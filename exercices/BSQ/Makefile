@@ -1,12 +1,13 @@
 CC		= cc
 
-FLAGS	= -Wall -Wextra -Werror -g -fsanitize=address
+FLAGS	= -Wall -Wextra -Werror -g
+
 
 HDRS	= includes
 
-DIR_C	= srcs/bsq.c srcs/first_square.c srcs/read_params.c srcs/search_square.c srcs/utils.c srcs/split.c
+DIR_C	= srcs/bsq.c srcs/first_square.c srcs/read_params.c srcs/search_square.c srcs/utils.c srcs/solver.c srcs/opti.c srcs/utils2.c srcs/error.c srcs/split.c srcs/utils3.c
 
-SRCS_O	= bsq.o first_square.o read_params.o search_square.o utils.o split.o
+SRCS_O	= bsq.o first_square.o read_params.o search_square.o utils.o solver.o opti.o utils2.o error.o split.o utils3.o
 
 DIR_O	= ${DIR_C:.c=.o}
 
