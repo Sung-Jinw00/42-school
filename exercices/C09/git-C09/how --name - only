@@ -1,0 +1,178 @@
+[33mcommit 25eba55e99ccc0aea791e2df36da9a3944879c06[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Louis Cagnion <locagnio@c3r3p9.42perpignan.fr>
+Date:   Wed Sep 18 19:19:31 2024 +0200
+
+    C09
+
+[1mdiff --git a/ex00/ft_putchar.c b/ex00/ft_putchar.c[m
+[1mnew file mode 100644[m
+[1mindex 0000000..da0793a[m
+[1m--- /dev/null[m
+[1m+++ b/ex00/ft_putchar.c[m
+[36m@@ -0,0 +1,26 @@[m
+[32m+[m[32m/* ************************************************************************** */[m
+[32m+[m[32m/*                                                                            */[m
+[32m+[m[32m/*                                                        :::      ::::::::   */[m
+[32m+[m[32m/*   ft_putchar.c                                       :+:      :+:    :+:   */[m
+[32m+[m[32m/*                                                    +:+ +:+         +:+     */[m
+[32m+[m[32m/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */[m
+[32m+[m[32m/*                                                +#+#+#+#+#+   +#+           */[m
+[32m+[m[32m/*   Created: 2024/09/04 19:28:05 by locagnio          #+#    #+#             */[m
+[32m+[m[32m/*   Updated: 2024/09/04 20:29:43 by locagnio         ###   ########.fr       */[m
+[32m+[m[32m/*                                                                            */[m
+[32m+[m[32m/* ************************************************************************** */[m
+[32m+[m
+[32m+[m[32m#include <unistd.h>[m
+[32m+[m
+[32m+[m[32mvoid	ft_putchar(char c)[m
+[32m+[m[32m{[m
+[32m+[m	[32mwrite(1, &c, 1);[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/*[m
+[32m+[m[32mint main(void)[m
+[32m+[m[32m{[m
+[32m+[m	[32mft_putchar('1');[m
+[32m+[m	[32mreturn(0);[m
+[32m+[m[32m}[m
+[32m+[m[32m*/[m
+\ No newline at end of file[m
+[1mdiff --git a/ex00/ft_putstr.c b/ex00/ft_putstr.c[m
+[1mnew file mode 100644[m
+[1mindex 0000000..0454d18[m
+[1m--- /dev/null[m
+[1m+++ b/ex00/ft_putstr.c[m
+[36m@@ -0,0 +1,35 @@[m
+[32m+[m[32m/* ************************************************************************** */[m
+[32m+[m[32m/*                                                                            */[m
+[32m+[m[32m/*                                                        :::      ::::::::   */[m
+[32m+[m[32m/*   ft_putstr.c                                        :+:      :+:    :+:   */[m
+[32m+[m[32m/*                                                    +:+ +:+         +:+     */[m
+[32m+[m[32m/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */[m
+[32m+[m[32m/*                                                +#+#+#+#+#+   +#+           */[m
+[32m+[m[32m/*   Created: 2024/09/05 20:16:30 by locagnio          #+#    #+#             */[m
+[32m+[m[32m/*   Updated: 2024/09/05 21:19:52 by locagnio         ###   ########.fr       */[m
+[32m+[m[32m/*                                                                            */[m
+[32m+[m[32m/* ************************************************************************** */[m
+[32m+[m
+[32m+[m[32m#include <unistd.h>[m
+[32m+[m
+[32m+[m[32mvoid	ft_putstr(char *str)[m
+[32m+[m[32m{[m
+[32m+[m	[32mint	i;[m
+[32m+[m
+[32m+[m	[32mi = 0;[m
+[32m+[m	[32mwhile (str[i] != '\0')[m
+[32m+[m	[32m{[m
+[32m+[m		[32mwrite(1, &str[i], 1);[m
+[32m+[m		[32mi++;[m
+[32m+[m	[32m}[m
+[32m+[m[32m}[m
+[32m+[m[32m/*[m
+[32m+[m[32mint main(void)[m
+[32m+[m[32m{[m
+[32m+[m	[32mchar str[] = "Hello World";[m
+[32m+[m
+[32m+[m	[32mft_putstr(str);[m
+[32m+[m	[32mreturn(0);[m
+[32m+[m
+[32m+[m[32m}[m
+[32m+[m[32m*/[m
+\ No newline at end of file[m
+[1mdiff --git a/ex00/ft_strcmp.c b/ex00/ft_strcmp.c[m
+[1mnew file mode 100644[m
+[1mindex 0000000..596758e[m
+[1m--- /dev/null[m
+[1m+++ b/ex00/ft_strcmp.c[m
+[36m@@ -0,0 +1,41 @@[m
+[32m+[m[32m/* ************************************************************************** */[m
+[32m+[m[32m/*                                                                            */[m
+[32m+[m[32m/*                                                        :::      ::::::::   */[m
+[32m+[m[32m/*   ft_strcmp.c                                        :+:      :+:    :+:   */[m
+[32m+[m[32m/*                                                    +:+ +:+         +:+     */[m
+[32m+[m[32m/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */[m
+[32m+[m[32m/*                                                +#+#+#+#+#+   +#+           */[m
+[32m+[m[32m/*   Created: 2024/09/08 19:35:57 by locagnio          #+#    #+#             */[m
+[32m+[m[32m/*   Updated: 2024/09/11 20:09:44 by locagnio         ###   ########.fr       */[m
+[32m+[m[32m/*                                                                            */[m
+[32m+[m[32m/* ************************************************************************** */[m
+[32m+[m
+[32m+[m[32m/*#include <stdio.h>*/[m
+[32m+[m
+[32m+[m[32mint	ft_strcmp(char *s1, char *s2)[m
+[32m+[m[32m{[m
+[32m+[m	[32mint	i;[m
+[32m+[m	[32mint	result;[m
+[32m+[m
+[32m+[m	[32mi = 0;[m
+[32m+[m	[32mresult = 0;[m
+[32m+[m	[32mwhile (s1[i] != '\0' || s2[i] != '\0')[m
+[32m+[m	[32m{[m
+[32m+[m		[32mif (s1[i] != s2[i])[m
+[32m+[m		[32m{[m
+[32m+[m			[32mresult = s1[i] - s2[i];[m
+[32m+[m			[32mreturn (result);[m
+[32m+[m		[32m}[m
+[32m+[m		[32mi++;[m
+[32m+[m	[32m}[m
+[32m+[m	[32mreturn (result);[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/*int main(void)[m
+[32m+[m[32m{[m
+[32m+[m	[32mchar s1[] = "Hello World";[m
+[32m+[m	[32mchar s2[] = "Hello World";[m
+[32m+[m
+[32m+[m	[32mprintf("%d\n", ft_strcmp(s1, s2));[m
+[32m+[m	[32mreturn (0);[m
+[32m+[m[32m}*/[m
+\ No newline at end of file[m
+[1mdiff --git a/ex00/ft_strlen.c b/ex00/ft_strlen.c[m
+[1mnew file mode 100644[m
+[1mindex 0000000..95e9916[m
+[1m--- /dev/null[m
+[1m+++ b/ex00/ft_strlen.c[m
+[36m@@ -0,0 +1,34 @@[m
+[32m+[m[32m/* ************************************************************************** */[m
+[32m+[m[32m/*                                                                            */[m
+[32m+[m[32m/*                                                        :::      ::::::::   */[m
+[32m+[m[32m/*   ft_strlen.c                                        :+:      :+:    :+:   */[m
+[32m+[m[32m/*                                                    +:+ +:+         +:+     */[m
+[32m+[m[32m/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */[m
+[32m+[m[32m/*                                                +#+#+#+#+#+   +#+           */[m
+[32m+[m[32m/*   Created: 2024/09/05 20:20:21 by locagnio          #+#    #+#             */[m
+[32m+[m[32m/*   Updated: 2024/09/12 11:58:33 by locagnio         ###   ########.fr       */[m
+[32m+[m[32m/*                                                                            */[m
+[32m+[m[32m/* ************************************************************************** */[m
+[32m+[m
+[32m+[m[32m/*#include <stdio.h>*/[m
+[32m+[m
+[32m+[m[32mint	ft_strlen(char *str)[m
+[32m+[m[32m{[m
+[32m+[m	[32mint	i;[m
+[32m+[m
+[32m+[m	[32mi = 0;[m
+[32m+[m	[32mwhile (str[i] != '\0')[m
+[32m+[m		[32mi++;[m
+[32m+[m	[32mreturn (i);[m
+[32m+[m[32m}[m
+[32m+[m[32m/*[m
+[32m+[m[32mint main(void)[m
+[32m+[m[32m{[m
+[32m+[m	[32mchar str[] = "Yeppi";[m
+[32m+[m	[32mint i;[m
+[32m+[m
+[32m+[m	[32mi = ft_strlen(str);[m
+[32m+[m	[32mprintf("%d\n", i);[m
+[32m+[m	[32mreturn(0);[m
+[32m+[m
+[32m+[m[32m}*/[m
+[1mdiff --git a/ex00/ft_swap.c b/ex00/ft_swap.c[m
+[1mnew file mode 100644[m
+[1mindex 0000000..16ed91f[m
+[1m--- /dev/null[m
+[1m+++ b/ex00/ft_swap.c[m
+[36m@@ -0,0 +1,35 @@[m
+[32m+[m[32m/* ************************************************************************** */[m
+[32m+[m[32m/*                                                                            */[m
+[32m+[m[32m/*              
