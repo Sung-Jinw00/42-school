@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 11:15:29 by locagnio          #+#    #+#             */
-/*   Updated: 2024/09/26 16:30:15 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:27:22 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	ft_print_combn(int n)
 	write(1, "\n", 1);
 }
 
-#include <stdio.h>
+/* #include <stdio.h>
 int	main(void)
 {
 	printf("combinaisons d'1 nombre :\n");
@@ -122,4 +122,4 @@ int	main(void)
 	printf("combinaisons de 9 nombres :\n");
 	ft_print_combn(9);
 	return (0);
-}
+} */

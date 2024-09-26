@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:58:28 by locagnio          #+#    #+#             */
-/*   Updated: 2024/09/17 14:12:16 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/09/26 19:31:51 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ char	*ft_putnbr_base(char *nbr_base_to, int nbr, char *base, int i)
 	{
 		nbr_base_to[0] = '-';
 		nb = -nb;
+		i++;
 	}
 	if (nb >= len_base)
 		ft_putnbr_base(nbr_base_to, nb / len_base, base, i + 1);
@@ -78,21 +79,17 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 {
 	int		nbr_decimal;
 	char	*nbr_base_to;
-	int		i;
 	int		j;
 
 	j = 0;
 	nbr_decimal = 0;
-	i = 0;
-	if (nbr[0] == '-')
-		i = 1;
 	if (ft_error(base_from) && ft_error(base_to))
 	{
 		nbr_base_to = (char *)malloc(sizeof(char) * 256);
 		while (j < 256)
 			nbr_base_to[j++] = 0;
 		nbr_decimal = ft_atoi_base(nbr, base_from);
-		nbr_base_to = ft_putnbr_base(nbr_base_to, nbr_decimal, base_to, i);
+		nbr_base_to = ft_putnbr_base(nbr_base_to, nbr_decimal, base_to, 0);
 		nbr_base_to = ft_rev_int_tab(nbr_base_to, ft_strlen(nbr_base_to));
 	}
 	else
@@ -106,8 +103,8 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 
 int main(void)
 {
-	char nbr[] = "-42";
-	char base_from[] = "0123456789";
+	char nbr[] = "";
+	char base_from[] = "01";
 	char base_to[] = "01";
 	char *nbr_base_to;
 

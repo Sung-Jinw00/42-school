@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 10:43:05 by locagnio          #+#    #+#             */
-/*   Updated: 2024/09/20 11:43:10 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/09/26 17:18:35 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,27 @@
 int	main(int ac, char **av)
 {
 	int fd;
-	char buf[13];
+	char buff[20000];
 	int nb_read;
-	int count;
+	int i;
 	
+	i = 0;
 	if(ac > 1)
 	{
-		fd = open(av[1], O_WRONLY | O_CREAT);
-		if (fd == -1)
-			return (1);
-		write(fd, "Hello World\n", 13);
-		nb_read = -1;
-		count = 0;
-		while (nb_read != 0)
+		fd = open(av[1], O_RDONLY);
+		if (fd < 0)
 		{
-			nb_read = read(fd, buf, 13);
-			if (nb_read == -1)
-			{
-				write(2, "Cannot read file\n", 18);
-				return (1);
-			}
-			buf[nb_read] = 0;
-			count++;
+			write(2, "Cannot read file\n", 18);
+			return (1);
 		}
-		write(1, &count + 48, count / 10);
+		nb_read = read(fd, buff, sizeof(buff));
+		if (nb_read < 0)
+		{
+			write(2, "Cannot read file\n", 18);
+			return (1);
+		}
+		while (buff[i])
+			write(1, &buff[i++], 1);
 		close(fd);
 	}
 	return (0);

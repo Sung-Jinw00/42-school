@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:58:28 by locagnio          #+#    #+#             */
-/*   Updated: 2024/09/19 11:43:17 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/09/26 19:31:51 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 
 int main(void)
 {
-	char nbr[] = " -4200000";
-	char base_from[] = "0123456789";
+	char nbr[] = "";
+	char base_from[] = "01";
 	char base_to[] = "01";
 	char *nbr_base_to;
 

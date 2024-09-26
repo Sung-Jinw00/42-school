@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:18:34 by locagnio          #+#    #+#             */
-/*   Updated: 2024/09/25 23:51:30 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:05:39 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 int	syscall_bsq(char *x)
 {
-	int	c;
-
-	c = 1;
 	x = read_syscall();
-	if (!loop_main(x, c))
+	if (!loop_main(x, 1))
 	{
 		error();
 		return (0);
