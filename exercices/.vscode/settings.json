@@ -1,5 +1,16 @@
 {
 	"files.associations": {
-		"lib.h": "c"
+		"unistd.h": "c",
+		"ft_list.h": "c",
+		"array": "c",
+		"string": "c",
+		"string_view": "c",
+		"cstdlib": "c",
+		"algorithm": "c",
+		"functional": "c",
+		"lib.h": "c",
+		"r01boxs.h": "c",
+		"libft.h": "c",
+		"stdio.h": "c"
 	}
 }
