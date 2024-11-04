@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/06 21:22:48 by locagnio          #+#    #+#             */
-/*   Updated: 2024/10/30 20:52:36 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/04 13:33:55 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/04 13:33:56 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	strlcpy(char *dst, const char *src, size_t dsize)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dsize)
 {
 	size_t	i;
 	size_t	len;
 
 	i = 0;
-	len = ft_strlen(src) + 1;
+	len = ft_strlen(src);
 	if (dsize == 0)
 		return (len);
 	while (i < dsize - 1 && src[i] != '\0')
@@ -37,6 +37,7 @@ int main(void)
 	char dst[14];
 	char src[] = "Hello World.";
 
-	printf("%u\n", ft_strlcpy(dst, src, 12));
+	printf("%zu\n", ft_strlcpy(dst, src, 15));
+	printf("%s\n", dst);
 	return(0);
 } */

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 16:19:50 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/30 16:19:50 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/04 13:33:35 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/04 13:33:35 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*memset(void *s, int c, size_t n)
+void	*ft_memset(void *s, int c, size_t n)
 {
 	size_t	i;
 
@@ -26,3 +26,15 @@ void	*memset(void *s, int c, size_t n)
 	}
 	return (s);
 }
+
+/* #include <stdio.h>
+
+int main(void)
+{
+	void *s = malloc(30);
+	int c = 49;
+
+	s = ft_memset(s, c, 30);
+	printf("%s\n", (char *)s);
+	return (0);
+} */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/06 20:48:01 by locagnio          #+#    #+#             */
-/*   Updated: 2024/10/30 17:31:04 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/04 13:33:03 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/04 13:33:04 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int	ft_isprint(int c)
 
 int main(void)
 {
-	printf("%d\n", ft_isdigit(50));
+	printf("%d\n", ft_isprint(127));
 	return(0);
 } */

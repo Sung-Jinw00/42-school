@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:26:24 by locagnio          #+#    #+#             */
-/*   Updated: 2024/10/30 20:54:09 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/04 14:15:50 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,15 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (new_string);
 }
 
-/* int	main(void)
+/* #include <stdio.h>
+
+int	main(void)
 {
-	int size = 3;
-	char **strs = (char **)malloc(size * sizeof(char *));
-	char sep[] = "/";
-	char *conca;
+	char *s1 = "Hello ";
+	char *s2 = "World";
 	
-	strs[0] = "j'adore";
-	strs[1] = "le";
-	strs[2] = "C07";
-	conca = ft_strjoin(size, strs, sep);
-	printf("%s\n", conca);
-	free(conca);
-	free(strs);
+	s1 = ft_strjoin(s1, s2);
+	printf("%s\n", s1);
+	free(s1);
 	return (0);
 } */

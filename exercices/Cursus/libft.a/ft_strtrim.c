@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 19:19:54 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/30 19:19:54 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/04 13:32:16 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/04 13:32:16 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	i = 0;
 	j = 0;
+	count_set = 0;
 	while (s1[i] != '\0')
 	{
 		if (set_cmp(s1[i], set))
@@ -52,3 +53,14 @@ char	*ft_strtrim(char const *s1, char const *set)
 	}
 	return (s1_cpy);
 }
+
+/* #include <stdio.h>
+
+int main(void)
+{
+	const char *s1 = "Hello world";
+	const char *set = "o";
+
+	printf("%s\n", ft_strtrim(s1, set));
+	return (0);
+} */

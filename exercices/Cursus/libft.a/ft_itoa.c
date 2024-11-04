@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/20 09:47:35 by locagnio          #+#    #+#             */
-/*   Updated: 2024/10/30 20:55:34 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/04 13:31:07 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/04 13:31:09 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@ void	init_vals(long *nb, int *i, int *sign)
 	if (*nb < 0)
 	{
 		*sign = 1;
-		*i++;
+		(*i)++;
 		*nb = -*nb;
 	}
 	if (*nb == 0)
-		*i++;
+		(*i)++;
 	nbr = *nb;
 	while (nbr > 0)
 	{
 		nbr /= 10;
-		*i++;
+		(*i)++;
 	}
 }
 
-char	*itoa(int n)
+char	*ft_itoa(int n)
 {
 	char	*cpy;
 	int		i;
@@ -62,12 +62,12 @@ char	*itoa(int n)
 
 int	main(void)
 {
-	char *cpy1 = itoa(-2147483648);
-	char *cpy2 = itoa(-2147483647);
-	char *cpy3 = itoa(-1);
-	char *cpy4 = itoa(-0);
-	char *cpy5 = itoa(1);
-	char *cpy6 = itoa(2147483647);
+	char *cpy1 = ft_itoa(-2147483648);
+	char *cpy2 = ft_itoa(-2147483647);
+	char *cpy3 = ft_itoa(-1);
+	char *cpy4 = ft_itoa(-0);
+	char *cpy5 = ft_itoa(1);
+	char *cpy6 = ft_itoa(2147483647);
 
 	printf("%s\n", cpy1);
 	free(cpy1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/12 11:54:48 by locagnio          #+#    #+#             */
-/*   Updated: 2024/10/30 18:21:56 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/04 13:33:46 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/04 14:33:40 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ char	*ft_strdup(const char *src)
 	cpy[i] = '\0';
 	return (cpy);
 }
-/* #include <stddef.h>
-#include <stdio.h>
+
+/* #include <stdio.h>
 
 int	main(void)
 {
@@ -40,8 +40,8 @@ int	main(void)
 	char *cpy;
 	
 	cpy = ft_strdup(src);
-	printf("adresse de src : %p\nsrc : %s\nadresse de cpy : %p\n
-	cpy : %s\n", src, src, cpy, cpy);
+	printf("adresse de src : %p\nsrc : %s\nadresse de cpy : %p\ncpy : %s\n",\
+	src, src, cpy, cpy);
 	free (cpy);
 	return (0);
 } */

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 16:21:53 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/30 16:21:53 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/04 13:34:14 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/04 13:34:14 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*strrchr(const char *s, int c)
+char	*ft_strrchr(const char *s, int c)
 {
 	int	len;
 
@@ -20,7 +20,20 @@ char	*strrchr(const char *s, int c)
 	while (len >= 0)
 	{
 		if (s[len] == c)
-			return (s + len);
+			return ((char *)s + len);
 		len--;
 	}
+	return (0);
 }
+
+/* #include <stdio.h>
+
+int	main(void)
+{
+	const char *s = "Hello world";
+	int c = 'H';
+
+	s = ft_strrchr(s, c);
+	printf("%s\n", s);
+	return (0);
+} */

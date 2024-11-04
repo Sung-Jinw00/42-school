@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 16:22:26 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/30 16:22:26 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/04 13:33:11 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/04 13:33:11 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,3 +27,18 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	}
 	return (0);
 }
+
+/* #include <stdio.h>
+
+int	main(void)
+{
+	const char *tab1 = "Hello";
+	const char *tab2 = "world";
+	int c;
+	const void *s1 = tab1;
+	const void *s2 = tab2;
+
+	c = ft_memcmp(s1, s2, 3);
+	printf("%d\n", c);
+	return(0);
+} */

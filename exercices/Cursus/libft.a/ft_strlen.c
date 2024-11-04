@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/05 20:20:21 by locagnio          #+#    #+#             */
-/*   Updated: 2024/10/30 18:37:00 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/04 13:33:59 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/04 13:34:00 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t	ft_strlen(const char *s)
 	i = 0;
 	while (s[i] != '\0')
 		i++;
-	return (i - 1);
+	return (i);
 }
 
 /* #include <stdio.h>
@@ -27,10 +27,7 @@ size_t	ft_strlen(const char *s)
 int main(void)
 {
 	char str[] = "Yeppi";
-	int i;
 
-	i = ft_strlen(str);
-	printf("%d\n", i);
+	printf("%zu\n", ft_strlen(str));
 	return(0);
-
 } */

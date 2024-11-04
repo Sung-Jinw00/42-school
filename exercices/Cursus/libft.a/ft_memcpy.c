@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/06 19:52:37 by locagnio          #+#    #+#             */
-/*   Updated: 2024/10/30 21:04:22 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/04 13:33:21 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/04 13:33:22 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ int main(void)
 	char dest[30];
 	char src[] = "Hello World";
 
-	printf("%s\n", ft_strcpy(dest, src));
+	printf("%s\n", (char *)ft_memcpy(dest, src, 5));
 	return(0);
 } */

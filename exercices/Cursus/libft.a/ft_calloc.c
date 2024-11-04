@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/19 12:18:34 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/19 12:18:34 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/04 13:32:39 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/04 13:32:39 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ void	*ft_calloc(size_t nmemb, size_t size)
 
 int main(void)
 {
-	ft_calloc(13, sizeof(int));
+	void *tab;
+	int i = 0;
+	
+	tab = ft_calloc(13, sizeof(int));
+	while (i < 13)
+		printf("%c\n", *(char *)(tab + i++) + 48);
 	return(0);
 } */

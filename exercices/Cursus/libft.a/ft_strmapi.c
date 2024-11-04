@@ -3,21 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 19:38:58 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/30 19:38:58 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/04 13:32:05 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/04 13:32:05 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/* char f(unsigned int i, char s)
+{
+	if (s >= 'A' && s <= 'Z')
+		return (s += 32);
+	else if (s >= 'a' && s <= 'z')
+		return (s -= 32);
+	else
+		i = 1;
+	if (i == 1)
+		return (s);
+	return (s);
+} */
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	char			*cpy;
 	unsigned int	i;
 
-	cpy = malloc((int)ft_strlen(s) + 1);
+	i = 0;
+	cpy = malloc((int)ft_strlen(s));
 	if (!cpy)
 		return (NULL);
 	while (s[i])
@@ -27,3 +41,13 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	}
 	return (cpy);
 }
+
+/* #include <stdio.h>
+
+int main(void)
+{
+	const char *s = "Hello World";
+
+	printf("%s\n", ft_strmapi(s, *f));
+	return (0);
+} */

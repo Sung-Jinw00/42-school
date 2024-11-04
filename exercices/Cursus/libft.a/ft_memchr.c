@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 16:22:13 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/30 16:22:13 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/04 13:33:07 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/04 13:33:07 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,3 +27,16 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	}
 	return (0);
 }
+
+/* #include <stdio.h>
+
+int	main(void)
+{
+	const char *tab = "Hello world";
+	int c = 'o';
+	const void *s = tab;
+
+	s = ft_memchr(s, c, 3);
+	printf("%s\n", (unsigned char *)s);
+	return(0);
+} */

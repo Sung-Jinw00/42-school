@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 19:43:55 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/30 19:43:55 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/04 13:31:45 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/04 13:31:45 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/* void f(unsigned int i, char *s)
+{
+	if (*s >= 'A' && *s <= 'Z')
+		*s += 32;
+	else if (*s >= 'a' && *s <= 'z')
+		*s -= 32;
+	else
+		i = 1;
+	if (i == 1)
+		return ;
+} */
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
@@ -23,3 +35,14 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 		i++;
 	}
 }
+
+/* #include<stdio.h>
+
+int main(void)
+{
+	char s[12] = "Hello world";
+
+	ft_striteri(s, *f);
+	printf("%s\n", s);
+	return (0);
+} */

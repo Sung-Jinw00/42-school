@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/08 20:14:12 by locagnio          #+#    #+#             */
-/*   Updated: 2024/10/30 18:31:44 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/04 13:34:10 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/04 13:34:11 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*strnstr(const char	*big, const char *little, size_t len)
+char	*ft_strnstr(const char	*big, const char *little, size_t len)
 {
 	size_t	i;
 	size_t	j;
@@ -20,26 +20,26 @@ char	*strnstr(const char	*big, const char *little, size_t len)
 	i = 0;
 	j = 0;
 	if (!little)
-		return (big);
+		return ((char *)big);
 	while (i < len)
 	{
 		while (big[i + j] == little[j])
 			j++;
 		if (little[j] == '\0')
-			return (big + i - j);
+			return ((char *)big + i);
 		j = 0;
 		i++;
 	}
 	return (0);
 }
 
-/*#include <stdio.h>
+/* #include <stdio.h>
 
 int main(void)
 {
 	char str[] = "Hello World, wassup ?";
 	char to_find[] = "World";
 
-	printf("%s\n", ft_strstr(str, to_find));
+	printf("%s\n", ft_strnstr(str, to_find, 17));
 	return (0);
-}*/
+} */

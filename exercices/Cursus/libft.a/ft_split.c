@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/12 17:48:44 by locagnio          #+#    #+#             */
-/*   Updated: 2024/10/30 19:35:54 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/04 13:31:37 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/04 13:46:55 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_cnt_words(char *str, char charset)
+int	ft_cnt_words(const char *str, char charset)
 {
 	int	i;
 	int	trigger;
@@ -35,7 +35,7 @@ int	ft_cnt_words(char *str, char charset)
 	return (count);
 }
 
-int	len_word(char *str, char charset)
+int	len_word(const char *str, char charset)
 {
 	int	i;
 
@@ -45,7 +45,7 @@ int	len_word(char *str, char charset)
 	return (i);
 }
 
-char	**write_split(char *str, char **split, char charset, int i)
+char	**write_split(const char *str, char **split, char charset, int i)
 {
 	int	j;
 	int	k;
@@ -85,20 +85,20 @@ char	**ft_split(char const *str, char charset)
 	return (write_split(str, split, charset, 0));
 }
 
-/* #include <stddef.h>
-#include <stdio.h>
+/* #include <stdio.h>
 #include <unistd.h>
 
 int	main(void)
 {
-	char *str1 = "   J'adore\tle C07   ";
-	char *charset1 = " \t'";
+	char *str1 = "   J'adore le C07   ";
+	char charset1 = ' ';
 
-	char *str2 = " '\t''   \t  ";
-	char *charset2 = " \t'";
+	char *str2 = "              ";
+	char charset2 = ' ';
 	
 	char *str3 = " J'adore le C07 ";
-	char *charset3 = "";
+	char charset3 = 0;
+	
 	char **split;
 	int i = 0;
 	
