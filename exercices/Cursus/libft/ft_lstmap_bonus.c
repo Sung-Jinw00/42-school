@@ -29,9 +29,9 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	t_list	*start_newlist;
 	t_list	*temp;
 
-	if (!lst)
-		return (NULL);
 	newlist = malloc(sizeof(t_list));
+	if (!lst || !newlist)
+		return (NULL);
 	temp = lst;
 	newlist->content = (*f)(temp->content);
 	newlist->next = NULL;

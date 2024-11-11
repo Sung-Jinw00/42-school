@@ -6,13 +6,13 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:37 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/08 15:03:37 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/11 22:02:02 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_cnt_words(const char *str, char charset)
+static int	ft_cnt_words(const char *str, char charset)
 {
 	int	i;
 	int	trigger;
@@ -35,7 +35,7 @@ int	ft_cnt_words(const char *str, char charset)
 	return (count);
 }
 
-int	len_word(const char *str, char charset)
+static int	len_word(const char *str, char charset)
 {
 	int	i;
 
@@ -45,7 +45,7 @@ int	len_word(const char *str, char charset)
 	return (i);
 }
 
-char	**free_split(char **split, int j)
+static char	**ft_free(char **split, int j)
 {
 	while (j >= 0)
 		free(split[j--]);
@@ -53,28 +53,25 @@ char	**free_split(char **split, int j)
 	return (NULL);
 }
 
-char	**write_split(const char *str, char **split, char charset, int i)
+static char	**write_split(const char *str, char **split, char charset, int i)
 {
 	int	j;
-	int	k;
 	int	len_wrd;
 
 	j = 0;
-	k = 0;
 	len_wrd = 0;
 	while (str[i])
 	{
 		len_wrd = len_word(str + i, charset);
 		if (len_wrd > 0 && str[i] != charset)
 		{
-			split[j] = malloc(sizeof(char) * (len_wrd + 1));
+			split[j] = ft_substr(str, i, len_wrd);
 			if (!split[j])
-				return (free_split(split, j));
-			while (k < len_wrd)
-				split[j][k++] = str[i++];
-			split[j][k] = '\0';
+				return (ft_free(split, j));
+			i += len_wrd;
+			if (str[i] == '\0')
+				break ;
 			j++;
-			k = 0;
 		}
 		i++;
 	}
@@ -97,6 +94,28 @@ char	**ft_split(char const *str, char charset)
 		i++;
 	return (write_split(str, split, charset, i));
 }
+
+/* #include <stdio.h>
+
+int	main(void)
+{
+	char **split = ft_split("hello!", ' ');
+	int i = 0;
+
+	if (split[i])
+	{
+		while (split[i])
+		{
+			printf("tableau %d de split1 : %s\n", i, split[i]);
+			free(split[i]);
+			i++;
+		}
+		printf("tableau %d de split1 : %s\n", i, split[i]);
+	}
+	else
+		printf("tableau vide1 : %s\n", split[0]);
+	free(split);
+} */
 
 /* #include <stdio.h>
 #include <unistd.h>

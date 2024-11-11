@@ -36,7 +36,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 		return (NULL);
 	while (s[i])
 	{
-		cpy[i] = (*f)(i, s[i]);
+		cpy[i] = f(i, s[i]);
 		i++;
 	}
 	cpy[i] = '\0';

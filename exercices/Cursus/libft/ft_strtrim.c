@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	set_cmp(char c, const char *set)
+static int	set_cmp(char c, const char *set)
 {
 	int	i;
 
@@ -26,46 +26,23 @@ int	set_cmp(char c, const char *set)
 	return (0);
 }
 
-void	ft_trimage(char const *s1, char const *set, char *s1_cpy)
-{
-	int	i;
-	int	j;
-	int	k;
-
-	i = 0;
-	k = 0;
-	j = ft_strlen(s1) - 1;
-	while (set_cmp(s1[i], set))
-		i++;
-	while (set_cmp(s1[j], set))
-		j--;
-	while (i <= j)
-		s1_cpy[k++] = ((char *)s1)[i++];
-	s1_cpy[k] = '\0';
-}
-
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*s1_cpy;
 	int		i;
 	int		j;
 
+	if (!s1 || !set)
+		return (NULL);
 	i = 0;
-	j = ft_strlen(s1) - 1;
+	j = ft_strlen(s1);
 	while (set_cmp(s1[i], set))
 		i++;
-	while (set_cmp(s1[j], set))
+	if (i == j)
+		return (ft_strdup(""));
+	j--;
+	while (set_cmp(s1[j], set) && j > i)
 		j--;
-	if (i >= j)
-	{
-		i = 0;
-		j = 0;
-	}
-	s1_cpy = malloc(j - i + 2);
-	if (!s1_cpy)
-		return (NULL);
-	ft_trimage(s1, set, s1_cpy);
-	return (s1_cpy);
+	return (ft_substr(s1, i, j - i + 1));
 }
 
 /* #include <stdio.h>

@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 13:34:14 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/04 13:34:14 by locagnio         ###   ########.fr       */
+/*   Created: 2024/11/04 13:30:58 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/04 13:30:58 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "printflibft.h"
 
-char	*ft_strrchr(const char *s, int c)
+void	ft_putunbr_fd(unsigned int n, int fd)
 {
-	int	len;
-
-	len = (int)ft_strlen(s);
-	while (len >= 0)
-	{
-		if (s[len] == (char)c)
-			return ((char *)s + len);
-		len--;
-	}
-	return (0);
+	if (n > 9)
+		ft_putnbr_fd(n / 10, fd);
+	n = n % 10 + '0';
+	write(fd, &n, 1);
 }
 
-/* #include <stdio.h>
-
-int	main(void)
+/* int main(void)
 {
-	const char *s = "Hello world";
-
-	s = ft_strrchr(s, 't' + 256);
-	printf("%s\n", s);
+	ft_putnbr_fd(-5, 2);
 	return (0);
 } */

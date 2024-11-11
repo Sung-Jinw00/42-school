@@ -6,13 +6,13 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:07 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/08 21:51:15 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/11 20:01:12 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	init_vals(long nb, int *sign)
+static int	init_vals(long nb, int *sign)
 {
 	int	i;
 	int	digits;

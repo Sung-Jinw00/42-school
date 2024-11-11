@@ -1,48 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 13:31:45 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/04 13:31:45 by locagnio         ###   ########.fr       */
+/*   Created: 2024/11/04 13:30:58 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/04 13:30:58 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "printflibft.h"
 
-/* void f(unsigned int i, char *s)
+void	ft_putnbr_fd(int n, int fd)
 {
-	if (*s >= 'A' && *s <= 'Z')
-		*s += 32;
-	else if (*s >= 'a' && *s <= 'z')
-		*s -= 32;
-	else
-		i = 1;
-	if (i == 1)
-		return ;
-} */
-
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
-{
-	unsigned int	i;
-
-	i = 0;
-	while (s[i])
+	if (n == -2147483648)
 	{
-		f(i, &s[i]);
-		i++;
+		write(fd, "-2147483648", 11);
+		return ;
 	}
+	else if (n < 0)
+	{
+		write(fd, "-", 1);
+		n = -n;
+	}
+	if (n > 9)
+		ft_putnbr_fd(n / 10, fd);
+	n = n % 10 + '0';
+	write(fd, &n, 1);
 }
 
-/* #include<stdio.h>
-
-int main(void)
+/* int main(void)
 {
-	char s[12] = "Hello world";
-
-	ft_striteri(s, *f);
-	printf("%s\n", s);
+	ft_putnbr_fd(-5, 2);
 	return (0);
 } */

@@ -1,48 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 13:31:45 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/04 13:31:45 by locagnio         ###   ########.fr       */
+/*   Created: 2024/11/04 13:31:23 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/04 13:31:23 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "printflibft.h"
 
-/* void f(unsigned int i, char *s)
+void	ft_putstr_fd(char *s, int fd)
 {
-	if (*s >= 'A' && *s <= 'Z')
-		*s += 32;
-	else if (*s >= 'a' && *s <= 'z')
-		*s -= 32;
-	else
-		i = 1;
-	if (i == 1)
-		return ;
-} */
-
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
-{
-	unsigned int	i;
+	int	i;
 
 	i = 0;
 	while (s[i])
 	{
-		f(i, &s[i]);
+		write(fd, &s[i], 1);
 		i++;
 	}
 }
 
-/* #include<stdio.h>
-
-int main(void)
+/* int main(void)
 {
-	char s[12] = "Hello world";
+	char *s = "Hello World";
 
-	ft_striteri(s, *f);
-	printf("%s\n", s);
+	ft_putstr_fd(s, 1);
 	return (0);
-} */
+}  */
