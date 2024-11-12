@@ -4,6 +4,8 @@
 		"stdio.h": "c",
 		"stdarg.h": "c",
 		"stdlib.h": "c",
-		"printflibft.h": "c"
+		"printflibft.h": "c",
+		"unistd.h": "c",
+		"ft_printf.h": "c"
 	}
 }
