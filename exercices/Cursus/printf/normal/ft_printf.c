@@ -6,13 +6,13 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:05:11 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/12 23:39:27 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/13 20:33:20 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	found_count(va_list args, t_struct v)
+static int	found_count(va_list args, t_struct v)
 {
 	int	i;
 	int	count;
@@ -57,7 +57,7 @@ int main(void)
 {
 	long i = 0;
 	long j = 0;
-	printf("1copie : %d\n", printf("1copie :   %u %u %u \n", LONG_MIN, 0, -42));
-	printf("!copie : %d\n", ft_printf("!copie :   %u %u %u \n", LONG_MIN, 0, -42));
+	printf("1copie : %d\n", printf("1copie :   %010d\n", 46));
+	//printf("!copie : %d\n", ft_printf("!copie :   %p\n", NULL));
 	return (0);
 }

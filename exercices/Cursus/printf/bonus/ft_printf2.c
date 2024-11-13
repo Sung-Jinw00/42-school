@@ -1,33 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_printf2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 13:33:59 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/11 18:55:07 by locagnio         ###   ########.fr       */
+/*   Created: 2024/11/12 22:22:27 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/13 19:40:20 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printflibft.h"
+#include "ft_printf.h"
 
-size_t	ft_strlen(const char *s)
+char	*print_ptr(size_t adr, int *count)
 {
-	size_t	i;
+	char	ptr[18];
+	int		i;
+	char	*hexa;
+	size_t	adr_copy;
 
-	i = 0;
-	while (s[i] != '\0')
+	hexa = "0123456789abcdef";
+	i = 2;
+	adr_copy = adr;
+	while (adr_copy > 0)
+	{
+		adr_copy /= 16;
 		i++;
-	return (i);
+	}
+	ptr[i--] = '\0';
+	*count += i + 1;
+	while (adr > 0)
+	{
+		ptr[i] = hexa[adr % 16];
+		adr /= 16;
+		i--;
+	}
+	ptr[i] = 'x';
+	i--;
+	ptr[i] = '0';
+	return(ptr);
 }
-
-/* #include <stdio.h>
-
-int main(void)
-{
-	char str[] = "Yeppi";
-
-	printf("%zu\n", ft_strlen(str));
-	return(0);
-} */

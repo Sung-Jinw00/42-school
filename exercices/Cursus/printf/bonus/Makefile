@@ -3,15 +3,9 @@ FLAGS = -Wall -Wextra -Werror
 
 NAME = libftprintf.a
 
-FILES = ft_itoa_base.c ft_printf.c ft_putnbr_fd.c ft_putstr_fd.c ft_putunbr_fd.c ft_strlen.c
+FILES = ft_printf.c ft_printf2.c ft_utils.c ft_utils2.c ft_bonusline.c ft_bonusnbs.c
 
-FILES_BONUS = ft_lstclear_bonus.c \
-			ft_lstdelone_bonus.c  \
-			ft_lstiter_bonus.c    \
-			ft_lstlast_bonus.c    \
-			ft_lstmap_bonus.c     \
-			ft_lstnew_bonus.c     \
-			ft_lstsize_bonus.c    \
+FILES_BONUS = ft_bonusline.c ft_bonusnbs.c
 
 OBJS = $(FILES:.c=.o)
 OBJS_BONUS = $(FILES_BONUS:.c=.o)

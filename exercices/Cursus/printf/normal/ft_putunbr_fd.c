@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	ft_putunbr_fd(int *count, unsigned int n, int fd)
+void	ft_putunbr_fd(int *count, unsigned long n, int fd)
 {
 	if (n < 0)
 	{

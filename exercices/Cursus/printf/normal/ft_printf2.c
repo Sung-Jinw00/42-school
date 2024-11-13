@@ -6,13 +6,13 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 22:22:27 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/12 23:34:55 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:43:20 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_ptr(size_t adr, int *count)
+static void	print_ptr(size_t adr, int *count)
 {
 	char	ptr[18];
 	int		i;
@@ -41,7 +41,7 @@ void	print_ptr(size_t adr, int *count)
 	ft_putstr_fd(ptr, 1);
 }
 
-void	ft_blackpill(int i, int *count, t_struct v, va_list args)
+static void	ft_blackpill(int i, int *count, t_struct v, va_list args)
 {
 	int	j;
 
@@ -66,15 +66,19 @@ void	ft_blackpill(int i, int *count, t_struct v, va_list args)
 		return ;
 }
 
-void	ft_yellowpill(int i, int *count, t_struct v, va_list args)
+static void	ft_yellowpill(int i, int *count, t_struct v, va_list args)
 {
+	long value;
+
+	value = 0;
 	if (v.str[i] == 'u')
 	{
-		if (*(int *)v.arg < 0)
-			*(unsigned int *)v.arg = va_arg(args, int) + (long)INT_MAX * 2;
+		value = va_arg(args, int);
+		if (value < 0)
+			*(unsigned long *)v.arg = (unsigned long)(value + (long)INT_MAX * 2 + 2);
 		else
-			*(int *)v.arg = va_arg(args, int);
-		ft_putunbr_fd(count, *(unsigned int *)v.arg, 1);
+			*(unsigned long *)v.arg = (unsigned long)value;
+		ft_putunbr_fd(count, *(unsigned long *)v.arg, 1);
 	}
 	else if (v.str[i] == 'c')
 	{
@@ -86,18 +90,20 @@ void	ft_yellowpill(int i, int *count, t_struct v, va_list args)
 		ft_blackpill(i, count, v, args);
 }
 
-void	ft_bluepill(int i, int *count, t_struct v, va_list args)
+static void	ft_bluepill(int i, int *count, t_struct v, va_list args)
 {
 	int	j;
+	long long value;
 
+	value = 0;
 	j = 0;
 	if (v.str[i] == 'X' || v.str[i] == 'x')
 	{
-		*(int *)v.arg = va_arg(args, int);
+		value = va_arg(args, int);
 		if (v.str[i] == 'X')
-			v.arg = ft_itoa_base(*(int *)v.arg, "0123456789ABCDEF");
+			v.arg = ft_itoa_base(value, "0123456789ABCDEF");
 		else
-			v.arg = ft_itoa_base(*(int *)v.arg, "0123456789abcdef");
+			v.arg = ft_itoa_base(value, "0123456789abcdef");
 		while (((char *)v.arg)[j])
 		{
 			write (1, &((char *)v.arg)[j++], 1);

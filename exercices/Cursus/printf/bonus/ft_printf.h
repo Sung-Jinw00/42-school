@@ -10,22 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTFLIBFT_H
-# define PRINTFLIBFT_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
 # include <limits.h>
 
+typedef struct s_struct
+{
+	const char	*str;
+	void		*arg;
+}	t_struct;
+
 size_t	ft_strlen(const char *s);
-void	ft_putnbr_fd(int n, int fd);
-void	ft_putunbr_fd(unsigned int n, int fd);
+void	ft_putnbr_fd(int *count, int n, int fd);
+void	ft_putunbr_fd(int *count, unsigned long n, int fd);
 void	ft_putstr_fd(char *s, int fd);
-char	*ft_itoa_base(int n, const char *base);
+char	*ft_itoa_base(long long n, const char *base);
 int		ft_printf(const char *str, ...);
-void	ft_flags(const char *str, int i, void *arg, va_list args);
-int		ft_miniatoi(const char *nptr);
-void	ft_redpill(const char *str, int i, void *arg, va_list args);
+void	ft_yellowpill(int i, int *count, t_struct v, va_list args);
+void	ft_bluepill(int i, int *count, t_struct v, va_list args);
+char	*print_ptr(size_t adr, int *count);
+void	ft_redpill(int i, int *count, t_struct v, va_list args);
+int		ft_digits(int n);
 
 #endif
+
+/* 1copie :   2147483647 2147483648 4294967295 0 4294967295 0 4294967254 */

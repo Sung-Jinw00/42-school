@@ -6,52 +6,44 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 19:33:00 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/12 19:39:32 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/13 19:42:46 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	init_vals(long nb, int *sign, const char *base)
+static int	init_vals(long nb, const char *base)
 {
 	int	i;
 	int	digits;
 
 	i = 0;
 	digits = 1;
-	if (nb < 0)
-	{
-		nb = -nb;
-		*sign = 1;
-	}
 	while (nb >= (long)ft_strlen(base))
 	{
 		nb /= ft_strlen(base);
 		digits++;
 	}
-	i = digits + *sign;
+	i = digits;
 	return (i);
 }
 
-char	*ft_itoa_base(int n, const char *base)
+char	*ft_itoa_base(long long n, const char *base)
 {
-	char	*cpy;
-	long	nb;
-	int		i;
-	int		sign;
+	char		*cpy;
+	long long	nb;
+	int			i;
 
+	if (n < 0)
+		n = (n + (long)INT_MAX * 2 + 2);
 	nb = n;
-	sign = 0;
-	i = init_vals(nb, &sign, base);
-	if (nb < 0)
-		nb = -nb;
+	i = init_vals(nb, base);
 	cpy = malloc(sizeof(char) * i + 1);
 	if (!cpy)
 		return (NULL);
-	if (sign == 1)
-		cpy[0] = '-';
+
 	cpy[i--] = '\0';
-	while (i >= sign)
+	while (i >= 0)
 	{
 		cpy[i] = base[nb % ft_strlen(base)];
 		nb /= ft_strlen(base);
