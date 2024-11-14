@@ -22,7 +22,11 @@ typedef struct s_struct
 {
 	const char	*str;
 	void		*arg;
+	char		*flags_found[7];
+	int			flag_order[7];
+	int			nb;
 }	t_struct;
+//flag_order = {[0] = '-', [1] = '0', [2] = '.', [3] = '#', [4] = ' ', [5] = '+', [6] = '\0',} 
 
 size_t	ft_strlen(const char *s);
 void	ft_putnbr_fd(int *count, int n, int fd);
@@ -35,6 +39,20 @@ void	ft_bluepill(int i, int *count, t_struct v, va_list args);
 char	*print_ptr(size_t adr, int *count);
 void	ft_redpill(int i, int *count, t_struct v, va_list args);
 int		ft_digits(int n);
+int		ft_atoi(const char *nptr);
+int		standard_conds(t_struct v, int i);
+int		bonus_conds(t_struct v, int i);
+void	ft_bonus_nbrs(int i, int *count, t_struct v, va_list args);
+void	ft_bonus_line(int i, int *count, t_struct v, va_list args);
+void	ft_bonus_zero(int i, int *count, t_struct v, va_list args);
+void	ft_bonus_point(int i, int *count, t_struct v, va_list args);
+void	ft_bonus_hashtag(int i, int *count, t_struct v, va_list args);
+void	ft_bonus_space(int i, int *count, t_struct v, va_list args);
+void	ft_bonus_plus(int i, int *count, t_struct v, va_list args);
+int		skip_flag_duppl(int i, t_struct v, char flag);
+char	flag_finder(int i, t_struct v);
+t_struct	init_struct_vals(t_struct v);
+void	*ft_calloc(size_t nmemb, size_t size);
 
 #endif
 

@@ -6,31 +6,28 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:05:11 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/13 15:46:58 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/14 19:11:48 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	found_count(va_list args, t_struct v)
+void	set_istring(int *str)
 {
-	int	i;
-	int	count;
+	int i;
 
 	i = 0;
-	count = 0;
-	while (v.str[i])
-	{
-		if (v.str[i] == '%' && (v.str[i + 1] != '-' || v.str[i + 1] != '0'))
-			ft_redpill(++i, &count, v, args);
-		else
-		{
-			write(1, &v.str[i], 1);
-			count++;
-		}
-		i++;
-	}
-	return (count);
+	while (str[i])
+		str[i++] = 0;
+}
+
+void	set_cstring(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+		str[i++] = 0;
 }
 
 int	ft_printf(const char *str, ...)
@@ -43,6 +40,8 @@ int	ft_printf(const char *str, ...)
 		return (0);
 	v.arg = 0;
 	v.str = str;
+	set_istring(v.flag_order);
+	set_cstring(v.flags_found);
 	va_start(args, str);
 	v.arg = malloc(8);
 	count = found_count(args, v);

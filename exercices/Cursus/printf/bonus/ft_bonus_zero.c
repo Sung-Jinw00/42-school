@@ -6,86 +6,72 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:50:36 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/13 20:30:21 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/14 17:44:18 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 /*  . gerer n'importe quelle combinaison des flags (-0.) et la taille minimale des convertion */
+/* 		- avec "0" : %0(nombre)(suffixe) affiche (nombre) de zeros en incluant ce que
+			contient le suffixe a la fin, si j'ai un nombre negatif ou que j'utilise
+			un flag +, le signe est au debut de la suite, les zeros sont remplaces par des
+			espaces pour %s, %c et %p; */
 
-int	ft_digits(int n)
-{
-	int count;
-	
-	count = 1;
-	if (n < 0)
-	{
-		n = -n;
-		count++;
-	}
-	while (n >= 10)
-	{
-		n /= 10;
-		count++;
-	}
-	return (count);
-}
-
-void	ft_string3(int j, int i, t_struct v, va_list args)
+void	ft_string_zero3(int i, int nb, t_struct v, va_list args)
 {
 	if (v.str[i] == 'p')//si je dois ecrire un pointeur
 	{
 		v.arg = va_arg(args, void *);
 		if (!v.arg)//si j'ai un pointeur null
 		{
-			j -= ft_strlen("(nil)");//j'enleve la longueur de (nil)
-			while (j-- >= 0)
+			nb -= ft_strlen("(nil)");//j'enleve la longueur de (nil)
+			while (nb-- > 0)
 				write(1, " ", 1);
 			write(1, "(nil)", 5);//j'ecris l'erreur
 			return ;
 		}
 		v.arg = print_ptr((size_t)v.arg, -1);//sinon, je converti mon pointeur en hexa
-		j -= ft_strlen((const char *)v.arg);//j'enleve la len de la chaine
-		while (j-- >= 0)
+		nb -= ft_strlen((const char *)v.arg);//j'enleve la len de la chaine
+		while (nb-- > 0)
 			write(1, " ", 1);
 		ft_putstr_fd((char *)v.arg, 1);//j'ecris mon pointeur
 	}
 }
 
-void	ft_string2(int j, int i, t_struct v, va_list args)
+void	ft_string_zero2(int i, int nb, t_struct v, va_list args)
 {
-	int	j;
+	int	k;
 
-	j = 0;
+	k = 0;
 	if (v.str[i] == 's')//si c'est une chaine de characteres
 	{
 		v.arg = va_arg(args, char *);
 		if (!v.arg)//si j'ai une chaine vide
 		{
-			j -= ft_strlen("(null)");//j'enleve la longueur de (null)
-			while (j-- >= 0)
+			nb -= ft_strlen("(null)");//j'enleve la longueur de (null)
+			while (nb-- > 0)
 				write(1, " ", 1);
 			write(1, "(null)", 6);//j'ecris l'erreur
 			return ;
 		}
-		j -= ft_strlen((const char *)v.arg);//sinon j'enleve la len de la chaine
-		while (j-- >= 0)
+		nb -= ft_strlen((const char *)v.arg);//sinon j'enleve la len de la chaine
+		while (nb-- > 0)
 			write(1, " ", 1);
-		while (((char *)v.arg)[j])//et je l'ecris
-			write (1, &((char *)v.arg)[j++], 1);
+		while (((char *)v.arg)[k])//et je l'ecris
+			write (1, &((char *)v.arg)[k++], 1);
 	}
 	else
-		ft_string3(j, i, v, args);
+		ft_string_zero3(i, nb, v, args);
 }
 
 
-void	ft_string(int j, int i, t_struct v, va_list args)
+void	ft_string_zero(int i, int nb, t_struct v, va_list args)
 {
-	int	j;
+	int	k;
 	long long value;
 
 	value = 0;
-	j = 0;
+	k = 0;
 	if (v.str[i] == 'X' || v.str[i] == 'x')//si je veux un nombre en hexadecimal
 	{
 		value = va_arg(args, int);
@@ -93,69 +79,75 @@ void	ft_string(int j, int i, t_struct v, va_list args)
 			v.arg = ft_itoa_base(value, "0123456789ABCDEF");
 		else
 			v.arg = ft_itoa_base(value, "0123456789abcdef");
-		j -= ft_strlen((const char *)v.arg);//j'enleve la longueur de la chaine
-		while (j-- >= 0)
+		nb -= ft_strlen((const char *)v.arg);//j'enleve la longueur de la chaine
+		while (nb-- > 0)
 			write(1, "0", 1);
-		while (((char *)v.arg)[j])//j'ecris la chaine
-			write (1, &((char *)v.arg)[j++], 1);
+		while (((char *)v.arg)[k])//j'ecris la chaine
+			write (1, &((char *)v.arg)[k++], 1);
 	}
 	else
-		ft_string2(j, i, v, args);
+		ft_string_zero2(i, nb, v, args);
 }
 
-void	field_width2(int j, int i, t_struct v, va_list args)
+void	field_width_zero2(int i, int nb, t_struct v, va_list args)
 {
 	long value;
 
 	value = 0;
-	if (v.str[j] == 'u')//si c'est un entier non signé
+	if (v.str[i] == 'u')//si c'est un entier non signé
 	{
 		value = va_arg(args, int);
 		if (value < 0)//je choisi le nombre que je vais ecrire
 			*(unsigned long *)v.arg = (unsigned long)(value + (long)INT_MAX * 2 + 2);
 		else
 			*(unsigned long *)v.arg = (unsigned long)value;
-		j -= ft_digits(*(int *)v.arg);//j'enleve la longueur du nombre
-		while (j-- >= 0)
+		nb -= ft_digits(*(int *)v.arg);//j'enleve la longueur du nombre
+		while (nb-- > 0)
 			write(1, "0", 1);
 		ft_putunbr_fd(-1, *(unsigned long *)v.arg, 1);//j'ecris le nombre
 	}
-	else if (v.str[j] == 'p' || v.str[j] == 'x' || v.str[j] == 'X' || v.str[j] == 's')//si c'est une chaine de characteres (en puissance)
-		ft_string(j, i, v, args);
+	else if (v.str[i] == 'p' || v.str[i] == 'x' || v.str[i] == 'X' || v.str[i] == 's')//si c'est une chaine de characteres (en puissance)
+		ft_string_zero(i, nb, v, args);
 }
 
-void	field_width(int j, int i, t_struct v, va_list args)
+void	field_width_zero(int i, int nb, t_struct v, va_list args)
 {
-	if (v.str[j] == 'c' || v.str[j] == '%')//si c'est un caractere
+	if (v.str[i] == 'c' || v.str[i] == '%')//si c'est un caractere
 	{
-		j -= 1;//j'enleve un espace
-		while (j-- >= 0)
+		nb -= 1;//j'enleve un espace
+		while (nb-- > 0)
 			write(1, " ", 1);
 			*(char *)v.arg = (char)va_arg(args, int);
 		write (1, &*(char *)v.arg, 1);//j'ajoute le caractere
 	}
-	else if (v.str[j] == 'd' || v.str[j] == 'i')//si c'est des entiers
+	else if (v.str[i] == 'd' || v.str[i] == 'i')//si c'est des entiers
 	{
 		*(int *)v.arg = va_arg(args, int);
-		j -= ft_digits(*(int *)v.arg);//j'enleve la longueur de mon chiffre
-		while (j-- >= 0)
+		nb -= ft_digits(*(int *)v.arg);//j'enleve la longueur de mon chiffre
+		if (*(int *)v.arg < 0)
+		{
+			write(1, "-", 1);
+			*(int *)v.arg = -(*(int *)v.arg);
+			nb--;
+		}
+		while (nb-- > 0)
 			write(1, "0", 1);
 		ft_putnbr_fd(-1, *(int *)v.arg, 1);//j'ecris mon chiffre
 	}
 	else
-		field_width2(j, i, v, args);
+		field_width_zero2(i, nb, v, args);
 }
 
-/* 		- avec "0" : %0(nombre)(suffixe) affiche (nombre) de zeros en incluant ce que
-			contient le suffixe a la fin, si j'ai un nombre negatif ou que j'utilise
-			un flag +, le signe est au debut de la suite, les zeros sont remplaces par des
-			espaces pour %s, %c et %p; */
-void	ft_bonus_zero(int i, int *count, t_struct v, va_list args)
+
+int	ft_bonus_zero(int i, int *count, t_struct v, va_list args)
 {
 	int j;
+	int nb;
 
-	j = i;
-	if (v.str[j] != '0')//si j'ai que des chiffres
+	i = if_plus(i, v, count);
+	j = i + 1;
+	nb = 0;
+	if (v.str[i] != '0')//si j'ai un zero
 	{
 		while (v.str[j] >= '0' || v.str[j] <= '9')
 			j++;
@@ -166,11 +158,14 @@ void	ft_bonus_zero(int i, int *count, t_struct v, va_list args)
 		}
 		else
 		{
-			j = atoi(v.str + i);//j prends la valeur du nombre
-			*count += j;//j'ajoute le nombre de caracteres que je vais ecrire au compteur
-			field_width_line(j, i, v, args);//j'ecris et compte en fonction du type
+			nb = ft_atoi(v.str + i + 1);//j prends la valeur du nombre
+			if ((v.str[i - 1] != '+'))
+				nb--;
+			*count += nb;//j'ajoute le nombre de caracteres que je vais ecrire au compteur
+			field_width_zero(j, nb, v, args);//j'ecris et compte en fonction du type
 		}
 	}
+	return (j + 1);
 }
 //ex : printf("|%-10d|\n", 42)     =     "|42        |"
 
