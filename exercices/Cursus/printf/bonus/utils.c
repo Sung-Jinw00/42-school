@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:53:23 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/13 19:54:27 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/15 20:32:12 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*print_ptr(size_t adr, int *count)
+char	*print_ptr(size_t adr, int *count, char *hexa)
 {
-	char	ptr[18];
+	char	*ptr;
 	int		i;
-	char	*hexa;
 	size_t	adr_copy;
 
-	hexa = "0123456789abcdef";
+	ptr = malloc(18);
 	i = 2;
 	adr_copy = adr;
 	while (adr_copy > 0)
@@ -66,22 +65,19 @@ void	ft_putunbr_fd(int *count, unsigned long n, int fd)
 	write(fd, &n, 1);
 }
 
-void	ft_putnbr_fd(int *count, int n, int fd)
+void	ft_putnbr_fd(int *count, long long n, int fd)
 {
-	long nb;
-
-	nb = n;
-	if (nb < 0)
+	if (n < 0)
 	{
 		write(fd, "-", 1);
 		*count += 1;
-		nb = -nb;
+		n = -n;
 	}
-	if (nb > 9)
-		ft_putnbr_fd(count, nb / 10, fd);
-	nb = nb % 10 + '0';
+	if (n > 9)
+		ft_putnbr_fd(count, n / 10, fd);
+	n = n % 10 + '0';
 	*count += 1;
-	write(fd, &nb, 1);
+	write(fd, &n, 1);
 }
 
 void	ft_putstr_fd(char *s, int fd)

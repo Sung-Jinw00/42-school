@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_normal _solving.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 22:22:27 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/15 00:19:16 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/15 20:31:12 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 static void	ft_blackpill(int i, int *count, t_struct v, va_list args)
 {
 	int	j;
+	char *s;
 
 	j = 0;
+	s = NULL;
 	if (v.str[i] == 'p')
 	{
 		v.arg = va_arg(args, void *);
@@ -26,7 +28,9 @@ static void	ft_blackpill(int i, int *count, t_struct v, va_list args)
 			*count += 5;
 			return ;
 		}
-		print_ptr((size_t)v.arg, count);
+		s = print_ptr((size_t)v.arg, count, "0123456789abcdef");
+		ft_putstr_fd(s, 1);
+		free(s);
 	}
 	else if (v.str[i] == 'i' || v.str[i] == 'd')
 	{

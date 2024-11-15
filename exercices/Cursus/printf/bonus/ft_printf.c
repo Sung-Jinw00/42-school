@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:05:11 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/15 00:42:53 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/15 22:46:09 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	set_string(char *str)
 
 	i = 0;
 	while (str[i])
-		str[i++] = 0;
+		str[i++] = 'A';
 }
 
 int	ft_printf(const char *str, ...)
@@ -31,10 +31,10 @@ int	ft_printf(const char *str, ...)
 		return (0);
 	v.arg = 0;
 	v.str = str;
-	set_string(v.flag_order);
+	set_string(v.flag_order);//je met tout a zero
 	va_start(args, str);
 	v.arg = malloc(8);
-	count = found_count(args, v);
+	count = print_this_bs(args, v);//je print et retourne le nombre de characteres que j'ai imprimer
 	free(v.arg);
 	va_end(args);
 	return (count);
@@ -44,9 +44,9 @@ int	ft_printf(const char *str, ...)
 
 int main(void)
 {
-	long i = 0;
-	long j = 0;
-	printf("1copie : %d\n", printf("1copie :   %-#+#0++ .10p\n", NULL));
-	printf("!copie : %d\n", ft_printf("!copie :   %p\n", NULL));
+	//printf("original : %d\n", printf("original :   |%%|\n"));
+	//printf("copie    : %d\n", ft_printf("copie    :   |%%|\n"));
+	printf("original : %d\n", printf("original :   |% s|\n", "Hello world"));
+	printf("copie    : %d\n", ft_printf("copie    :   |% s|\n", "Hello world"));
 	return (0);
 }

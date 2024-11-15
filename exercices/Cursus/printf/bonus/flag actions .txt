@@ -1,0 +1,65 @@
+flags normaux :
+char :
+	- 'c'
+	- '%'
+
+char * :
+	- 's;
+	- 'p'
+
+entiers :
+	- 'd'
+	- 'i'
+	- 'u'
+	- 'x'
+	- 'X'
+
+////////////////////////
+
+
+actions de champ :
+	0 : rempli le champ de zeros et affiche le nombre a droite, si l'entier est negatif ou que j'utilise
+		un flag '+', le signe se retrouve au debut
+	- : rempli le champ d'espaces et affiche le nombre a gauche
+		pas de flags : rempli le champ d'espaces et affiche le nombre a droite
+
+
+actions d'ajout :
+	+   : affiche le signe + d'un nombre si il est positif
+	' ' : affiche un espace a la place du signe + d'un nombre si il est positif
+	.   : agit comme '0' avec les entiers, defini le nombre de characteres a imprimer avec les
+		  chaines de characteres
+
+
+modifications de valeur :
+	# : rajoute un prefixe hexadecimal si j'ai 'x' ou 'X' ✅
+
+/////////////////////////
+
+
+annulations de flags:
+	pas de flags :
+		- si la largeur du champ est trop petite ✅
+
+	0 :
+		- quand '-' est present ✅
+		- quand j'ai une chaine de characteres a imprimer ✅
+
+	- :
+		- si j'ai une chaine de characteres a imprimer ✅
+
+	+ :
+		- si j'ai un nombre negatif ou zero ✅
+		- si j'ai un pointeur, une chaine de characteres ou un nombre hexadecimal a afficher ✅
+
+	' ' :
+		- quand '+' est present ✅
+		- si j'ai un nombre negatif ✅
+		- si j'ai une chaine de characteres ou un nombre hexadecimal a afficher ✅
+		- si le champ specifier est trop petit pour rajouter un espace ✅
+
+	. : affiche autant de nombres que demander apres la virgule
+		- ne fonctionne pas sur les pointeurs et les hexadecimaux ✅
+	
+	# : rajoute un prefixe hexadecimal si j'ai 'x' ou 'X'
+		- ne fonctionne pas pour le reste ✅
