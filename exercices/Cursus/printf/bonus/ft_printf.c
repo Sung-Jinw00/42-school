@@ -3,25 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:05:11 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/14 19:11:48 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/15 00:42:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	set_istring(int *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-		str[i++] = 0;
-}
-
-void	set_cstring(char *str)
+void	set_string(char *str)
 {
 	int i;
 
@@ -40,8 +31,7 @@ int	ft_printf(const char *str, ...)
 		return (0);
 	v.arg = 0;
 	v.str = str;
-	set_istring(v.flag_order);
-	set_cstring(v.flags_found);
+	set_string(v.flag_order);
 	va_start(args, str);
 	v.arg = malloc(8);
 	count = found_count(args, v);
@@ -56,7 +46,7 @@ int main(void)
 {
 	long i = 0;
 	long j = 0;
-	printf("1copie : %d\n", printf("1copie :   %p\n", NULL));
+	printf("1copie : %d\n", printf("1copie :   %-#+#0++ .10p\n", NULL));
 	printf("!copie : %d\n", ft_printf("!copie :   %p\n", NULL));
 	return (0);
 }

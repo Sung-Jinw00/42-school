@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 16:56:47 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/14 18:55:41 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/15 00:43:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,7 @@ int	bonus_conds(t_struct v, int i)
 	return (0);
 }
 
-int	skip_flag_duppl(int i, t_struct v, char flag)
-{
-	while (v.str[i + 1] == flag)
-			i++;
-	return (i);
-}
-
-char	flag_finder(int i, t_struct v)
+char	bonus_flag_finder(int i, t_struct v)
 {
 	if (v.str[i] == '-')
 		return ('-');

@@ -22,11 +22,9 @@ typedef struct s_struct
 {
 	const char	*str;
 	void		*arg;
-	char		*flags_found[7];
-	int			flag_order[7];
+	char		flag_order[7];
 	int			nb;
 }	t_struct;
-//flag_order = {[0] = '-', [1] = '0', [2] = '.', [3] = '#', [4] = ' ', [5] = '+', [6] = '\0',} 
 
 size_t	ft_strlen(const char *s);
 void	ft_putnbr_fd(int *count, int n, int fd);
@@ -50,7 +48,7 @@ void	ft_bonus_hashtag(int i, int *count, t_struct v, va_list args);
 void	ft_bonus_space(int i, int *count, t_struct v, va_list args);
 void	ft_bonus_plus(int i, int *count, t_struct v, va_list args);
 int		skip_flag_duppl(int i, t_struct v, char flag);
-char	flag_finder(int i, t_struct v);
+char	bonus_flag_finder(int i, t_struct v);
 t_struct	init_struct_vals(t_struct v);
 void	*ft_calloc(size_t nmemb, size_t size);
 

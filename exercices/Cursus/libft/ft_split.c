@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:37 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/11 22:02:02 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/14 23:43:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,16 @@ char	**ft_split(char const *str, char charset)
 
 int	main(void)
 {
-	char **split = ft_split("hello!", ' ');
+	const char *str = malloc(0);
+	str = 0;
+	char **split = ft_split(str, 0);
 	int i = 0;
 
-	if (split[i])
+	if (!split)
+		printf("tableau null\n");
+	else if (!split[0])
+		printf("tableau vide : %s\n", split[0]);
+	else if (split[i])
 	{
 		while (split[i])
 		{
@@ -112,8 +118,6 @@ int	main(void)
 		}
 		printf("tableau %d de split1 : %s\n", i, split[i]);
 	}
-	else
-		printf("tableau vide1 : %s\n", split[0]);
 	free(split);
 } */
 

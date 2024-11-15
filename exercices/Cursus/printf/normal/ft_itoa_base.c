@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 19:33:00 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/13 19:42:46 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/14 23:25:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ char	*ft_itoa_base(long long n, const char *base)
 	cpy = malloc(sizeof(char) * i + 1);
 	if (!cpy)
 		return (NULL);
-
 	cpy[i--] = '\0';
 	while (i >= 0)
 	{
@@ -51,6 +50,7 @@ char	*ft_itoa_base(long long n, const char *base)
 	}
 	return (cpy);
 }
+
 /* #include <stdio.h>
 
 int main(void)

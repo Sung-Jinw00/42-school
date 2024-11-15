@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:05:11 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/14 18:04:20 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/14 23:28:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,19 @@ int	ft_printf(const char *str, ...)
 	return (count);
 }
 
-#include <stdio.h>
+/* #include <stdio.h>
 
 int main(void)
 {
-	/* long i = 0;
+	long i = 0;
 	long j = 0;
-	printf("1copie : %d\n", printf("1copie :   %.10d\n", 46)); */
-	//printf("!copie : %d\n", ft_printf("!copie :   %p\n", NULL));
-	/* printf("%c\n", 'l');
-	printf("%010c\n\n", 'l'); */
+	printf("1copie : %d\n", printf("1copie :   %.10d\n", 46));
+	printf("!copie : %d\n", ft_printf("!copie :   %p\n", NULL));
+	printf("%c\n", 'l');
+	printf("%010c\n\n", 'l');
 	printf("|%---10d|\n", 46);
 	printf("|%.10d|\n\n", 46);
-	/* printf("%.10i\n", 46);
+	printf("%.10i\n", 46);
 	printf("%010i\n\n", 46);
 	char str = 'H';
 	printf("%.10s\n", "Hello :3");
@@ -77,6 +77,6 @@ int main(void)
 	printf("%.10X\n", 373453);
 	printf("%010X\n\n", 373453);
 	printf("%.10%\n");
-	printf("%010%\n\n"); */
+	printf("%010%\n\n");
 	return (0);
-}
+} */
