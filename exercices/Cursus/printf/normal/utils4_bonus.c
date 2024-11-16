@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils4.c                                           :+:      :+:    :+:   */
+/*   utils4_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 16:18:33 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/15 20:31:54 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/16 23:23:42 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
-void	keep_prior_flag(char erased, char prior, t_struct v)
+t_struct	keep_prior_flag(char erased, char prior, t_struct v)
 {
-	int j;
-	int save;
+	int	j;
+	int	save;
 
 	j = 0;
 	save = 0;
@@ -36,6 +36,7 @@ void	keep_prior_flag(char erased, char prior, t_struct v)
 		}
 		j++;
 	}
+	return (v);
 }
 
 int	ft_strchr(char *s, char c)
@@ -52,10 +53,10 @@ int	ft_strchr(char *s, char c)
 	return (0);
 }
 
-void	erase_flag(char erased, t_struct v)
+t_struct	erase_flag(char erased, t_struct v)
 {
-	int j;
-	int save;
+	int	j;
+	int	save;
 
 	j = 0;
 	save = 0;
@@ -72,35 +73,37 @@ void	erase_flag(char erased, t_struct v)
 		}
 		j++;
 	}
+	return (v);
 }
-t_struct	assign_val2(int i, t_struct v, va_list args)
-{
-	int count;
 
-	count = 0;
+t_struct	assign_val2(int i, t_struct v, va_list args, long long nb)
+{
 	if (v.str[i] == 'p')
 	{
 		v.arg = va_arg(args, void *);
 		if (!v.arg)
 			v.arg = "(nil)";
 		else
-			v.arg = print_ptr((size_t)v.arg, &count, "0123456789abcdef");
+			v.arg = print_ptr((size_t)v.arg, (int *)&nb, "0123456789abcdef");
 	}
 	else if (v.str[i] == 'u')
 	{
 		*(long *)v.arg = va_arg(args, int);
 		if (*(long *)v.arg < 0)
-			*(unsigned long *)v.arg = (unsigned long)(*(long *)v.arg + (long)INT_MAX \
-			* 2 + 2);
+			*(unsigned long *)v.arg = (unsigned long)(*(long *)v.arg + \
+			(long)INT_MAX * 2 + 2);
 		else
 			*(unsigned long *)v.arg = (unsigned long)(*(long *)v.arg);
 	}
 	else if (v.str[i] == 'i' || v.str[i] == 'd')
-		*(int *)v.arg = va_arg(args, int);
+	{
+		nb = va_arg(args, int);
+		*(long long *)v.arg = nb;
+	}
 	return (v);
 }
 
-t_struct	assign_val(int i, t_struct v, va_list args)
+t_struct	assign_val(int i, t_struct v, va_list args, long long nb)
 {
 	if (v.str[i] == 's')
 	{
@@ -125,6 +128,6 @@ t_struct	assign_val(int i, t_struct v, va_list args)
 	else if (v.str[i] == 'c')
 		*(char *)v.arg = (char)va_arg(args, int);
 	else
-		v = assign_val2(i, v, args);
+		v = assign_val2(i, v, args, nb);
 	return (v);
 }

@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:05:11 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/15 19:49:32 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/17 00:55:20 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	found_count(va_list args, t_struct v)
 	count = 0;
 	while (v.str[i])
 	{
-		if (v.str[i] == '%')
+		if (v.str[i] == '%' && (v.str[i + 1] != '-' || v.str[i + 1] != '0'))
 			ft_redpill(++i, &count, v, args);
 		else
 		{
@@ -51,12 +51,12 @@ int	ft_printf(const char *str, ...)
 	return (count);
 }
 
-#include <stdio.h>
+/* #include <stdio.h>
 
 int main(void)
 {
-	int a = 42;
-	printf("|% +3d|\n", a);
-	printf("|% +1d|\n", a);
+	printf("original : %d\n", ft_printf("original :   %s\n", " - "));
+	fflush(stdout);
+	printf("copie    : %d\n", ft_printf("copie    :   %s\n", " - "));
 	return (0);
-}
+} */

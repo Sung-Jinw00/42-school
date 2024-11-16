@@ -3,35 +3,32 @@ FLAGS = -Wall -Wextra -Werror
 
 NAME = libftprintf.a
 
-FILES = ft_itoa_base.c ft_printf.c ft_putnbr_fd.c ft_putstr_fd.c ft_putunbr_fd.c ft_strlen.c\
-		ft_printf2.c
+FILES = ft_itoa_base.c ft_printf.c utils.c ft_printf2.c
 
-#FILES_BONUS = ft_lstclear_bonus.c \
-			ft_lstdelone_bonus.c  \
-			ft_lstiter_bonus.c    \
-			ft_lstlast_bonus.c    \
-			ft_lstmap_bonus.c     \
-			ft_lstnew_bonus.c     \
-			ft_lstsize_bonus.c    \
+FILES_BONUS = ft_normal_solving_bonus.c ft_printf_bonus.c ft_printf2_bonus.c\
+			  utils_bonus.c utils2_bonus.c utils3_bonus.c utils4_bonus.c\
+			  utils5_bonus.c utils6_bonus.c
 
 OBJS = $(FILES:.c=.o)
 OBJS_BONUS = $(FILES_BONUS:.c=.o)
 
 all : $(NAME)
 
-$(NAME) : $(OBJS)
-	ar -rcs $(NAME) $(OBJS)
+$(NAME) : $(OBJS) ft_printf.h
+	ar -rcs $(NAME) $(OBJS) ft_printf.h
 
 %.o : %.c
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean :
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(OBJS_BONUS)
 
 fclean : clean
 	rm -f $(NAME)
 
 re : fclean all
 
-#bonus : $(OBJS) $(OBJS_BONUS)
-#	ar -rcs $(NAME) $(OBJS) $(OBJS_BONUS)
+bonus : $(OBJS_BONUS) ft_printf_bonus.h
+	ar -rcs $(NAME) $(OBJS_BONUS) ft_printf_bonus.h
+
+.PHONY : all clean fclean re bonus

@@ -6,6 +6,9 @@
 		"stdlib.h": "c",
 		"printflibft.h": "c",
 		"unistd.h": "c",
-		"ft_printf.h": "c"
+		"ft_printf.h": "c",
+		"tests.h": "c",
+		"ft_printf_bonus.h": "c",
+		"limits.h": "c"
 	}
 }

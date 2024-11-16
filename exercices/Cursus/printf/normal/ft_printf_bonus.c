@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:05:11 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/15 22:46:09 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/17 00:22:46 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
-void	set_string(char *str)
+static void	set_string(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (str[i])
-		str[i++] = 'A';
+	while (i < 7)
+		str[i++] = 0;
 }
 
 int	ft_printf(const char *str, ...)
@@ -31,22 +31,28 @@ int	ft_printf(const char *str, ...)
 		return (0);
 	v.arg = 0;
 	v.str = str;
-	set_string(v.flag_order);//je met tout a zero
+	v.nb1 = 0;
+	v.nb2 = 0;
+	set_string(v.flag_order);
 	va_start(args, str);
 	v.arg = malloc(8);
-	count = print_this_bs(args, v);//je print et retourne le nombre de characteres que j'ai imprimer
+	count = print_this_bs(args, v);
 	free(v.arg);
 	va_end(args);
 	return (count);
 }
 
-#include <stdio.h>
+/* #include "../tests/tests.h"
 
 int main(void)
 {
-	//printf("original : %d\n", printf("original :   |%%|\n"));
-	//printf("copie    : %d\n", ft_printf("copie    :   |%%|\n"));
-	printf("original : %d\n", printf("original :   |% s|\n", "Hello world"));
-	printf("copie    : %d\n", ft_printf("copie    :   |% s|\n", "Hello world"));
+	tests_c(0);
+	tests_s(NULL);
+	tests_d(-128);
+	tests_i(-128);
+	tests_u(-128);
+	tests_x(-128);
+	tests_x_maj(-128);
+	tests_percent();
 	return (0);
-}
+} */

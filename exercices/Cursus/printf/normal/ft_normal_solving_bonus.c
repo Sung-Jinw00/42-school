@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_normal _solving.c                               :+:      :+:    :+:   */
+/*   ft_normal_solving_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 22:22:27 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/15 20:31:12 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/17 00:15:05 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 static void	ft_blackpill(int i, int *count, t_struct v, va_list args)
 {
-	int	j;
-	char *s;
+	int		j;
+	char	*s;
 
 	j = 0;
 	s = NULL;
@@ -29,13 +29,13 @@ static void	ft_blackpill(int i, int *count, t_struct v, va_list args)
 			return ;
 		}
 		s = print_ptr((size_t)v.arg, count, "0123456789abcdef");
-		ft_putstr_fd(s, 1);
+		ft_bputstr_fd(s, 1);
 		free(s);
 	}
 	else if (v.str[i] == 'i' || v.str[i] == 'd')
 	{
 		*(int *)v.arg = va_arg(args, int);
-		ft_putnbr_fd(count, *(int *)v.arg, 1);
+		ft_bputnbr_fd(count, *(int *)v.arg, 1);
 	}
 	else
 		return ;
@@ -43,17 +43,18 @@ static void	ft_blackpill(int i, int *count, t_struct v, va_list args)
 
 static void	ft_yellowpill(int i, int *count, t_struct v, va_list args)
 {
-	long value;
+	long	value;
 
 	value = 0;
 	if (v.str[i] == 'u')
 	{
 		value = va_arg(args, int);
 		if (value < 0)
-			*(unsigned long *)v.arg = (unsigned long)(value + (long)INT_MAX * 2 + 2);
+			*(unsigned long *)v.arg = (unsigned long)(value + \
+			(long)INT_MAX * 2 + 2);
 		else
 			*(unsigned long *)v.arg = (unsigned long)value;
-		ft_putunbr_fd(count, *(unsigned long *)v.arg, 1);
+		ft_bputunbr_fd(count, *(unsigned long *)v.arg, 1);
 	}
 	else if (v.str[i] == 'c')
 	{
@@ -67,8 +68,8 @@ static void	ft_yellowpill(int i, int *count, t_struct v, va_list args)
 
 static void	ft_bluepill(int i, int *count, t_struct v, va_list args)
 {
-	int	j;
-	long long value;
+	int			j;
+	long long	value;
 
 	value = 0;
 	j = 0;

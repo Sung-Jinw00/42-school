@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:53:23 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/15 20:32:12 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/17 00:16:18 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_bstrlen(const char *s)
 {
 	size_t	i;
 
@@ -47,10 +47,10 @@ char	*print_ptr(size_t adr, int *count, char *hexa)
 	ptr[i] = 'x';
 	i--;
 	ptr[i] = '0';
-	return(ptr);
+	return (ptr);
 }
 
-void	ft_putunbr_fd(int *count, unsigned long n, int fd)
+void	ft_bputunbr_fd(int *count, unsigned long n, int fd)
 {
 	if (n < 0)
 	{
@@ -59,13 +59,13 @@ void	ft_putunbr_fd(int *count, unsigned long n, int fd)
 		n = -n;
 	}
 	if (n > 9)
-		ft_putunbr_fd(count, n / 10, fd);
+		ft_bputunbr_fd(count, n / 10, fd);
 	n = n % 10 + '0';
 	*count += 1;
 	write(fd, &n, 1);
 }
 
-void	ft_putnbr_fd(int *count, long long n, int fd)
+void	ft_bputnbr_fd(int *count, long long n, int fd)
 {
 	if (n < 0)
 	{
@@ -74,13 +74,13 @@ void	ft_putnbr_fd(int *count, long long n, int fd)
 		n = -n;
 	}
 	if (n > 9)
-		ft_putnbr_fd(count, n / 10, fd);
+		ft_bputnbr_fd(count, n / 10, fd);
 	n = n % 10 + '0';
 	*count += 1;
 	write(fd, &n, 1);
 }
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_bputstr_fd(char *s, int fd)
 {
 	int	i;
 
