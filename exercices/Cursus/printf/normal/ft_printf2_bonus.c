@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf2_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 22:22:27 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/16 23:22:40 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/18 01:25:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,20 @@ t_struct	fill_parser(char c, t_struct v)
 	return (v);
 }
 
-/* ecris la reponse en conftion des flags */
 void	ft_write_answer(int i, int *count, t_struct v, va_list args)
 {
-	int			j;
 	int			len_field;
 	long long	nb;
+	int			strlen;
 
-	j = 0;
 	nb = 0;
 	v = assign_val(i, v, args, nb);
 	len_field = ft_len_field(i, v);
+	if (v.str[i] == 'X' || v.str[i] == 'x')
+		strlen = (int)ft_bstrlen((const char *)v.arg);
+	if ((v.str[i] == 'X' || v.str[i] == 'x') && v.nb2 > strlen
+		&& ft_strchr(v.flag_order, '.'))
+		v.zerosnb = v.nb2 - strlen;
 	if (v.str[i] == '%' || (v.str[i] == 'c' && ft_strchr(v.flag_order, '.')))
 	{
 		write(1, &*(char *)v.arg, 1);
@@ -59,7 +62,9 @@ void	ft_write_answer(int i, int *count, t_struct v, va_list args)
 
 t_struct	flag_filter(int i, t_struct v)
 {
-	if (ft_strchr(v.flag_order, '0') && (v.str[i] == 's'))
+	if (ft_strchr(v.flag_order, '0') && (v.str[i] == 's'
+			|| ((v.str[i] == 'x' || v.str[i] == 'X')
+				&& ft_strchr(v.flag_order, '.'))))
 		v = erase_flag('0', v);
 	v = keep_prior_flag('0', '-', v);
 	if (ft_strchr(v.flag_order, '+') && (v.str[i] == 's' || v.str[i] == 'u'
@@ -69,8 +74,8 @@ t_struct	flag_filter(int i, t_struct v)
 			|| v.str[i] == 'x' || v.str[i] == 'X'))
 		v = erase_flag(' ', v);
 	v = keep_prior_flag(' ', '+', v);
-	if (ft_strchr(v.flag_order, '.') && (v.nb2 == 0 || v.str[i] == 'p'
-			|| v.str[i] == 'x' || v.str[i] == 'X'))
+	if (ft_strchr(v.flag_order, '.') && (v.str[i] == 'p' || (v.nb2 == 0
+				&& v.str[i] == 'c')))
 		v = erase_flag('.', v);
 	if (ft_strchr(v.flag_order, '#')
 		&& !(v.str[i] == 'x' || v.str[i] == 'X'))
@@ -80,21 +85,30 @@ t_struct	flag_filter(int i, t_struct v)
 
 int	parseur(int i, int *count, t_struct v, va_list args)
 {
-	while (!((v.str[i] >= '1' && v.str[i] <= '9') || standard_conds(v, i)))
+	while (!standard_conds(v, i))
 	{
-		v = fill_parser(bonus_flag_finder(i, v), v);
-		i += 1;
-	}
-	if (v.str[i] >= '1' && v.str[i] <= '9')
-		v.nb1 = ft_atoi((const char *)v.str + i);
-	while (v.str[i] >= '0' && v.str[i] <= '9')
-		i += 1;
-	if (v.str[i] == '.')
-	{
-		v = fill_parser(bonus_flag_finder(i++, v), v);
-		v.nb2 = ft_atoi((const char *)v.str + i);
-		while (v.str[i] >= '0' && v.str[i] <= '9')
+		if ((v.str[i] >= '1' && v.str[i] <= '9')
+			|| v.str[i] == '.')
+		{
+			if (v.str[i] >= '1' && v.str[i] <= '9')
+			{
+				v.nb1 = ft_atoi((const char *)v.str + i);
+				while (v.str[i] >= '0' && v.str[i] <= '9')
+					i += 1;
+			}
+			if (v.str[i] == '.')
+			{
+				v = fill_parser(bonus_flag_finder(i++, v), v);
+				v.nb2 = ft_atoi((const char *)v.str + i);
+				while (v.str[i] >= '0' && v.str[i] <= '9')
+					i += 1;
+			}
+		}
+		else
+		{
+			v = fill_parser(bonus_flag_finder(i, v), v);
 			i += 1;
+		}
 	}
 	v = flag_filter(i, v);
 	ft_write_answer(i, count, v, args);

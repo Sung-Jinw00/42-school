@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_normal_solving_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 22:22:27 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/17 00:15:05 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/17 19:17:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 static void	ft_blackpill(int i, int *count, t_struct v, va_list args)
 {
-	int		j;
 	char	*s;
 
-	j = 0;
 	s = NULL;
 	if (v.str[i] == 'p')
 	{
@@ -35,7 +33,7 @@ static void	ft_blackpill(int i, int *count, t_struct v, va_list args)
 	else if (v.str[i] == 'i' || v.str[i] == 'd')
 	{
 		*(int *)v.arg = va_arg(args, int);
-		ft_bputnbr_fd(count, *(int *)v.arg, 1);
+		ft_bputnbr_fd(count, *(int *)v.arg, 1, -1);
 	}
 	else
 		return ;

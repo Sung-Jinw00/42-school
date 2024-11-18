@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 19:33:00 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/17 00:42:39 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/14 23:25:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,3 +50,14 @@ char	*ft_itoa_base(long long n, const char *base)
 	}
 	return (cpy);
 }
+
+/* #include <stdio.h>
+
+int main(void)
+{
+	char str[] = "      +-++-50";
+	char base[] = "0123456789ABCDEF";
+
+	printf("%d\n", ft_atoi_base(str, base));
+	return (0);
+} */

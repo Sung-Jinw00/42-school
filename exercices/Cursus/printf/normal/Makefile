@@ -3,32 +3,36 @@ FLAGS = -Wall -Wextra -Werror
 
 NAME = libftprintf.a
 
-FILES = ft_itoa_base.c ft_printf.c utils.c ft_printf2.c
+FILES = ft_itoa_base.c ft_printf.c ft_putnbr_fd.c ft_putstr_fd.c ft_putunbr_fd.c ft_strlen.c\
+		ft_printf2.c
+
+LIBFT = ft_printf.h
 
 FILES_BONUS = ft_normal_solving_bonus.c ft_printf_bonus.c ft_printf2_bonus.c\
 			  utils_bonus.c utils2_bonus.c utils3_bonus.c utils4_bonus.c\
-			  utils5_bonus.c utils6_bonus.c
+			  utils5_bonus.c utils6_bonus.c utils7_bonus.c utils8_bonus.c
+
+LIBFT_BONUS = ft_printf_bonus.h
 
 OBJS = $(FILES:.c=.o)
 OBJS_BONUS = $(FILES_BONUS:.c=.o)
 
-all : $(NAME)
+all: ${NAME}
 
-$(NAME) : $(OBJS) ft_printf.h
-	ar -rcs $(NAME) $(OBJS) ft_printf.h
+$(NAME): $(FILES)
+	$(CC) $(FLAGS) -c $(FILES)
+	ar rcs $(NAME) $(OBJS)
 
-%.o : %.c
-	$(CC) $(FLAGS) -c $< -o $@
+bonus: $(FILES_BONUS)
+	$(CC) $(FLAGS) -c $(FILES_BONUS)
+	ar rcs $(NAME) $(OBJS_BONUS)
 
-clean :
-	rm -f $(OBJS) $(OBJS_BONUS)
+clean:
+	rm -f *.o
 
-fclean : clean
+fclean: clean
 	rm -f $(NAME)
 
-re : fclean all
+re: fclean all
 
-bonus : $(OBJS_BONUS) ft_printf_bonus.h
-	ar -rcs $(NAME) $(OBJS_BONUS) ft_printf_bonus.h
-
-.PHONY : all clean fclean re bonus
+.PHONY: all bonus clean fclean re

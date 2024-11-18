@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 16:56:47 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/16 23:23:31 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/18 01:25:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,14 @@ int	ft_len_field(int i, t_struct v)
 	len_val = 0;
 	if (v.str[i] == 'd' || v.str[i] == 'i' || v.str[i] == 'u')
 	{
-		len_val = ft_digits(*(long long *)v.arg);
+		if (!(ft_strchr(v.flag_order, '.') && v.nb2 == 0
+			&& *(long long *)v.arg == 0))
+			len_val = ft_digits(*(long long *)v.arg);
 		if ((v.nb1 == 0 || (v.nb1 != 0 && v.nb1 >= len_val + 1))
 			&& ((ft_strchr(v.flag_order, '+') && *(long long *)v.arg >= 0)
 				|| (ft_strchr(v.flag_order, ' ') && *(long long *)v.arg >= 0)))
 			v.nb1 = len_val++;
+		len_val = len_field_nb2(v, len_val);
 	}
 	else
 		len_val = assign_if_non_nb(v, i);

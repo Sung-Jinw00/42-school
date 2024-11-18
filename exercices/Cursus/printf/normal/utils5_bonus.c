@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils5_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 17:05:16 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/17 00:15:59 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/18 01:27:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,30 +58,38 @@ void	print_char(t_struct v, int len_field)
 	}
 }
 
-void	print_string(t_struct v, int len_field, int i)
+void	print_string(t_struct v, int len_field, int i, int trigger)
 {
 	int	j;
 	int	limit;
 
 	j = 0;
 	limit = len_field - (int)ft_bstrlen((const char *)v.arg);
-	if (len_field == (int)ft_bstrlen((const char *)v.arg))
+	if (special_cases(v, i))
+		limit -= v.zerosnb;
+	if (len_field == (int)ft_bstrlen((const char *)v.arg) && !special_cases(v, i))
 		ft_bputstr_fd((char *)v.arg, 1);
 	else if (!ft_strchr(v.flag_order, '-') || ft_strchr(v.flag_order, '0'))
 	{
 		print_string2(j, limit, v, i);
+		if(special_cases(v, i))
+			v.nb2 = printfzeronb(v.zerosnb);
 		ft_bputstr_fd((char *)v.arg, 1);
 	}
 	else if (ft_strchr(v.flag_order, '-'))
 	{
+		j = (int)ft_bstrlen((const char *)v.arg) + v.zerosnb;
+		if(special_cases(v, i))
+			v.nb2 = printfzeronb(v.zerosnb);
 		ft_bputstr_fd((char *)v.arg, 1);
-		j = (int)ft_bstrlen((const char *)v.arg);
 		while (j++ < len_field)
 			write(1, " ", 1);
 	}
+	if (trigger == 1)
+		free(v.arg);
 }
 
-static void	print_nb2(t_struct v, int len_field, int len_nb)
+static void	print_nb2(t_struct v, int len_field, int len_nb, int i)
 {
 	int	limit_filling;
 	int	count;
@@ -90,24 +98,38 @@ static void	print_nb2(t_struct v, int len_field, int len_nb)
 	j = 0;
 	count = 0;
 	limit_filling = 0;
+	if (ft_strchr(v.flag_order, '0') && !ft_strchr(v.flag_order, '.')
+		&& *(long long *)v.arg < 0)
+	{
+		write(1, "-", 1);
+		*(long long *)v.arg = -*(long long *)v.arg;
+	}
 	if (!ft_strchr(v.flag_order, '-') || ft_strchr(v.flag_order, '0'))
 	{
 		limit_filling = len_field - len_nb;
+		if (ft_strchr(v.flag_order, '.'))
+			limit_filling -= v.zerosnb;
 		while (j < limit_filling)
 		{
-			if (ft_strchr(v.flag_order, '0'))
+			if (ft_strchr(v.flag_order, '0') && !ft_strchr(v.flag_order, '.'))
 				write(1, "0", 1);
+			else if (ft_strchr(v.flag_order, '0') && ft_strchr(v.flag_order, '.'))
+				write(1, " ", 1);
 			else if (!(limit_filling == 1 && (ft_strchr(v.flag_order, ' ')
 						|| ft_strchr(v.flag_order, '+'))))
 				write(1, " ", 1);
 			j++;
 		}
 		if_plus_or_space(v);
-		ft_bputnbr_fd(&count, *(long long *)v.arg, 1);
+		if (!(ft_strchr(v.flag_order, '.') && v.nb2 == 0
+			&& *(long long *)v.arg == 0))
+			ft_bputnbr_fd(&count, *(long long *)v.arg, 1, v.zerosnb);
+		else if (!special_cases(v, i))
+			write(1, " ", 1);
 	}
 }
 
-void	print_nb(t_struct v, int len_field)
+void	print_nb(t_struct v, int len_field, int i)
 {
 	int	j;
 	int	count;
@@ -115,22 +137,22 @@ void	print_nb(t_struct v, int len_field)
 
 	j = 0;
 	count = 0;
-	if (*(long long *)v.arg < 0 && ft_strchr(v.flag_order, '0'))
-	{
-		*(long long *)v.arg = -*(long long *)v.arg;
-		write (1, "-", 1);
-		len_field--;
-	}
+	v = ft_preprint_nb(v);
 	len_nb = ft_digits(*(long long *)v.arg);
 	if (len_field == len_nb)
-		ft_bputnbr_fd(&count, *(long long *)v.arg, 1);
+		ft_bputnbr_fd(&count, *(long long *)v.arg, 1, v.zerosnb);
 	else if (!ft_strchr(v.flag_order, '-') || ft_strchr(v.flag_order, '0'))
-		print_nb2(v, len_field, len_nb);
+		print_nb2(v, len_field, len_nb, i);
 	else if (ft_strchr(v.flag_order, '-'))
 	{
 		if_plus_or_space(v);
-		ft_bputnbr_fd(&count, *(long long *)v.arg, 1);
-		j = len_nb;
+		j += v.zerosnb;
+		if (!(ft_strchr(v.flag_order, '.') && v.nb2 == 0
+			&& *(long long *)v.arg == 0))
+			ft_bputnbr_fd(&count, *(long long *)v.arg, 1, v.zerosnb);
+		else if (!special_cases(v, i))
+			write(1, " ", 1);
+		j += len_nb;
 		while (j++ < len_field)
 			write(1, " ", 1);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:53:23 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/17 00:16:18 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/17 23:49:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_bstrlen(const char *s)
 	size_t	i;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while (s[i] != '\0')
 		i++;
 	return (i);
@@ -52,12 +54,6 @@ char	*print_ptr(size_t adr, int *count, char *hexa)
 
 void	ft_bputunbr_fd(int *count, unsigned long n, int fd)
 {
-	if (n < 0)
-	{
-		write(fd, "-", 1);
-		*count += 1;
-		n = -n;
-	}
 	if (n > 9)
 		ft_bputunbr_fd(count, n / 10, fd);
 	n = n % 10 + '0';
@@ -65,7 +61,7 @@ void	ft_bputunbr_fd(int *count, unsigned long n, int fd)
 	write(fd, &n, 1);
 }
 
-void	ft_bputnbr_fd(int *count, long long n, int fd)
+void	ft_bputnbr_fd(int *count, long long n, int fd, int zeros)
 {
 	if (n < 0)
 	{
@@ -73,8 +69,9 @@ void	ft_bputnbr_fd(int *count, long long n, int fd)
 		*count += 1;
 		n = -n;
 	}
+	zeros = printfzeronb(zeros);
 	if (n > 9)
-		ft_bputnbr_fd(count, n / 10, fd);
+		ft_bputnbr_fd(count, n / 10, fd, -1);
 	n = n % 10 + '0';
 	*count += 1;
 	write(fd, &n, 1);

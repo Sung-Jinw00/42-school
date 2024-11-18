@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 22:22:27 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/17 00:44:07 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/17 16:18:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	print_ptr(size_t adr, int *count)
 {
-	char	ptr[18];
+	char	ptr[36];
 	int		i;
 	char	*hexa;
 	size_t	adr_copy;
@@ -43,9 +43,6 @@ static void	print_ptr(size_t adr, int *count)
 
 static void	ft_blackpill(int i, int *count, t_struct v, va_list args)
 {
-	int	j;
-
-	j = 0;
 	if (v.str[i] == 'p')
 	{
 		v.arg = va_arg(args, void *);
@@ -75,8 +72,8 @@ static void	ft_yellowpill(int i, int *count, t_struct v, va_list args)
 	{
 		value = va_arg(args, int);
 		if (value < 0)
-			*(unsigned long *)v.arg = (unsigned long)(value + \
-			(long)INT_MAX * 2 + 2);
+			*(unsigned long *)v.arg = (unsigned long)(value + (long)INT_MAX \
+			* 2 + 2);
 		else
 			*(unsigned long *)v.arg = (unsigned long)value;
 		ft_putunbr_fd(count, *(unsigned long *)v.arg, 1);

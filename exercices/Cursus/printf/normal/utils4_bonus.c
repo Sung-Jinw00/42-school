@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 16:18:33 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/16 23:23:42 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/18 01:26:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ int	ft_strchr(char *s, char c)
 t_struct	erase_flag(char erased, t_struct v)
 {
 	int	j;
-	int	save;
 
 	j = 0;
-	save = 0;
 	while (v.flag_order[j])
 	{
 		if (v.flag_order[j] == erased)
@@ -109,15 +107,28 @@ t_struct	assign_val(int i, t_struct v, va_list args, long long nb)
 	{
 		v.arg = va_arg(args, char *);
 		if (!v.arg)
-			v.arg = "(null)";
-		else if (ft_strchr(v.flag_order, '.') && v.nb2 > 0)
-			while (((char *)v.arg)[v.nb2] != '\0')
-				((char *)v.arg)[v.nb2++] = '\0';
+		{
+			if (ft_strchr(v.flag_order, '.') && !special_cases(v, i)
+				&& v.nb2 < 6)
+			{
+				erase_flag('.', v);
+				v.arg = "";
+			}
+			else
+				v.arg = "(null)";
+		}
+		else if (ft_strchr(v.flag_order, '.') && v.nb2 == 0)
+			v.arg = "";
+		if (v.nb2 > (int)ft_bstrlen((const char *)v.arg))
+			v.nb2 = (int)ft_bstrlen((const char *)v.arg);
 	}
 	else if (v.str[i] == 'X' || v.str[i] == 'x')
 	{
 		*(long long *)v.arg = va_arg(args, int);
-		if (v.str[i] == 'X')
+		if (*(long long *)v.arg == 0 && ft_strchr(v.flag_order, '.')
+			&& v.nb2 == 0)
+			v.arg = "";
+		else if (v.str[i] == 'X')
 			v.arg = ft_itoa_base(*(long long *)v.arg, "0123456789ABCDEF");
 		else
 			v.arg = ft_itoa_base(*(long long *)v.arg, "0123456789abcdef");
