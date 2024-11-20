@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_normal_solving_bonus.c                          :+:      :+:    :+:   */
+/*   ft_normal_solving.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 22:22:27 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/17 19:17:40 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/20 16:01:20 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 static void	ft_blackpill(int i, int *count, t_struct v, va_list args)
 {
-	char	*s;
-
-	s = NULL;
 	if (v.str[i] == 'p')
 	{
-		v.arg = va_arg(args, void *);
-		if (!v.arg)
+		v.arg = (char *)va_arg(args, void *);
+		if (!(char *)v.arg)
 		{
 			write(1, "(nil)", 5);
 			*count += 5;
 			return ;
 		}
-		s = print_ptr((size_t)v.arg, count, "0123456789abcdef");
-		ft_bputstr_fd(s, 1);
-		free(s);
+		v.arg = print_ptr((size_t)v.arg, count, "0123456789abcdef");
+		ft_bputstr_fd((char *)v.arg, 1);
 	}
 	else if (v.str[i] == 'i' || v.str[i] == 'd')
 	{
-		*(int *)v.arg = va_arg(args, int);
-		ft_bputnbr_fd(count, *(int *)v.arg, 1, -1);
+		v.zerosnb = -1;
+		*(long long *)v.arg = va_arg(args, int);
+		ft_bputnbr_fd(count, *(long long *)v.arg, 1, v);
 	}
 	else
 		return ;
@@ -41,18 +38,12 @@ static void	ft_blackpill(int i, int *count, t_struct v, va_list args)
 
 static void	ft_yellowpill(int i, int *count, t_struct v, va_list args)
 {
-	long	value;
-
-	value = 0;
 	if (v.str[i] == 'u')
 	{
-		value = va_arg(args, int);
-		if (value < 0)
-			*(unsigned long *)v.arg = (unsigned long)(value + \
-			(long)INT_MAX * 2 + 2);
-		else
-			*(unsigned long *)v.arg = (unsigned long)value;
-		ft_bputunbr_fd(count, *(unsigned long *)v.arg, 1);
+		*(long long *)v.arg = va_arg(args, int);
+		if (*(long long *)v.arg < 0)
+			*(long long *)v.arg = (*(long long *)v.arg + (long)INT_MAX * 2 + 2);
+		ft_bputunbr_fd(count, *(long long *)v.arg, 1);
 	}
 	else if (v.str[i] == 'c')
 	{
@@ -66,18 +57,16 @@ static void	ft_yellowpill(int i, int *count, t_struct v, va_list args)
 
 static void	ft_bluepill(int i, int *count, t_struct v, va_list args)
 {
-	int			j;
-	long long	value;
+	int	j;
 
-	value = 0;
 	j = 0;
 	if (v.str[i] == 'X' || v.str[i] == 'x')
 	{
-		value = va_arg(args, int);
+		*(long long *)v.arg = va_arg(args, int);
 		if (v.str[i] == 'X')
-			v.arg = ft_itoa_base(value, "0123456789ABCDEF");
+			v.arg = ft_itoa_base(*(long long *)v.arg, "0123456789ABCDEF");
 		else
-			v.arg = ft_itoa_base(value, "0123456789abcdef");
+			v.arg = ft_itoa_base(*(long long *)v.arg, "0123456789abcdef");
 		while (((char *)v.arg)[j])
 		{
 			write (1, &((char *)v.arg)[j++], 1);
@@ -93,24 +82,27 @@ static void	ft_bluepill(int i, int *count, t_struct v, va_list args)
 		ft_yellowpill(i, count, v, args);
 }
 
-void	ft_redpill(int i, int *count, t_struct v, va_list args)
+void	ft_bredpill(int i, int *count, t_struct v, va_list args)
 {
 	int	j;
 
 	j = 0;
 	if (v.str[i] == 's')
 	{
-		v.arg = va_arg(args, char *);
+		v.arg = va_arg(args, void *);
 		if (!v.arg)
 		{
 			write(1, "(null)", 6);
 			*count += 6;
 			return ;
 		}
-		while (((char *)v.arg)[j])
+		else
 		{
-			write (1, &((char *)v.arg)[j++], 1);
-			*count += 1;
+			while (((char *)v.arg)[j])
+			{
+				write (1, &((char *)v.arg)[j++], 1);
+				*count += 1;
+			}
 		}
 	}
 	else

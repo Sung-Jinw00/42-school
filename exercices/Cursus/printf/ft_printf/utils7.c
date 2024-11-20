@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 int	special_cases(t_struct v, int i)
 {
@@ -20,7 +20,7 @@ int	special_cases(t_struct v, int i)
 				&& v.nb2 == 8 && ft_strchr(v.flag_order, '-')) || (v.nb1 == 10
 				&& v.nb2 == 8 && ft_strchr(v.flag_order, '-'))))
 		return (1);
-	else if (v.str[i] == 's' && !v.arg && ft_strchr(v.flag_order, '.')
+	else if (v.str[i] == 's' && !(char *)v.arg && ft_strchr(v.flag_order, '.')
 		&& v.nb2 == 0)
 		return (0);
 	else if ((v.str[i] == 'i' || v.str[i] == 'u' || v.str[i] == 'd')
@@ -28,7 +28,7 @@ int	special_cases(t_struct v, int i)
 		return (1);
 	else if ((v.nb1 < v.nb2 && (v.str[i] == 'x' || v.str[i] == 'X'))
 		|| ((v.str[i] == 'x' || v.str[i] == 'X') && v.nb1 >= v.nb2
-			&& v.nb2 > (int)ft_bstrlen((const char *)v.arg)))
+			&& v.nb2 > (int)ft_strlen((const char *)v.arg)))
 		return (1);
 	else if (((v.str[i] == 'x' || v.str[i] == 'X' || v.str[i] == 's'))
 		&& ft_strchr(v.flag_order, '.') && v.nb2 == 0)
@@ -36,14 +36,15 @@ int	special_cases(t_struct v, int i)
 	return (0);
 }
 
-/* void	print_string3(int j, t_struct v, int i, int len_field)
+void	print_string3(int j, t_struct v, int i, int limit)
 {
-	j = (int)ft_bstrlen((const char *)v.arg) + v.zerosnb;
+	int	strlen;
+
+	strlen = (int)ft_strlen((const char *)v.arg);
+	print_string2(j, limit, v, i);
 	if (special_cases(v, i))
-		v.nb2 = printfzeronb(v.zerosnb);
+		v.nb2 = printfzeronb(v, i);
 	ft_bputstr_fd((char *)v.arg, 1);
-	while (j++ < len_field)
-		write(1, " ", 1);
 }
 
 static void	print_nb4(t_struct v, int *count, int i)
@@ -51,7 +52,7 @@ static void	print_nb4(t_struct v, int *count, int i)
 	if_plus_or_space(v);
 	if (!(ft_strchr(v.flag_order, '.') && v.nb2 == 0
 			&& *(long long *)v.arg == 0))
-		ft_bputnbr_fd(count, *(long long *)v.arg, 1, v.zerosnb);
+		ft_bputnbr_fd(count, *(long long *)v.arg, 1, v);
 	else if (!special_cases(v, i))
 		write(1, " ", 1);
 }
@@ -71,8 +72,8 @@ void	print_nb3(t_struct v, int len_field, int len_nb, int i)
 	{
 		if (ft_strchr(v.flag_order, '0') && !ft_strchr(v.flag_order, '.'))
 			write(1, "0", 1);
-		else if (ft_strchr(v.flag_order, '0')
-			&& ft_strchr(v.flag_order, '.'))
+		else if (ft_strchr(v.flag_order, '0') && !ft_strchr(v.flag_order, '+')
+			&& ft_strchr(v.flag_order, '.') && !ft_strchr(v.flag_order, ' '))
 			write(1, " ", 1);
 		else if (!(limit_filling == 1 && (ft_strchr(v.flag_order, ' ')
 					|| ft_strchr(v.flag_order, '+'))))
@@ -84,9 +85,13 @@ void	print_nb3(t_struct v, int len_field, int len_nb, int i)
 
 t_struct	assign_val3(int i, t_struct v, va_list args, long long nb)
 {
+	long long	val;
+
+	val = 0;
 	if (v.str[i] == 'X' || v.str[i] == 'x')
 	{
-		*(long long *)v.arg = va_arg(args, int);
+		val = va_arg(args, int);
+		*(long long *)v.arg = val;
 		if (*(long long *)v.arg == 0 && ft_strchr(v.flag_order, '.')
 			&& v.nb2 == 0)
 			v.arg = "";
@@ -94,7 +99,8 @@ t_struct	assign_val3(int i, t_struct v, va_list args, long long nb)
 			v.arg = ft_itoa_base(*(long long *)v.arg, "0123456789ABCDEF");
 		else
 			v.arg = ft_itoa_base(*(long long *)v.arg, "0123456789abcdef");
-		v.arg = if_hashtag(v, i);
+		if (val != 0)
+			v.arg = if_hashtag(v, i);
 	}
 	else if (v.str[i] == '%')
 		*(char *)v.arg = '%';
@@ -104,4 +110,3 @@ t_struct	assign_val3(int i, t_struct v, va_list args, long long nb)
 		v = assign_val2(i, v, args, nb);
 	return (v);
 }
- */

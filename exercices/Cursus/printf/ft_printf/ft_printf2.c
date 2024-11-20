@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf2_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_printf2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 22:22:27 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/18 01:25:14 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/20 14:48:56 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 t_struct	fill_parser(char c, t_struct v)
 {
@@ -43,7 +43,7 @@ void	ft_write_answer(int i, int *count, t_struct v, va_list args)
 	v = assign_val(i, v, args, nb);
 	len_field = ft_len_field(i, v);
 	if (v.str[i] == 'X' || v.str[i] == 'x')
-		strlen = (int)ft_bstrlen((const char *)v.arg);
+		strlen = (int)ft_strlen((const char *)v.arg);
 	if ((v.str[i] == 'X' || v.str[i] == 'x') && v.nb2 > strlen
 		&& ft_strchr(v.flag_order, '.'))
 		v.zerosnb = v.nb2 - strlen;
@@ -89,21 +89,7 @@ int	parseur(int i, int *count, t_struct v, va_list args)
 	{
 		if ((v.str[i] >= '1' && v.str[i] <= '9')
 			|| v.str[i] == '.')
-		{
-			if (v.str[i] >= '1' && v.str[i] <= '9')
-			{
-				v.nb1 = ft_atoi((const char *)v.str + i);
-				while (v.str[i] >= '0' && v.str[i] <= '9')
-					i += 1;
-			}
-			if (v.str[i] == '.')
-			{
-				v = fill_parser(bonus_flag_finder(i++, v), v);
-				v.nb2 = ft_atoi((const char *)v.str + i);
-				while (v.str[i] >= '0' && v.str[i] <= '9')
-					i += 1;
-			}
-		}
+			v = parseur2(&i, v);
 		else
 		{
 			v = fill_parser(bonus_flag_finder(i, v), v);
@@ -125,7 +111,7 @@ int	print_this_bs(va_list args, t_struct v)
 	while (v.str[i])
 	{
 		if (v.str[i] == '%' && standard_conds(v, i + 1))
-			ft_redpill(++i, &count, v, args);
+			ft_bredpill(++i, &count, v, args);
 		else if (v.str[i] == '%' && bonus_conds(v, i + 1))
 			i = parseur(i + 1, &count, v, args);
 		else

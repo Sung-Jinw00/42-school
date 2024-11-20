@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_bonus.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:53:23 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/17 23:49:37 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/20 18:05:36 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
-size_t	ft_bstrlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
@@ -61,7 +61,7 @@ void	ft_bputunbr_fd(int *count, unsigned long n, int fd)
 	write(fd, &n, 1);
 }
 
-void	ft_bputnbr_fd(int *count, long long n, int fd, int zeros)
+void	ft_bputnbr_fd(int *count, long long n, int fd, t_struct v)
 {
 	if (n < 0)
 	{
@@ -69,9 +69,10 @@ void	ft_bputnbr_fd(int *count, long long n, int fd, int zeros)
 		*count += 1;
 		n = -n;
 	}
-	zeros = printfzeronb(zeros);
+	v.zerosnb = printfzeronb(v, 0);
+	v.zerosnb = -1;
 	if (n > 9)
-		ft_bputnbr_fd(count, n / 10, fd, -1);
+		ft_bputnbr_fd(count, n / 10, fd, v);
 	n = n % 10 + '0';
 	*count += 1;
 	write(fd, &n, 1);
@@ -82,6 +83,8 @@ void	ft_bputstr_fd(char *s, int fd)
 	int	i;
 
 	i = 0;
+	if (!s)
+		return ;
 	while (s[i])
 	{
 		write(fd, &s[i], 1);

@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 13:33:59 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/12 19:39:17 by locagnio         ###   ########.fr       */
+/*   Created: 2024/11/19 20:47:03 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/19 21:46:37 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stdlib.h>
 
-size_t	ft_strlen(const char *s)
+char	*ft_strndup(char *str, size_t n)
 {
-	size_t	i;
+	char *cpy;
+	size_t i;
 
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
+	i = -1;
+	cpy = malloc(n + 1);
+	if (!cpy)
+		return (NULL);
+	while (++i < n)
+		cpy[i] = str[i];
+	cpy[n] = '\0';
+	return (cpy);
 }
-
-/* #include <stdio.h>
-
-int main(void)
-{
-	char str[] = "Yeppi";
-
-	printf("%zu\n", ft_strlen(str));
-	return(0);
-} */

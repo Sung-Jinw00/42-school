@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils3_bonus.c                                     :+:      :+:    :+:   */
+/*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 16:56:47 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/18 01:25:55 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/20 19:36:57 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 int	standard_conds(t_struct v, int i)
 {
@@ -75,19 +75,13 @@ int	ft_len_field(int i, t_struct v)
 	if (v.str[i] == 'd' || v.str[i] == 'i' || v.str[i] == 'u')
 	{
 		if (!(ft_strchr(v.flag_order, '.') && v.nb2 == 0
-			&& *(long long *)v.arg == 0))
+				&& *(long long *)v.arg == 0))
 			len_val = ft_digits(*(long long *)v.arg);
-		if ((v.nb1 == 0 || (v.nb1 != 0 && v.nb1 >= len_val + 1))
-			&& ((ft_strchr(v.flag_order, '+') && *(long long *)v.arg >= 0)
-				|| (ft_strchr(v.flag_order, ' ') && *(long long *)v.arg >= 0)))
-			v.nb1 = len_val++;
-		len_val = len_field_nb2(v, len_val);
+		len_val = len_field_nb2(v, len_val, i);
 	}
 	else
 		len_val = assign_if_non_nb(v, i);
-	if ((v.str[i] == 'X' || v.str[i] == 'x') && ft_strchr(v.flag_order, '#')
-		&& *(char *)v.arg != '0')
-		len_val += 2;
+	len_val = len_if_x(v, i, len_val);
 	if (v.nb1 > len_val)
 	{
 		len_val = v.nb1;

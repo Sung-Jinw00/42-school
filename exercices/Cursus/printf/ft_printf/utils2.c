@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2_bonus.c                                     :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:53:23 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/17 00:16:11 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/19 20:51:39 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 int	ft_digits(long long n)
 {
@@ -37,9 +37,9 @@ static int	init_vals(long nb, const char *base)
 
 	i = 0;
 	digits = 1;
-	while (nb >= (long)ft_bstrlen(base))
+	while (nb >= (long)ft_strlen(base))
 	{
-		nb /= ft_bstrlen(base);
+		nb /= ft_strlen(base);
 		digits++;
 	}
 	i = digits;
@@ -56,14 +56,14 @@ char	*ft_itoa_base(long long n, const char *base)
 		n = (n + (long)INT_MAX * 2 + 2);
 	nb = n;
 	i = init_vals(nb, base);
-	cpy = malloc(sizeof(char) * i + 1);
+	cpy = ft_calloc(i + 1, 1);
 	if (!cpy)
 		return (NULL);
 	cpy[i--] = '\0';
 	while (i >= 0)
 	{
-		cpy[i] = base[nb % ft_bstrlen(base)];
-		nb /= ft_bstrlen(base);
+		cpy[i] = base[nb % ft_strlen(base)];
+		nb /= ft_strlen(base);
 		i--;
 	}
 	return (cpy);

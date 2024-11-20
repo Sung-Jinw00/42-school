@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils4_bonus.c                                     :+:      :+:    :+:   */
+/*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 16:18:33 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/18 01:26:31 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/20 15:11:36 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 t_struct	keep_prior_flag(char erased, char prior, t_struct v)
 {
@@ -82,22 +82,22 @@ t_struct	assign_val2(int i, t_struct v, va_list args, long long nb)
 		if (!v.arg)
 			v.arg = "(nil)";
 		else
-			v.arg = print_ptr((size_t)v.arg, (int *)&nb, "0123456789abcdef");
+			v.arg = print_ptr((size_t)v.arg, (int *)&nb, \
+			"0123456789abcdef");
 	}
 	else if (v.str[i] == 'u')
 	{
-		*(long *)v.arg = va_arg(args, int);
-		if (*(long *)v.arg < 0)
-			*(unsigned long *)v.arg = (unsigned long)(*(long *)v.arg + \
-			(long)INT_MAX * 2 + 2);
-		else
-			*(unsigned long *)v.arg = (unsigned long)(*(long *)v.arg);
+		*(long long *)v.arg = va_arg(args, int);
+		if (*(long long *)v.arg < 0)
+			*(long long *)v.arg = (*(long long *)v.arg + (long)INT_MAX * 2 + 2);
 	}
 	else if (v.str[i] == 'i' || v.str[i] == 'd')
 	{
 		nb = va_arg(args, int);
 		*(long long *)v.arg = nb;
 	}
+	else
+		v = assign_val3(i, v, args, nb);
 	return (v);
 }
 
@@ -106,7 +106,7 @@ t_struct	assign_val(int i, t_struct v, va_list args, long long nb)
 	if (v.str[i] == 's')
 	{
 		v.arg = va_arg(args, char *);
-		if (!v.arg)
+		if (!(char *)v.arg)
 		{
 			if (ft_strchr(v.flag_order, '.') && !special_cases(v, i)
 				&& v.nb2 < 6)
@@ -119,25 +119,7 @@ t_struct	assign_val(int i, t_struct v, va_list args, long long nb)
 		}
 		else if (ft_strchr(v.flag_order, '.') && v.nb2 == 0)
 			v.arg = "";
-		if (v.nb2 > (int)ft_bstrlen((const char *)v.arg))
-			v.nb2 = (int)ft_bstrlen((const char *)v.arg);
 	}
-	else if (v.str[i] == 'X' || v.str[i] == 'x')
-	{
-		*(long long *)v.arg = va_arg(args, int);
-		if (*(long long *)v.arg == 0 && ft_strchr(v.flag_order, '.')
-			&& v.nb2 == 0)
-			v.arg = "";
-		else if (v.str[i] == 'X')
-			v.arg = ft_itoa_base(*(long long *)v.arg, "0123456789ABCDEF");
-		else
-			v.arg = ft_itoa_base(*(long long *)v.arg, "0123456789abcdef");
-		v.arg = if_hashtag(v, i);
-	}
-	else if (v.str[i] == '%')
-		*(char *)v.arg = '%';
-	else if (v.str[i] == 'c')
-		*(char *)v.arg = (char)va_arg(args, int);
 	else
 		v = assign_val2(i, v, args, nb);
 	return (v);

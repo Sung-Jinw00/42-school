@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 18:36:48 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/16 19:58:42 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/18 16:48:20 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdio.h>
 
-int	ft_printf(const char *str, ...);
 void	tests_c(char c);
 void	tests_s(char *str);
 void	tests_d(int nb);
