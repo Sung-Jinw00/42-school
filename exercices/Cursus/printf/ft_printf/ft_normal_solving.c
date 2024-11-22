@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 22:22:27 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/20 16:01:20 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/22 16:39:09 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ static void	ft_blackpill(int i, int *count, t_struct v, va_list args)
 			return ;
 		}
 		v.arg = print_ptr((size_t)v.arg, count, "0123456789abcdef");
-		ft_bputstr_fd((char *)v.arg, 1);
+		ft_putstr((char *)v.arg);
+		free(v.arg);
 	}
 	else if (v.str[i] == 'i' || v.str[i] == 'd')
 	{
 		v.zerosnb = -1;
 		*(long long *)v.arg = va_arg(args, int);
-		ft_bputnbr_fd(count, *(long long *)v.arg, 1, v);
+		ft_putnbr(count, *(long long *)v.arg, v);
 	}
 	else
 		return ;
@@ -43,7 +44,7 @@ static void	ft_yellowpill(int i, int *count, t_struct v, va_list args)
 		*(long long *)v.arg = va_arg(args, int);
 		if (*(long long *)v.arg < 0)
 			*(long long *)v.arg = (*(long long *)v.arg + (long)INT_MAX * 2 + 2);
-		ft_bputunbr_fd(count, *(long long *)v.arg, 1);
+		ft_putunbr(count, *(long long *)v.arg);
 	}
 	else if (v.str[i] == 'c')
 	{
@@ -72,6 +73,7 @@ static void	ft_bluepill(int i, int *count, t_struct v, va_list args)
 			write (1, &((char *)v.arg)[j++], 1);
 			*count += 1;
 		}
+		free(v.arg);
 	}
 	else if (v.str[i] == '%')
 	{

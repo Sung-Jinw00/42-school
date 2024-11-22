@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 17:05:16 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/20 18:37:36 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/22 16:34:38 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = 0;
 	j = 0;
 	len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	new_string = ft_calloc(len, 1);
+	new_string = ft_calloc(len + 1, 1);
 	if (!new_string)
 		return (NULL);
 	while (s1[i] != '\0')
@@ -72,7 +72,7 @@ void	print_string(t_struct v, int len_field, int i, int trigger)
 		limit -= v.zerosnb;
 	if (len_field == strlen
 		&& !special_cases(v, i))
-		ft_bputstr_fd(v.arg, 1);
+		ft_putstr(v.arg);
 	else if (!ft_strchr(v.flag_order, '-') || ft_strchr(v.flag_order, '0'))
 		print_string3(j, v, i, limit);
 	else if (ft_strchr(v.flag_order, '-'))
@@ -80,7 +80,7 @@ void	print_string(t_struct v, int len_field, int i, int trigger)
 		j = assign_j(strlen, v, i);
 		if (special_cases(v, i))
 			v.nb2 = printfzeronb(v, i);
-		ft_bputstr_fd(v.arg, 1);
+		ft_putstr(v.arg);
 		while (j++ < len_field)
 			write(1, " ", 1);
 	}
@@ -118,7 +118,7 @@ void	print_nb(t_struct v, int len_field, int i)
 	v = ft_preprint_nb(v, &len_field);
 	len_nb = ft_digits(*(long long *)v.arg);
 	if (len_field == len_nb)
-		ft_bputnbr_fd(&count, *(long long *)v.arg, 1, v);
+		ft_putnbr(&count, *(long long *)v.arg, v);
 	else if (!ft_strchr(v.flag_order, '-') || ft_strchr(v.flag_order, '0'))
 		print_nb2(v, len_field, len_nb, i);
 	else if (ft_strchr(v.flag_order, '-'))
@@ -127,7 +127,7 @@ void	print_nb(t_struct v, int len_field, int i)
 		j += v.zerosnb;
 		if (!(ft_strchr(v.flag_order, '.') && v.nb2 == 0
 				&& *(long long *)v.arg == 0))
-			ft_bputnbr_fd(&count, *(long long *)v.arg, 1, v);
+			ft_putnbr(&count, *(long long *)v.arg, v);
 		else if (!special_cases(v, i))
 			write(1, " ", 1);
 		j += len_nb;

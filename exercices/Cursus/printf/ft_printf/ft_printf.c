@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:05:11 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/20 19:40:06 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:38:17 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*ft_strndup(char *str, size_t n)
 	size_t	i;
 
 	i = -1;
-	cpy = malloc(n);
+	cpy = ft_calloc(n + 1, 1);
 	if (!cpy)
 		return (NULL);
 	while (++i < n)
@@ -104,7 +104,7 @@ int	ft_printf(const char *str, ...)
 	i = 0;
 	count = 0;
 	v.str = str;
-	v.arg = malloc(8);
+	v.arg = ft_calloc(1, 8);
 	while (i < 7)
 		v.flag_order[i++] = 0;
 	v.nb1 = 0;
@@ -122,29 +122,22 @@ int	ft_printf(const char *str, ...)
 
 void	tests_point(void)
 {
-	printf("original : %d\n", printf("original :   | % d |\n", \
-	1));
-	printf("copie    : %d\n", ft_printf("copie    :   | % d |\n", \
-	1));
-	printf("\n\n\n");
-	printf("original : %d\n", printf("original :   |%  .10d|\n", \
-	2661836));
-	printf("copie    : %d\n", ft_printf("copie    :   |%  .10d|\n", \
-	2661836));
+	printf("original : %d\n", printf("original :   |%c|%s|%p|%u|%i|%d|%x|%X|%%|\n", 0, 0, 0, 0, 0, 0, 0, 0));
+	printf("copie    : %d\n", ft_printf("copie    :   |%c|%s|%p|%u|%i|%d|%x|%X|%%|\n", 0, 0, 0, 0, 0, 0, 0, 0));
 	printf("\n\n\n");
 }
 
 #include <stdio.h>
 int main(void)
 {
-	// tests_c(0);
-	// tests_s(NULL);
-	// tests_d(-128);
-	// tests_i(-128);
-	// tests_u(-128);
-	// tests_x(-128);
-	// tests_x_maj(-128);
-	//tests_percent();
+	tests_c(0);
+	tests_s(NULL);
+	tests_d(-128);
+	tests_i(-128);
+	tests_u(-128);
+	tests_x(-128);
+	tests_x_maj(-128);
+	tests_percent();
 	tests_point();
 	return (0);
 }  */

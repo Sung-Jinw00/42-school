@@ -44,7 +44,7 @@ void	print_string3(int j, t_struct v, int i, int limit)
 	print_string2(j, limit, v, i);
 	if (special_cases(v, i))
 		v.nb2 = printfzeronb(v, i);
-	ft_bputstr_fd((char *)v.arg, 1);
+	ft_putstr((char *)v.arg);
 }
 
 static void	print_nb4(t_struct v, int *count, int i)
@@ -52,7 +52,7 @@ static void	print_nb4(t_struct v, int *count, int i)
 	if_plus_or_space(v);
 	if (!(ft_strchr(v.flag_order, '.') && v.nb2 == 0
 			&& *(long long *)v.arg == 0))
-		ft_bputnbr_fd(count, *(long long *)v.arg, 1, v);
+		ft_putnbr(count, *(long long *)v.arg, v);
 	else if (!special_cases(v, i))
 		write(1, " ", 1);
 }
@@ -73,7 +73,7 @@ void	print_nb3(t_struct v, int len_field, int len_nb, int i)
 		if (ft_strchr(v.flag_order, '0') && !ft_strchr(v.flag_order, '.'))
 			write(1, "0", 1);
 		else if (ft_strchr(v.flag_order, '0') && !ft_strchr(v.flag_order, '+')
-			&& ft_strchr(v.flag_order, '.') && !ft_strchr(v.flag_order, ' '))
+			&& ft_strchr(v.flag_order, '.'))
 			write(1, " ", 1);
 		else if (!(limit_filling == 1 && (ft_strchr(v.flag_order, ' ')
 					|| ft_strchr(v.flag_order, '+'))))

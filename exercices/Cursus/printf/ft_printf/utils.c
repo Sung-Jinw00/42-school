@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 19:53:23 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/20 18:05:36 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/22 16:40:15 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*print_ptr(size_t adr, int *count, char *hexa)
 	int		i;
 	size_t	adr_copy;
 
-	ptr = malloc(18);
+	ptr = ft_calloc(18 + 1, 1);
 	i = 2;
 	adr_copy = adr;
 	while (adr_copy > 0)
@@ -52,33 +52,33 @@ char	*print_ptr(size_t adr, int *count, char *hexa)
 	return (ptr);
 }
 
-void	ft_bputunbr_fd(int *count, unsigned long n, int fd)
+void	ft_putunbr(int *count, unsigned long n)
 {
 	if (n > 9)
-		ft_bputunbr_fd(count, n / 10, fd);
+		ft_putunbr(count, n / 10);
 	n = n % 10 + '0';
 	*count += 1;
-	write(fd, &n, 1);
+	write(1, &n, 1);
 }
 
-void	ft_bputnbr_fd(int *count, long long n, int fd, t_struct v)
+void	ft_putnbr(int *count, long long n, t_struct v)
 {
 	if (n < 0)
 	{
-		write(fd, "-", 1);
+		write(1, "-", 1);
 		*count += 1;
 		n = -n;
 	}
 	v.zerosnb = printfzeronb(v, 0);
 	v.zerosnb = -1;
 	if (n > 9)
-		ft_bputnbr_fd(count, n / 10, fd, v);
+		ft_putnbr(count, n / 10, v);
 	n = n % 10 + '0';
 	*count += 1;
-	write(fd, &n, 1);
+	write(1, &n, 1);
 }
 
-void	ft_bputstr_fd(char *s, int fd)
+void	ft_putstr(char *s)
 {
 	int	i;
 
@@ -87,7 +87,7 @@ void	ft_bputstr_fd(char *s, int fd)
 		return ;
 	while (s[i])
 	{
-		write(fd, &s[i], 1);
+		write(1, &s[i], 1);
 		i++;
 	}
 }
