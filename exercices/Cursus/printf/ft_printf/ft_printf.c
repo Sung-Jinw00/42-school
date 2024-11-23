@@ -6,90 +6,67 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:05:11 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/22 17:38:17 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/23 18:53:59 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	len_field_nb2(t_struct v, int len_val, int i)
+void	parser(int i, int *count, t_struct v, va_list args)
 {
-	int			zeros;
-	long long	nb;
-
-	zeros = 0;
-	nb = *(long long *)v.arg;
-	if (ft_strchr(v.flag_order, '.'))
-	{
-		if (nb < 0)
-			nb = -nb;
-		zeros = v.nb2 - ft_digits(nb);
-		if (v.nb2 > ft_digits(nb))
-			len_val += zeros;
-	}
-	if ((v.nb1 == 0 || (v.nb1 != 0 && v.nb1 < len_val + 1))
-		&& ((ft_strchr(v.flag_order, '+') && *(long long *)v.arg >= 0)
-			|| (ft_strchr(v.flag_order, ' ') && *(long long *)v.arg >= 0)))
-		v.nb1 = len_val++;
-	else if ((ft_strchr(v.flag_order, '+') || ft_strchr(v.flag_order, ' '))
-		&& v.nb1 != 0
-		&& *(long long *)v.arg >= 0 && (v.str[i] == 'd' || v.str[i] == 'i'))
-		len_val++;
-	return (len_val);
+	if (v.str[i] == 'c')
+		ft_print_char((char)va_arg(args, int), v, i, count);
+	else if (v.str[i] == 's')
+		ft_print_str(va_arg(args, char *), v, i, count);
+	else if (v.str[i] == 'p')
+		ft_print_ptr((size_t)va_arg(args, void *), v, i, count);
+	else if (v.str[i] == 'd' || v.str[i] == 'i')
+		ft_print_int(va_arg(args, int), v, i, count);
+	else if (v.str[i] == 'u')
+		ft_print_uns_int(va_arg(args, int), v, i, count);
+	else if (v.str[i] == 'x' || v.str[i] == 'X')
+		ft_print_hexa(va_arg(args, int), v, i, count);
+	else if (v.str[i] == '%')
+		ft_print_percent('%', v, i, count);
 }
 
-int	printfzeronb(t_struct v, int i)
+int	parse_nd_flags(int i, int *count, t_struct v, va_list args)
 {
-	if (v.arg && ft_strchr(v.flag_order, '#'))
+	while (!standard_conds(v, i))
 	{
-		if (ft_strcmp((char *)v.arg, "0") == 0)
+		if ((v.str[i] >= '1' && v.str[i] <= '9')
+			|| v.str[i] == '.')
+			v = parse_nd_flags2(&i, v);
+		else
 		{
-			if (v.str[i] == 'x')
-				write(1, "0x", 2);
-			else
-				write(1, "0X", 2);
+			v = flags(bonus_flag_finder(i, v), v);
+			i += 1;
 		}
 	}
-	while (v.zerosnb > 0)
+	v = flag_filter(i, v);
+	parser(i, count, v, args);
+	return (i);
+}
+
+int	print_this_bs(va_list args, t_struct v)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (v.str[i])
 	{
-		write(1, "0", 1);
-		v.zerosnb--;
+		if (v.str[i] == '%')
+			i = parse_nd_flags(i + 1, &count, v, args);
+		else
+		{
+			write(1, &v.str[i], 1);
+			count++;
+		}
+		i++;
 	}
-	return (0);
-}
-
-char	*ft_strndup(char *str, size_t n)
-{
-	char	*cpy;
-	size_t	i;
-
-	i = -1;
-	cpy = ft_calloc(n + 1, 1);
-	if (!cpy)
-		return (NULL);
-	while (++i < n)
-		cpy[i] = str[i];
-	cpy[n] = '\0';
-	return (cpy);
-}
-
-t_struct	ft_preprint_nb(t_struct v, int *len_field)
-{
-	int	zeros;
-	int	sign;
-
-	sign = 0;
-	v.zerosnb = 0;
-	if (*(long long *)v.arg < 0)
-		sign = 1;
-	zeros = v.nb2 - ft_digits(*(long long *)v.arg) + sign;
-	if (ft_strchr(v.flag_order, '.') && zeros > 0)
-		v.zerosnb = zeros;
-	if ((ft_strchr(v.flag_order, '+') || ft_strchr(v.flag_order, ' '))
-		&& *(long long *)v.arg >= 0
-		&& v.nb1 != 0)
-		*len_field -= 1;
-	return (v);
+	return (count);
 }
 
 int	ft_printf(const char *str, ...)
@@ -102,35 +79,34 @@ int	ft_printf(const char *str, ...)
 	if (!str)
 		return (0);
 	i = 0;
-	count = 0;
 	v.str = str;
-	v.arg = ft_calloc(1, 8);
 	while (i < 7)
-		v.flag_order[i++] = 0;
+		v.flags[i++] = 0;
 	v.nb1 = 0;
 	v.nb2 = 0;
-	v.zerosnb = 0;
+	v.zeros = 0;
 	va_start(args, str);
 	count = print_this_bs(args, v);
 	va_end(args);
-	free(v.arg);
 	return (count);
 }
 
-/* #include "../tests/tests.h"
+#include "../tests/tests.h"
 #include <limits.h>
 
 void	tests_point(void)
 {
-	printf("original : %d\n", printf("original :   |%c|%s|%p|%u|%i|%d|%x|%X|%%|\n", 0, 0, 0, 0, 0, 0, 0, 0));
-	printf("copie    : %d\n", ft_printf("copie    :   |%c|%s|%p|%u|%i|%d|%x|%X|%%|\n", 0, 0, 0, 0, 0, 0, 0, 0));
+	printf("original : %d\n", printf("original :   \
+	|%c|%s|%p|%u|%i|%d|%x|%X|%%|\n", 0, 0, 0, 0, 0, 0, 0, 0));
+	printf("copie    : %d\n", ft_printf("copie    :   \
+	|%c|%s|%p|%u|%i|%d|%x|%X|%%|\n", 0, 0, 0, 0, 0, 0, 0, 0));
 	printf("\n\n\n");
 }
 
 #include <stdio.h>
 int main(void)
 {
-	tests_c(0);
+	/* tests_c(0);
 	tests_s(NULL);
 	tests_d(-128);
 	tests_i(-128);
@@ -138,9 +114,876 @@ int main(void)
 	tests_x(-128);
 	tests_x_maj(-128);
 	tests_percent();
-	tests_point();
+	tests_point(); */
+
+	/* char c = 0;
+	printf("//////////////////// Tests avec 'c' = 0 ////////////////////\n");
+	printf("/////test sans flags/////\n");
+	printf("original : %d\n", printf("original :   |%c|\n", c));
+	fflush(stdout);
+	printf("/////test de champ 10/////\n");
+	printf("original : %d\n", printf("original :   |%10c|\n", c));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-10c|\n", c));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%010c|\n", c));
+	fflush(stdout);
+	printf("\n/////test 10 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.10c|\n", c));
+	fflush(stdout);
+	printf("/////test de champ 3/////\n");
+	printf("original : %d\n", printf("original :   |%3c|\n", c));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-3c|\n", c));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%03c|\n", c));
+	fflush(stdout);
+	printf("\n/////test 3 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.3c|\n", c));
+	fflush(stdout);
+	printf("\n/////test de champ avec ' '/////\n");
+	printf("original : %d\n", printf("original :   |% c|\n", c));
+	fflush(stdout);
+	printf("\n/////test de champ avec '+'/////\n");
+	printf("original : %d\n", printf("original :   |%+c|\n", c));
+	fflush(stdout);
+	printf("\n/////test de champ avec '#'/////\n");
+	printf("original : %d\n", printf("original :   |%#c|\n", c));
+	fflush(stdout);
+	printf("\n\n\n");
+	c = 'l';
+	printf("//////////////////// Tests avec 'c' = '%c' ////////////////////\n", c);
+	printf("/////test sans flags/////\n");
+	printf("original : %d\n", printf("original :   |%c|\n", c));
+	fflush(stdout);
+	printf("/////test de champ 10/////\n");
+	printf("original : %d\n", printf("original :   |%10c|\n", c));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-10c|\n", c));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%010c|\n", c));
+	fflush(stdout);
+	printf("\n/////test 10 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.10c|\n", c));
+	fflush(stdout);
+	printf("/////test de champ 3/////\n");
+	printf("original : %d\n", printf("original :   |%3c|\n", c));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-3c|\n", c));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%03c|\n", c));
+	fflush(stdout);
+	printf("\n/////test 3 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.3c|\n", c));
+	fflush(stdout);
+	printf("\n/////test de champ avec ' '/////\n");
+	printf("original : %d\n", printf("original :   |% c|\n", c));
+	fflush(stdout);
+	printf("\n/////test de champ avec '+'/////\n");
+	printf("original : %d\n", printf("original :   |%+c|\n", c));
+	fflush(stdout);
+	printf("\n/////test de champ avec '#'/////\n");
+	printf("original : %d\n", printf("original :   |%#c|\n", c));
+	fflush(stdout);
+	printf("\n\n\n"); */
+
+	/* char *s = 0;
+	printf("//////////////////// Tests avec 's' = %s ////////////////////\n", s);
+	printf("/////test sans flags/////\n");
+	printf("original : %d\n", printf("original :   |%s|\n", s));
+	fflush(stdout);
+	printf("/////test de champ 10/////\n");
+	printf("original : %d\n", printf("original :   |%10s|\n", s));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-10s|\n", s));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%010s|\n", s));
+	fflush(stdout);
+	printf("\n/////test 10 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.10s|\n", s));
+	fflush(stdout);
+	printf("/////test de champ 3/////\n");
+	printf("original : %d\n", printf("original :   |%3s|\n", s));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-3s|\n", s));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%03s|\n", s));
+	fflush(stdout);
+	printf("\n/////test 3 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.3s|\n", s));
+	fflush(stdout);
+	printf("\n/////test de champ avec ' '/////\n");
+	printf("original : %d\n", printf("original :   |% s|\n", s));
+	fflush(stdout);
+	printf("\n/////test de champ avec '+'/////\n");
+	printf("original : %d\n", printf("original :   |%+s|\n", s));
+	fflush(stdout);
+	printf("\n/////test de champ avec '#'/////\n");
+	printf("original : %d\n", printf("original :   |%#s|\n", s));
+	fflush(stdout);
+	printf("\n\n\n");
+	s = "Yo boi";
+	printf("//////////////////// Tests avec 's' = \"%s\" ////////////////////\n", s);
+	printf("/////test sans flags/////\n");
+	printf("original : %d\n", printf("original :   |%s|\n", s));
+	fflush(stdout);
+	printf("/////test de champ 10/////\n");
+	printf("original : %d\n", printf("original :   |%10s|\n", s));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-10s|\n", s));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%010s|\n", s));
+	fflush(stdout);
+	printf("\n/////test 10 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.10s|\n", s));
+	fflush(stdout);
+	printf("/////test de champ 3/////\n");
+	printf("original : %d\n", printf("original :   |%3s|\n", s));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-3s|\n", s));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%03s|\n", s));
+	fflush(stdout);
+	printf("\n/////test 3 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.3s|\n", s));
+	fflush(stdout);
+	printf("\n/////test de champ avec ' '/////\n");
+	printf("original : %d\n", printf("original :   |% s|\n", s));
+	fflush(stdout);
+	printf("\n/////test de champ avec '+'/////\n");
+	printf("original : %d\n", printf("original :   |%+s|\n", s));
+	fflush(stdout);
+	printf("\n/////test de champ avec '#'/////\n");
+	printf("original : %d\n", printf("original :   |%#s|\n", s));
+	fflush(stdout);
+	printf("\n\n\n"); */
+
+
+	char *ptr = 0;
+	printf("//////////////////// Tests avec 'p' = %p ////////////////////\n", ptr);
+	printf("/////test sans flags/////\n");
+	printf("original : %d\n", printf("original :   |%p|\n", ptr));
+	fflush(stdout);
+	printf("/////test de champ 10/////\n");
+	printf("original : %d\n", printf("original :   |%10p|\n", ptr));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-10p|\n", ptr));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%010p|\n", ptr));
+	fflush(stdout);
+	printf("\n/////test 10 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.10p|\n", ptr));
+	fflush(stdout);
+	printf("/////test de champ 3/////\n");
+	printf("original : %d\n", printf("original :   |%3p|\n", ptr));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-3p|\n", ptr));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%03p|\n", ptr));
+	fflush(stdout);
+	printf("\n/////test 3 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.3p|\n", ptr));
+	fflush(stdout);
+	printf("\n/////test de champ avec ' '/////\n");
+	printf("original : %d\n", printf("original :   |% p|\n", ptr));
+	fflush(stdout);
+	printf("\n/////test de champ avec '+'/////\n");
+	printf("original : %d\n", printf("original :   |%+p|\n", ptr));
+	fflush(stdout);
+	printf("\n/////test de champ avec '#'/////\n");
+	printf("original : %d\n", printf("original :   |%#p|\n", ptr));
+	fflush(stdout);
+	printf("\n\n\n");
+	void *ptr2 = (void *)0x343545;
+	printf("//////////////////// Tests avec 'p' = %p ////////////////////\n", ptr2);
+	printf("/////test sans flags/////\n");
+	printf("original : %d\n", printf("original :   |%p|\n", ptr2));
+	fflush(stdout);
+	printf("/////test de champ 20/////\n");
+	printf("original : %d\n", printf("original :   |%20p|\n", ptr2));
+	fflush(stdout);
+	printf("\n/////test de champ 20 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-20p|\n", ptr2));
+	fflush(stdout);
+	printf("\n/////test de champ 20 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%020p|\n", ptr2));
+	fflush(stdout);
+	printf("\n/////test 20 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.20p|\n", ptr2));
+	fflush(stdout);
+	printf("/////test de champ 3/////\n");
+	printf("original : %d\n", printf("original :   |%3p|\n", ptr2));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-3p|\n", ptr2));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%03p|\n", ptr2));
+	fflush(stdout);
+	printf("\n/////test 3 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.3p|\n", ptr2));
+	fflush(stdout);
+	printf("\n/////test de champ avec ' '/////\n");
+	printf("original : %d\n", printf("original :   |% p|\n", ptr2));
+	fflush(stdout);
+	printf("\n/////test de champ avec '+'/////\n");
+	printf("original : %d\n", printf("original :   |%+p|\n", ptr2));
+	fflush(stdout);
+	printf("\n/////test de champ avec '#'/////\n");
+	printf("original : %d\n", printf("original :   |%#p|\n", ptr2));
+	fflush(stdout);
+	printf("\n\n\n");
+
+	/* int d = 0;
+	printf("//////////////////// Tests avec 'd' = %d ////////////////////\n", d);
+	printf("/////test sans flags/////\n");
+	printf("original : %d\n", printf("original :   |%d|\n", d));
+	fflush(stdout);
+	printf("/////test de champ 10/////\n");
+	printf("original : %d\n", printf("original :   |%10d|\n", d));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-10d|\n", d));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%010d|\n", d));
+	fflush(stdout);
+	printf("\n/////test 10 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.10d|\n", d));
+	fflush(stdout);
+	printf("/////test de champ 3/////\n");
+	printf("original : %d\n", printf("original :   |%3d|\n", d));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-3d|\n", d));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%03d|\n", d));
+	fflush(stdout);
+	printf("\n/////test 3 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.3d|\n", d));
+	fflush(stdout);
+	printf("\n/////test de champ avec ' '/////\n");
+	printf("original : %d\n", printf("original :   |% d|\n", d));
+	fflush(stdout);
+	printf("\n/////test de champ avec '+'/////\n");
+	printf("original : %d\n", printf("original :   |%+d|\n", d));
+	fflush(stdout);
+	printf("\n/////test de champ avec '#'/////\n");
+	printf("original : %d\n", printf("original :   |%#d|\n", d));
+	fflush(stdout);
+	printf("\n\n\n");
+	d = -123;
+	printf("//////////////////// Tests avec 'd' = %d ////////////////////\n", d);
+	printf("/////test sans flags/////\n");
+	printf("original : %d\n", printf("original :   |%d|\n", d));
+	fflush(stdout);
+	printf("/////test de champ 10/////\n");
+	printf("original : %d\n", printf("original :   |%10d|\n", d));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-10d|\n", d));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%010d|\n", d));
+	fflush(stdout);
+	printf("\n/////test 10 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.10d|\n", d));
+	fflush(stdout);
+	printf("/////test de champ 3/////\n");
+	printf("original : %d\n", printf("original :   |%3d|\n", d));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-3d|\n", d));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%03d|\n", d));
+	fflush(stdout);
+	printf("\n/////test 3 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.3d|\n", d));
+	fflush(stdout);
+	printf("\n/////test de champ avec ' '/////\n");
+	printf("original : %d\n", printf("original :   |% d|\n", d));
+	fflush(stdout);
+	printf("\n/////test de champ avec '+'/////\n");
+	printf("original : %d\n", printf("original :   |%+d|\n", d));
+	fflush(stdout);
+	printf("\n/////test de champ avec '#'/////\n");
+	printf("original : %d\n", printf("original :   |%#d|\n", d));
+	fflush(stdout);
+	printf("\n\n\n");
+	d = 1;
+	printf("//////////////////// Tests avec 'd' = %d ////////////////////\n", d);
+	printf("/////test sans flags/////\n");
+	printf("original : %d\n", printf("original :   |%d|\n", d));
+	fflush(stdout);
+	printf("/////test de champ 10/////\n");
+	printf("original : %d\n", printf("original :   |%10d|\n", d));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-10d|\n", d));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%+010d|\n", d));
+	fflush(stdout);
+	printf("\n/////test 10 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%+.10d|\n", d));
+	fflush(stdout);
+	printf("/////test de champ 3/////\n");
+	printf("original : %d\n", printf("original :   |%3d|\n", d));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-3d|\n", d));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%03d|\n", d));
+	fflush(stdout);
+	printf("\n/////test 3 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.3d|\n", d));
+	fflush(stdout);
+	printf("\n/////test de champ avec ' '/////\n");
+	printf("original : %d\n", printf("original :   |% d|\n", d));
+	fflush(stdout);
+	printf("\n/////test de champ avec '+'/////\n");
+	printf("original : %d\n", printf("original :   |%+d|\n", d));
+	fflush(stdout);
+	printf("\n/////test de champ avec '#'/////\n");
+	printf("original : %d\n", printf("original :   |%#d|\n", d));
+	fflush(stdout);
+	printf("\n\n\n"); */
+
+	/* int i = 0;
+	printf("//////////////////// Tests avec 'i' = %i ////////////////////\n", i);
+	printf("/////test sans flags/////\n");
+	printf("original : %d\n", printf("original :   |%i|\n", i));
+	fflush(stdout);
+	printf("/////test de champ 10/////\n");
+	printf("original : %d\n", printf("original :   |%10i|\n", i));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-10i|\n", i));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%010i|\n", i));
+	fflush(stdout);
+	printf("\n/////test 10 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.10i|\n", i));
+	fflush(stdout);
+	printf("/////test de champ 3/////\n");
+	printf("original : %d\n", printf("original :   |%3i|\n", i));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-3i|\n", i));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%03i|\n", i));
+	fflush(stdout);
+	printf("\n/////test 3 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.3i|\n", i));
+	fflush(stdout);
+	printf("\n/////test de champ avec ' '/////\n");
+	printf("original : %d\n", printf("original :   |% i|\n", i));
+	fflush(stdout);
+	printf("\n/////test de champ avec '+'/////\n");
+	printf("original : %d\n", printf("original :   |%+i|\n", i));
+	fflush(stdout);
+	printf("\n/////test de champ avec '#'/////\n");
+	printf("original : %d\n", printf("original :   |%#i|\n", i));
+	fflush(stdout);
+	printf("\n\n\n");
+	i = -1;
+	printf("//////////////////// Tests avec 'i' = %i ////////////////////\n", i);
+	printf("/////test sans flags/////\n");
+	printf("original : %d\n", printf("original :   |%i|\n", i));
+	fflush(stdout);
+	printf("/////test de champ 10/////\n");
+	printf("original : %d\n", printf("original :   |%10i|\n", i));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-10i|\n", i));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%010i|\n", i));
+	fflush(stdout);
+	printf("\n/////test 10 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.10i|\n", i));
+	fflush(stdout);
+	printf("/////test de champ 3/////\n");
+	printf("original : %d\n", printf("original :   |%3i|\n", i));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-3i|\n", i));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%03i|\n", i));
+	fflush(stdout);
+	printf("\n/////test 3 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.3i|\n", i));
+	fflush(stdout);
+	printf("\n/////test de champ avec ' '/////\n");
+	printf("original : %d\n", printf("original :   |% i|\n", i));
+	fflush(stdout);
+	printf("\n/////test de champ avec '+'/////\n");
+	printf("original : %d\n", printf("original :   |%+i|\n", i));
+	fflush(stdout);
+	printf("\n/////test de champ avec '#'/////\n");
+	printf("original : %d\n", printf("original :   |%#i|\n", i));
+	fflush(stdout);
+	printf("\n\n\n");
+	i = 1;
+	printf("//////////////////// Tests avec 'i' = %i ////////////////////\n", i);
+	printf("/////test sans flags/////\n");
+	printf("original : %d\n", printf("original :   |%i|\n", i));
+	fflush(stdout);
+	printf("/////test de champ 10/////\n");
+	printf("original : %d\n", printf("original :   |%10i|\n", i));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-10i|\n", i));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%010i|\n", i));
+	fflush(stdout);
+	printf("\n/////test 10 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.10i|\n", i));
+	fflush(stdout);
+	printf("/////test de champ 3/////\n");
+	printf("original : %d\n", printf("original :   |%3i|\n", i));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-3i|\n", i));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%03i|\n", i));
+	fflush(stdout);
+	printf("\n/////test 3 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.3i|\n", i));
+	fflush(stdout);
+	printf("\n/////test de champ avec ' '/////\n");
+	printf("original : %d\n", printf("original :   |% i|\n", i));
+	fflush(stdout);
+	printf("\n/////test de champ avec '+'/////\n");
+	printf("original : %d\n", printf("original :   |%+i|\n", i));
+	fflush(stdout);
+	printf("\n/////test de champ avec '#'/////\n");
+	printf("original : %d\n", printf("original :   |%#i|\n", i));
+	fflush(stdout);
+	printf("\n\n\n"); */
+
+	/* long u = 0;
+	printf("//////////////////// Tests avec 'u' = %u ////////////////////\n", u);
+	printf("/////test sans flags/////\n");
+	printf("original : %d\n", printf("original :   |%u|\n", u));
+	fflush(stdout);
+	printf("/////test de champ 15/////\n");
+	printf("original : %d\n", printf("original :   |%15u|\n", u));
+	fflush(stdout);
+	printf("\n/////test de champ 15 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-15u|\n", u));
+	fflush(stdout);
+	printf("\n/////test de champ 15 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%015u|\n", u));
+	fflush(stdout);
+	printf("\n/////test 15 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.15u|\n", u));
+	fflush(stdout);
+	printf("/////test de champ 3/////\n");
+	printf("original : %d\n", printf("original :   |%3u|\n", u));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-3u|\n", u));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%03u|\n", u));
+	fflush(stdout);
+	printf("\n/////test 3 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.3u|\n", u));
+	fflush(stdout);
+	printf("\n/////test de champ avec ' '/////\n");
+	printf("original : %d\n", printf("original :   |% u|\n", u));
+	fflush(stdout);
+	printf("\n/////test de champ avec '+'/////\n");
+	printf("original : %d\n", printf("original :   |%+u|\n", u));
+	fflush(stdout);
+	printf("\n/////test de champ avec '#'/////\n");
+	printf("original : %d\n", printf("original :   |%#u|\n", u));
+	fflush(stdout);
+	printf("\n\n\n");
+	u = 1;
+	printf("//////////////////// Tests avec 'u' = %u ////////////////////\n", u);
+	printf("/////test sans flags/////\n");
+	printf("original : %d\n", printf("original :   |%u|\n", u));
+	fflush(stdout);
+	printf("/////test de champ 15/////\n");
+	printf("original : %d\n", printf("original :   |%15u|\n", u));
+	fflush(stdout);
+	printf("\n/////test de champ 15 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-15u|\n", u));
+	fflush(stdout);
+	printf("\n/////test de champ 15 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%015u|\n", u));
+	fflush(stdout);
+	printf("\n/////test 15 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.15u|\n", u));
+	fflush(stdout);
+	printf("/////test de champ 3/////\n");
+	printf("original : %d\n", printf("original :   |%3u|\n", u));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-3u|\n", u));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%03u|\n", u));
+	fflush(stdout);
+	printf("\n/////test 3 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.3u|\n", u));
+	fflush(stdout);
+	printf("\n/////test de champ avec ' '/////\n");
+	printf("original : %d\n", printf("original :   |% u|\n", u));
+	fflush(stdout);
+	printf("\n/////test de champ avec '+'/////\n");
+	printf("original : %d\n", printf("original :   |%+u|\n", u));
+	fflush(stdout);
+	printf("\n/////test de champ avec '#'/////\n");
+	printf("original : %d\n", printf("original :   |%#u|\n", u));
+	fflush(stdout);
+	printf("\n\n\n");
+	u = -1;
+	printf("//////////////////// Tests avec 'u' = %u ////////////////////\n", u);
+	printf("/////test sans flags/////\n");
+	printf("original : %d\n", printf("original :   |%u|\n", u));
+	fflush(stdout);
+	printf("/////test de champ 15/////\n");
+	printf("original : %d\n", printf("original :   |%15u|\n", u));
+	fflush(stdout);
+	printf("\n/////test de champ 15 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-15u|\n", u));
+	fflush(stdout);
+	printf("\n/////test de champ 15 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%015u|\n", u));
+	fflush(stdout);
+	printf("\n/////test 15 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.15u|\n", u));
+	fflush(stdout);
+	printf("/////test de champ 3/////\n");
+	printf("original : %d\n", printf("original :   |%3u|\n", u));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-3u|\n", u));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%03u|\n", u));
+	fflush(stdout);
+	printf("\n/////test 3 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.3u|\n", u));
+	fflush(stdout);
+	printf("\n/////test de champ avec ' '/////\n");
+	printf("original : %d\n", printf("original :   |% u|\n", u));
+	fflush(stdout);
+	printf("\n/////test de champ avec '+'/////\n");
+	printf("original : %d\n", printf("original :   |%+u|\n", u));
+	fflush(stdout);
+	printf("\n/////test de champ avec '#'/////\n");
+	printf("original : %d\n", printf("original :   |%#u|\n", u));
+	fflush(stdout);
+	printf("\n\n\n"); */
+
+	/* int x = 0;
+	printf("//////////////////// Tests avec 'x' pour x = %i ////////////////////\n", x);
+	printf("/////test sans flags/////\n");
+	printf("original : %d\n", printf("original :   |%x|\n", x));
+	fflush(stdout);
+	printf("/////test de champ 10/////\n");
+	printf("original : %d\n", printf("original :   |%10x|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-10x|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%010x|\n", x));
+	fflush(stdout);
+	printf("\n/////test 10 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.10x|\n", x));
+	fflush(stdout);
+	printf("/////test de champ 3/////\n");
+	printf("original : %d\n", printf("original :   |%3x|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-3x|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%03x|\n", x));
+	fflush(stdout);
+	printf("\n/////test 3 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.3x|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ avec ' '/////\n");
+	printf("original : %d\n", printf("original :   |% x|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ avec '+'/////\n");
+	printf("original : %d\n", printf("original :   |%+x|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ avec '#'/////\n");
+	printf("original : %d\n", printf("original :   |%#x|\n", x));
+	fflush(stdout);
+	printf("\n\n\n");
+	x = -1;
+	printf("//////////////////// Tests avec 'x' pour x = %i ////////////////////\n", x);
+	printf("/////test sans flags/////\n");
+	printf("original : %d\n", printf("original :   |%x|\n", x));
+	fflush(stdout);
+	printf("/////test de champ 10/////\n");
+	printf("original : %d\n", printf("original :   |%10x|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-10x|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%010x|\n", x));
+	fflush(stdout);
+	printf("\n/////test 10 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.10x|\n", x));
+	fflush(stdout);
+	printf("/////test de champ 3/////\n");
+	printf("original : %d\n", printf("original :   |%3x|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-3x|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%03x|\n", x));
+	fflush(stdout);
+	printf("\n/////test 3 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.3x|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ avec ' '/////\n");
+	printf("original : %d\n", printf("original :   |% x|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ avec '+'/////\n");
+	printf("original : %d\n", printf("original :   |%+x|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ avec '#'/////\n");
+	printf("original : %d\n", printf("original :   |%#x|\n", x));
+	fflush(stdout);
+	printf("\n\n\n");
+	x = 1;
+	printf("//////////////////// Tests avec 'x' pour x = %i ////////////////////\n", x);
+	printf("/////test sans flags/////\n");
+	printf("original : %d\n", printf("original :   |%x|\n", x));
+	fflush(stdout);
+	printf("/////test de champ 10/////\n");
+	printf("original : %d\n", printf("original :   |%10x|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-10x|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%010x|\n", x));
+	fflush(stdout);
+	printf("\n/////test 10 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.10x|\n", x));
+	fflush(stdout);
+	printf("/////test de champ 3/////\n");
+	printf("original : %d\n", printf("original :   |%3x|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-3x|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%03x|\n", x));
+	fflush(stdout);
+	printf("\n/////test 3 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.3x|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ avec ' '/////\n");
+	printf("original : %d\n", printf("original :   |% x|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ avec '+'/////\n");
+	printf("original : %d\n", printf("original :   |%+x|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ avec '#'/////\n");
+	printf("original : %d\n", printf("original :   |%#x|\n", x));
+	fflush(stdout);
+	printf("\n\n\n"); */
+
+	/* int x = 0;
+	printf("//////////////////// Tests avec 'X' pour x = %i ////////////////////\n", x);
+	printf("/////test sans flags/////\n");
+	printf("original : %d\n", printf("original :   |%X|\n", x));
+	fflush(stdout);
+	printf("/////test de champ 10/////\n");
+	printf("original : %d\n", printf("original :   |%10X|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-10X|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%010X|\n", x));
+	fflush(stdout);
+	printf("\n/////test 10 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.10X|\n", x));
+	fflush(stdout);
+	printf("/////test de champ 3/////\n");
+	printf("original : %d\n", printf("original :   |%3X|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-3X|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%03X|\n", x));
+	fflush(stdout);
+	printf("\n/////test 3 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.3X|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ avec ' '/////\n");
+	printf("original : %d\n", printf("original :   |% X|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ avec '+'/////\n");
+	printf("original : %d\n", printf("original :   |%+X|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ avec '#'/////\n");
+	printf("original : %d\n", printf("original :   |%#X|\n", x));
+	fflush(stdout);
+	printf("\n\n\n");
+	x = -1;
+	printf("//////////////////// Tests avec 'X' pour x = %i ////////////////////\n", x);
+	printf("/////test sans flags/////\n");
+	printf("original : %d\n", printf("original :   |%X|\n", x));
+	fflush(stdout);
+	printf("/////test de champ 10/////\n");
+	printf("original : %d\n", printf("original :   |%10X|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-10X|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%010X|\n", x));
+	fflush(stdout);
+	printf("\n/////test 10 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.10X|\n", x));
+	fflush(stdout);
+	printf("/////test de champ 3/////\n");
+	printf("original : %d\n", printf("original :   |%3X|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-3X|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%03X|\n", x));
+	fflush(stdout);
+	printf("\n/////test 3 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.3X|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ avec ' '/////\n");
+	printf("original : %d\n", printf("original :   |% X|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ avec '+'/////\n");
+	printf("original : %d\n", printf("original :   |%+X|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ avec '#'/////\n");
+	printf("original : %d\n", printf("original :   |%#X|\n", x));
+	fflush(stdout);
+	printf("\n\n\n");
+	x = 1;
+	printf("//////////////////// Tests avec 'X' pour x = %i ////////////////////\n", x);
+	printf("/////test sans flags/////\n");
+	printf("original : %d\n", printf("original :   |%X|\n", x));
+	fflush(stdout);
+	printf("/////test de champ 10/////\n");
+	printf("original : %d\n", printf("original :   |%10X|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-10X|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%010X|\n", x));
+	fflush(stdout);
+	printf("\n/////test 10 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.10X|\n", x));
+	fflush(stdout);
+	printf("/////test de champ 3/////\n");
+	printf("original : %d\n", printf("original :   |%3X|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-3X|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%03X|\n", x));
+	fflush(stdout);
+	printf("\n/////test 3 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.3X|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ avec ' '/////\n");
+	printf("original : %d\n", printf("original :   |% X|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ avec '+'/////\n");
+	printf("original : %d\n", printf("original :   |%+X|\n", x));
+	fflush(stdout);
+	printf("\n/////test de champ avec '#'/////\n");
+	printf("original : %d\n", printf("original :   |%#X|\n", x));
+	fflush(stdout);
+	printf("\n\n\n"); */
+
+	/* printf("//////////////////// Tests avec '%%' ////////////////////\n");
+	printf("/////test sans flags/////\n");
+	printf("original : %d\n", printf("original :   |%%|\n"));
+	fflush(stdout);
+	printf("/////test de champ 10/////\n");
+	printf("original : %d\n", printf("original :   |%10%|\n"));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-10%|\n"));
+	fflush(stdout);
+	printf("\n/////test de champ 10 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%010%|\n"));
+	fflush(stdout);
+	printf("\n/////test 10 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.10%|\n"));
+	fflush(stdout);
+	printf("/////test de champ 3/////\n");
+	printf("original : %d\n", printf("original :   |%3%|\n"));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '-'/////\n");
+	printf("original : %d\n", printf("original :   |%-3%|\n"));
+	fflush(stdout);
+	printf("\n/////test de champ 3 avec '0'/////\n");
+	printf("original : %d\n", printf("original :   |%03%|\n"));
+	fflush(stdout);
+	printf("\n/////test 3 chiffres apres la virgule /////\n");
+	printf("original : %d\n\n", printf("original :   |%.3%|\n"));
+	fflush(stdout);
+	printf("\n/////test de champ avec ' '/////\n");
+	printf("original : %d\n", printf("original :   |% %|\n"));
+	fflush(stdout);
+	printf("\n/////test de champ avec '+'/////\n");
+	printf("original : %d\n", printf("original :   |%+%|\n"));
+	fflush(stdout);
+	printf("\n/////test de champ avec '#'/////\n");
+	printf("original : %d\n", printf("original :   |%#%|\n"));
+	fflush(stdout);
+	printf("\n\n\n"); */
 	return (0);
-}  */
+} 
 
 /*
 "%#-76.67x%-178c%#126.17x%-178.97%%-80.63i" ,2705358650u,-128,4292242043u,

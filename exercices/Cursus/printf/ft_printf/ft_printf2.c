@@ -6,13 +6,13 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 22:22:27 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/20 14:48:56 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/23 16:54:46 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_struct	fill_parser(char c, t_struct v)
+t_struct	flags(char c, t_struct v)
 {
 	int	i;
 
@@ -21,105 +21,67 @@ t_struct	fill_parser(char c, t_struct v)
 		return (v);
 	while (i < 6)
 	{
-		if (c == v.flag_order[i])
+		if (c == v.flags[i])
 			break ;
-		else if (v.flag_order[i] == 0)
+		else if (v.flags[i] == 0)
 		{
-			v.flag_order[i] = c;
+			v.flags[i] = c;
 			break ;
 		}
 		i++;
 	}
 	return (v);
-}
-
-void	ft_write_answer(int i, int *count, t_struct v, va_list args)
-{
-	int			len_field;
-	long long	nb;
-	int			strlen;
-
-	nb = 0;
-	v = assign_val(i, v, args, nb);
-	len_field = ft_len_field(i, v);
-	if (v.str[i] == 'X' || v.str[i] == 'x')
-		strlen = (int)ft_strlen((const char *)v.arg);
-	if ((v.str[i] == 'X' || v.str[i] == 'x') && v.nb2 > strlen
-		&& ft_strchr(v.flag_order, '.'))
-		v.zerosnb = v.nb2 - strlen;
-	if (v.str[i] == '%' || (v.str[i] == 'c' && ft_strchr(v.flag_order, '.')))
-	{
-		write(1, &*(char *)v.arg, 1);
-		*count += 1;
-		return ;
-	}
-	else
-	{
-		*count += len_field;
-		ft_write_answer2(i, len_field, v);
-	}
 }
 
 t_struct	flag_filter(int i, t_struct v)
 {
-	if (ft_strchr(v.flag_order, '0') && (v.str[i] == 's'
-			|| ((v.str[i] == 'x' || v.str[i] == 'X')
-				&& ft_strchr(v.flag_order, '.'))))
-		v = erase_flag('0', v);
+	int j;
+
+	j = 0;
+	if (v.str[i] == '%')
+		while (v.flags[j] != 0)
+			v.flags[j++] = 0;
 	v = keep_prior_flag('0', '-', v);
-	if (ft_strchr(v.flag_order, '+') && (v.str[i] == 's' || v.str[i] == 'u'
-			|| v.str[i] == 'p' || v.str[i] == 'x' || v.str[i] == 'X'))
-		v = erase_flag('+', v);
-	if (ft_strchr(v.flag_order, ' ') && (v.str[i] == 's' || v.str[i] == 'u'
-			|| v.str[i] == 'x' || v.str[i] == 'X'))
-		v = erase_flag(' ', v);
 	v = keep_prior_flag(' ', '+', v);
-	if (ft_strchr(v.flag_order, '.') && (v.str[i] == 'p' || (v.nb2 == 0
-				&& v.str[i] == 'c')))
+	if (srch_flag(v.flags, '0') && (v.str[i] == 'c' || v.str[i] == 's'))
+		v = erase_flag('0', v);
+	if (srch_flag(v.flags, '+') && !(v.str[i] == 'i' || v.str[i] == 'd'
+		|| v.str[i] == 'p'))
+		v = erase_flag('+', v);
+	if (srch_flag(v.flags, ' ') && !(v.str[i] == 'i' || v.str[i] == 'd'
+		|| v.str[i] == 'p'))
+		v = erase_flag(' ', v);
+	if (srch_flag(v.flags, '.') && v.str[i] == 'c')
 		v = erase_flag('.', v);
-	if (ft_strchr(v.flag_order, '#')
-		&& !(v.str[i] == 'x' || v.str[i] == 'X'))
+	if (srch_flag(v.flags, '#') && !(v.str[i] == 'x' || v.str[i] == 'X'))
 		v = erase_flag('#', v);
 	return (v);
 }
 
-int	parseur(int i, int *count, t_struct v, va_list args)
+t_struct	parse_nd_flags2(int *i, t_struct v)
 {
-	while (!standard_conds(v, i))
+	if (v.str[*i] >= '1' && v.str[*i] <= '9')
 	{
-		if ((v.str[i] >= '1' && v.str[i] <= '9')
-			|| v.str[i] == '.')
-			v = parseur2(&i, v);
-		else
-		{
-			v = fill_parser(bonus_flag_finder(i, v), v);
-			i += 1;
-		}
+		v.nb1 = ft_atoi((const char *)v.str + *i);
+		while (v.str[*i] >= '0' && v.str[*i] <= '9')
+			*i += 1;
 	}
-	v = flag_filter(i, v);
-	ft_write_answer(i, count, v, args);
-	return (i);
+	if (v.str[*i] == '.')
+	{
+		v = flags(bonus_flag_finder(*i, v), v);
+		*i += 1;
+		v.nb2 = ft_atoi((const char *)v.str + *i);
+		while (v.str[*i] >= '0' && v.str[*i] <= '9')
+			*i += 1;
+	}
+	return (v);
 }
 
-int	print_this_bs(va_list args, t_struct v)
+int	standard_conds(t_struct v, int i)
 {
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (v.str[i])
-	{
-		if (v.str[i] == '%' && standard_conds(v, i + 1))
-			ft_bredpill(++i, &count, v, args);
-		else if (v.str[i] == '%' && bonus_conds(v, i + 1))
-			i = parseur(i + 1, &count, v, args);
-		else
-		{
-			write(1, &v.str[i], 1);
-			count++;
-		}
-		i++;
-	}
-	return (count);
+	if (v.str[i] == 'c' || v.str[i] == 's' || v.str[i] == 'p'
+		|| v.str[i] == 'd' || v.str[i] == 'i' || v.str[i] == 'u'
+		|| v.str[i] == 'x' || v.str[i] == 'X' || v.str[i] == '%')
+		return (1);
+	return (0);
 }

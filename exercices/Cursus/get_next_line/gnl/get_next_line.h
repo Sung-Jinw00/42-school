@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils3.c                                           :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 17:08:53 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/23 17:09:16 by locagnio         ###   ########.fr       */
+/*   Created: 2024/11/22 18:45:24 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/22 18:59:34 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
+# include <stdlib.h>
 
-	i = 0;
-	while (s1[i] && s2[i])
-	{
-		if (s1[i] != s2[i])
-			return (0);
-		i++;
-	}
-	return (1);
-}
+# define BUFFER_SIZE 1024
+
+char	*get_next_line(int fd);
+
+#endif

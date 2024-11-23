@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils3.c                                           :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 17:08:53 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/23 17:09:16 by locagnio         ###   ########.fr       */
+/*   Created: 2024/11/22 18:44:36 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/22 19:04:31 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "get_next_line.h"
 
-int	ft_strcmp(char *s1, char *s2)
+char	*get_next_line(int fd)
 {
-	int	i;
+	char	buffer[BUFFER_SIZE];
+	char	line[BUFFER_SIZE];
+	int		bytesRead;
+	int		i;
 
 	i = 0;
-	while (s1[i] && s2[i])
+	fd = open();
+	if (fd == -1)
+		return (NULL);
+	while ((bytesRead = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
-		if (s1[i] != s2[i])
-			return (0);
-		i++;
+		if (bytesRead == -1)
+			return (NULL);
 	}
-	return (1);
+	close(fd);
+	
 }

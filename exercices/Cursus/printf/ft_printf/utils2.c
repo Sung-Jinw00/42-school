@@ -5,102 +5,81 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 19:53:23 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/22 17:14:23 by locagnio         ###   ########.fr       */
+/*   Created: 2024/11/22 20:52:22 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/23 18:59:05 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_digits(long long n)
-{
-	int	count;
-
-	count = 1;
-	if (n < 0)
-	{
-		n = -n;
-		count++;
-	}
-	while (n >= 10)
-	{
-		n /= 10;
-		count++;
-	}
-	return (count);
-}
-
-static int	init_vals(long nb, const char *base)
+void	ft_putstr(char *s, int *count, int limit)
 {
 	int	i;
-	int	digits;
 
 	i = 0;
-	digits = 1;
-	while (nb >= (long)ft_strlen(base))
+	if (!s)
+		return ;
+	while (s[i] && i < limit)
 	{
-		nb /= ft_strlen(base);
-		digits++;
-	}
-	i = digits;
-	return (i);
-}
-
-char	*ft_itoa_base(long long n, const char *base)
-{
-	char		*cpy;
-	long long	nb;
-	int			i;
-
-	if (n < 0)
-		n = (n + (long)INT_MAX * 2 + 2);
-	nb = n;
-	i = init_vals(nb, base);
-	cpy = ft_calloc(i + 1, 1);
-	if (!cpy)
-		return (NULL);
-	cpy[i--] = '\0';
-	while (i >= 0)
-	{
-		cpy[i] = base[nb % ft_strlen(base)];
-		nb /= ft_strlen(base);
-		i--;
-	}
-	return (cpy);
-}
-
-int	ft_atoi(const char *nptr)
-{
-	int	i;
-	int	sign;
-	int	result;
-
-	i = 0;
-	sign = 1;
-	result = 0;
-	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
-			sign = -sign;
-		i++;
-	}
-	while (nptr[i] >= '0' && nptr[i] <= '9')
-	{
-		result = result * 10 + nptr[i] - '0';
-		i++;
-	}
-	return (result * sign);
-}
-
-int	if_plus(int i, t_struct v, int *count)
-{
-	if (v.str[i] == '+')
-	{
-		write(1, &v.str[i], 1);
+		write(1, &s[i], 1);
 		*count += 1;
 		i++;
 	}
+}
+
+void	ft_putunbr(int *count, unsigned long n)
+{
+	if (n > 9)
+		ft_putunbr(count, n / 10);
+	n = n % 10 + '0';
+	*count += 1;
+	write(1, &n, 1);
+}
+
+void	ft_putnbr(int *count, long n)
+{
+	if (n < 0)
+	{
+		write(1, "-", 1);
+		*count += 1;
+		n = -n;
+	}
+	if (n > 9)
+		ft_putnbr(count, n / 10);
+	n = n % 10 + '0';
+	*count += 1;
+	write(1, &n, 1);
+}
+
+void	hexa_print(size_t nb, t_struct v, char x)
+{
+	char *str;
+	size_t nb_cpy;
+	
+	nb_cpy = nb;
+	if (x = 'x')
+		str = "0123456789abcdef";
+	else
+		str = "0123456789ABCDEF";
+	
+	while (nb > 0)
+	{
+		nb_cpy = nb;
+		while (nb_cpy >= 16)
+			nb_cpy /= 16;
+		write (1, &str[nb], 1);
+		nb /= 16;
+	}
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i] != '\0')
+		i++;
 	return (i);
 }

@@ -9,6 +9,7 @@
 		"ft_printf.h": "c",
 		"tests.h": "c",
 		"ft_printf_bonus.h": "c",
-		"limits.h": "c"
+		"limits.h": "c",
+		"get_next_line.h": "c"
 	}
 }

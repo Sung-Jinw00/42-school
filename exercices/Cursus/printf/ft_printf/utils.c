@@ -5,89 +5,114 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 19:53:23 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/22 16:40:15 by locagnio         ###   ########.fr       */
+/*   Created: 2024/11/15 16:18:33 by locagnio          #+#    #+#             */
+/*   Updated: 2024/11/23 16:54:53 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	ft_strlen(const char *s)
+t_struct	keep_prior_flag(char erased, char prior, t_struct v)
 {
-	size_t	i;
+	int	j;
+	int	save;
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
-
-char	*print_ptr(size_t adr, int *count, char *hexa)
-{
-	char	*ptr;
-	int		i;
-	size_t	adr_copy;
-
-	ptr = ft_calloc(18 + 1, 1);
-	i = 2;
-	adr_copy = adr;
-	while (adr_copy > 0)
+	j = 0;
+	save = 0;
+	while (v.flags[j])
 	{
-		adr_copy /= 16;
-		i++;
+		if (v.flags[j] == erased || v.flags[j] == prior)
+			save = j++;
+		if (v.flags[j] == erased || v.flags[j] == prior)
+		{
+			if (v.flags[save] == erased)
+				j = save;
+			while (v.flags[j] != '\0')
+			{
+				v.flags[j] = v.flags[j + 1];
+				j++;
+			}
+			break ;
+		}
+		j++;
 	}
-	ptr[i--] = '\0';
-	*count += i + 1;
-	while (adr > 0)
-	{
-		ptr[i] = hexa[adr % 16];
-		adr /= 16;
-		i--;
-	}
-	ptr[i] = 'x';
-	i--;
-	ptr[i] = '0';
-	return (ptr);
+	return (v);
 }
 
-void	ft_putunbr(int *count, unsigned long n)
-{
-	if (n > 9)
-		ft_putunbr(count, n / 10);
-	n = n % 10 + '0';
-	*count += 1;
-	write(1, &n, 1);
-}
-
-void	ft_putnbr(int *count, long long n, t_struct v)
-{
-	if (n < 0)
-	{
-		write(1, "-", 1);
-		*count += 1;
-		n = -n;
-	}
-	v.zerosnb = printfzeronb(v, 0);
-	v.zerosnb = -1;
-	if (n > 9)
-		ft_putnbr(count, n / 10, v);
-	n = n % 10 + '0';
-	*count += 1;
-	write(1, &n, 1);
-}
-
-void	ft_putstr(char *s)
+int	srch_flag(char *s, char c)
 {
 	int	i;
 
 	i = 0;
-	if (!s)
-		return ;
 	while (s[i])
 	{
-		write(1, &s[i], 1);
+		if (s[i] == c)
+			return (1);
 		i++;
 	}
+	return (0);
+}
+
+t_struct	erase_flag(char erased, t_struct v)
+{
+	int	j;
+
+	j = 0;
+	while (v.flags[j])
+	{
+		if (v.flags[j] == erased)
+		{
+			while (v.flags[j] != '\0')
+			{
+				v.flags[j] = v.flags[j + 1];
+				j++;
+			}
+			break ;
+		}
+		j++;
+	}
+	return (v);
+}
+
+char	bonus_flag_finder(int i, t_struct v)
+{
+	if (v.str[i] == '-')
+		return ('-');
+	else if (v.str[i] == '0')
+		return ('0');
+	else if (v.str[i] == '.')
+		return ('.');
+	else if (v.str[i] == '#')
+		return ('#');
+	else if (v.str[i] == ' ')
+		return (' ');
+	else if (v.str[i] == '+')
+		return ('+');
+	else
+		return (0);
+}
+
+int	ft_atoi(const char *nptr)
+{
+	int	i;
+	int	sign;
+	int	result;
+
+	i = 0;
+	sign = 1;
+	result = 0;
+	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
+	{
+		if (nptr[i] == '-')
+			sign = -sign;
+		i++;
+	}
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		result = result * 10 + nptr[i] - '0';
+		i++;
+	}
+	return (result * sign);
 }
