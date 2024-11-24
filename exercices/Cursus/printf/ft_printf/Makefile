@@ -7,7 +7,8 @@ NAME = libftprintf.a
 LIBFT = ft_printf.h
 
 FILES = ft_printf.c ft_printf2.c utils.c utils2.c utils3.c\
-		utils4.c utils5.c utils6.c utils7.c utils8.c
+		print_char_and_string.c print_hexa.c print_ptr.c\
+		print_signed.c print_unsigned.c
 
 OBJS = $(FILES:.c=.o)
 

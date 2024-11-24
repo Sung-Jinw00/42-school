@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 22:22:27 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/23 16:54:46 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/24 22:38:14 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_struct	flags(char c, t_struct v)
 
 t_struct	flag_filter(int i, t_struct v)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	if (v.str[i] == '%')
@@ -46,10 +46,10 @@ t_struct	flag_filter(int i, t_struct v)
 	if (srch_flag(v.flags, '0') && (v.str[i] == 'c' || v.str[i] == 's'))
 		v = erase_flag('0', v);
 	if (srch_flag(v.flags, '+') && !(v.str[i] == 'i' || v.str[i] == 'd'
-		|| v.str[i] == 'p'))
+			|| v.str[i] == 'p'))
 		v = erase_flag('+', v);
 	if (srch_flag(v.flags, ' ') && !(v.str[i] == 'i' || v.str[i] == 'd'
-		|| v.str[i] == 'p'))
+			|| v.str[i] == 'p'))
 		v = erase_flag(' ', v);
 	if (srch_flag(v.flags, '.') && v.str[i] == 'c')
 		v = erase_flag('.', v);
@@ -58,21 +58,44 @@ t_struct	flag_filter(int i, t_struct v)
 	return (v);
 }
 
-t_struct	parse_nd_flags2(int *i, t_struct v)
+t_struct	parse_nd_flags2(int *i, t_struct v, va_list args)
 {
-	if (v.str[*i] >= '1' && v.str[*i] <= '9')
+	if (v.str[*i] == '*')
 	{
-		v.nb1 = ft_atoi((const char *)v.str + *i);
-		while (v.str[*i] >= '0' && v.str[*i] <= '9')
-			*i += 1;
-	}
-	if (v.str[*i] == '.')
-	{
-		v = flags(bonus_flag_finder(*i, v), v);
 		*i += 1;
-		v.nb2 = ft_atoi((const char *)v.str + *i);
-		while (v.str[*i] >= '0' && v.str[*i] <= '9')
+		if (v.str[*i - 1] == '*')
+			v.nb1 = va_arg(args, int);
+		if (v.str[*i] == '.' && v.str[*i + 1] == '*')
+		{
+			v = flags(bonus_flag_finder(*i, v), v);
+			v.nb2 = va_arg(args, int);
+			v = flags('0', v);
+			*i += 2;
+		}
+	}
+	else
+	{
+		if (v.str[*i] >= '1' && v.str[*i] <= '9')
+		{
+			v.nb1 = ft_atoi((const char *)v.str + *i);
+			while (v.str[*i] >= '0' && v.str[*i] <= '9')
+				*i += 1;
+		}
+		if (v.str[*i] == '.')
+		{
+			v = flags(bonus_flag_finder(*i, v), v);
 			*i += 1;
+			if (v.str[*i] == '*')
+			{
+				v.nb2 = va_arg(args, int);
+				v = flags('0', v);
+				*i += 1;
+			}
+			else
+				v.nb2 = ft_atoi((const char *)v.str + *i);
+			while (v.str[*i] >= '0' && v.str[*i] <= '9')
+				*i += 1;
+		}
 	}
 	return (v);
 }
