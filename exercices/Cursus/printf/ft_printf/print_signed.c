@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 17:01:22 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/24 21:35:10 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:24:05 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ int	ft_len_nb(long nb, t_struct *v)
 		len_nb++;
 	}
 	len_nb += ft_digits(nb);
-	if ((srch_flag(v->flags, ' ') || srch_flag(v->flags, '+'))
-		&& sign != 1)
+	if ((srch_flag(v->flags, ' ') || srch_flag(v->flags, '+')) && sign != 1)
+	{
 		len_nb++;
+		sign++;
+	}
 	if (srch_flag(v->flags, '.') && v->nb2 > len_nb - sign)
 	{
 		v->zeros = v->nb2 - (len_nb - sign);

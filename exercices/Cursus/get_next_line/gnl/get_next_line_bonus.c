@@ -78,27 +78,27 @@ char	*newline_save(char *line_save, int len_line)
 
 char	*get_next_line(int fd)
 {
-	static char	*line_save;
+	static char	*line_save[1024];
 	char		*line;
 
 	line = NULL;
-	if (fd < 0)
+	if (fd < 0 || fd >= 1024)
 		return (NULL);
-	if (!line_save)
+	if (!line_save[fd])
 	{
-		line_save = (char *)ft_calloc(1, 1);
-		line_save = ft_line_save(line_save, fd);
+		line_save[fd] = (char *)ft_calloc(1, 1);
+		line_save[fd] = ft_line_save(line_save[fd], fd);
 	}
-	if (!line_save)
+	if (!line_save[fd])
 		return (NULL);
-	line = line_to_print(line_save);
+	line = line_to_print(line_save[fd]);
 	if (!line)
 		return (NULL);
-	line_save = newline_save(line_save, 0);
-	if (!line_save[0])
+	line_save[fd] = newline_save(line_save[fd], 0);
+	if (!line_save[fd][0])
 	{
-		free(line_save);
-		line_save = NULL;
+		free(line_save[fd]);
+		line_save[fd] = NULL;
 	}
 	return (line);
 }

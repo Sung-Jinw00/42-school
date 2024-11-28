@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:05:11 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/24 22:38:37 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:21:29 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,21 +96,16 @@ int	ft_printf(const char *str, ...)
 	return (count);
 }
 
-/* #include "../tests/tests.h"
-#include <limits.h>
-
-void	tests(void)
-{
-	printf("original : %d\n", printf("original : |%*.*d|\n", 0, 3, 0));
-	fflush(stdout);
-	printf("copie    : %d\n", ft_printf("copie    : |%*.*d|\n", 0, 3, 0));
-	printf("\n\n\n");
-}
-
+/* #include <limits.h>
 #include <stdio.h>
+
 int main(void)
 {
-	tests();
+	printf("original : %d\n", printf("original : |^.^/% 53.24d^.^/|\n", 0));
+	fflush(stdout);
+	printf("copie    : %d\n", ft_printf("copie    : |^.^/% 53.24d^.^/|\n", 0));
+	printf("\n\n\n");
+	return (0);
 } */
 
 /*

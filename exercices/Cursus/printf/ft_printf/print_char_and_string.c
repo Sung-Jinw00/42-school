@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 16:45:58 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/24 21:26:16 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:23:46 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	ft_print_char(char c, t_struct v, int *count)
 
 void	print_str_if_field(t_struct v, int print_chars, char *str, int *count)
 {
-	if (v.nb1 >= (int)ft_strlen((const char *)str))
-		*count += v.nb1 - (int)ft_strlen((const char *)str);
+	if (v.nb1 >= print_chars)
+		*count += v.nb1 - print_chars;
 	if (srch_flag(v.flags, '-'))
 		ft_putstr(str, count, print_chars);
 	v.nb1 -= print_chars;

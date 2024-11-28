@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 22:22:27 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/24 22:38:14 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:21:36 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,35 @@ t_struct	flag_filter(int i, t_struct v)
 	return (v);
 }
 
+t_struct	parse_nd_flags3(int *i, t_struct v, va_list args)
+{
+	if (v.str[*i] >= '1' && v.str[*i] <= '9')
+	{
+		v.nb1 = ft_atoi((const char *)v.str + *i);
+		while (v.str[*i] >= '0' && v.str[*i] <= '9')
+			*i += 1;
+	}
+	if (v.str[*i] == '.')
+	{
+		v = flags(bonus_flag_finder(*i, v), v);
+		*i += 1;
+		if (v.str[*i] == '*')
+		{
+			v.nb2 = va_arg(args, int);
+			if (v.nb2 < 0)
+				v = erase_flag('.', v);
+			else
+				v = flags('0', v);
+			*i += 1;
+		}
+		else
+			v.nb2 = ft_atoi((const char *)v.str + *i);
+		while (v.str[*i] >= '0' && v.str[*i] <= '9')
+			*i += 1;
+	}
+	return (v);
+}
+
 t_struct	parse_nd_flags2(int *i, t_struct v, va_list args)
 {
 	if (v.str[*i] == '*')
@@ -69,34 +98,15 @@ t_struct	parse_nd_flags2(int *i, t_struct v, va_list args)
 		{
 			v = flags(bonus_flag_finder(*i, v), v);
 			v.nb2 = va_arg(args, int);
-			v = flags('0', v);
+			if (v.nb2 < 0)
+				v = erase_flag('.', v);
+			else
+				v = flags('0', v);
 			*i += 2;
 		}
 	}
 	else
-	{
-		if (v.str[*i] >= '1' && v.str[*i] <= '9')
-		{
-			v.nb1 = ft_atoi((const char *)v.str + *i);
-			while (v.str[*i] >= '0' && v.str[*i] <= '9')
-				*i += 1;
-		}
-		if (v.str[*i] == '.')
-		{
-			v = flags(bonus_flag_finder(*i, v), v);
-			*i += 1;
-			if (v.str[*i] == '*')
-			{
-				v.nb2 = va_arg(args, int);
-				v = flags('0', v);
-				*i += 1;
-			}
-			else
-				v.nb2 = ft_atoi((const char *)v.str + *i);
-			while (v.str[*i] >= '0' && v.str[*i] <= '9')
-				*i += 1;
-		}
-	}
+		v = parse_nd_flags3(i, v, args);
 	return (v);
 }
 

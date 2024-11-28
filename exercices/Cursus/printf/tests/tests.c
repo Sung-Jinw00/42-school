@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 18:36:34 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/24 19:52:55 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:29:19 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -635,7 +635,7 @@ void	tests_u(void)
 	printf("\n\n\n");
 }
 
-void	tests_x(int x)
+void	tests_x(void)
 {
 	int x = 0;
 	printf("//////////////////// Tests avec 'x' pour x = %i ////////////////////\n", x);
@@ -792,7 +792,7 @@ void	tests_x(int x)
 	printf("\n\n\n");
 }
 
-void	tests_x_maj(int x_maj)
+void	tests_x_maj(void)
 {
 	int x = 0;
 	printf("//////////////////// Tests avec 'X' pour x = %i ////////////////////\n", x);

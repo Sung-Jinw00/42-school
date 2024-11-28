@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 18:36:48 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/18 16:48:20 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:29:08 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 # include <stdio.h>
 
-void	tests_c(char c);
-void	tests_s(char *str);
-void	tests_d(int nb);
-void	tests_i(int i);
-void	tests_u(int ui);
-void	tests_x(int x);
-void	tests_x_maj(int x_maj);
+void	tests_c(void);
+void	tests_s(void);
+void	tests_d(void);
+void	tests_i(void);
+void	tests_u(void);
+void	tests_x(void);
+void	tests_x_maj(void);
 void	tests_percent(void);
 
 #endif
