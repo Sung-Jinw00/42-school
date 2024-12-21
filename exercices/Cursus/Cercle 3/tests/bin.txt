@@ -1,5 +1,0 @@
-test
-point
-t
-x
-t
