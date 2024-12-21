@@ -11,6 +11,8 @@
 		"ft_printf_bonus.h": "c",
 		"limits.h": "c",
 		"get_next_line.h": "c",
-		"fcntl.h": "c"
+		"fcntl.h": "c",
+		"get_next_line_bonus.h": "c",
+		"pipex.h": "c"
 	}
 }
