@@ -1,16 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:11:55 by locagnio          #+#    #+#             */
-/*   Updated: 2024/12/26 18:40:35 by locagnio         ###   ########.fr       */
+/*   Updated: 2024/12/26 18:40:12 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
+
+void	read_stdin(int *fd, char *limiter)
+{
+	char	*line;
+
+	close(fd[0]);
+	line = get_next_line(STDIN_FILENO);
+	while (line)
+	{
+		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0
+			&& line[ft_strlen(limiter)] == '\n')
+			exit(EXIT_SUCCESS);
+		write(fd[1], line, ft_strlen(line));
+		line = get_next_line(STDIN_FILENO);
+	}
+}
 
 void	free_dbl_tab(char **str)
 {
@@ -20,12 +36,6 @@ void	free_dbl_tab(char **str)
 	while (str[j])
 		free(str[j++]);
 	free(str);
-}
-
-void	error(void)
-{
-	perror(RED"Error ");
-	exit(EXIT_FAILURE);
 }
 
 int	ft_strnchr(const char *s, const char *to_find, int len)
@@ -61,7 +71,7 @@ char	*find_path(char *cmd, char **env)
 		i++;
 	paths = ft_split(env[i] + 5, ':');
 	if (!paths)
-		error();
+		perror(RED"Error -> invalid path\n"RESET);
 	i = 0;
 	while (paths[i])
 	{
@@ -84,18 +94,23 @@ void	execute(char *av, char **env)
 
 	cmd = ft_split(av, ' ');
 	if (!cmd)
-		error();
+	{
+		perror(RED"Error -> issue spliting command\n"RESET);
+		exit(EXIT_FAILURE);
+	}
 	path = find_path(cmd[0], env);
 	if (!path)
 	{
 		free_dbl_tab(cmd);
-		error();
+		perror(RED"Error -> issue finding path\n"RESET);
+		exit(EXIT_FAILURE);
 	}
 	if (execve(path, cmd, env) == -1)
 	{
 		free(path);
 		free_dbl_tab(cmd);
-		error();
+		perror(RED"Error -> execution failure\n"RESET);
+		exit(EXIT_FAILURE);
 	}
 	free(path);
 	free_dbl_tab(cmd);

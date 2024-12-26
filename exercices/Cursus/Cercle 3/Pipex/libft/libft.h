@@ -124,8 +124,9 @@ int			main(int ac, char **av, char **envp);
 void		error(void);
 void		execute(char *argv, char **envp);
 int			ft_strnchr(const char *s, const char *to_find, int len);
+void		read_stdin(int *fd, char *limiter);
 
-////////////////////////////////// [pipex] ////////////////////////////////////
+////////////////////////////////// [Colors] ///////////////////////////////////
 /* Définition des couleurs de texte */
 # define RESET       "\033[0m"  // Réinitialisation
 # define BOLD        "\033[1m"  // Texte en gras
