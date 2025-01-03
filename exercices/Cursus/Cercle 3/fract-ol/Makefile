@@ -1,70 +1,56 @@
-# Désactivation de l'affichage des commandes par défaut
-MAKEFLAGS += -s  # Active le mode silencieux globalement
-
 # Définition des variables
-GCC          = gcc
-HDRS         = includes/*.h
-FLAGS        = -Wall -Wextra -Werror -O3
-NAME         = fractol
-LIBFT_DIR    = ./libft
-LIBFT        = $(LIBFT_DIR)/libft.a
-MLX_DIR      = minilibx/minilibx-linux
-MLX_FLAGS    = -L $(MLX_DIR) -lmlx -lXext -lX11 -lm
-SRCS         = fract-ol.c other_file.c
-OBJS         = $(SRCS:.c=.o)
-RM           = rm -f
-CREATE       = ar rcs
+GCC        = gcc
+FLAGS      = -Wall -Wextra -Werror -g
+HDRS       = includes
+MLX_HDRS = minilibx/minilibx-linux
+SRCS_C     = srcs/colors.c srcs/controls.c srcs/fract-ol.c srcs/fractals.c srcs/ft_atod.c\
+			 srcs/ft_bzero.c srcs/ft_putstr_fd.c srcs/ft_strlen.c srcs/ft_strncmp.c\
+			 srcs/main.c srcs/utils.c 
+SRC_O      = $(SRCS_C:.c=.o)
+NAME       = fract-ol
+RM         = rm -f
+MLX_FLAGS  = -L minilibx/minilibx-linux -lmlx -lXext -lX11 -lm
+LIB_PATH   = minilibx/minilibx-linux
+LIB_MLX    = $(LIB_PATH)/libmlx.a
+CYAN	   = "\033[36m"
+RED		   = "\033[31m"
+GREEN	   = "\033[32m"
+RESET	   = "\033[0m"
 
-# Couleurs
-RESET        = \033[0m
-BLUE_LIGHT   = \033[1;34m  # Bleu clair
-GREEN_LIGHT  = \033[1;32m  # Vert clair
 
-# Règle par défaut
+# Règle par défaut : création de l'exécutable
 all: $(NAME)
 
 # Création de l'exécutable
-$(NAME): $(LIBFT) $(MLX_DIR)/libmlx.a $(OBJS)
-	@$(GCC) $(FLAGS) $(OBJS) $(LIBFT) $(MLX_FLAGS) -I $(MLX_DIR) -I . -I ./libft -o $(NAME)
+$(NAME): $(SRC_O) $(LIB_MLX)
+	@echo $(CYAN)"Création de l'exécutable $(NAME)..."$(RESET)
+	@$(GCC) $(FLAGS) $(SRC_O) $(LIB_MLX) $(MLX_FLAGS) -I $(HDRS) -I $(MLX_HDRS) -o $(NAME)
+	@echo $(GREEN)"Exécutable $(NAME) créé !"$(RESET)
 
 # Compilation des fichiers sources en objets
-%.o: %.c $(HDRS)
-	@echo "$(BLUE_LIGHT)Compilation de $< en cours...$(RESET)"
-	@$(GCC) $(FLAGS) -I $(MLX_DIR) -I . -I ./libft -c $< -o $@
+$(SRC_O): srcs/%.o: srcs/%.c $(HDRS)
+	@echo $(CYAN)"Compilation de $<..."$(RESET)
+	@$(GCC) $(FLAGS) -I $(HDRS) -I $(MLX_HDRS) -c $< -o $@ -s
 
-# Règle pour la libft
-$(LIBFT):
-	@echo "$(BLUE_LIGHT)Compilation de libft...$(RESET)"
-	@make -s -C $(LIBFT_DIR) all
-	@echo "$(GREEN_LIGHT)Compilation libft terminée !$(RESET)"
-
-# Règle pour MiniLibX
-$(MLX_DIR)/libmlx.a:
-	@echo "$(BLUE_LIGHT)Compilation de MiniLibX...$(RESET)"
-	@make -s -C $(MLX_DIR)
-	@echo "$(GREEN_LIGHT)MiniLibX compilée !$(RESET)"
+# Règle pour la compilation de MiniLibX
+$(LIB_MLX):
+	@echo $(CYAN)"Compilation de MiniLibX..."$(RESET)
+	@make -s -C $(LIB_PATH)
+	@echo $(GREEN)"MiniLibX compilée !"$(RESET)
 
 # Nettoyage des objets
 clean:
-	@echo "$(GREEN_LIGHT)Suppression des objets ✔️$(RESET)"
-	@$(RM) $(OBJS)
-	@make -s -C $(LIBFT_DIR) clean
-	@make -s -C $(MLX_DIR) clean
+	@echo $(CYAN)"Suppression des fichiers objets..."$(RESET)
+	@$(RM) srcs/*.o
 
 # Nettoyage complet
 fclean: clean
-	@echo "$(GREEN_LIGHT)Suppression de l'exécutable ✔️$(RESET)"
+	@echo $(CYAN)"Suppression de l'exécutable $(NAME)..."$(RESET)
 	@$(RM) $(NAME)
-	@make -s -C $(LIBFT_DIR) fclean
-	@make -s -C $(MLX_DIR) clean
+	@make -s -C $(LIB_PATH) clean
 
-# Reset
+# Récompilation depuis zéro
 re: fclean all
 
-# Règle bonus (si applicable)
-bonus: $(LIBFT) $(OBJS_BONUS)
-	@echo "$(GREEN_LIGHT)Compilation des bonus ✔️$(RESET)"
-	@$(GCC) $(FLAGS) $(OBJS_BONUS) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
-
-# Sécurité
-.PHONY: all clean fclean re bonus
+# Sécurité des règles
+.PHONY: all clean fclean re
