@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 17:10:54 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/04 19:20:33 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/06 21:46:24 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,4 @@ void	set_mlx_datas(t_mlx *mlx)
 	if (!mlx->img.addr)
 		error(RED"\nCannot collect data addr.\n"RESET, mlx);
 	draw_fractals(mlx);
-	mlx_hook(mlx->window, DestroyNotify, KeyReleaseMask, quit, mlx);
-	mlx_key_hook(mlx->window, deal_key, mlx);
-	//mlx_mouse_hook(mlx->window, deal_mouse, mlx);
-	mlx_loop(mlx->init);
 }
