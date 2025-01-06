@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:34:47 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/03 15:13:13 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/06 17:25:27 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,11 @@ void	arrow_controls(int key, t_mlx *mlx)
 
 void	mouse_controls(int key, t_mlx *mlx)
 {
-	if (key == LEFT_CLICK)
-		return ;
-	else if (key == SCROLL_UP)
-		return ;
+	if (key == SCROLL_UP)
+		mlx->f_params.ratio *= 1.1;
 	else if (key == SCROLL_DOWN)
-		return ;
-	//ft_bzero(, WIDTH * HEIGHT *sizeof(int));
+		mlx->f_params.ratio *= 0.9;
+	mlx_destroy_image(mlx->init, mlx->img.img_ID);
 	draw_fractals(mlx);
 	mlx_put_image_to_window(mlx->init, mlx->window, mlx->img.img_ID, 0, 0);
 }

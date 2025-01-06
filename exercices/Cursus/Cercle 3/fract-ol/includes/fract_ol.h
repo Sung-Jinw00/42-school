@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:07:52 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/03 17:57:36 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/06 16:32:17 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "mlx.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include "ft_printf.h"
 
 typedef struct s_colors
 {
@@ -77,6 +78,31 @@ typedef struct s_mlx
 	t_fl_params	f_params;
 }	t_mlx;
 
+int				main(int ac, char **av);
+int				quit(t_mlx *mlx);
+int				deal_key(int key, t_mlx *mlx);
+int				mandelbrot_equation(double x, double y);
+int				deal_mouse(int button, int x, int y, t_mlx *mlx);
+int				julia_equation(double x, double y, double c_re, double c_im);
+unsigned int	rotate_hue(double iter);
+void			help_message(void);
+void			mlx_hooks(t_mlx *mlx);
+void			draw_fractals(t_mlx *mlx);
+void			set_mlx_datas(t_mlx *mlx);
+void			arrow_controls(int key, t_mlx *mlx);
+void			mouse_controls(int key, t_mlx *mlx);
+void			error(char *error_message, t_mlx *mlx);
+void			julia_presets(t_mlx *mlx, char preset_choice);
+void			set_fractal_datas(t_mlx *mlx, int ac, char **av);
+char			*set_args(char *arg, int arg_nb, t_mlx *mlx);
+
+//libft
+int			ft_strcmp_frctl(char *s1, char *s2);
+void		*ft_calloc(size_t nmemb, size_t size);
+void		ft_putstr_fd(char *s, int fd);
+void		ft_bzero(void *s, size_t n);
+double		ft_atod(char *nptr);
+size_t		ft_strlen(const char *s);
 
 //nom des fractales
 # define MANDELBROT "Mandelbrot"
@@ -170,26 +196,5 @@ typedef struct s_mlx
 # define OX_CORAL       0x007F5042  // Couleur corail
 # define OX_PEARL       0x00E68C8C  // Couleur perle
 
-int				main(int ac, char **av);
-int				quit(t_mlx *mlx);
-int				deal_key(int key, t_mlx *mlx);
-int				mandelbrot_equation(double x, double y);
-int				deal_mouse(int button, int x, int y, t_mlx *mlx);
-int				julia_equation(double x, double y, double c_re, double c_im);
-unsigned int	rotate_hue(double iter);
-void			draw_fractals(t_mlx *mlx);
-void			error(char *error_message);
-void			arrow_controls(int key, t_mlx *mlx);
-void			mouse_controls(int key, t_mlx *mlx);
-void			julia_presets(t_mlx *mlx, char preset_choice);
-char			*set_args(char *arg, int arg_nb);
-
-//srcs
-int			ft_strcmp(const char *s1, const char *s2);
-void		init_shift(t_mlx *mlx, int ac, char **av);
-void		ft_putstr_fd(char *s, int fd);
-void		ft_bzero(void *s, size_t n);
-double		ft_atod(char *nptr);
-size_t		ft_strlen(const char *s);
 
 #endif

@@ -3,9 +3,22 @@ GCC        = gcc
 FLAGS      = -Wall -Wextra -Werror -g
 HDRS       = includes
 MLX_HDRS = minilibx/minilibx-linux
-SRCS_C     = srcs/colors.c srcs/controls.c srcs/fract-ol.c srcs/fractals.c srcs/ft_atod.c\
-			 srcs/ft_bzero.c srcs/ft_putstr_fd.c srcs/ft_strlen.c srcs/ft_strncmp.c\
-			 srcs/main.c srcs/utils.c 
+FT_PRINTF_HDRS = ft_printf
+
+SRCS_C		= srcs/colors.c\
+			  srcs/controls.c\
+			  srcs/display_fractals.c\
+			  srcs/errors.c\
+			  srcs/ft_atod.c\
+			  srcs/ft_bzero.c\
+			  srcs/ft_calloc.c\
+			  srcs/ft_putstr_fd.c\
+			  srcs/ft_strcmp_frctl.c\
+			  srcs/hooks.c\
+			  srcs/main.c\
+			  srcs/set_fractals.c\
+			  srcs/set_mlx.c
+
 SRC_O      = $(SRCS_C:.c=.o)
 NAME       = fract-ol
 RM         = rm -f
@@ -24,7 +37,7 @@ all: $(NAME)
 # Création de l'exécutable
 $(NAME): $(SRC_O) $(LIB_MLX)
 	@echo $(CYAN)"Création de l'exécutable $(NAME)..."$(RESET)
-	@$(GCC) $(FLAGS) $(SRC_O) $(LIB_MLX) $(MLX_FLAGS) -I $(HDRS) -I $(MLX_HDRS) -o $(NAME)
+	@$(GCC) $(FLAGS) $(SRC_O) $(LIB_MLX) $(MLX_FLAGS) -L lib -lftprintf -I $(HDRS) -I $(MLX_HDRS) -o $(NAME)
 	@echo $(GREEN)"Exécutable $(NAME) créé !"$(RESET)
 
 # Compilation des fichiers sources en objets

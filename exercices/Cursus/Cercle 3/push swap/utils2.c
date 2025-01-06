@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 13:33:59 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/03 15:16:21 by locagnio         ###   ########.fr       */
+/*   Created: 2025/01/06 20:38:13 by locagnio          #+#    #+#             */
+/*   Updated: 2025/01/06 21:28:24 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fract_ol.h"
+#include "push_swap.h"
 
-size_t	ft_strlen(const char *s)
+t_list	*free_list(t_list *list)
 {
-	size_t	i;
+	t_list	*tmp;
 
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
+	tmp = NULL;
+	while (list)
+	{
+		tmp = list->next;
+		free (list);
+		list = tmp;
+	}
+	return (list);
 }
 
-/* #include <stdio.h>
-
-int main(void)
+void	print_action(char *action, char chosen_list)
 {
-	char str[] = "Yeppi";
-
-	printf("%zu\n", ft_strlen(str));
-	return(0);
-} */
+	ft_printf("%s", action);
+	if (chosen_list == 'a')
+		ft_printf("a\n");
+	else
+		ft_printf("b\n");
+}
