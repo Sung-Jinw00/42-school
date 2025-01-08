@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 17:21:08 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/06 21:43:08 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/08 19:48:25 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	quit(t_mlx *mlx)
 
 int mouse_hook(int button, int x, int y, t_mlx *mlx)
 {
-	printf("souris : %d\n", button);
 	x += 7 - y;
 	if (button == SCROLL_UP || button == SCROLL_DOWN)
 		mouse_controls(button, mlx);
@@ -33,7 +32,6 @@ int mouse_hook(int button, int x, int y, t_mlx *mlx)
 
 int	deal_key(int key, t_mlx *mlx)
 {
-	printf("clavier : %d\n", key);
 	if (key == XK_Escape)
 	{
 		quit(mlx);

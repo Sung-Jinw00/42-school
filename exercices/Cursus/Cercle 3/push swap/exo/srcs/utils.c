@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 20:08:07 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/06 21:17:46 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/08 17:58:52 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	ft_putstr_fd(char *s, int fd)
 	}
 }
 
-int	ft_natoi(const char *nptr, int *i)
+int	ft_natoi(const char *nptr, int *i, t_list *a_list)
 {
-	int	sign;
-	int	result;
+	int		sign;
+	long	result;
 
 	sign = 1;
 	result = 0;
@@ -51,6 +51,8 @@ int	ft_natoi(const char *nptr, int *i)
 		result = result * 10 + nptr[*i] - '0';
 		*i += 1;
 	}
+	if (result < INT_MIN || result > INT_MAX)
+		error(RED"Error : Number bigger than int !\n"RESET, a_list);
 	return (result * sign);
 }
 
@@ -63,4 +65,17 @@ void	print_list(t_list *list, char *msg)
 		list = list->next;
 	}
 	ft_printf("\n");
+}
+
+long	len_list(t_list *list)
+{
+	long	len;
+
+	len = 0;
+	while (list)
+	{
+		len++;
+		list = list->next;
+	}
+	return (len);
 }
