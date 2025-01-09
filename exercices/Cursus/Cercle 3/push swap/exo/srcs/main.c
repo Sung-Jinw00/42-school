@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:52:11 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/08 20:25:20 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/09 20:49:39 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,16 @@ void	push_swap(int ac, char **av)
 	a_list = initiate_a_list(ac, av);
 	if (duplicates(a_list))
 		error(RED"Error : duplicates !\n"RESET, a_list);
+	if (sorted_list(a_list))
+	{
+		free_list(a_list);
+		return ;
+	}
 	b_list = NULL;
 	len_a_list = len_list(a_list);
-	print_list(a_list, "liste a initiale : ");
+	//print_list(a_list, "liste a initiale : ");
 	a_list = sort_list(a_list, b_list, len_a_list);
-	print_list(a_list, "liste a finale : ");
+	//print_list(a_list, "liste a finale : ");
 	free_list(a_list);
 	free_list(b_list);
 }

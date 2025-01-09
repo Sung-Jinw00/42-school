@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:07:52 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/06 16:32:17 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/09 19:06:11 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ typedef struct s_mlx
 	t_data		img;
 	t_pixels	pixel;
 	t_fl_params	f_params;
+	int			ac;
+	char		**av;
 }	t_mlx;
 
 int				main(int ac, char **av);

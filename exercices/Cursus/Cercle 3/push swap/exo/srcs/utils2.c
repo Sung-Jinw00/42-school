@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 20:38:13 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/08 20:05:49 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/09 20:14:15 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,15 @@ int	sorted_list(t_list *list)
 	t_list *cur;
 
 	prev = list;
-	if (prev->is_min != 1)
-		return (1);
 	cur = prev->next;
 	while (prev && cur)
 	{
 		if (prev->data > cur->data)
-			return (1);
+			return (0);
 		prev = cur;
 		cur = prev->next;
 	}
-	if (prev->is_max != 1)
-		return (1);
-	return (0);
+	return (1);
 }
 
 char	*bases_sorted_way(t_list *list)

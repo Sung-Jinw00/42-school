@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:52:14 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/08 21:26:41 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/09 16:50:09 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ void	*ft_calloc(size_t nmemb, size_t size);
 int		chunk_check(t_list *list, int first_chunk, int sec_chunk);
 int		pos_of_highest_value_in_chunk(t_list *b_list, int chunk);
 
-void	print_chunk(t_list *a_list, char chosen_list);
+void	print_vals_and_chunks(t_list *a_list, t_list *b_list);
 
 #endif

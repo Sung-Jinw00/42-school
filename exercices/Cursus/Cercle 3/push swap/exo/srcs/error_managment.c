@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 20:03:35 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/08 17:59:04 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/09 16:12:57 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	check_all_args(char **numbers)
 				error(RED"Error : Invalid arguments !\n"RESET, NULL);
 			i++;
 		}
+		i = 0;
 		j++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 17:10:54 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/06 21:46:24 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/09 18:06:34 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,4 @@ void	set_mlx_datas(t_mlx *mlx)
 	&mlx->img.line_length, &mlx->img.endian);
 	if (!mlx->img.addr)
 		error(RED"\nCannot collect data addr.\n"RESET, mlx);
-	draw_fractals(mlx);
 }

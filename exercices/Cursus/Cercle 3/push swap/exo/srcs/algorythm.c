@@ -6,60 +6,155 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:34:26 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/08 21:33:57 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/09 21:53:42 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sorted_a_list(t_list **a_list, t_list **b_list, int chunk)
+void	sorted_a_list(t_list **a_list, t_list **b_list, int chunk, int len_b_lst)
 {
 	int pos;
-
+	
 	pos = 0;
 	while (*b_list && chunk > 0)
 	{
-		while (*b_list && (*b_list)->chunk_level == chunk)
+		while (*b_list && chunk_check(*b_list, chunk, chunk))
 		{
 			pos = pos_of_highest_value_in_chunk(*b_list, chunk);
-			if (pos != 0)
-			{
-				while (pos > 0)
-				{
+			if (pos != 0 && pos <= len_b_lst / 2)
+				while (pos-- > 0)
 					ra_rb(b_list, 'b');
-					pos--;
-				}
+			else if (pos != 0 && pos > len_b_lst / 2)
+			{
+				pos = len_b_lst - pos;
+				while (pos-- > 0)
+					rra_rrb(b_list, 'b');
 			}
 			pa_pb(a_list, b_list, 'a');
+			len_b_lst--;
 		}
 		chunk--;
 	}
 }
 
+int	last_chunk2(t_list *tmp, int last_valid_value)
+{
+	int i;
+
+	i = 0;
+	while (tmp && tmp->data != last_valid_value)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	return (i);
+}
+
+int	last_chunk(t_list *a_list, int chunk1, int chunk2)
+{
+	t_list *tmp;
+	int		last_valid_value;
+	int trigger;
+
+	trigger = 0;
+	tmp = a_list;
+	tmp = tmp->next;
+	last_valid_value = 0;
+	while (tmp)
+	{
+		if (tmp->chunk_level == chunk1 || tmp->chunk_level == chunk2)
+		{
+			last_valid_value = tmp->data;
+			trigger = 1;
+		}
+		tmp = tmp->next;
+	}
+	if (trigger == 0)
+		return (-1);
+	tmp = a_list;
+	return (last_chunk2(tmp, last_valid_value));
+}
+
+int	first_chunk(t_list *a_list, int chunk1, int chunk2)
+{
+	t_list	*tmp;
+	int		first_valid_value;
+	int		i;
+
+	tmp = a_list;
+	tmp = tmp->next;
+	first_valid_value = 0;
+	while (tmp && !(tmp->chunk_level == chunk1 || tmp->chunk_level == chunk2))
+		tmp = tmp->next;
+	if (tmp && (tmp->chunk_level == chunk1 || tmp->chunk_level == chunk2))
+		first_valid_value = tmp->data;
+	else
+		return (-1);
+	tmp = a_list;
+	i = 0;
+	while (tmp->data != first_valid_value)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	return (i);
+}
+
+void	opti_chunk_mv(t_list **a_list, int chunk1, int chunk2)
+{
+	t_list	*tmp;
+	int		frst_chunk;
+	int		lst_chunk;
+
+	tmp = *a_list;
+	tmp = tmp->next;
+	if (!tmp)
+		return ;
+	frst_chunk = first_chunk(*a_list, chunk1, chunk2);
+	ft_printf("first chunk == %d\n", frst_chunk);
+	lst_chunk = last_chunk(*a_list, chunk1, chunk2);
+	ft_printf("last chunk == %d\n", lst_chunk);
+	if (frst_chunk != -1 && frst_chunk <= lst_chunk
+		&& frst_chunk <= len_list(*a_list) / 2)
+	{
+		while (frst_chunk-- > 0)
+			ra_rb(a_list, 'a');
+	}
+	else
+	{
+		lst_chunk = len_list(*a_list) - lst_chunk;
+		while (lst_chunk-- > 0)
+			rra_rrb(a_list, 'a');
+	}
+}
+
+
 void	sort_by_chunk(t_list **a_list, t_list **b_list, int max_chunk)
 {
 	int 	index;
-	int		fst_chunk;
-	int		sec_chunk;
+	int		chunk1;
+	int		chunk2;
 
 	index = 0;
-	fst_chunk = max_chunk / 2;
-	sec_chunk = max_chunk / 2 + 1;
+	chunk1 = max_chunk / 2;//je prends les 2 chunks medians
+	chunk2 = max_chunk / 2 + 1;
 	while (*a_list)
 	{
-		if ((*a_list)->chunk_level == (fst_chunk - index)
-			|| (*a_list)->chunk_level == (sec_chunk + index))
+		if ((*a_list)->chunk_level == (chunk1 - index)
+			|| (*a_list)->chunk_level == (chunk2 + index))//si j'ai un chunk qui correspond
 		{
 			pa_pb(a_list, b_list, 'b');
-			if ((*b_list)->chunk_level == (fst_chunk - index)
+			if ((*b_list)->chunk_level == (chunk1 - index)//si j'ai un chunk inferieur au dessus je le met en dessous
 				&& (*b_list)->next
-				&& (*b_list)->next->chunk_level == (sec_chunk + index))
+				&& (*b_list)->next->chunk_level == (chunk2 + index))
 				ra_rb(b_list, 'b');
 		}
-		if (!chunk_check(*a_list, fst_chunk - index, sec_chunk + index))
+		if (!chunk_check(*a_list, chunk1 - index, chunk2 + index))//si je trouve plus mes chunks dans a, je passe aux suivants
 			index++;
-		else
-			ra_rb(a_list, 'a');
+		else if (*a_list && !((*a_list)->chunk_level == chunk1 - index
+			|| (*a_list)->chunk_level == chunk2 + index))//sinon je cherche le prochain
+			opti_chunk_mv(a_list, chunk1 - index, chunk2 - index);
 	}
 	
 }
@@ -73,12 +168,12 @@ void	chunk_list(double min, double max, t_list **a_list, double ratio)
 	limit_chunk = min + ratio;
 	chunk_level = 1;
 	tmp = *a_list;
-	while (!(limit_chunk > max))
+	while (!(limit_chunk > max + 0.1))
 	{
 		while (tmp)
 		{
 			if (tmp->chunk_level == 0 
-				&& ((tmp->data == max && limit_chunk + ratio > max)
+				&& ((tmp->data == max && limit_chunk + ratio > max + 0.1)
 					|| (tmp->data >= min && tmp->data < limit_chunk)))
 				tmp->chunk_level = chunk_level;
 			tmp = tmp->next;
@@ -105,11 +200,12 @@ t_list	*sort_list(t_list *a_list, t_list *b_list, int len_a_list)
 	else
 		divizor = 6;
 	chunk_list(min, max, &a_list, (double)(max - min) / divizor);
+	//print_vals_and_chunks(a_list, b_list);
 	sort_by_chunk(&a_list, &b_list, divizor);
-	print_chunk(a_list, 'a');
-	print_chunk(b_list, 'b');
-	sorted_a_list(&a_list, &b_list, divizor);
-	print_list(a_list, "liste a : ");
-	print_list(b_list, "liste b : ");
+	//print_vals_and_chunks(a_list, b_list);
+	sorted_a_list(&a_list, &b_list, divizor, len_list(b_list));
+	//ft_printf("\n");
+	//print_vals_and_chunks(a_list, b_list);
+	//ft_printf("\n");
 	return (a_list);
 }

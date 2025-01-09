@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 17:07:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/08 19:43:38 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/09 20:05:36 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	mandelbrot_equation(double x, double y)
 {
 	unsigned int i;
-	double r;
-	double im_tmp;
-	double	r2;
+	double		r;
+	double		im_tmp;
+	double		r2;
 
 	r = 0;
 	i = 0;
@@ -117,6 +117,8 @@ void	set_fractal_datas(t_mlx *mlx, int ac, char **av)
 {
 	mlx->f_params.name = set_args(av[1], 1, mlx);
 	mlx->f_params.ratio = 2.5;
+	mlx->ac = ac;
+	mlx->av = av;
 	if (!ft_strcmp_frctl(mlx->f_params.name, JULIA) && ac <= 4)
 	{
 		julia_presets(mlx, '1');

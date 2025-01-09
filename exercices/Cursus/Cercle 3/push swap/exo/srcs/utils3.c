@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:16:47 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/08 21:26:12 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/09 20:39:20 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,37 @@ int	chunk_check(t_list *list, int first_chunk, int sec_chunk)
 	return (0);
 }
 
-void	print_chunk(t_list *a_list, char chosen_list)
+void	print_vals_and_chunks(t_list *a_list, t_list *b_list)
 {
-	t_list *tmp = a_list;
+	t_list *tmp_a = a_list;
+	t_list *tmp_b = b_list;
 	int count = 1;
-	while (tmp)
+	ft_printf("-----------------------------       -----------------------------\n");
+	ft_printf("|          liste a          |       |          liste b          |\n");
+	ft_printf("-----------------------------       -----------------------------\n");
+	while (tmp_a || tmp_b)
 	{
-		ft_printf("value %d of list %c : %d   chunk level : %d\n", count++, chosen_list, tmp->data, tmp->chunk_level);
-		tmp = tmp->next;
+		if (tmp_a && tmp_b)
+		{
+			ft_printf("data %d = %d     chunk level : %d  |  data %d = %d     chunk level : %d\n", count, tmp_a->data, tmp_a->chunk_level, count, tmp_b->data, tmp_b->chunk_level);
+			tmp_a = tmp_a->next;
+			tmp_b = tmp_b->next;
+		}
+		else if (!tmp_a && tmp_b)
+		{
+			ft_printf("     N/A             N/A        |  data %d = %d     chunk level : %d\n", count, tmp_b->data, tmp_b->chunk_level);
+			tmp_b = tmp_b->next;
+		}
+		else if (tmp_a && !tmp_b)
+		{
+			ft_printf("data %d = %d     chunk level : %d  |      N/A              N/A         \n", count, tmp_a->data, tmp_a->chunk_level);
+			tmp_a = tmp_a->next;
+		}
+		else if (!tmp_a && !tmp_b)
+			break ;
+		count++;
 	}
+	ft_printf("\n");
 }
 
 int	pos_of_highest_value_in_chunk(t_list *b_list, int chunk)
@@ -82,11 +104,11 @@ int	pos_of_highest_value_in_chunk(t_list *b_list, int chunk)
 	tmp = b_list;
 	highest_value = tmp->data;
 	tmp = tmp->next;
-	if (!tmp || tmp->chunk_level != chunk)
+	if (!tmp)
 		return (0);
-	while (tmp && tmp->chunk_level == chunk)
+	while (tmp)
 	{
-		if (tmp->data > highest_value)
+		if (tmp->chunk_level == chunk && tmp->data > highest_value)
 			highest_value = tmp->data;
 		tmp = tmp->next;
 	}
