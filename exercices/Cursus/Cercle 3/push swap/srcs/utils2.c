@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 20:38:13 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/11 15:20:33 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/12 00:48:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	print_action(char *action, char chosen_list)
 	ft_printf("%s%c\n", action, chosen_list);
 }
 
-int	sorted_list(t_list *list)
+int	sorted_list_degrow(t_list *list)
 {
 	t_list *prev;
 	t_list *cur;
@@ -42,7 +42,26 @@ int	sorted_list(t_list *list)
 	cur = prev->next;
 	while (prev && cur)
 	{
-		if (prev->data > cur->data)
+		if (prev->data < cur->data
+			&& !(prev->data == find_min(&list) && cur->data == find_max(&list)))
+			return (0);
+		prev = cur;
+		cur = prev->next;
+	}
+	return (1);
+}
+
+int	sorted_list_grow(t_list *list)
+{
+	t_list *prev;
+	t_list *cur;
+
+	prev = list;
+	cur = prev->next;
+	while (prev && cur)
+	{
+		if (prev->data > cur->data
+			&& !(prev->data == find_max(&list) && cur->data == find_min(&list)))
 			return (0);
 		prev = cur;
 		cur = prev->next;
@@ -75,4 +94,33 @@ char	*bases_sorted_way(t_list *list)
 		return("degrow");
 	else
 		return("grow");
+}
+
+
+int	find_a_value(t_list *list, int min_or_max, int data, char *smaller_or_bigger)
+{
+	t_list *tmp;
+	int pos;
+	int	value_to_find;
+
+	tmp = list;
+	value_to_find = 0;
+	while (tmp)
+	{
+		if (ft_strcmp(smaller_or_bigger, "smaller")
+			&& tmp->data > min_or_max && tmp->data < data)
+			value_to_find = tmp->data;
+		else if (ft_strcmp(smaller_or_bigger, "bigger")
+			&& tmp->data < min_or_max && tmp->data > data)
+			value_to_find = tmp->data;
+		tmp = tmp->next;
+	}
+	tmp = list;
+	pos = 0;	
+	while (tmp->data != value_to_find)
+	{
+		tmp = tmp->next;
+		pos++;
+	}
+	return (pos);
 }

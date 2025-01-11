@@ -7,7 +7,7 @@ FLAGS       = -Wall -Wextra -Werror -g
 HDRS        = includes
 FT_PRINTF_HDRS = ft_printf
 
-SRCS        =  srcs/algorythm\ copy.c srcs/error_managment.c srcs/list_creation.c srcs/main.c \
+SRCS        =  srcs/algorythm.c srcs/error_managment.c srcs/list_creation.c srcs/main.c \
               srcs/moves.c srcs/moves2.c srcs/utils.c srcs/utils2.c srcs/utils3.c
 
 # Remplacement de srcs/algorythm.c par algorythm.o pour chaque fichier source

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:52:11 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/11 16:09:34 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/11 23:57:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	push_swap(int ac, char **av)
 	a_list = initiate_a_list(ac, av);
 	if (duplicates(a_list))
 		error(RED"Error : duplicates !\n"RESET, a_list);
-	if (sorted_list(a_list))
+	if ((a_list))
 	{
 		free_list(a_list);
 		return ;

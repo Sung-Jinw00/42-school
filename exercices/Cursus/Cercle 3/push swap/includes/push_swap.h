@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:52:14 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/11 21:56:18 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/12 00:48:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	error(char *msg, t_list *a_list);
 int		is_nb(char c);
 long	len_list(t_list *list);
 t_list	*free_list(t_list *list);
-int		sorted_list(t_list *list);
+int		sorted_list_grow(t_list *list);
+int		sorted_list_degrow(t_list *list);
 int		unsorted_grow(t_list *a_list);
 void	ft_putstr_fd(char *s, int fd);
 char	*bases_sorted_way(t_list *list);
@@ -74,6 +75,8 @@ t_list	*r_or_rr(t_list **list, int len_list, int pos);
 void	if_is_max(t_list **a_list, int bigger_nb);
 void	if_is_min(t_list **a_list, int smaller_nb);
 t_list	*pos_of_value_for_b2(t_list **a_list, t_list *b_list, int bigger_nb);
+t_list	*ft_listdup(t_list *src);
+int		find_a_value(t_list *list, int min_or_max, int data, char *smaller_or_bigger);
 
 //to print
 void	print_list(t_list *list, char *msg);

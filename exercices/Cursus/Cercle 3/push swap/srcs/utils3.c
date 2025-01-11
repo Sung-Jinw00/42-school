@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:16:47 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/11 22:24:51 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/12 00:45:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,10 @@ void	init_vals(t_list *tmp, int *smaller_nb, int *bigger_nb)
 
 t_list	*r_or_rr(t_list **list, int len_list, int pos)
 {
-	if (pos < len_list / 2)
+	if (pos <= len_list / 2)
 		while (pos-- > 0)
 			ra_rb(list, 'a');
-	else if (pos > len_list / 2)
+	else
 	{
 		pos = len_list - pos;
 		while (pos-- > 0)
@@ -135,7 +135,8 @@ void	if_is_max(t_list **a_list, int bigger_nb)
 		tmp = tmp->next;
 		pos++;
 	}
-	if (pos + 1 == len_list(*a_list))
+	pos++;
+	if (pos == len_list(*a_list))
 		pos = 0;
 	*a_list = r_or_rr(a_list, len_list(*a_list), pos);
 }
@@ -198,13 +199,6 @@ int	last_3_bnrs(t_list *a_list)
 	return (0);
 }
 
-void	sort_a2(t_list **a_list)
-{
-	ra_rb(a_list, 'a');
-	sa_sb(a_list, 'a');
-	rra_rrb(a_list, 'a');
-}
-
 void	init_sort_a(t_list *a_list, t_list **v1, t_list **v2, t_list **v3)
 {
 	*v1 = a_list;
@@ -219,21 +213,36 @@ void	sort_a(t_list **a_list)
 	t_list	*v3;
 
 	init_sort_a(*a_list, &v1, &v2, &v3);
-	if (!sorted_list(*a_list))
+	if (!(*a_list))
 	{
 		if (v1->data > v2->data && v2->data < v3->data
 			&& !(v1->data == find_max(a_list) && v2->data == find_min(a_list)))
 			sa_sb(a_list, 'a');
 		else if (v1->data < v2->data && v2->data > v3->data
 			&& !(v2->data == find_max(a_list) && v3->data == find_min(a_list)))
-			sort_a2(a_list);
-		else
 		{
-			sa_sb(a_list, 'a');
-			rra_rrb(a_list, 'a');
-		}
-		init_sort_a(*a_list, &v1, &v2, &v3);
-		while (!(v1->data < v2->data && v2->data < v3->data))
 			ra_rb(a_list, 'a');
+			sa_sb(a_list, 'a');
+		}
+		else
+			sa_sb(a_list, 'a');
+		init_sort_a(*a_list, &v1, &v2, &v3);
 	}
+}
+
+t_list	*ft_listdup(t_list *src)
+{
+	t_list	*cpy;
+	t_list	*tmp;
+	int		i;
+
+	tmp = src;
+	i = 0;
+	while (tmp)
+	{
+		cpy = add_at(cpy, tmp->data, i);
+		i++;
+		tmp = tmp->next;
+	}
+	return (cpy);
 }

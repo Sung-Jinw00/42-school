@@ -3,217 +3,137 @@
 /*                                                        :::      ::::::::   */
 /*   algorythm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:34:26 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/11 17:11:23 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/12 00:50:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sorted_a_list(t_list **a_list, t_list **b_list, int chunk, int len_b_lst)
+void	final_moves(t_list **a_list, int smaller_nb)
 {
 	int pos;
-	
+	t_list *tmp;
+
+	tmp = *a_list;
 	pos = 0;
-	while (*b_list && chunk > 0)
-	{
-		while (*b_list && chunk_check(*b_list, chunk, chunk))
-		{
-			pos = pos_of_highest_value_in_chunk(*b_list, chunk);
-			if (pos != 0 && pos <= len_b_lst / 2)
-				while (pos-- > 0)
-					ra_rb(b_list, 'b');
-			else if (pos != 0 && pos > len_b_lst / 2)
-			{
-				pos = len_b_lst - pos;
-				while (pos-- > 0)
-					rra_rrb(b_list, 'b');
-			}
-			pa_pb(a_list, b_list, 'a');
-			len_b_lst--;
-		}
-		chunk--;
-	}
-}
-
-int	last_chunk2(t_list *tmp, int last_valid_value, int len_list_tmp)
-{
-	int i;
-
-	i = 0;
-	while (tmp && tmp->data != last_valid_value)
+	while (tmp->data != smaller_nb)
 	{
 		tmp = tmp->next;
-		i++;
+		pos++;
 	}
-	if (i > len_list_tmp / 2)
-		i = len_list_tmp - i;
-	return (i);
+	r_or_rr(a_list, len_list(*a_list), pos);
 }
 
-int	last_chunk(t_list *a_list, int chunk1, int chunk2)
+void	pos_of_value_for_b(t_list **a_list, t_list *b_list)
 {
-	t_list *tmp;
-	int		last_valid_value;
-	int trigger;
+	int		smaller_nb;
+	int		bigger_nb;
 
-	trigger = 0;
-	tmp = a_list;
-	last_valid_value = 0;
-	while (tmp)
+	while (b_list)
 	{
-		if (tmp->chunk_level == chunk1 || tmp->chunk_level == chunk2)
-		{
-			last_valid_value = tmp->data;
-			trigger = 1;
-		}
-		tmp = tmp->next;
+		smaller_nb = find_min(a_list);
+		bigger_nb = find_max(a_list);
+		//print_vals_and_chunks(*a_list, b_list);
+		if (b_list->data < smaller_nb)
+			if_is_min(a_list, smaller_nb);
+		else if (b_list->data > bigger_nb)
+			if_is_max(a_list, bigger_nb);
+		else if (smaller_nb < b_list->data && b_list->data < bigger_nb)
+			*a_list = pos_of_value_for_b2(a_list, b_list, bigger_nb);
+		//print_vals_and_chunks(*a_list, b_list);
+		pa_pb(a_list, &b_list, 'a');
 	}
-	if (trigger == 0)
-		return (-1);
-	tmp = a_list;
-	return (last_chunk2(tmp, last_valid_value, len_list(tmp)));
+	final_moves(a_list, find_min(a_list));
+	//print_vals_and_chunks(*a_list, b_list);
 }
 
-int	first_chunk(t_list *a_list, int chunk1, int chunk2)
+int	calculate_cost(t_list *a_list, t_list *b_list, int pos_data, int data)
 {
-	t_list	*tmp;
-	int		first_valid_value;
-	int		i;
+	int cost;
+	int pos_in_b;
 
-	tmp = a_list;
-	first_valid_value = 0;
-	while (tmp && !(tmp->chunk_level == chunk1 || tmp->chunk_level == chunk2))
-		tmp = tmp->next;
-	if (tmp && (tmp->chunk_level == chunk1 || tmp->chunk_level == chunk2))
-		first_valid_value = tmp->data;
-	else
-		return (-1);
-	tmp = a_list;
-	i = 0;
-	while (tmp->data != first_valid_value)
+	cost = 0;
+	pos_in_b = find_a_value(b_list, find_min(&b_list), data, "smaller");
+	while(!sorted_list_degrow(b_list))
 	{
-		tmp = tmp->next;
-		i++;
+		if (pos_data > len_list(a_list) / 2)
+			pos_data = len_list(a_list) - pos_data;
+		cost = pos_data + 1;//on compte le nombre de coups qu'il faudrait pour pouvoir faire passer la data dans b
+		if (pos_in_b > len_list(b_list) / 2)
+			cost += len_list(b_list) - pos_in_b;
+		else
+			cost += pos_in_b;
 	}
-	return (i);
+	free_list(a_list);
+	free_list(b_list);
+	return (cost);
 }
 
-void	opti_chunk_mv(t_list **a_list, int chunk1, int chunk2)
+void	put_data_in_b(t_list **a_list, int pos_in_a, t_list **b_list, int pos_in_b)
 {
-	t_list	*tmp;
-	int		frst_chunk;
-	int		lst_chunk;
-
-	tmp = *a_list;
-	tmp = tmp->next;
-	if (!tmp)
-		return ;
-	frst_chunk = first_chunk(*a_list, chunk1, chunk2);
-	lst_chunk = last_chunk(*a_list, chunk1, chunk2);
-	if (frst_chunk != -1 && frst_chunk != 0 && frst_chunk <= lst_chunk
-		&& frst_chunk <= len_list(*a_list) / 2)
+	if (pos_in_a > len_list(*a_list) / 2)
 	{
-		while (frst_chunk-- > 0)
-			ra_rb(a_list, 'a');
-	}
-	else if (frst_chunk != -1  && frst_chunk != 0 && frst_chunk > lst_chunk)
-		while (lst_chunk-- > 0)
+		pos_in_a = len_list(*a_list) - pos_in_a;
+		while (pos_in_a > 0)
 			rra_rrb(a_list, 'a');
-}
-
-
-void	sort_by_chunk2(t_list **a_list, t_list **b_list, int chunk1, int chunk2)
-{
-	int frst_chunk;
-	int lst_chunk;
-	frst_chunk = first_chunk(*a_list, chunk1, chunk2);
-	lst_chunk = last_chunk(*a_list, chunk1, chunk2);
-	//ft_printf("chunk1 : %d\nchunk2 : %d\nlen_list_a : %d\n", chunk1, chunk2, len_list(*a_list));
-	if (frst_chunk != -1  && frst_chunk != 0 && frst_chunk <= lst_chunk
-		&& frst_chunk <= len_list(*a_list) / 2)
-		rr(a_list, b_list);
-	else
-		ra_rb(b_list, 'b');
-}
-
-void	sort_by_chunk(t_list **a_list, t_list **b_list, int max_chunk)
-{
-	int 	index;
-	int		chunk1;
-	int		chunk2;
-
-	index = 0;
-	chunk1 = max_chunk / 2;//je prends les 2 chunks medians
-	chunk2 = max_chunk / 2 + 1;
-	while (*a_list)
-	{
-		if ((*a_list)->chunk_level == (chunk1 - index)
-			|| (*a_list)->chunk_level == (chunk2 + index))//si j'ai un chunk qui correspond
-		{
-			pa_pb(a_list, b_list, 'b');
-			if ((*b_list)->next
-				&& (*b_list)->chunk_level < (*b_list)->next->chunk_level)
-				sort_by_chunk2(a_list, b_list, chunk1 - index, chunk2 + index);
-		}
-		if (!chunk_check(*a_list, chunk1 - index, chunk2 + index))//si je trouve plus mes chunks dans a, je passe aux suivants
-			index++;
-		if (*a_list && !((*a_list)->chunk_level == chunk1 - index
-			|| (*a_list)->chunk_level == chunk2 + index))//sinon je cherche le prochain
-			opti_chunk_mv(a_list, chunk1 - index, chunk2 + index);
-		//print_vals_and_chunks(*a_list, *b_list);
 	}
+	else if (pos_in_a <= len_list(*a_list) / 2)
+		while (pos_in_a > 0)
+			ra_rb(a_list, 'a');
+	if (pos_in_b > len_list(*b_list) / 2)
+	{
+		pos_in_b = len_list(*b_list) - pos_in_b;
+		while (pos_in_b > 0)
+			rra_rrb(b_list, 'b');
+	}
+	else if (pos_in_b <= len_list(*b_list) / 2)
+		while (pos_in_b > 0)
+			ra_rb(b_list, 'b');
+	pa_pb(a_list, b_list, 'b');
 }
 
-void	chunk_list(double min, double max, t_list **a_list, double ratio)
+void	cheapest_move_to_b(t_list **a_list, t_list **b_list)
 {
-	int		chunk_level;
-	double	limit_chunk;
-	t_list *tmp;
+	t_list	*tmp;
+	int		data;
+	int		cost;
+	int		pos;
+	int		pos_saved;
 
-	limit_chunk = min + ratio;
-	chunk_level = 1;
-	tmp = *a_list;
-	while (!(limit_chunk > max + 0.1))
+	while (*a_list && len_list(*a_list) != 3)
 	{
-		while (tmp)
-		{
-			if (tmp->chunk_level == 0 
-				&& ((tmp->data == max && limit_chunk + ratio > max + 0.1)
-					|| (tmp->data >= min && tmp->data < limit_chunk)))
-				tmp->chunk_level = chunk_level;
-			tmp = tmp->next;
-		}
-		chunk_level++;
 		tmp = *a_list;
-		min = limit_chunk;
-		limit_chunk = min + ratio;
+		data = tmp->data;
+		pos = 0;
+		pos_saved = pos;
+		cost = calculate_cost(ft_listdup(*a_list), ft_listdup(*b_list), pos, data);
+		while (tmp->next)
+		{
+			tmp = tmp->next;
+			pos++;
+			if (cost > calculate_cost(ft_listdup(*a_list), ft_listdup(*b_list), pos, data))
+			{
+				cost = calculate_cost(ft_listdup(*a_list), ft_listdup(*b_list), pos, data);
+				pos_saved = pos;
+			}
+		}
+		put_data_in_b(a_list, pos_saved, b_list, find_a_value(*b_list, find_min(b_list), data, "smaller"));
 	}
 }
 
 t_list	*sort_list(t_list *a_list, t_list *b_list, int len_a_list)
 {
-	int max;
-	int min;
-	int divizor;
-
 	if (len_a_list == 1)
 		return (a_list);
-	max = find_max(&a_list);
-	min = find_min(&a_list);
-	if (len_a_list < 100)
-		divizor = 2;
-	else if (len_a_list >= 100 && len_a_list < 500)
-		divizor = 10;
-	else
-		divizor = 16;
-	chunk_list(min, max, &a_list, (double)(max - min) / divizor);
+	pa_pb(&a_list, &b_list, 'b');
+	pa_pb(&a_list, &b_list, 'b');
+	cheapest_move_to_b(&a_list, &b_list);
 	//print_vals_and_chunks(a_list, b_list);
-	sort_by_chunk(&a_list, &b_list, divizor);
-	//print_vals_and_chunks(a_list, b_list);
-	sorted_a_list(&a_list, &b_list, divizor, len_list(b_list));
+	sort_a(&a_list);
+	pos_of_value_for_b(&a_list, b_list);
 	//ft_printf("\n");
 	//print_vals_and_chunks(a_list, b_list);
 	//ft_printf("\n");
