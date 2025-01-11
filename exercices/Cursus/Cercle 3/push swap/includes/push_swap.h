@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:52:14 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/10 19:37:51 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/11 21:56:18 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,21 @@ int		unsorted_grow(t_list *a_list);
 void	ft_putstr_fd(char *s, int fd);
 char	*bases_sorted_way(t_list *list);
 int		ft_natoi(const char *nptr, int *i, t_list *a_list);
-void	print_list(t_list *list, char *msg);
-void	print_action(char *action, char chosen_list);
 void	*ft_calloc(size_t nmemb, size_t size);
 int		chunk_check(t_list *list, int first_chunk, int sec_chunk);
 int		pos_of_highest_value_in_chunk(t_list *b_list, int chunk);
+void	connext_last_and_first_val(t_list **a_list);
+void	print_action(char *action, char chosen_list);
+void	pos_of_value_for_b(t_list **a_list, t_list *b_list);
+int		last_3_bnrs(t_list *a_list);
+void	sort_a(t_list **a_list);
+t_list	*r_or_rr(t_list **list, int len_list, int pos);
+void	if_is_max(t_list **a_list, int bigger_nb);
+void	if_is_min(t_list **a_list, int smaller_nb);
+t_list	*pos_of_value_for_b2(t_list **a_list, t_list *b_list, int bigger_nb);
 
+//to print
+void	print_list(t_list *list, char *msg);
 void	print_vals_and_chunks(t_list *a_list, t_list *b_list);
 
 #endif

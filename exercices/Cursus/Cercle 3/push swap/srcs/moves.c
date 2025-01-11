@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 18:47:15 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/08 20:49:00 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/11 16:08:43 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,31 +34,8 @@ void	sa_sb(t_list **list, char chosen_list)
 /* intervertit les 2 premiers elements du sommet des deux listes */
 void	ss(t_list **a_list, t_list **b_list)
 {
-	t_list *prev_a;
-	t_list *cur_a;
-	t_list *prev_b;
-	t_list *cur_b;
-
-	if ((*a_list)->data && (*a_list)->next->data
-		&& (*b_list)->data && (*b_list)->next->data)
-	{
-		prev_a = *a_list;
-		if (prev_a->next)
-		{
-			cur_a = prev_a->next;
-			prev_a->next = cur_a->next;
-			cur_a->next = prev_a;
-			*a_list = cur_a;
-		}
-		prev_b = *b_list;
-		if (prev_b->next)
-		{
-			cur_b = prev_b->next;
-			prev_b->next = cur_b->next;
-			cur_b->next = prev_b;
-			*a_list = cur_b;
-		}
-	}
+	sa_sb(a_list, 0);
+	sa_sb(b_list, 0);
 	ft_printf("ss\n");
 }
 

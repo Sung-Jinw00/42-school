@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 20:38:13 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/09 20:14:15 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/11 15:20:33 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_list	*free_list(t_list *list)
 
 void	print_action(char *action, char chosen_list)
 {
+	if (chosen_list == 0)
+		return ;
 	ft_printf("%s%c\n", action, chosen_list);
 }
 

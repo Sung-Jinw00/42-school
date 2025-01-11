@@ -1,41 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algorythm.c                                        :+:      :+:    :+:   */
+/*   algorythm copy.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:34:26 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/11 17:11:23 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/11 22:15:24 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sorted_a_list(t_list **a_list, t_list **b_list, int chunk, int len_b_lst)
+void	final_moves(t_list **a_list, int smaller_nb)
 {
 	int pos;
-	
+	t_list *tmp;
+
+	tmp = *a_list;
 	pos = 0;
-	while (*b_list && chunk > 0)
+	while (tmp->data != smaller_nb)
 	{
-		while (*b_list && chunk_check(*b_list, chunk, chunk))
-		{
-			pos = pos_of_highest_value_in_chunk(*b_list, chunk);
-			if (pos != 0 && pos <= len_b_lst / 2)
-				while (pos-- > 0)
-					ra_rb(b_list, 'b');
-			else if (pos != 0 && pos > len_b_lst / 2)
-			{
-				pos = len_b_lst - pos;
-				while (pos-- > 0)
-					rra_rrb(b_list, 'b');
-			}
-			pa_pb(a_list, b_list, 'a');
-			len_b_lst--;
-		}
-		chunk--;
+		tmp = tmp->next;
+		pos++;
 	}
+	r_or_rr(a_list, len_list(*a_list), pos);
+}
+
+void	pos_of_value_for_b(t_list **a_list, t_list *b_list)
+{
+	int		smaller_nb;
+	int		bigger_nb;
+
+	while (b_list)
+	{
+		smaller_nb = find_min(a_list);
+		bigger_nb = find_max(a_list);
+		//print_vals_and_chunks(*a_list, b_list);
+		if (b_list->data < smaller_nb)
+			if_is_min(a_list, smaller_nb);
+		else if (b_list->data > bigger_nb)
+			if_is_max(a_list, bigger_nb);
+		else if (smaller_nb < b_list->data && b_list->data < bigger_nb)
+			*a_list = pos_of_value_for_b2(a_list, b_list, bigger_nb);
+		//print_vals_and_chunks(*a_list, b_list);
+		pa_pb(a_list, &b_list, 'a');
+	}
+	final_moves(a_list, find_min(a_list));
+	//print_vals_and_chunks(*a_list, b_list);
 }
 
 int	last_chunk2(t_list *tmp, int last_valid_value, int len_list_tmp)
@@ -148,7 +160,7 @@ void	sort_by_chunk(t_list **a_list, t_list **b_list, int max_chunk)
 	index = 0;
 	chunk1 = max_chunk / 2;//je prends les 2 chunks medians
 	chunk2 = max_chunk / 2 + 1;
-	while (*a_list)
+	while (*a_list && len_list(*a_list) != 3)
 	{
 		if ((*a_list)->chunk_level == (chunk1 - index)
 			|| (*a_list)->chunk_level == (chunk2 + index))//si j'ai un chunk qui correspond
@@ -208,12 +220,13 @@ t_list	*sort_list(t_list *a_list, t_list *b_list, int len_a_list)
 	else if (len_a_list >= 100 && len_a_list < 500)
 		divizor = 10;
 	else
-		divizor = 16;
+		divizor = 6;
 	chunk_list(min, max, &a_list, (double)(max - min) / divizor);
 	//print_vals_and_chunks(a_list, b_list);
 	sort_by_chunk(&a_list, &b_list, divizor);
 	//print_vals_and_chunks(a_list, b_list);
-	sorted_a_list(&a_list, &b_list, divizor, len_list(b_list));
+	sort_a(&a_list);
+	pos_of_value_for_b(&a_list, b_list);
 	//ft_printf("\n");
 	//print_vals_and_chunks(a_list, b_list);
 	//ft_printf("\n");
