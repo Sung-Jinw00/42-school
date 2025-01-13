@@ -3,31 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:16:47 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/12 00:45:43 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/13 18:14:54 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	unsorted_grow(t_list *a_list)
-{
-	t_list *temp;
-	int unsorted_pos;
-
-	temp = a_list;
-	unsorted_pos = 0;
-	while (temp->next)
-	{
-		if (temp->data > temp->next->data && !temp->next->is_min)
-			return (unsorted_pos);
-		temp = temp->next;
-		unsorted_pos++;
-	}
-	return (-1);
-}
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
@@ -46,53 +29,6 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		i++;
 	}
 	return (tab);
-}
-
-int	chunk_check(t_list *list, int first_chunk, int sec_chunk)
-{
-	t_list *tmp;
-
-	tmp = list;
-	while (tmp)
-	{
-		if (tmp->chunk_level == first_chunk || tmp->chunk_level == sec_chunk)
-			return (1);
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
-void	print_vals_and_chunks(t_list *a_list, t_list *b_list)
-{
-	t_list *tmp_a = a_list;
-	t_list *tmp_b = b_list;
-	int count = 1;
-	ft_printf("-----------------------------       -----------------------------\n");
-	ft_printf("|          liste a          |       |          liste b          |\n");
-	ft_printf("-----------------------------       -----------------------------\n");
-	while (tmp_a || tmp_b)
-	{
-		if (tmp_a && tmp_b)
-		{
-			ft_printf("data %d = %d     chunk level : %d  |  data %d = %d     chunk level : %d\n", count, tmp_a->data, tmp_a->chunk_level, count, tmp_b->data, tmp_b->chunk_level);
-			tmp_a = tmp_a->next;
-			tmp_b = tmp_b->next;
-		}
-		else if (!tmp_a && tmp_b)
-		{
-			ft_printf("     N/A             N/A        |  data %d = %d     chunk level : %d\n", count, tmp_b->data, tmp_b->chunk_level);
-			tmp_b = tmp_b->next;
-		}
-		else if (tmp_a && !tmp_b)
-		{
-			ft_printf("data %d = %d     chunk level : %d  |      N/A              N/A         \n", count, tmp_a->data, tmp_a->chunk_level);
-			tmp_a = tmp_a->next;
-		}
-		else if (!tmp_a && !tmp_b)
-			break ;
-		count++;
-	}
-	ft_printf("\n");
 }
 
 void	init_vals(t_list *tmp, int *smaller_nb, int *bigger_nb)
@@ -180,25 +116,6 @@ t_list	*pos_of_value_for_b2(t_list **a_list, t_list *b_list, int bigger_nb)
 	return (*a_list);
 }
 
-int	last_3_bnrs(t_list *a_list)
-{
-	int	i;
-	t_list *tmp;
-
-	i = 1;
-	tmp = a_list;
-	if (!tmp)
-		return (0);
-	while (tmp)
-	{
-		tmp = tmp->next;
-		i++;
-	}
-	if (i == 3)
-		return (1);
-	return (0);
-}
-
 void	init_sort_a(t_list *a_list, t_list **v1, t_list **v2, t_list **v3)
 {
 	*v1 = a_list;
@@ -213,7 +130,7 @@ void	sort_a(t_list **a_list)
 	t_list	*v3;
 
 	init_sort_a(*a_list, &v1, &v2, &v3);
-	if (!(*a_list))
+	if (!sorted_list_grow(*a_list))
 	{
 		if (v1->data > v2->data && v2->data < v3->data
 			&& !(v1->data == find_max(a_list) && v2->data == find_min(a_list)))
@@ -230,7 +147,7 @@ void	sort_a(t_list **a_list)
 	}
 }
 
-t_list	*ft_listdup(t_list *src)
+t_list	*lstdup(t_list *src)
 {
 	t_list	*cpy;
 	t_list	*tmp;
@@ -238,6 +155,7 @@ t_list	*ft_listdup(t_list *src)
 
 	tmp = src;
 	i = 0;
+	cpy = NULL;
 	while (tmp)
 	{
 		cpy = add_at(cpy, tmp->data, i);
@@ -245,4 +163,19 @@ t_list	*ft_listdup(t_list *src)
 		tmp = tmp->next;
 	}
 	return (cpy);
+}
+
+int	get_at(t_list *L, int pos)
+{
+	int	i;
+
+	i = 0;
+	if (!L || (pos > len_list(L)))
+		return (-1);
+	while (i < pos)
+	{
+		i++;
+		L = L->next;
+	}
+	return (L->data);
 }

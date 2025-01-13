@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 20:00:51 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/11 16:09:13 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:00:52 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ t_list	*initiate_a_list(int ac, char **av)
 	return (list);
 }
 
-int	find_min(t_list **a_list)
+int	find_min(t_list **list)
 {
 	int 	min;
 	t_list *tmp;
 
-	tmp = *a_list;
+	tmp = *list;
 	tmp->is_min = 0;
 	min = tmp->data;
 	tmp = tmp->next;
@@ -98,7 +98,7 @@ int	find_min(t_list **a_list)
 		tmp->is_min = 0;
 		tmp = tmp->next;
 	}
-	tmp = *a_list;
+	tmp = *list;
 	while (tmp->data != min)
 		tmp = tmp->next;
 	tmp->is_min = 1;

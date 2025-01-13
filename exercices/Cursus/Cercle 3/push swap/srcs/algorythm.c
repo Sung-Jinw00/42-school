@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algorythm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:34:26 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/12 00:50:46 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/13 17:59:29 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	final_moves(t_list **a_list, int smaller_nb)
 	r_or_rr(a_list, len_list(*a_list), pos);
 }
 
-void	pos_of_value_for_b(t_list **a_list, t_list *b_list)
+void	place_b_values(t_list **a_list, t_list *b_list)
 {
 	int		smaller_nb;
 	int		bigger_nb;
@@ -36,37 +36,30 @@ void	pos_of_value_for_b(t_list **a_list, t_list *b_list)
 	{
 		smaller_nb = find_min(a_list);
 		bigger_nb = find_max(a_list);
-		//print_vals_and_chunks(*a_list, b_list);
 		if (b_list->data < smaller_nb)
 			if_is_min(a_list, smaller_nb);
 		else if (b_list->data > bigger_nb)
 			if_is_max(a_list, bigger_nb);
 		else if (smaller_nb < b_list->data && b_list->data < bigger_nb)
 			*a_list = pos_of_value_for_b2(a_list, b_list, bigger_nb);
-		//print_vals_and_chunks(*a_list, b_list);
 		pa_pb(a_list, &b_list, 'a');
 	}
-	final_moves(a_list, find_min(a_list));
-	//print_vals_and_chunks(*a_list, b_list);
 }
 
-int	calculate_cost(t_list *a_list, t_list *b_list, int pos_data, int data)
+int	cal_cost(t_list *a_list, t_list *b_list, int pos_data, int data)
 {
 	int cost;
 	int pos_in_b;
 
 	cost = 0;
-	pos_in_b = find_a_value(b_list, find_min(&b_list), data, "smaller");
-	while(!sorted_list_degrow(b_list))
-	{
-		if (pos_data > len_list(a_list) / 2)
-			pos_data = len_list(a_list) - pos_data;
-		cost = pos_data + 1;//on compte le nombre de coups qu'il faudrait pour pouvoir faire passer la data dans b
-		if (pos_in_b > len_list(b_list) / 2)
-			cost += len_list(b_list) - pos_in_b;
-		else
-			cost += pos_in_b;
-	}
+	pos_in_b = find_lwr_val(b_list, find_min(&b_list), data);//je cherche la valeur inferieure dans b
+	if (pos_data > len_list(a_list) / 2)
+		pos_data = len_list(a_list) - pos_data;
+	cost = pos_data + 1;//j'ajoute les mouvements pour passer la data dans b
+	if (pos_in_b > len_list(b_list) / 2)
+		cost += len_list(b_list) - pos_in_b;
+	else//j'ajoute les mouvements pour recevoir la data de a et conserver le tri
+		cost += pos_in_b;
 	free_list(a_list);
 	free_list(b_list);
 	return (cost);
@@ -74,6 +67,7 @@ int	calculate_cost(t_list *a_list, t_list *b_list, int pos_data, int data)
 
 void	put_data_in_b(t_list **a_list, int pos_in_a, t_list **b_list, int pos_in_b)
 {
+	//r_or_rr(b_list, len_list(*b_list), pos_in_b);
 	if (pos_in_a > len_list(*a_list) / 2)
 	{
 		pos_in_a = len_list(*a_list) - pos_in_a;
@@ -86,41 +80,40 @@ void	put_data_in_b(t_list **a_list, int pos_in_a, t_list **b_list, int pos_in_b)
 	if (pos_in_b > len_list(*b_list) / 2)
 	{
 		pos_in_b = len_list(*b_list) - pos_in_b;
-		while (pos_in_b > 0)
+		while (pos_in_b-- > 0)
 			rra_rrb(b_list, 'b');
 	}
 	else if (pos_in_b <= len_list(*b_list) / 2)
-		while (pos_in_b > 0)
+		while (pos_in_b-- > 0)
 			ra_rb(b_list, 'b');
 	pa_pb(a_list, b_list, 'b');
 }
 
-void	cheapest_move_to_b(t_list **a_list, t_list **b_list)
+void	cheapest_move_to_b(t_list **a_lst, t_list **b_lst)
 {
 	t_list	*tmp;
-	int		data;
 	int		cost;
 	int		pos;
 	int		pos_saved;
 
-	while (*a_list && len_list(*a_list) != 3)
+	while (*a_lst && len_list(*a_lst) != 3)//tant que j'ai plus de 3 nombres
 	{
-		tmp = *a_list;
-		data = tmp->data;
-		pos = 0;
-		pos_saved = pos;
-		cost = calculate_cost(ft_listdup(*a_list), ft_listdup(*b_list), pos, data);
+		tmp = *a_lst;
+		pos = 0;//sa position
+		pos_saved = pos;//je sauvegarde la position la plus avantageuse
+		cost = cal_cost(lstdup(*a_lst), lstdup(*b_lst), pos, tmp->data);//je calcule le cout des mouvements
 		while (tmp->next)
 		{
 			tmp = tmp->next;
 			pos++;
-			if (cost > calculate_cost(ft_listdup(*a_list), ft_listdup(*b_list), pos, data))
+			if (cost > cal_cost(lstdup(*a_lst), lstdup(*b_lst), pos, tmp->data))//si j'ai mieux
 			{
-				cost = calculate_cost(ft_listdup(*a_list), ft_listdup(*b_list), pos, data);
-				pos_saved = pos;
+				cost = cal_cost(lstdup(*a_lst), lstdup(*b_lst), pos, tmp->data);
+				pos_saved = pos;//je sauvegarde la position la plus avantageuse
 			}
-		}
-		put_data_in_b(a_list, pos_saved, b_list, find_a_value(*b_list, find_min(b_list), data, "smaller"));
+		}//je met la data dans b a la bonne place
+		pos = find_lwr_val(*b_lst, find_min(b_lst), get_at(*a_lst, pos_saved));
+		put_data_in_b(a_lst, pos_saved, b_lst, pos);
 	}
 }
 
@@ -128,14 +121,15 @@ t_list	*sort_list(t_list *a_list, t_list *b_list, int len_a_list)
 {
 	if (len_a_list == 1)
 		return (a_list);
-	pa_pb(&a_list, &b_list, 'b');
-	pa_pb(&a_list, &b_list, 'b');
-	cheapest_move_to_b(&a_list, &b_list);
-	//print_vals_and_chunks(a_list, b_list);
-	sort_a(&a_list);
-	pos_of_value_for_b(&a_list, b_list);
-	//ft_printf("\n");
-	//print_vals_and_chunks(a_list, b_list);
-	//ft_printf("\n");
+	if (len_a_list > 3 && !sorted_list_grow(a_list))
+	{
+		pa_pb(&a_list, &b_list, 'b');
+		pa_pb(&a_list, &b_list, 'b');
+		cheapest_move_to_b(&a_list, &b_list);
+	}
+	if (len_list(a_list) == 3)
+		sort_a(&a_list);
+	place_b_values(&a_list, b_list);
+	final_moves(&a_list, find_min(&a_list));
 	return (a_list);
 }

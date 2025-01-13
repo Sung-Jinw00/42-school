@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 20:08:07 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/08 17:58:52 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/13 18:06:19 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,6 @@ int	ft_natoi(const char *nptr, int *i, t_list *a_list)
 	return (result * sign);
 }
 
-void	print_list(t_list *list, char *msg)
-{
-	ft_printf("%s", msg);
-	while (list)
-	{
-		ft_printf("%d ", list->data);
-		list = list->next;
-	}
-	ft_printf("\n");
-}
 
 long	len_list(t_list *list)
 {
