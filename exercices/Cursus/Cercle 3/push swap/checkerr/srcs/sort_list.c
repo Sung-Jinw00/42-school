@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:20:51 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/13 23:35:15 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/13 23:38:19 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	check_list(t_list *a_list, t_list *b_list)
 	char *instruction;
 
 	instruction = get_next_line(0);
-	while (instruction[0] != '\n')
+	while (instruction)
 	{
 		if (valid_instruction(instruction, a_list, b_list))
 			do_instructions(instruction, &a_list, &b_list);
