@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:20:51 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/13 23:38:19 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/13 23:41:21 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int valid_instruction(char *instruction, t_list *a_list, t_list *b_list)
 		return (1);
 	else if (!ft_strncmp(instruction, "ss\n", 4))
 		return (1);
-	else if (!ft_strncmp(instruction, "pa\n", 4))
+	else if (!ft_strncmp(instruction, "pa\n", 4) && b_list)
 		return (1);
 	else if (!ft_strncmp(instruction, "pb\n", 4))
 		return (1);

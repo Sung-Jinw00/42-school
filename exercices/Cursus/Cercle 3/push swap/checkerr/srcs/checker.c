@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 22:10:24 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/13 23:12:07 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/13 23:46:48 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void	checker(int ac, char **av)
 	a_list = initiate_a_list(ac, av);
 	if (duplicates(a_list))
 		error(RED"Error : duplicates !\n"RESET, a_list);
-	if (sorted_a_list(a_list))
+	/* if (sorted_a_list(a_list))
 	{
 		ft_printf("OK\n");
 		free_list(a_list);
 		return ;
-	}
+	} */
 	b_list = NULL;
 	check_list(a_list, b_list);
 }
