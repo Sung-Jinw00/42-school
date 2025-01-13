@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 20:08:07 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/13 18:06:19 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/13 21:48:12 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	ft_natoi(const char *nptr, int *i, t_list *a_list)
 		if (nptr[*i] == '-')
 			sign = -sign;
 		*i += 1;
+		if (!(nptr[*i] >= '0' && nptr[*i] <= '9'))
+			error(RED"Error : Invalid arguments !\n"RESET, a_list);
 	}
 	while (nptr[*i] >= '0' && nptr[*i] <= '9')
 	{

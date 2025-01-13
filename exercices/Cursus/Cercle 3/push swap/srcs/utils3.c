@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 19:16:47 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/13 18:14:54 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/13 20:32:54 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,16 @@ void	init_vals(t_list *tmp, int *smaller_nb, int *bigger_nb)
 	}
 }
 
-t_list	*r_or_rr(t_list **list, int len_list, int pos)
+t_list	*r_or_rr(t_list **list, int len_list, int pos, char chosen_list)
 {
 	if (pos <= len_list / 2)
 		while (pos-- > 0)
-			ra_rb(list, 'a');
+			ra_rb(list, chosen_list);
 	else
 	{
 		pos = len_list - pos;
 		while (pos-- > 0)
-			rra_rrb(list, 'a');
+			rra_rrb(list, chosen_list);
 	}
 	return (*list);
 }
@@ -74,7 +74,7 @@ void	if_is_max(t_list **a_list, int bigger_nb)
 	pos++;
 	if (pos == len_list(*a_list))
 		pos = 0;
-	*a_list = r_or_rr(a_list, len_list(*a_list), pos);
+	*a_list = r_or_rr(a_list, len_list(*a_list), pos, 'a');
 }
 
 void	if_is_min(t_list **a_list, int smaller_nb)
@@ -89,7 +89,7 @@ void	if_is_min(t_list **a_list, int smaller_nb)
 		tmp = tmp->next;
 		pos++;
 	}
-	*a_list = r_or_rr(a_list, len_list(*a_list), pos);
+	*a_list = r_or_rr(a_list, len_list(*a_list), pos, 'a');
 }
 
 t_list	*pos_of_value_for_b2(t_list **a_list, t_list *b_list, int bigger_nb)
@@ -111,8 +111,7 @@ t_list	*pos_of_value_for_b2(t_list **a_list, t_list *b_list, int bigger_nb)
 		tmp = tmp->next;
 		pos++;
 	}
-	*a_list = r_or_rr(a_list, len_list(*a_list), pos);
-	//print_vals_and_chunks(*a_list, b_list);
+	*a_list = r_or_rr(a_list, len_list(*a_list), pos, 'a');
 	return (*a_list);
 }
 
@@ -129,6 +128,7 @@ void	sort_a(t_list **a_list)
 	t_list	*v2;
 	t_list	*v3;
 
+	//print_vals(*a_list, NULL);
 	init_sort_a(*a_list, &v1, &v2, &v3);
 	if (!sorted_list_grow(*a_list))
 	{
@@ -145,24 +145,7 @@ void	sort_a(t_list **a_list)
 			sa_sb(a_list, 'a');
 		init_sort_a(*a_list, &v1, &v2, &v3);
 	}
-}
-
-t_list	*lstdup(t_list *src)
-{
-	t_list	*cpy;
-	t_list	*tmp;
-	int		i;
-
-	tmp = src;
-	i = 0;
-	cpy = NULL;
-	while (tmp)
-	{
-		cpy = add_at(cpy, tmp->data, i);
-		i++;
-		tmp = tmp->next;
-	}
-	return (cpy);
+	//print_vals(*a_list, NULL);
 }
 
 int	get_at(t_list *L, int pos)

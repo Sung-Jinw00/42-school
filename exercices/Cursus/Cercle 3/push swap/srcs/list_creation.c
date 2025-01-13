@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 20:00:51 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/13 16:00:52 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/13 18:45:39 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ int	find_min(t_list **list)
 	int 	min;
 	t_list *tmp;
 
+	if (!*list)
+		return (0);
 	tmp = *list;
 	tmp->is_min = 0;
 	min = tmp->data;
@@ -110,6 +112,8 @@ int	find_max(t_list **a_list)
 	int 	max;
 	t_list *tmp;
 
+	if (!*a_list)
+		return (0);
 	tmp = *a_list;
 	tmp->is_max = 0;
 	max = tmp->data;
