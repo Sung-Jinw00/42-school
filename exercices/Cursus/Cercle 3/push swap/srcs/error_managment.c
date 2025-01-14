@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 20:03:35 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/09 16:12:57 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/14 16:42:19 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	error(char *msg, t_list *a_list)
 
 int	check_all_args(char **numbers)
 {
-	int j;
-	int i;
+	int	j;
+	int	i;
 
 	i = 0;
 	j = 1;
@@ -44,8 +44,8 @@ int	check_all_args(char **numbers)
 
 int	duplicates(t_list *list)
 {
-	t_list *i;
-	t_list *j;
+	t_list	*i;
+	t_list	*j;
 
 	j = list;
 	i = j->next;

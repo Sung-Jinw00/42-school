@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:52:14 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/13 23:09:31 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/14 16:52:00 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ typedef struct s_list
 	int				is_min;
 	int				is_max;
 	struct s_list	*next;
-} t_list, t_cell;
+}	t_list,	t_cell;
 
-# 	define RESET       "\033[0m"   //Réinitialisation
-# 	define RED         "\033[31m"   //Couleur rouge
+# define RESET "\033[0m"   //Réinitialisation
+# define RED   "\033[31m"   //Couleur rouge
 
 //main
 void	push_swap(int ac, char **av);
@@ -76,11 +76,12 @@ t_list	*pos_of_value_for_b2(t_list **a_list, t_list *b_list, int bigger_nb);
 int		find_lwr_val(t_list *list, int min, int data);
 int		sorted_a_list(t_list *a_list);
 int		get_at(t_list *L, int pos);
+void	final_moves(t_list **a_list, int smaller_nb);
 
 //checker
 void	checker(int ac, char **av);
 void	check_list(t_list *a_list, t_list *b_list);
-int 	do_instructions(char *instruction, t_list **a_list, t_list **b_list);
+int		do_instructions(char *instruction, t_list **a_list, t_list **b_list);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 //get_next_line

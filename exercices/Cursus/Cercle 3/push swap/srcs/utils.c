@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 20:08:07 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/13 21:48:12 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/14 16:37:46 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	ft_natoi(const char *nptr, int *i, t_list *a_list)
 		error(RED"Error : Number bigger than int !\n"RESET, a_list);
 	return (result * sign);
 }
-
 
 long	len_list(t_list *list)
 {

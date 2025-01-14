@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:52:11 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/13 21:51:15 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/14 16:41:15 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	push_swap(int ac, char **av)
 {
-	t_list *a_list;
-	t_list *b_list;
-	int len_a_list;
+	t_list	*a_list;
+	t_list	*b_list;
+	int		len_a_list;
 
 	a_list = initiate_a_list(ac, av);
 	if (duplicates(a_list))
@@ -27,10 +27,8 @@ void	push_swap(int ac, char **av)
 		return ;
 	}
 	b_list = NULL;
-	//print_vals(a_list, b_list);
 	len_a_list = len_list(a_list);
 	a_list = sort_list(a_list, b_list, len_a_list);
-	//print_vals(a_list, b_list);
 	free_list(a_list);
 	free_list(b_list);
 }
@@ -41,3 +39,5 @@ int	main(int ac, char **av)
 		push_swap(ac, av);
 	return (0);
 }
+
+//print_vals(a_list, b_list);

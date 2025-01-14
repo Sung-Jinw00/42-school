@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 20:00:51 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/13 18:45:39 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/14 16:41:59 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_list	*add_at(t_list *list, int data, int pos)
 
 t_list	*initiate_a_list(int ac, char **av)
 {
-	t_list *list;
+	t_list	*list;
 	int		i;
 	int		j;
 	int		count;
@@ -84,8 +84,8 @@ t_list	*initiate_a_list(int ac, char **av)
 
 int	find_min(t_list **list)
 {
-	int 	min;
-	t_list *tmp;
+	int		min;
+	t_list	*tmp;
 
 	if (!*list)
 		return (0);
@@ -109,8 +109,8 @@ int	find_min(t_list **list)
 
 int	find_max(t_list **a_list)
 {
-	int 	max;
-	t_list *tmp;
+	int		max;
+	t_list	*tmp;
 
 	if (!*a_list)
 		return (0);

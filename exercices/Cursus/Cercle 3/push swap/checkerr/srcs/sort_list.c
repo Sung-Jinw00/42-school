@@ -6,13 +6,13 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:20:51 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/13 23:41:21 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/14 16:47:56 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int do_instructions(char *instruction, t_list **a_list, t_list **b_list)
+int	do_instructions(char *instruction, t_list **a_list, t_list **b_list)
 {
 	if (!ft_strncmp(instruction, "sa\n", 4))
 		c_sa_sb(a_list);
@@ -61,7 +61,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
-int valid_instruction(char *instruction, t_list *a_list, t_list *b_list)
+int	valid_instruction(char *instruction, t_list *a_list, t_list *b_list)
 {
 	if (!ft_strncmp(instruction, "sa\n", 4))
 		return (1);
@@ -91,7 +91,7 @@ int valid_instruction(char *instruction, t_list *a_list, t_list *b_list)
 
 void	check_list(t_list *a_list, t_list *b_list)
 {
-	char *instruction;
+	char	*instruction;
 
 	instruction = get_next_line(0);
 	while (instruction)
