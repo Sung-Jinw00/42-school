@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:52:14 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/14 16:52:00 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:27:13 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_list
 	int				is_min;
 	int				is_max;
 	struct s_list	*next;
-}	t_list,	t_cell;
+} t_list,	t_cell;
 
 # define RESET "\033[0m"   //Réinitialisation
 # define RED   "\033[31m"   //Couleur rouge
@@ -83,6 +83,7 @@ void	checker(int ac, char **av);
 void	check_list(t_list *a_list, t_list *b_list);
 int		do_instructions(char *instruction, t_list **a_list, t_list **b_list);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+void	c_error(char *msg, t_list *a_list, t_list *b_list);
 
 //get_next_line
 char	*ft_line_save(char *line_save, int fd);

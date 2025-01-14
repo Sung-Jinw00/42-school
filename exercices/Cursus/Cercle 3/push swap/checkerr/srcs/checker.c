@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 22:10:24 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/14 16:50:55 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:03:06 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@
 	b_list = NULL;
 	check_list(a_list, b_list);
 } */
+
+void	c_error(char *msg, t_list *a_list, t_list *b_list)
+{
+	free_list(a_list);
+	free_list(b_list);
+	ft_putstr_fd(msg, 2);
+	exit(EXIT_FAILURE);
+}
 
 void	checker(int ac, char **av)
 {

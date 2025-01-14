@@ -7,11 +7,11 @@ HDRS        = includes
 
 SRCS        =  srcs/algorythm.c srcs/error_managment.c srcs/list_creation.c srcs/main.c \
                srcs/moves.c srcs/moves2.c srcs/utils.c srcs/utils2.c srcs/utils3.c\
-			   srcs/to_print.c
+			   srcs/utils4.c srcs/to_print.c
 
 SRCS_BONUS  =  srcs/algorythm.c srcs/error_managment.c srcs/list_creation.c\
                srcs/moves.c srcs/moves2.c srcs/utils.c srcs/utils2.c srcs/utils3.c\
-			   srcs/to_print.c\
+			   srcs/utils4.c srcs/to_print.c\
 			   checkerr/gnl_checker/get_next_line_bonus.c\
 			   checkerr/gnl_checker/get_next_line_utils_bonus.c\
 			   checkerr/srcs/checker_moves.c\

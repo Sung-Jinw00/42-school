@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:20:51 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/14 16:47:56 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:28:12 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,6 @@ int	do_instructions(char *instruction, t_list **a_list, t_list **b_list)
 	return (1);
 }
 
-void	c_error(char *msg, t_list *a_list, t_list *b_list)
-{
-	free_list(a_list);
-	free_list(b_list);
-	ft_putstr_fd(msg, 2);
-	exit(EXIT_FAILURE);
-}
-
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
@@ -69,7 +61,7 @@ int	valid_instruction(char *instruction, t_list *a_list, t_list *b_list)
 		return (1);
 	else if (!ft_strncmp(instruction, "ss\n", 4))
 		return (1);
-	else if (!ft_strncmp(instruction, "pa\n", 4) && b_list)
+	else if (!ft_strncmp(instruction, "pa\n", 4))
 		return (1);
 	else if (!ft_strncmp(instruction, "pb\n", 4))
 		return (1);

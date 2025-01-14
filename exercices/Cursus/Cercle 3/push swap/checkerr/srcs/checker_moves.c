@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 18:47:15 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/14 16:49:41 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:33:59 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	c_sa_sb(t_list **list)
 	t_list	*prev;
 	t_list	*cur;
 
-	if (!(*list)->next)
+	if (!(*list) || !(*list)->next)
 		return ;
 	if ((*list)->data && (*list)->next->data)
 	{
@@ -42,7 +42,7 @@ void	c_pa_pb(t_list **a_list, t_list **b_list, char destination)
 	t_list	*first_b;
 	t_list	*second_b;
 
-	if (destination == 'a')
+	if (*b_list != NULL && destination == 'a')
 	{
 		first_b = *b_list;
 		second_b = first_b->next;
@@ -51,7 +51,7 @@ void	c_pa_pb(t_list **a_list, t_list **b_list, char destination)
 		*a_list = first_b;
 		*b_list = second_b;
 	}
-	else
+	else if (*a_list && destination == 'b')
 	{
 		first_a = *a_list;
 		second_a = first_a->next;
@@ -67,7 +67,7 @@ void	c_ra_rb(t_list **list)
 	t_list	*last;
 	t_list	*first;
 
-	if (!(*list)->next)
+	if (!(*list) || !(*list)->next)
 		return ;
 	last = *list;
 	first = *list;
