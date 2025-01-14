@@ -1,4 +1,3 @@
-# Désactivation de l'affichage des commandes par défaut
 MAKEFLAGS += -s  # Active le mode silencieux globalement
 
 # Définition des variables
