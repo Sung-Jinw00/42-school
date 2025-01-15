@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 17:20:19 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/15 19:03:21 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/15 19:36:51 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,13 @@ int	equations(char *fractal_name, t_mlx *mlx)
 	else if (ft_strcmp_frctl(fractal_name, JULIA) == 0)
 		return (julia_equation(mlx->f_params.x, mlx->f_params.y,
 				mlx->f_params.real, mlx->f_params.im));
-	else if (ft_strcmp_frctl(fractal_name, DRAGON) == 0)
-		return (multibrot_equation(x, y, d));
+	else if (ft_strcmp_frctl(fractal_name, MULTIBROT) == 0)
+		return (multibrot_equation(mlx->f_params.x, mlx->f_params.y, mlx->f_params.d));
 	return (error(RED "\nCannot choose an equation.\n" RESET, mlx), 1);
 }
 
 void	draw_fractals(t_mlx *mlx)
 {
-	ft_printf("%s\n", mlx->f_params.name);
 	mlx->pixel.x = 0;
 	mlx->pixel.y = 0;
 	mlx->pixel.w_scale = mlx->f_params.ratio * 1.5 / WIDTH;

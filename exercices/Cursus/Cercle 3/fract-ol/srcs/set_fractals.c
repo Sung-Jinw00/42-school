@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 17:07:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/15 19:02:45 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/15 19:59:48 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,26 @@ int	mandelbrot_equation(double x, double y)
 	return (OX_BLACK);
 }
 
-int	multibrot_equation(double x, double y, int d, int max_iter)
+int	multibrot_equation(double x, double y, double d)
 {
     double real = 0.0, imag = 0.0;
-    double temp_real;
     double modulus_squared;
     int i = 0;
 
-    while (i < max_iter) 
-    {
-        temp_real = real * real - imag * imag + x;
-        imag = 2 * real * imag + y;
-        real = temp_real;
+    double cx = x, cy = y;
+
+    while (i < MAX_ITER) {
         modulus_squared = real * real + imag * imag;
-        if (modulus_squared > 4) 
-        	return (rotate_hue((double)i));
+
+        if (modulus_squared > 4)
+            return rotate_hue(i);
+        double r = sqrt(modulus_squared);
+        double theta = atan2(imag, real);
+
+        r = pow(r, d);
+        theta *= d;
+        real = r * cos(theta) + cx;
+        imag = r * sin(theta) + cy;
         i++;
     }
     return (OX_BLACK);
@@ -106,6 +111,25 @@ void	julia_presets(t_mlx *mlx, char preset_choice)
 	}
 }
 
+void	multibrot_presets(t_mlx *mlx, char preset_choice)
+{
+	if (preset_choice == '0')
+	{
+		mlx->f_params.d = 1.1;
+		mlx->f_params.ratio = 0.5;
+		mlx->f_params.shift_x = -2.5 + 2.125;
+		mlx->f_params.shift_y = -(2.5 / 2) + 1;
+	}
+	if (preset_choice == '2')
+		mlx->f_params.d = 3;
+	else if (preset_choice == '3')
+		mlx->f_params.d = 4;
+	else if (preset_choice == '4')
+		mlx->f_params.d = 5;
+	else if (preset_choice == '5')
+		mlx->f_params.d = 6;
+}
+
 char	*set_args(char *arg, int arg_nb, t_mlx *mlx)
 {
 	int	i;
@@ -124,14 +148,39 @@ char	*set_args(char *arg, int arg_nb, t_mlx *mlx)
 		return (MANDELBROT);
 	else if (!ft_strcmp_frctl(arg, JULIA))
 		return (JULIA);
-	else if (!ft_strcmp_frctl(arg, DRAGON))
-		return (DRAGON);
+	else if (!ft_strcmp_frctl(arg, MULTIBROT))
+		return (MULTIBROT);
 	else if (arg_nb == 1)
 		return (error(RED "\nInvalid name !\n" RESET, mlx), NULL);
 	if (!ft_strcmp_frctl(arg, PRESET) && arg_nb == 2)
 		return (PRESET);
 	else
 		return (NULL);
+}
+
+void	set_fractal_datas2(t_mlx *mlx, int ac, char **av)
+{
+	if ((!ft_strcmp_frctl(mlx->f_params.name, MANDELBROT) && ac <= 2)
+		|| (!ft_strcmp_frctl(mlx->f_params.name, MULTIBROT) && ac <= 4
+			&& av[3][0] == '1'))
+	{
+		mlx->f_params.shift_x = -2.5;
+		mlx->f_params.shift_y = -(2.5 / 2);
+		mlx->pixel.x_value = 0.00232857;
+	}
+	else if (!ft_strcmp_frctl(mlx->f_params.name, MULTIBROT) && ac <= 4)
+	{
+		mlx->f_params.ratio = 3;
+		mlx->f_params.shift_x = -2.5 + 0.3;
+		mlx->f_params.shift_y = -(2.5 / 2) - 0.2;
+		if (ac <= 4 && !ft_strcmp_frctl(set_args(av[2], 2, mlx), PRESET))
+			multibrot_presets(mlx, av[3][0]);
+		else if (ac == 3)
+			mlx->f_params.d = ft_atod(av[2]);
+		else
+		mlx->f_params.d = 3;
+		mlx->pixel.x_value = (0.00268571 + 0.00232857) / 2;
+	}
 }
 
 void	set_fractal_datas(t_mlx *mlx, int ac, char **av)
@@ -156,17 +205,8 @@ void	set_fractal_datas(t_mlx *mlx, int ac, char **av)
 		mlx->f_params.shift_y = -(2.5 / 2);
 		mlx->pixel.x_value = 0.00268571;
 	}
-	else if (!ft_strcmp_frctl(mlx->f_params.name, MANDELBROT) && ac <= 2)
-	{
-		mlx->f_params.shift_x = -2.5;
-		mlx->f_params.shift_y = -(2.5 / 2);
-		mlx->pixel.x_value = 0.00232857;
-	}
-	else if (!ft_strcmp_frctl(mlx->f_params.name, DRAGON) && ac <= 2)
-	{
-		mlx->f_params.shift_x = 0;
-		mlx->f_params.shift_y = 0;
-		mlx->pixel.x_value = 0;
-	}
+	else if ((!ft_strcmp_frctl(mlx->f_params.name, MANDELBROT) && ac <= 2)
+		|| (!ft_strcmp_frctl(mlx->f_params.name, MULTIBROT) && ac <= 4))
+		set_fractal_datas2(mlx, ac, av);
 	mlx->pixel.y_value = 0;
 }

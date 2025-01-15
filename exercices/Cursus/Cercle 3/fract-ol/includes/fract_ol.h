@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:07:52 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/15 19:03:00 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/15 19:36:27 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_fl_params
 	char	*name;
 	double	x;
 	double	y;
+	double	d;
 	double	real;
 	double	im;
 	double	shift_x;
@@ -102,7 +103,7 @@ void			mouse_controls(int key, int x, int y, t_mlx *mlx);
 int				mouse_hook(int button, int x, int y, t_mlx *mlx);
 //equations
 int				mandelbrot_equation(double x, double y);
-int				multibrot_equation(double x, double y, int d, int max_iter);
+int				multibrot_equation(double x, double y, double d);
 int				julia_equation(double x, double y, double c_re, double c_im);
 
 //libft
@@ -116,7 +117,7 @@ size_t		ft_strlen(const char *s);
 //nom des fractales
 # define MANDELBROT "Mandelbrot"
 # define JULIA "Julia"
-# define DRAGON "Dragon"
+# define MULTIBROT "Multibrot"
 //presets Julia
 # define PRESET "Preset"
 # define J_PRESET_1
