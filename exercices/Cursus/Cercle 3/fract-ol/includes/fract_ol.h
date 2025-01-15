@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:07:52 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/09 19:06:11 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/15 19:03:00 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include "ft_printf.h"
+# include <math.h>
 
 typedef struct s_colors
 {
@@ -53,6 +54,8 @@ typedef struct s_pixels
 {
 	int		x;
 	int		y;
+	double	x_value;
+	double	y_value;
 	int 	color;
 	double	w_move;
 	double	h_move;
@@ -82,21 +85,25 @@ typedef struct s_mlx
 
 int				main(int ac, char **av);
 int				quit(t_mlx *mlx);
-int				deal_key(int key, t_mlx *mlx);
-int				mandelbrot_equation(double x, double y);
-int				deal_mouse(int button, int x, int y, t_mlx *mlx);
-int				julia_equation(double x, double y, double c_re, double c_im);
 unsigned int	rotate_hue(double iter);
 void			help_message(void);
 void			mlx_hooks(t_mlx *mlx);
 void			draw_fractals(t_mlx *mlx);
 void			set_mlx_datas(t_mlx *mlx);
-void			arrow_controls(int key, t_mlx *mlx);
-void			mouse_controls(int key, t_mlx *mlx);
 void			error(char *error_message, t_mlx *mlx);
 void			julia_presets(t_mlx *mlx, char preset_choice);
 void			set_fractal_datas(t_mlx *mlx, int ac, char **av);
 char			*set_args(char *arg, int arg_nb, t_mlx *mlx);
+void			image_refresh(t_mlx *mlx);
+//hooks
+void			arrow_controls(int key, t_mlx *mlx);
+int				deal_key(int key, t_mlx *mlx);
+void			mouse_controls(int key, int x, int y, t_mlx *mlx);
+int				mouse_hook(int button, int x, int y, t_mlx *mlx);
+//equations
+int				mandelbrot_equation(double x, double y);
+int				multibrot_equation(double x, double y, int d, int max_iter);
+int				julia_equation(double x, double y, double c_re, double c_im);
 
 //libft
 int			ft_strcmp_frctl(char *s1, char *s2);
@@ -109,6 +116,7 @@ size_t		ft_strlen(const char *s);
 //nom des fractales
 # define MANDELBROT "Mandelbrot"
 # define JULIA "Julia"
+# define DRAGON "Dragon"
 //presets Julia
 # define PRESET "Preset"
 # define J_PRESET_1
@@ -128,6 +136,8 @@ size_t		ft_strlen(const char *s);
 # define CLOSE_WINDOW 17
 
 # define PI 3.14159265358979323846
+// Le nombre d'or (phi)
+# define PHI 1.6180339887
 
 /* Définition des couleurs de texte */
 # define RESET       "\033[0m"  // Réinitialisation
@@ -174,8 +184,8 @@ size_t		ft_strlen(const char *s);
 # define OX_BLACK       0x00000000  // Couleur noire
 # define OX_RED         0x00FF0000  // Couleur rouge
 # define OX_GREEN       0x0000FF00  // Couleur verte
-# define OX_YELLOW      0x00FFFF00  // Couleur jaune
 # define OX_BLUE        0x000000FF  // Couleur bleue
+# define OX_YELLOW      0x00FFFF00  // Couleur jaune
 # define OX_MAGENTA     0x00FF00FF  // Couleur magenta
 # define OX_CYAN        0x0000FFFF  // Couleur cyan
 # define OX_WHITE       0x00000000  // Couleur blanche

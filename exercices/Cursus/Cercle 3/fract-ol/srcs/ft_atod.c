@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/03 18:12:14 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:52:59 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static double	decimal(char *nptr)
 {
-	int	i;
-	int divizor;
+	int		i;
+	int		divizor;
 	double	result;
 
 	i = 0;
@@ -32,8 +32,8 @@ static double	decimal(char *nptr)
 
 double	ft_atod(char *nptr)
 {
-	int	i;
-	int	sign;
+	int		i;
+	int		sign;
 	double	result;
 
 	if (!nptr)
@@ -61,7 +61,7 @@ double	ft_atod(char *nptr)
 
 /* #include <stdio.h>
 
-int main(void)
+int	main(void)
 {
 	const char nptr[] = "   +1234ab567";
 

@@ -28,12 +28,12 @@ void	*ft_calloc(size_t nmemb, size_t size)
 /* #include <stdio.h>
 #include <string.h>
 
-int main(void)
+int	main(void)
 {
 	int size = 8539;
 	int i = 0;
- 	void * d1 = ft_calloc(10, 8);
- 	void * d2 = calloc(10, 8);
+	void * d1 = ft_calloc(10, 8);
+	void * d2 = calloc(10, 8);
 
 	while (i < 8)
 		((char *)d1)[i++] += 48;
@@ -42,7 +42,7 @@ int main(void)
 		((char *)d2)[i++] += 48;
 	printf("original : %s\ncopie    : %s\n", (char *)d2, (char *)d1);
 	if (memcmp(d1, d2, size * 8))
- 		printf("fail");
+		printf("fail");
 	free(d1);
 	free(d2);
 	return(0);

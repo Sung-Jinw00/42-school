@@ -14,7 +14,7 @@
 
 int	ft_strcmp_frctl(char *s1, char *s2)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!s1 || !s2)

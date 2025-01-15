@@ -6,15 +6,27 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 17:02:06 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/09 19:05:25 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:26:08 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fract_ol.h"
 
-int main(int ac, char **av)
+void	free_all(t_mlx *mlx)
 {
-	t_mlx	*mlx;
+	if (mlx->img.img_ID)
+		mlx_destroy_image(mlx->init, mlx->img.img_ID);
+	if (mlx->window)
+		mlx_destroy_window(mlx->init, mlx->window);
+	if (mlx->init)
+		mlx_destroy_display(mlx->init);
+	free(mlx->init);
+	free(mlx);
+}
+
+int	main(int ac, char **av)
+{
+	t_mlx *mlx;
 
 	mlx = ft_calloc(sizeof(t_mlx), 1);
 	if (ac >= 2 && ac <= 4)
@@ -27,5 +39,5 @@ int main(int ac, char **av)
 	}
 	else
 		help_message();
-	return (free(mlx->init), free(mlx), 0);
+	return (free_all(mlx), 0);
 }

@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 17:07:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/09 20:05:36 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/15 19:02:45 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	mandelbrot_equation(double x, double y)
 {
-	unsigned int i;
-	double		r;
-	double		im_tmp;
-	double		r2;
+	unsigned int	i;
+	double			r;
+	double			im_tmp;
+	double			r2;
 
 	r = 0;
 	i = 0;
@@ -34,26 +34,47 @@ int	mandelbrot_equation(double x, double y)
 	return (OX_BLACK);
 }
 
-int julia_equation(double x, double y, double c_re, double c_im)
+int	multibrot_equation(double x, double y, int d, int max_iter)
 {
-    unsigned int i;
-    double r;
-    double im_tmp;
-    double r2;
+    double real = 0.0, imag = 0.0;
+    double temp_real;
+    double modulus_squared;
+    int i = 0;
 
-    r = x;
-    im_tmp = y;
-    i = 0;
-    while (i < MAX_ITER)
+    while (i < max_iter) 
     {
-        r2 = r * r - im_tmp * im_tmp + c_re;
-        im_tmp = 2 * r * im_tmp + c_im;
-        r = r2;
-        if ((r * r + im_tmp * im_tmp) > 4)
-            return (rotate_hue((double)i));
+        temp_real = real * real - imag * imag + x;
+        imag = 2 * real * imag + y;
+        real = temp_real;
+        modulus_squared = real * real + imag * imag;
+        if (modulus_squared > 4) 
+        	return (rotate_hue((double)i));
         i++;
     }
     return (OX_BLACK);
+}
+
+
+int	julia_equation(double x, double y, double c_re, double c_im)
+{
+	unsigned int	i;
+	double			r;
+	double			im_tmp;
+	double			r2;
+
+	r = x;
+	im_tmp = y;
+	i = 0;
+	while (i < MAX_ITER)
+	{
+		r2 = r * r - im_tmp * im_tmp + c_re;
+		im_tmp = 2 * r * im_tmp + c_im;
+		r = r2;
+		if ((r * r + im_tmp * im_tmp) > 4)
+			return (rotate_hue((double)i));
+		i++;
+	}
+	return (OX_BLACK);
 }
 
 void	julia_presets(t_mlx *mlx, char preset_choice)
@@ -87,26 +108,26 @@ void	julia_presets(t_mlx *mlx, char preset_choice)
 
 char	*set_args(char *arg, int arg_nb, t_mlx *mlx)
 {
-	int i;
+	int	i;
 
 	if (!arg && arg_nb == 1)
-		error(RED"\nNo name specified !\n"RESET, mlx);
+		error(RED "\nNo name specified !\n" RESET, mlx);
 	if (!arg && arg_nb == 2)
 		return (NULL);
 	i = 0;
-		if (arg[i] >= 'a' && arg[i] <= 'z')
-			arg[i] -= 32;
-		while (arg[++i])
-			if (arg[i] >= 'A' && arg[i] <= 'Z')
-				arg[i] += 32;
-		if (!ft_strcmp_frctl(arg, MANDELBROT))
-			return (MANDELBROT);
-		else if (!ft_strcmp_frctl(arg, JULIA))
-			return (JULIA);
-		else if (arg_nb == 1)
-			return (error(RED"\nInvalid name !\n"\
-			CYAN BOLD"Theses are the valid names to display a fractal :\n"\
-			RESET GREEN"- \"Mandelbrot\"\n- \"Julia\"\n"RESET, mlx), NULL);
+	if (arg[i] >= 'a' && arg[i] <= 'z')
+		arg[i] -= 32;
+	while (arg[++i])
+		if (arg[i] >= 'A' && arg[i] <= 'Z')
+			arg[i] += 32;
+	if (!ft_strcmp_frctl(arg, MANDELBROT))
+		return (MANDELBROT);
+	else if (!ft_strcmp_frctl(arg, JULIA))
+		return (JULIA);
+	else if (!ft_strcmp_frctl(arg, DRAGON))
+		return (DRAGON);
+	else if (arg_nb == 1)
+		return (error(RED "\nInvalid name !\n" RESET, mlx), NULL);
 	if (!ft_strcmp_frctl(arg, PRESET) && arg_nb == 2)
 		return (PRESET);
 	else
@@ -132,11 +153,20 @@ void	set_fractal_datas(t_mlx *mlx, int ac, char **av)
 				mlx->f_params.im = ft_atod(av[3]);
 		}
 		mlx->f_params.shift_x = -2.5 + 0.6;
-		mlx->f_params.shift_y = -(2.5 / 2);	
+		mlx->f_params.shift_y = -(2.5 / 2);
+		mlx->pixel.x_value = 0.00268571;
 	}
 	else if (!ft_strcmp_frctl(mlx->f_params.name, MANDELBROT) && ac <= 2)
 	{
 		mlx->f_params.shift_x = -2.5;
-		mlx->f_params.shift_y = -(2.5 / 2);	
+		mlx->f_params.shift_y = -(2.5 / 2);
+		mlx->pixel.x_value = 0.00232857;
 	}
+	else if (!ft_strcmp_frctl(mlx->f_params.name, DRAGON) && ac <= 2)
+	{
+		mlx->f_params.shift_x = 0;
+		mlx->f_params.shift_y = 0;
+		mlx->pixel.x_value = 0;
+	}
+	mlx->pixel.y_value = 0;
 }
