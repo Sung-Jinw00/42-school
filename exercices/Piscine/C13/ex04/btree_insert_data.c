@@ -14,8 +14,8 @@
 
 /* int	ft_strcmp(void *s1, void *s2)
 {
-	int a;
-	int b;
+	int	a;
+	int	b;
 
 	if (!s1)
 		a = 0;
@@ -27,9 +27,8 @@
 		b = *(int *)s2;
 	return (a - b);
 } */
-
-void	left(t_btree **root, t_btree **prev, void *item, \
-int (*cmpf)(void *, void *))
+void	left(t_btree **root, t_btree **prev, void *item, int (*cmpf)(void *,
+			void *))
 {
 	*root = (*root)->left;
 	while (*root)
@@ -42,8 +41,8 @@ int (*cmpf)(void *, void *))
 	}
 }
 
-void	right(t_btree **root, t_btree **prev, void *item, \
-int (*cmpf)(void *, void *))
+void	right(t_btree **root, t_btree **prev, void *item, int (*cmpf)(void *,
+			void *))
 {
 	*root = (*root)->right;
 	while (*root)
@@ -56,8 +55,8 @@ int (*cmpf)(void *, void *))
 	}
 }
 
-void	btree_insert_data(t_btree **root, void *item, \
-int (*cmpf)(void *, void *))
+void	btree_insert_data(t_btree **root, void *item, int (*cmpf)(void *,
+			void *))
 {
 	t_btree	*head;
 	t_btree	*prev;
@@ -79,7 +78,7 @@ int (*cmpf)(void *, void *))
 
 /* #include <stdio.h>
 
-void print_btree(t_btree *root)
+void	print_btree(t_btree *root)
 {
 	if (root)
 	{
@@ -89,11 +88,13 @@ void print_btree(t_btree *root)
 	}
 }
 
-t_btree *btree_create_at(t_btree *root, void *data)
+t_btree	*btree_create_at(t_btree *root, void *data)
 {
-	t_btree *head = root;
-	t_btree *prev = root;
+	t_btree	*head;
+	t_btree	*prev;
 
+	head = root;
+	prev = root;
 	if (!root)
 		return (btree_create_node(data));
 	while (root)
@@ -113,7 +114,7 @@ t_btree *btree_create_at(t_btree *root, void *data)
 
 #include <string.h>
 
-int main(void)
+int	main(void)
 {
 	t_btree *root;
 	void *item;

@@ -34,8 +34,8 @@ int	parse_nd_flags(int i, int *count, t_struct v, va_list args)
 {
 	while (!standard_conds(v, i))
 	{
-		if ((v.str[i] >= '1' && v.str[i] <= '9')
-			|| v.str[i] == '.' || v.str[i] == '*')
+		if ((v.str[i] >= '1' && v.str[i] <= '9') || v.str[i] == '.'
+			|| v.str[i] == '*')
 			v = parse_nd_flags2(&i, v, args);
 		else
 		{
@@ -99,7 +99,7 @@ int	ft_printf(const char *str, ...)
 /* #include <limits.h>
 #include <stdio.h>
 
-int main(void)
+int	main(void)
 {
 	printf("original : %d\n", printf("original : |^.^/% 53.24d^.^/|\n", 0));
 	fflush(stdout);

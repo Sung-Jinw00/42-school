@@ -34,7 +34,7 @@ t_list	*add_at(t_list *list, int data, int pos)
 	cur = list;
 	cell = create_cell(data);
 	if (!cell)
-		error(RED"Error : issue creating cell.\n"RESET, list);
+		error(RED "Error : issue creating cell.\n" RESET, list);
 	if (!list)
 		return (cell);
 	else if (pos == 0)

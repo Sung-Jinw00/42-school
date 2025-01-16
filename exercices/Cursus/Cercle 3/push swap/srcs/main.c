@@ -20,7 +20,7 @@ void	push_swap(int ac, char **av)
 
 	a_list = initiate_a_list(ac, av);
 	if (duplicates(a_list))
-		error(RED"Error : duplicates !\n"RESET, a_list);
+		error(RED "Error : duplicates !\n" RESET, a_list);
 	if (sorted_a_list(a_list))
 	{
 		free_list(a_list);
@@ -40,4 +40,4 @@ int	main(int ac, char **av)
 	return (0);
 }
 
-//print_vals(a_list, b_list);
+// print_vals(a_list, b_list);

@@ -122,4 +122,4 @@ t_list	*sort_list(t_list *a_list, t_list *b_list, int len_a_list)
 	return (a_list);
 }
 
-//print_vals(a_list, b_list);
+// print_vals(a_list, b_list);

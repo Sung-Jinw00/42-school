@@ -14,8 +14,8 @@
 
 int	find_last_digit(int value, int **answer, int val_max)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;
@@ -41,28 +41,32 @@ int	find_last_digit(int value, int **answer, int val_max)
 	return (count);
 }
 
-void remove_invalid_values(int **answer, int val_max, int box)
+void	remove_invalid_values(int **answer, int val_max, int box)
 {
-	int start;
-	int saved_value;
+	int	start;
+	int	saved_value;
 
 	start = box;
-	saved_value = answer[0][box];//je prends la valeur que je viens de mettre en sauvegarde
-	while (same_line(box, val_max, start - 1) && start >= 0)//je vais au debut de la ligne
+	saved_value = answer[0][box];                           
+		// je prends la valeur que je viens de mettre en sauvegarde
+	while (same_line(box, val_max, start - 1) && start >= 0)
+		// je vais au debut de la ligne
 		start--;
 	while (same_line(box, val_max, start))
 	{
-		answer[saved_value][start] = 0;//j'enleve cette valeur des autres box de la ligne
+		answer[saved_value][start] = 0;
+			// j'enleve cette valeur des autres box de la ligne
 		if (start == box)
 			answer[saved_value][start] = saved_value;
 		start++;
 	}
 	start = box;
-	while ((start - val_max) >= 0)//je vais au debut de la colonne
+	while ((start - val_max) >= 0) // je vais au debut de la colonne
 		start -= val_max;
 	while (start < val_max * val_max)
 	{
-		answer[saved_value][start] = 0;//j'enleve cette valeur des autres box de la colonne
+		answer[saved_value][start] = 0;
+			// j'enleve cette valeur des autres box de la colonne
 		if (start == box)
 			answer[saved_value][start] = saved_value;
 		start += val_max;
@@ -70,11 +74,12 @@ void remove_invalid_values(int **answer, int val_max, int box)
 	find_last_digit(saved_value, answer, val_max);
 }
 
-void one_to_5_in_col(int **answer, int val_max, int box, char *da_wae)
+void	one_to_5_in_col(int **answer, int val_max, int box, char *da_wae)
 {
-	int one_to_5;
+	int	one_to_5;
 
-	if (!ft_strcmp(da_wae, "down"))//si j'ai val_max en condition du bas, j'ecris val_max...321 sur ma colonne
+	if (!ft_strcmp(da_wae, "down")) // si j'ai val_max en condition du bas,
+		j'ecris val_max...321 sur ma colonne
 	{
 		one_to_5 = val_max;
 		while (box < val_max * val_max && one_to_5 >= 1)
@@ -84,7 +89,8 @@ void one_to_5_in_col(int **answer, int val_max, int box, char *da_wae)
 			box += val_max;
 		}
 	}
-	else if (!ft_strcmp(da_wae, "up"))//sinon j'ecris 123...val_max sur ma colonne
+	else if (!ft_strcmp(da_wae, "up"))
+		// sinon j'ecris 123...val_max sur ma colonne
 	{
 		one_to_5 = 1;
 		while (box < val_max * val_max && one_to_5 <= val_max)
@@ -96,13 +102,14 @@ void one_to_5_in_col(int **answer, int val_max, int box, char *da_wae)
 	}
 }
 
-void one_to_5_in_line(int **answer, int val_max, int box, char *da_wae)
+void	one_to_5_in_line(int **answer, int val_max, int box, char *da_wae)
 {
-	int one_to_5;
-	int col;
+	int	one_to_5;
+	int	col;
 
 	col = box;
-	if (!ft_strcmp(da_wae, "right"))//si j'ai val_max en condition de droite, j'ecris val_max...321 sur ma ligne
+	if (!ft_strcmp(da_wae, "right")) // si j'ai val_max en condition de droite,
+		j'ecris val_max...321 sur ma ligne
 	{
 		one_to_5 = val_max;
 		while (same_line(box, val_max, col) && one_to_5 >= 1)

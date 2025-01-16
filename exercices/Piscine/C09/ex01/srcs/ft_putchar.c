@@ -18,7 +18,7 @@ void	ft_putchar(char c)
 }
 
 /*
-int main(void)
+int	main(void)
 {
 	ft_putchar('1');
 	return(0);

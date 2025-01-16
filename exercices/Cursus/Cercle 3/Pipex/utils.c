@@ -24,7 +24,7 @@ void	free_dbl_tab(char **str)
 
 void	error(void)
 {
-	perror(RED"Error ");
+	perror(RED "Error ");
 	exit(EXIT_FAILURE);
 }
 

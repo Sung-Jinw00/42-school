@@ -24,9 +24,12 @@ void	print_list(t_list *L)
 	printf("\n");
 }
 
-int ft_list_size(t_list *begin_list)
+int	ft_list_size(t_list *begin_list)
 {
-	int len;
+	int	len;
+	int	mid;
+	int	len;
+	int	len_copy;
 
 	len = 0;
 	while (begin_list)
@@ -36,13 +39,8 @@ int ft_list_size(t_list *begin_list)
 	}
 	return (len);
 } */
-
 void	ft_fun2(t_list **begin_list, t_list *last, t_list *first, void *temp)
 {
-	int		mid;
-	int		len;
-	int		len_copy;
-
 	first = *begin_list;
 	len = ft_list_size(*begin_list) - 1;
 	len_copy = len;
@@ -75,10 +73,10 @@ void	ft_list_reverse_fun(t_list *begin_list)
 
 /* t_list	*add_at(t_list *L, void *data, int pos)
 {
-	t_list *prec;
-	t_list *cur;
-	t_list *cell;
-	int i;
+	t_list	*prec;
+	t_list	*cur;
+	t_list	*cell;
+	int		i;
 
 	i = 0;
 	cur = L;

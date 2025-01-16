@@ -52,8 +52,8 @@ void	print_vals(t_list *a_list, t_list *b_list)
 	{
 		if (tmp_a && tmp_b)
 		{
-			ft_printf("data %d = %d  |  data %d = %d\n", count, tmp_a->data, \
-			count, tmp_b->data);
+			ft_printf("data %d = %d  |  data %d = %d\n", count, tmp_a->data,
+				count, tmp_b->data);
 			tmp_a = tmp_a->next;
 			tmp_b = tmp_b->next;
 		}

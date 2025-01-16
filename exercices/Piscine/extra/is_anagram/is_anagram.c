@@ -12,9 +12,9 @@
 
 int	is_anagram(char *a, char *b)
 {
-	int     array[96];
-	int     i;
-	int j;
+	int	array[96];
+	int	i;
+	int	j;
 
 	i = -1;
 	while (++i < 96)
@@ -74,7 +74,7 @@ int	is_anagram(char *a, char *b)
 	return(0);
 } */
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	if (ac == 3)
 	{
@@ -85,5 +85,5 @@ int main(int ac, char **av)
 		}
 	}
 	printf("0");
-	return (0);	
+	return (0);
 }

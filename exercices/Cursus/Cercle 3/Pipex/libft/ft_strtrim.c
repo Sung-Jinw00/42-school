@@ -28,8 +28,8 @@ static int	set_cmp(char c, const char *set)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
 	if (!s1 || !set)
 		return (NULL);
@@ -48,14 +48,14 @@ char	*ft_strtrim(char const *s1, char const *set)
 /* #include <stdio.h>
 #include <string.h>
 
-int main(void)
+int	main(void)
 {
 	char *s1 = "   \t  \n\n \t\t  \n\n \t  \n \n	\n \n \t\t\n  ";
- 	char *s2 = "";
- 	char *ret = ft_strtrim(s1, " \n\t");
- 
+	char *s2 = "";
+	char *ret = ft_strtrim(s1, " \n\t");
+
 	printf("%s\n", ret);
- 	if (!strcmp(ret, s2))
+	if (!strcmp(ret, s2))
 		printf("nickel");
 	free(ret);
 	return (0);

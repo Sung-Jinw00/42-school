@@ -38,7 +38,7 @@ int	main(void)
 {
 	char src[] = "Hello";
 	char *cpy;
-	
+
 	cpy = ft_strdup(src);
 	printf("adresse de src : %p\nsrc : %s\nadresse de cpy : %p\ncpy : %s\n",\
 	src, src, cpy, cpy);

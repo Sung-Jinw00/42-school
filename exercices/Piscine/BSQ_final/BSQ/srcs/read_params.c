@@ -82,8 +82,8 @@ char	*read_file(char *filename)
 
 int	gen_loop(char *buff, char **tab, int i)
 {
-	int		j;
-	int		k;
+	int	j;
+	int	k;
 
 	j = 0;
 	k = 0;
@@ -104,8 +104,8 @@ int	gen_loop(char *buff, char **tab, int i)
 
 char	**gen_tab_of_tab(char *buff, char **tab, t_coords *save, int c)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
 	i = 1;
 	j = 0;

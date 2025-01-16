@@ -17,8 +17,8 @@
 
 int	ft_ultimate_range(int **range, int min, int max)
 {
-	int		len_range;
-	int		i;
+	int	len_range;
+	int	i;
 
 	i = 0;
 	len_range = max - min;
@@ -46,7 +46,7 @@ int	ft_ultimate_range(int **range, int min, int max)
 {
 	int **range;
 	int max = 100;
-	
+
 	range = malloc(sizeof(int *));
 	printf("%d\n", ft_ultimate_range(range, 1, max));
 	free(range);

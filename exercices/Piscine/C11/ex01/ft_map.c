@@ -54,13 +54,13 @@ int	*ft_map(int *tab, int length, int (*f)(int))
 
 /* #include <limits.h>
 
-int main(void)
+int	main(void)
 {
 	int tab[5] = {INT_MIN, -42, -0, 42, INT_MAX -42};
 	int length = 5;
 	int *cpy;
 	int i = 0;
-	
+
 	cpy = ft_map(tab, length, &ft_42);
 	printf("adresse de tab : %p\n", tab);
 	while (i < length)

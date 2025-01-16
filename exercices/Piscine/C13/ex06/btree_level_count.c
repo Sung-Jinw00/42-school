@@ -29,7 +29,7 @@ int	btree_level_count(t_btree *root)
 
 /* #include <stdio.h>
 
-void print_btree(t_btree *root)
+void	print_btree(t_btree *root)
 {
 	if (root)
 	{
@@ -39,11 +39,13 @@ void print_btree(t_btree *root)
 	}
 }
 
-t_btree *btree_create_at(t_btree *root, void *data)
+t_btree	*btree_create_at(t_btree *root, void *data)
 {
-	t_btree *head = root;
-	t_btree *prev = root;
+	t_btree	*head;
+	t_btree	*prev;
 
+	head = root;
+	prev = root;
 	if (!root)
 		return (btree_create_node(data));
 	while (root)
@@ -63,7 +65,7 @@ t_btree *btree_create_at(t_btree *root, void *data)
 
 #include <string.h>
 
-int main(void)
+int	main(void)
 {
 	t_btree *root;
 

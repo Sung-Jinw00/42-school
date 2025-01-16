@@ -12,27 +12,27 @@
 
 #include "ft_list.h"
 #include <stdlib.h>
+
 /* #include <stdio.h>
 
 void	print_elem(t_list *elem)
 {
+	t_list	*temp;
+
 	while (elem)
 	{
 		printf("%s\n", (char *)elem->data);
 		elem = elem->next;
 	}
 } */
-
 void	ft_list_push_front(t_list **begin_list, void *data)
 {
-	t_list	*temp;
-
 	temp = ft_create_elem(data);
 	temp->next = *begin_list;
 	*begin_list = temp;
 }
 
-	//print_elem(*begin_list);
+// print_elem(*begin_list);
 /* int main (void)
 {
 	t_list	*begin_list;

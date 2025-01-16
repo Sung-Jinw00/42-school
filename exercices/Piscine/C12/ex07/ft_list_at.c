@@ -46,12 +46,12 @@ t_list	*ft_list_at(t_list *begin_list, unsigned int nbr)
 
 /* #include <stdio.h>
 
-t_list *add_elems(t_list *elem, char **strs, int mark, int pos)
+t_list	*add_elems(t_list *elem, char **strs, int mark, int pos)
 {
-	t_list *cur;
-	t_list *prev;
-	t_list *cell;
-	int i;
+	t_list	*cur;
+	t_list	*prev;
+	t_list	*cell;
+	int		i;
 
 	i = 1;
 	cur = elem;
@@ -69,12 +69,12 @@ t_list *add_elems(t_list *elem, char **strs, int mark, int pos)
 	}
 	prev->next = cell;
 	return (elem);
-} 
+}
 
-t_list *ft_list_push_strs(int size, char **strs)
+t_list	*ft_list_push_strs(int size, char **strs)
 {
-	t_list *newlist;
-	int i;
+	t_list	*newlist;
+	int		i;
 
 	i = 1;
 	newlist = ft_create_elem(strs[size - 1]);

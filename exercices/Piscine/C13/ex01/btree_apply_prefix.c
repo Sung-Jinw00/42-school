@@ -16,7 +16,6 @@
 {
 	*(int *)item += 3;
 } */
-
 void	btree_apply_prefix(t_btree *root, void (*applyf)(void *))
 {
 	if (root)
@@ -29,7 +28,7 @@ void	btree_apply_prefix(t_btree *root, void (*applyf)(void *))
 
 /* #include <stdio.h>
 
-void print_btree(t_btree *root)
+void	print_btree(t_btree *root)
 {
 	if (root)
 	{
@@ -39,11 +38,13 @@ void print_btree(t_btree *root)
 	}
 }
 
-t_btree *btree_create_at(t_btree *root, void *data)
+t_btree	*btree_create_at(t_btree *root, void *data)
 {
-	t_btree *head = root;
-	t_btree *prev = root;
+	t_btree	*head;
+	t_btree	*prev;
 
+	head = root;
+	prev = root;
 	if (!root)
 		return (btree_create_node(data));
 	while (root)
@@ -61,7 +62,7 @@ t_btree *btree_create_at(t_btree *root, void *data)
 	return (head);
 }
 
-int main(void)
+int	main(void)
 {
 	t_btree *root;
 

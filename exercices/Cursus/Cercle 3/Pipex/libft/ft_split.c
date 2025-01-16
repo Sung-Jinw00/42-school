@@ -131,13 +131,13 @@ int	main(void)
 
 	char *str2 = "              ";
 	char charset2 = ' ';
-	
+
 	char *str3 = " J'adore le C07 ";
 	char charset3 = 0;
-	
+
 	char **split;
 	int i = 0;
-	
+
 	split = ft_split(str1, charset1);
 	if (split[i])
 	{

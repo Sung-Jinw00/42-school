@@ -14,26 +14,26 @@
 
 void	usage(void)
 {
-	ft_putstr_fd(RED BOLD"Error : Invalid arguments !\n\n"RESET, 2);
-	ft_printf(BRIGHT_GREEN BOLD"Please, enter valid arguments like so :\n");
-	ft_printf(RESET CYAN"	./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2\n");
+	ft_putstr_fd(RED BOLD "Error : Invalid arguments !\n\n" RESET, 2);
+	ft_printf(BRIGHT_GREEN BOLD "Please, enter valid arguments like so :\n");
+	ft_printf(RESET CYAN "	./pipex file1 cmd1 cmd2 cmd3 ... cmdn file2\n");
 	ft_printf("	or\n");
-	ft_printf("	./pipex here_doc LIMITER cmd cmd1 file\n"RESET);
+	ft_printf("	./pipex here_doc LIMITER cmd cmd1 file\n" RESET);
 }
 
 void	son_program(char *av, char **env, pid_t pid_son)
 {
-	int		fd[2];
+	int	fd[2];
 
 	if (pipe(fd) == -1)
 	{
-		perror(RED"Error -> issue creating pipe\n"RESET);
+		perror(RED "Error -> issue creating pipe\n" RESET);
 		exit(EXIT_FAILURE);
 	}
 	pid_son = fork();
 	if (pid_son == -1)
 	{
-		perror(RED"Error -> pid failure\n"RESET);
+		perror(RED "Error -> pid failure\n" RESET);
 		exit(EXIT_FAILURE);
 	}
 	if (pid_son == 0)
@@ -62,7 +62,7 @@ int	get_file(char *av, int i)
 		file = open(av, O_RDONLY);
 	if (file == -1)
 	{
-		perror(RED"Error -> cannot open file\n"RESET);
+		perror(RED "Error -> cannot open file\n" RESET);
 		exit(EXIT_FAILURE);
 	}
 	return (file);
@@ -77,13 +77,13 @@ void	here_doc(char *limiter, int ac)
 		usage();
 	if (pipe(fd) == -1)
 	{
-		perror(RED"Error -> issue creating pipe\n"RESET);
+		perror(RED "Error -> issue creating pipe\n" RESET);
 		exit(EXIT_FAILURE);
 	}
 	reader = fork();
 	if (reader == -1)
 	{
-		perror(RED"Error -> pid failure\n"RESET);
+		perror(RED "Error -> pid failure\n" RESET);
 		exit(EXIT_FAILURE);
 	}
 	if (reader == 0)

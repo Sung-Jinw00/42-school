@@ -26,9 +26,9 @@ void	print_list(t_list *L)
 
 int	ft_strcmp(void *s1, void *s2)
 {
-	char *a;
-	char *b;
-	int i;
+	char	*a;
+	char	*b;
+	int		i;
 
 	i = -1;
 	a = (char *)s1;
@@ -38,7 +38,6 @@ int	ft_strcmp(void *s1, void *s2)
 			return (a[i] - b[i]);
 	return (0);
 } */
-
 void	big_cmp(t_list **before, t_list **after, int (*cmp)(), t_list *new_cell)
 {
 	while (*before)
@@ -51,8 +50,8 @@ void	big_cmp(t_list **before, t_list **after, int (*cmp)(), t_list *new_cell)
 				return ;
 			}
 		}
-		else if ((*cmp)(new_cell, *after) <= 0
-			&& (*cmp)(*before, new_cell) >= 0)
+		else if ((*cmp)(new_cell, *after) <= 0 && (*cmp)(*before,
+				new_cell) >= 0)
 		{
 			new_cell->next = *after;
 			(*before)->next = new_cell;
@@ -86,10 +85,10 @@ void	ft_sorted_list_insert(t_list **begin_list, void *data, int (*cmp)())
 
 /* t_list	*add_at(t_list *L, void *data, int pos)
 {
-	t_list *prec;
-	t_list *cur;
-	t_list *cell;
-	int i;
+	t_list	*prec;
+	t_list	*cur;
+	t_list	*cell;
+	int		i;
 
 	i = 0;
 	cur = L;

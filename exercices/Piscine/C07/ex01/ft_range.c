@@ -17,6 +17,10 @@
 
 void	ft_putnbr(int n)
 {
+	int	*cpy;
+	int	len_cpy;
+	int	i;
+
 	if (n == -2147483648)
 	{
 		write (1, "-2147483648", 11);
@@ -32,13 +36,8 @@ void	ft_putnbr(int n)
 	n = n % 10 + '0';
 	write (1, &n, 1);
 } */
-
 int	*ft_range(int min, int max)
 {
-	int		*cpy;
-	int		len_cpy;
-	int		i;
-
 	i = 0;
 	if (min >= max)
 		return (0);
@@ -60,7 +59,7 @@ int	*ft_range(int min, int max)
 	int *cpy;
 	int i = 0;
 	int max = 100;
-	
+
 	cpy = ft_range(1, max);
 	while (i < max - 1)
 	{

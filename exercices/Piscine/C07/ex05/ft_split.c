@@ -110,12 +110,12 @@ int	main(void)
 
 	char *str2 = " '\t''   \t  ";
 	char *charset2 = " \t'";
-	
+
 	char *str3 = " J'adore le C07 ";
 	char *charset3 = "";
 	char **split;
 	int i = 0;
-	
+
 	split = ft_split(str1, charset1);
 	if (split[i])
 	{

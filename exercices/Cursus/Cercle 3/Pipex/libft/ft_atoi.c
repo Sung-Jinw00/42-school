@@ -39,7 +39,7 @@ int	ft_atoi(const char *nptr)
 
 /* #include <stdio.h>
 
-int main(void)
+int	main(void)
 {
 	const char nptr[] = "   +1234ab567";
 

@@ -12,30 +12,34 @@
 
 #include "r01boxs.h"
 
-int	up_line_conds(int box, int val_max, int *conditions)//selectionne la condition correspondante sur la ligne du haut
+int	up_line_conds(int box, int val_max, int *conditions)
+		// selectionne la condition correspondante sur la ligne du haut
 {
 	return (conditions[box % val_max]);
 }
 
-int	low_line_conds(int box, int val_max, int *conditions)//selectionne la condition correspondante sur la ligne du bas
+int	low_line_conds(int box, int val_max, int *conditions)
+		// selectionne la condition correspondante sur la ligne du bas
 {
 	return (conditions[val_max + box % val_max]);
 }
 
-int	left_col_conds(int box, int val_max, int *conditions)//selectionne la condition correspondante sur la ligne a gauche
+int	left_col_conds(int box, int val_max, int *conditions)
+		// selectionne la condition correspondante sur la ligne a gauche
 {
 	return (conditions[val_max * 2 + box / val_max]);
 }
 
-int	right_col_conds(int box, int val_max, int * conditions)//selectionne la condition correspondante sur la ligne a droite
+int	right_col_conds(int box, int val_max, int *conditions)
+		// selectionne la condition correspondante sur la ligne a droite
 {
 	return (conditions[val_max * 3 + box / val_max]);
 }
 
 int	ft_strcmp(char *s1, char *s2)
 {
-	int	i;
-	int	result;
+	int i;
+	int result;
 
 	i = 0;
 	result = 0;

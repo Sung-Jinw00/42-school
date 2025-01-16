@@ -35,8 +35,8 @@ int	ft_error(char *base)
 	{
 		while (j <= ft_strlen(base))
 		{
-			if (base[i] == base[j] || base[i] == '-'
-				|| base[i] == '+' || base[j] == '-' || base[j] == '+')
+			if (base[i] == base[j] || base[i] == '-' || base[i] == '+'
+				|| base[j] == '-' || base[j] == '+')
 				return (0);
 			j++;
 		}

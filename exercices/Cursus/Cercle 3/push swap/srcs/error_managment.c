@@ -31,9 +31,9 @@ int	check_all_args(char **numbers)
 		while (numbers[j][i])
 		{
 			if (!(is_nb(numbers[j][i]) || numbers[j][i] == '+'
-				|| numbers[j][i] == '-' || numbers[j][i] == ' '
-				|| numbers[j][i] == '\t'))
-				error(RED"Error : Invalid arguments !\n"RESET, NULL);
+					|| numbers[j][i] == '-' || numbers[j][i] == ' '
+					|| numbers[j][i] == '\t'))
+				error(RED "Error : Invalid arguments !\n" RESET, NULL);
 			i++;
 		}
 		i = 0;

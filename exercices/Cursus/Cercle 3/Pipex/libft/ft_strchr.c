@@ -28,7 +28,7 @@ char	*ft_strchr(const char *s, int c)
 
 /* #include <stdio.h>
 
-int main(void)
+int	main(void)
 {
 	const char *s = NULL;
 

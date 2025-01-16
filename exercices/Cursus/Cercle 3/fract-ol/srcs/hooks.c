@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 17:21:08 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/15 18:13:05 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/16 19:29:00 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	deal_key(int key, t_mlx *mlx)
 {
 	if (key == XK_Escape)
 		quit(mlx);
-	else if (key == XK_Left || key == XK_Right || key == XK_Up
-		|| key == XK_Down || key == XK_r)
+	else if (key == XK_Left || key == XK_Right || key == XK_Up || key == XK_Down
+		|| key == XK_r || key == XK_z || key == XK_x)
 		arrow_controls(key, mlx);
 	return (0);
 }

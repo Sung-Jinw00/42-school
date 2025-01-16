@@ -41,13 +41,13 @@ void	find_first_square(int *coords, char **map, t_coords *save)
 	save[0].col_backup = save[0].col;
 	while (map[save[0].line]
 		&& (map[save[0].line][save[0].col] != save[0].obstacle
-		&& map[save[0].line][save[0].col] != '\0'))
+			&& map[save[0].line][save[0].col] != '\0'))
 		save[0].col++;
 	save[0].backup_obst = save[0].col;
 	save[0].col = save[0].col_backup;
 	solver(map, save);
-	if (map[save[0].line][save[0].col] == '\0'
-		|| map[save[0].line][save[0].col + 1] == '\0')
+	if (map[save[0].line][save[0].col] == '\0' || map[save[0].line][save[0].col
+		+ 1] == '\0')
 	{
 		save[0].col = 0;
 		save[0].backup_obst = 0;

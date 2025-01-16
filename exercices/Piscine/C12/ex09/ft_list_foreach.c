@@ -16,13 +16,12 @@
 
 void	modif(void *data)
 {
-	printf("%s ", (char *)data);
-} */
-
-void	ft_list_foreach(t_list *begin_list, void (*f)(void *))
-{
 	t_list	*cur;
 
+	printf("%s ", (char *)data);
+} */
+void	ft_list_foreach(t_list *begin_list, void (*f)(void *))
+{
 	cur = begin_list;
 	while (cur)
 	{
@@ -43,10 +42,10 @@ void	ft_list_foreach(t_list *begin_list, void (*f)(void *))
 
 t_list	*add_at(t_list *L, void *data, int pos)
 {
-	t_list *prec;
-	t_list *cur;
-	t_list *cell;
-	int i;
+	t_list	*prec;
+	t_list	*cur;
+	t_list	*cell;
+	int		i;
 
 	i = 0;
 	cur = L;

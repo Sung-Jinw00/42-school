@@ -10,22 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	up_line_conds(int cases, int val_max)//selectionne la condition correspondante sur la ligne du haut
+int	up_line_conds(int cases, int val_max)
+		// selectionne la condition correspondante sur la ligne du haut
 {
 	return (cases % val_max);
 }
 
-int	low_line_conds(int cases, int val_max)//selectionne la condition correspondante sur la ligne du bas
+int	low_line_conds(int cases, int val_max)
+		// selectionne la condition correspondante sur la ligne du bas
 {
 	return (val_max + cases % val_max);
 }
 
-int	left_col_conds(int cases, int val_max)//selectionne la condition correspondante sur la ligne a gauche
+int	left_col_conds(int cases, int val_max)
+		// selectionne la condition correspondante sur la ligne a gauche
 {
 	return (val_max * 2 + cases / val_max);
 }
 
-int	right_col_conds(int cases, int val_max)//selectionne la condition correspondante sur la ligne a droite
+int	right_col_conds(int cases, int val_max)
+		// selectionne la condition correspondante sur la ligne a droite
 {
 	return (val_max * 3 + cases / val_max);
 }

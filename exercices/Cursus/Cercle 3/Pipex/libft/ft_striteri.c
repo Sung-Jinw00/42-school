@@ -14,6 +14,8 @@
 
 /* void f(unsigned int i, char *s)
 {
+	unsigned int	i;
+
 	if (*s >= 'A' && *s <= 'Z')
 		*s += 32;
 	else if (*s >= 'a' && *s <= 'z')
@@ -23,11 +25,8 @@
 	if (i == 1)
 		return ;
 } */
-
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	unsigned int	i;
-
 	i = 0;
 	while (s[i])
 	{
@@ -38,7 +37,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 
 /* #include<stdio.h>
 
-int main(void)
+int	main(void)
 {
 	char s[12] = "Hello world";
 

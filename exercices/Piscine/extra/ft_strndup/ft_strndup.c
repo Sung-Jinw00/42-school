@@ -14,8 +14,8 @@
 
 char	*ft_strndup(char *str, size_t n)
 {
-	char *cpy;
-	size_t i;
+	char	*cpy;
+	size_t	i;
 
 	i = -1;
 	cpy = malloc(n + 1);

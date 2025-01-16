@@ -39,7 +39,7 @@ t_list	*free_list(t_list *L)
 	}
 }
 
-int main(void)
+int	main(void)
 {
 	char *c = "bonus";
 	void *content = c;

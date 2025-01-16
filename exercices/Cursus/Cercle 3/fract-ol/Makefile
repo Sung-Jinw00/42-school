@@ -17,6 +17,7 @@ SRCS_C		= srcs/colors.c\
 			  srcs/hooks.c\
 			  srcs/main.c\
 			  srcs/set_fractals.c\
+			  srcs/set_fractals2.c\
 			  srcs/set_mlx.c
 
 SRC_O      = $(SRCS_C:.c=.o)

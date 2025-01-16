@@ -15,28 +15,28 @@
 int	up_border(int cases, int val_max)
 {
 	if (cases / val_max == 0)
-		return (1);//je suis sur la bordure du haut
+		return (1); // je suis sur la bordure du haut
 	return (0);
 }
 
 int	low_border(int cases, int val_max)
 {
 	if (cases / val_max == val_max - 1)
-		return (1);//je suis sur la bordure du bas
+		return (1); // je suis sur la bordure du bas
 	return (0);
 }
 
 int	left_border(int cases, int val_max)
 {
 	if (cases % val_max == 0)
-		return (1);//je suis sur la bordure de gauche
+		return (1); // je suis sur la bordure de gauche
 	return (0);
 }
 
 int	right_border(int cases, int val_max)
 {
-	if (cases % val_max == val_max -1)
-		return (1);//je suis sur la bordure de droite
+	if (cases % val_max == val_max - 1)
+		return (1); // je suis sur la bordure de droite
 	return (0);
 }
 

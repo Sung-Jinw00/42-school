@@ -21,7 +21,7 @@ int	ft_isdigit(int c)
 
 /* #include <stdio.h>
 
-int main(void)
+int	main(void)
 {
 	printf("%d\n", ft_isdigit(47));
 	return(0);

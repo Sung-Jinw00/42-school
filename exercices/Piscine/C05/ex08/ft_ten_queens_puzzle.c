@@ -34,9 +34,9 @@ int	check(int *position, int col)
 	n = 1;
 	while (col - n >= 0)
 	{
-		if ((position[col - n] == position[col])
-			|| ((position[col - n] == position[col] + n))
-			|| ((position[col - n] == position[col] - n)))
+		if ((position[col - n] == position[col]) || ((position[col
+					- n] == position[col] + n)) || ((position[col
+					- n] == position[col] - n)))
 			return (0);
 		n++;
 	}

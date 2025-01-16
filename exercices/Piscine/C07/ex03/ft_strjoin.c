@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <stddef.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 
 char	*ft_strcpy(char *dest, char *src)
@@ -91,7 +91,7 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 	char **strs = (char **)malloc(size * sizeof(char *));
 	char sep[] = "/";
 	char *conca;
-	
+
 	strs[0] = "j'adore";
 	strs[1] = "le";
 	strs[2] = "C07";

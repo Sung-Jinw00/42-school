@@ -31,14 +31,14 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 int	main(void)
 {
 	char *s1 = "atoms\0\0\0\0";
- 	char *s2 = "atoms\0abc";
- 	size_t size = 8;
- 	int i1 = ((memcmp(s1, s2, size) > 0) ? 1 : ((memcmp(s1, s2, size) < 0) \
+	char *s2 = "atoms\0abc";
+	size_t size = 8;
+	int i1 = ((memcmp(s1, s2, size) > 0) ? 1 : ((memcmp(s1, s2, size) < 0) \
 	? -1 : 0));
- 	int i2 = ((ft_memcmp(s1, s2, size) > 0) ? 1 : ((ft_memcmp(s1, s2, size) \
+	int i2 = ((ft_memcmp(s1, s2, size) > 0) ? 1 : ((ft_memcmp(s1, s2, size) \
 	< 0) ? -1 : 0));
 	printf("i1 : %d\ni2 : %d\n", i1, i2);
- 	if (i1 == i2)
- 		printf("c'est bon");
- 	return (0);
+	if (i1 == i2)
+		printf("c'est bon");
+	return (0);
 } */

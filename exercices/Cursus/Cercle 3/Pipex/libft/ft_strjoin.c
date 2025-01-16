@@ -14,10 +14,10 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char		*new_string;
-	size_t		len;
-	size_t		i;
-	size_t		j;
+	char	*new_string;
+	size_t	len;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	j = 0;
@@ -42,7 +42,7 @@ int	main(void)
 {
 	char *s1 = "Hello ";
 	char *s2 = "World";
-	
+
 	s1 = ft_strjoin(s1, s2);
 	printf("%s\n", s1);
 	free(s1);

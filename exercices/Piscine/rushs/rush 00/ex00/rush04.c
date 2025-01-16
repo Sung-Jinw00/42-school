@@ -12,20 +12,21 @@
 
 void	ft_putchar(char c);
 
-void ft_conditions(int x, int y, int height, int length)
+void	ft_conditions(int x, int y, int height, int length)
 {
-	if ((length == 0 && height == 0) || (x > 0 && y > 0 && length == x && height == y))
-			ft_putchar('A');
-		else if ((length == x && height == 0) || (length == 0 && height == y))
-			ft_putchar('C');
-		else if (((height == 0 || height == y) && !(length == 0 || length == x))
+	if ((length == 0 && height == 0) || (x > 0 && y > 0 && length == x
+			&& height == y))
+		ft_putchar('A');
+	else if ((length == x && height == 0) || (length == 0 && height == y))
+		ft_putchar('C');
+	else if (((height == 0 || height == y) && !(length == 0 || length == x))
 		|| (!(height == 0 || height == y) && (length == 0 || length == x)))
-			ft_putchar('B');
-		else
-			ft_putchar(' ');
+		ft_putchar('B');
+	else
+		ft_putchar(' ');
 }
 
-int rush(int x, int y)
+int	rush(int x, int y)
 {
 	int length;
 	int height;
@@ -34,10 +35,10 @@ int rush(int x, int y)
 	height = 0;
 	x -= 1;
 	y -= 1;
-	while(length <= x && height <= y)
+	while (length <= x && height <= y)
 	{
 		ft_conditions(x, y, height, length);
-		length ++;
+		length++;
 		if (length == x + 1 && height != y)
 		{
 			ft_putchar('\n');

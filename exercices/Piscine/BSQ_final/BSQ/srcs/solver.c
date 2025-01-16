@@ -36,17 +36,16 @@ int	solver_part3(int count, t_coords *save)
 
 int	solver_part2(char **map, t_coords *save, int k, int count)
 {
-	while (map[save[0].line + count]
-		&& map[save[0].line][save[0].col + count] != '\0'
-		&& map[save[0].line + count][save[0].col] == save[0].empty
-		&& map[save[0].line][save[0].col + count] == save[0].empty
-		&& map[save[0].line + count][save[0].col + count] == save[0].empty)
+	while (map[save[0].line + count] && map[save[0].line][save[0].col
+		+ count] != '\0' && map[save[0].line
+		+ count][save[0].col] == save[0].empty && map[save[0].line][save[0].col
+		+ count] == save[0].empty && map[save[0].line + count][save[0].col
+		+ count] == save[0].empty)
 	{
-		while (k < count
-			&& map[save[0].line + count][save[0].col + k] == save[0].empty
-			&& map[save[0].line + k][save[0].col + count] == save[0].empty
-			&& (map[save[0].line + count][save[0].col]
-			|| map[save[0].line][save[0].col + count] != '\0'))
+		while (k < count && map[save[0].line + count][save[0].col
+			+ k] == save[0].empty && map[save[0].line + k][save[0].col
+			+ count] == save[0].empty && (map[save[0].line + count][save[0].col]
+				|| map[save[0].line][save[0].col + count] != '\0'))
 			k++;
 		if (k == count)
 		{
@@ -69,9 +68,8 @@ void	solver(char **map, t_coords *save)
 	ft_init_lol(save);
 	while (save[0].col < save[0].backup_obst)
 	{
-		if (map[save[0].line + count]
-			&& map[save[0].line][save[0].col + count] != '\0'
-			&& map[save[0].line][save[0].col] == save[0].empty
+		if (map[save[0].line + count] && map[save[0].line][save[0].col
+			+ count] != '\0' && map[save[0].line][save[0].col] == save[0].empty
 			&& map[save[0].line + count][save[0].col] == save[0].empty
 			&& map[save[0].line][save[0].col + count] == save[0].empty
 			&& map[save[0].line + count][save[0].col + count] == save[0].empty)

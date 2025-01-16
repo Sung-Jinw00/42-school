@@ -29,7 +29,7 @@ void	ft_ultimate_ft(int *********nbr)
 	int *******nbr7;
 	int ********nbr8;
 
-	
+
 	nbr = 0;
 	printf("%d\n", nbr);
 	nbr1 = &nbr;

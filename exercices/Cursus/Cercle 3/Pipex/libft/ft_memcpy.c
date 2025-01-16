@@ -29,7 +29,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 
 /* #include <stdio.h>
 
-int main(void)
+int	main(void)
 {
 	char dest[30];
 	char src[] = "Hello World";

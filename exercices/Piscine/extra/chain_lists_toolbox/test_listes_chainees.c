@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "liste_test.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 long	len_list(List *L)
 {
@@ -61,7 +61,7 @@ List	*free_list(List *L)
 	while (L)
 	{
 		tmp = L->next;
-		free (L);
+		free(L);
 		L = tmp;
 	}
 }
@@ -78,7 +78,7 @@ List	*free_at(List *L, int pos)
 	else if (pos == 0)
 	{
 		L = L->next;
-		free (cur);
+		free(cur);
 		return (L);
 	}
 	i = 0;
@@ -89,7 +89,7 @@ List	*free_at(List *L, int pos)
 		cur = cur->next;
 	}
 	prec->next = cur->next;
-	free (cur);
+	free(cur);
 	return (L);
 }
 

@@ -66,49 +66,49 @@ char	*ft_itoa(int n)
 int	main(void)
 {
 	char *i1 = ft_itoa(0);
- 	char *i2 = ft_itoa(9);
- 	char *i3 = ft_itoa(-9);
- 	char *i4 = ft_itoa(10);
- 	char *i5 = ft_itoa(-10);
- 	char *i6 = ft_itoa(8124);
- 	
- 	if (strcmp(i1, "0"))
- 	{
+	char *i2 = ft_itoa(9);
+	char *i3 = ft_itoa(-9);
+	char *i4 = ft_itoa(10);
+	char *i5 = ft_itoa(-10);
+	char *i6 = ft_itoa(8124);
+
+	if (strcmp(i1, "0"))
+	{
 		printf("la reponse attendue : 0\nma reponse : %s\n", i1);
- 		printf("fail test 1");
+		printf("fail test 1");
 		return (0);
- 	}
- 	if (strcmp(i2, "9"))
- 	{
+	}
+	if (strcmp(i2, "9"))
+	{
 		printf("la reponse attendue : 9\nma reponse : %s\n", i2);
- 		printf("fail test 2");
+		printf("fail test 2");
 		return (0);
- 	}
- 	if (strcmp("-9", i3))
- 	{
+	}
+	if (strcmp("-9", i3))
+	{
 		printf("la reponse attendue : -9\nma reponse : %s\n", i3);
- 		printf("fail test 3");
+		printf("fail test 3");
 		return (0);
- 	}
+	}
 	if (strcmp(i4, "10"))
- 	{
+	{
 		printf("la reponse attendue : 10\nma reponse : %s\n", i4);
- 		printf("fail test 1");
+		printf("fail test 1");
 		return (0);
- 	}
- 	if (strcmp(i5, "-10"))
- 	{
+	}
+	if (strcmp(i5, "-10"))
+	{
 		printf("la reponse attendue : -10\nma reponse : %s\n", i5);
- 		printf("fail test 2");
+		printf("fail test 2");
 		return (0);
- 	}
- 	if (strcmp("8124", i6))
- 	{
+	}
+	if (strcmp("8124", i6))
+	{
 		printf("la reponse attendue : 8124\nma reponse : %s\n", i6);
- 		printf("fail test 3");
+		printf("fail test 3");
 		return (0);
- 	}
- 	printf("gg win");
+	}
+	printf("gg win");
 	return (0);
 
 } */

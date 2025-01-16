@@ -19,7 +19,7 @@ int	ft_strclen(char c, char *str)
 	{
 		if (c == str[i])
 			return (i);
-		i ++;
+		i++;
 	}
 	return (i);
 }
@@ -60,7 +60,7 @@ int	ft_check(char str_mark, char *base)
 	{
 		if (str_mark == base[i])
 			return (1);
-		i ++;
+		i++;
 	}
 	return (0);
 }

@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 void	ft_display(int fd)
 {
-	char buffer;
+	char	buffer;
 
 	buffer = 0;
 	while (read(fd, &buffer, 1) > 0)
@@ -26,8 +26,8 @@ void	ft_display(int fd)
 
 void	ft_cat(int argc, char **argv)
 {
-	int i;
-	int fd;
+	int	i;
+	int	fd;
 
 	i = 0;
 	if (argc < 2)
@@ -49,8 +49,8 @@ void	ft_cat(int argc, char **argv)
 		}
 }
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	ft_cat(argc, argv);
-	return 0;
+	return (0);
 }

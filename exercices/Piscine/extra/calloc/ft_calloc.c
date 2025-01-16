@@ -12,14 +12,14 @@
 
 #include <stdlib.h>
 
-int *ft_calloc(int *tab, int size)
+int	*ft_calloc(int *tab, int size)
 {
 	int i;
 
 	i = 0;
 	tab = malloc(sizeof(int) * size);
 	if (!tab)
-		return(NULL);
+		return (NULL);
 	while (i < size)
 	{
 		tab[i] = 0;

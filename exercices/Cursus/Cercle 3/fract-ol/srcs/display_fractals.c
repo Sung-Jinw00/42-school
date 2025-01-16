@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 17:20:19 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/15 19:36:51 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/16 19:26:01 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	image_refresh(t_mlx *mlx)
 {
-	mlx_destroy_image(mlx->init, mlx->img.img_ID);
-	mlx->img.img_ID = mlx_new_image(mlx->init, WIDTH, HEIGHT);
+	mlx_destroy_image(mlx->init, mlx->img.img_id);
+	mlx->img.img_id = mlx_new_image(mlx->init, WIDTH, HEIGHT);
 	draw_fractals(mlx);
-	mlx_put_image_to_window(mlx->init, mlx->window, mlx->img.img_ID, 0, 0);
+	mlx_put_image_to_window(mlx->init, mlx->window, mlx->img.img_id, 0, 0);
 }
 
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
@@ -39,7 +39,8 @@ int	equations(char *fractal_name, t_mlx *mlx)
 		return (julia_equation(mlx->f_params.x, mlx->f_params.y,
 				mlx->f_params.real, mlx->f_params.im));
 	else if (ft_strcmp_frctl(fractal_name, MULTIBROT) == 0)
-		return (multibrot_equation(mlx->f_params.x, mlx->f_params.y, mlx->f_params.d));
+		return (multibrot_equation(mlx->f_params.x, mlx->f_params.y,
+				mlx->f_params.d));
 	return (error(RED "\nCannot choose an equation.\n" RESET, mlx), 1);
 }
 
@@ -60,17 +61,17 @@ void	draw_fractals(t_mlx *mlx)
 				+ mlx->pixel.w_move;
 			mlx->f_params.y = mlx->pixel.y * mlx->pixel.h_scale
 				+ mlx->pixel.h_move;
-				mlx->pixel.color = equations(mlx->f_params.name, mlx);
+			mlx->pixel.color = equations(mlx->f_params.name, mlx);
 			my_mlx_pixel_put(mlx, mlx->pixel.x, mlx->pixel.y, mlx->pixel.color);
 			mlx->pixel.x++;
 		}
 		mlx->pixel.y++;
 	}
-	mlx_put_image_to_window(mlx->init, mlx->window, mlx->img.img_ID, 0, 0);
+	mlx_put_image_to_window(mlx->init, mlx->window, mlx->img.img_id, 0, 0);
 }
 
-			/* if (mlx->pixel.x == WIDTH / 2 || mlx->pixel.x == WIDTH / 4
-				|| mlx->pixel.x == (WIDTH / 4) * 3 || mlx->pixel.y == HEIGHT / 2
-				|| mlx->pixel.y == HEIGHT / 4 || mlx->pixel.y == (HEIGHT / 4) * 3)
-				mlx->pixel.color = OX_RED;
-			else */
+/* if (mlx->pixel.x == WIDTH / 2 || mlx->pixel.x == WIDTH / 4
+	|| mlx->pixel.x == (WIDTH / 4) * 3 || mlx->pixel.y == HEIGHT / 2
+	|| mlx->pixel.y == HEIGHT / 4 || mlx->pixel.y == (HEIGHT / 4) * 3)
+	mlx->pixel.color = OX_RED;
+else */

@@ -20,7 +20,7 @@ t_list	*free_list(t_list *list)
 	while (list)
 	{
 		tmp = list->next;
-		free (list);
+		free(list);
 		list = tmp;
 	}
 	return (list);
@@ -42,8 +42,8 @@ int	sorted_list_grow(t_list *list)
 	cur = prev->next;
 	while (prev && cur)
 	{
-		if (prev->data > cur->data
-			&& !(prev->data == find_max(&list) && cur->data == find_min(&list)))
+		if (prev->data > cur->data && !(prev->data == find_max(&list)
+				&& cur->data == find_min(&list)))
 			return (0);
 		prev = cur;
 		cur = prev->next;

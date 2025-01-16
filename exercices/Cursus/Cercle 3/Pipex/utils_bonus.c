@@ -71,7 +71,7 @@ char	*find_path(char *cmd, char **env)
 		i++;
 	paths = ft_split(env[i] + 5, ':');
 	if (!paths)
-		perror(RED"Error -> invalid path\n"RESET);
+		perror(RED "Error -> invalid path\n" RESET);
 	i = 0;
 	while (paths[i])
 	{
@@ -95,21 +95,21 @@ void	execute(char *av, char **env)
 	cmd = ft_split(av, ' ');
 	if (!cmd)
 	{
-		perror(RED"Error -> issue spliting command\n"RESET);
+		perror(RED "Error -> issue spliting command\n" RESET);
 		exit(EXIT_FAILURE);
 	}
 	path = find_path(cmd[0], env);
 	if (!path)
 	{
 		free_dbl_tab(cmd);
-		perror(RED"Error -> issue finding path\n"RESET);
+		perror(RED "Error -> issue finding path\n" RESET);
 		exit(EXIT_FAILURE);
 	}
 	if (execve(path, cmd, env) == -1)
 	{
 		free(path);
 		free_dbl_tab(cmd);
-		perror(RED"Error -> execution failure\n"RESET);
+		perror(RED "Error -> execution failure\n" RESET);
 		exit(EXIT_FAILURE);
 	}
 	free(path);

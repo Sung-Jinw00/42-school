@@ -10,25 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "bintree_test.h"
 #include <stdio.h>
+#include <stdlib.h>
 
-int len_bt(BinTree *bt)
+int	len_bt(BinTree *bt)
 {
 	if (!bt)
 		return (0);
 	return (1 + len_bt(bt->left) + len_bt(bt->right));
 }
 
-int high_bt(BinTree *bt)
+int	high_bt(BinTree *bt)
 {
 	int h1, h2;
 	if (!bt)
 		return (0);
 	h1 = high_bt(bt->left);
 	h2 = high_bt(bt->right);
-
 	if (h1 > h2)
 		return (1 + h1);
 	return (1 + h2);
@@ -42,8 +41,8 @@ Node	*create_node(int data)
 	if (!node)
 		return (NULL);
 	node->data = data;
-	node->left= NULL;
-	node->right= NULL;
+	node->left = NULL;
+	node->right = NULL;
 	return (node);
 }
 
@@ -84,9 +83,11 @@ BinTree	*search(BinTree *bt, int data)
 
 BinTree	*insert(BinTree *bt, int data)
 {
-	BinTree	*prec = NULL;
-	BinTree	*head = bt;
+	BinTree	*prec;
+	BinTree	*head;
 
+	prec = NULL;
+	head = bt;
 	if (!bt)
 		return (create_node(data));
 	while (bt)

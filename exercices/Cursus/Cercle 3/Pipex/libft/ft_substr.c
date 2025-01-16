@@ -42,20 +42,20 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 /* #include <stdio.h>
 #include <string.h>
 
-int main(void)
+int	main(void)
 {
 	char *str = "01234";
- 	size_t size = 10;
- 	char *ret = ft_substr(str, 10, size);
+	size_t size = 10;
+	char *ret = ft_substr(str, 10, size);
 
 
 	printf("%s\n", ret);
- 	if (!strncmp(ret, "", 1))
- 	{
- 		free(ret);
+	if (!strncmp(ret, "", 1))
+	{
+		free(ret);
 		printf("nickel");
- 		return (0);
- 	}
- 	free(ret);
+		return (0);
+	}
+	free(ret);
 	return (0);
 } */

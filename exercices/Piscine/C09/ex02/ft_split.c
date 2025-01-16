@@ -105,17 +105,22 @@ char	**ft_split(char *str, char *charset)
 
 int	main(void)
 {
-	char *str1 = "   J'adore\tle C07   ";
-	char *charset1 = " \t'";
+	char	*str1;
+	char	*charset1;
+	char	*str2;
+	char	*charset2;
+	char	*str3;
+	char	*charset3;
+	char	**split;
+	int		i;
 
-	char *str2 = " '\t''   \t  ";
-	char *charset2 = " \t'";
-	
-	char *str3 = " J'adore le C07 ";
-	char *charset3 = "";
-	char **split;
-	int i = 0;
-	
+	str1 = "   J'adore\tle C07   ";
+	charset1 = " \t'";
+	str2 = " '\t''   \t  ";
+	charset2 = " \t'";
+	str3 = " J'adore le C07 ";
+	charset3 = "";
+	i = 0;
 	split = ft_split(str1, charset1);
 	if (split[i])
 	{

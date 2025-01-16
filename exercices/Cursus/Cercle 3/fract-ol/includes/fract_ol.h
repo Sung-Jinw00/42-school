@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:07:52 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/15 19:36:27 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/16 19:30:54 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@
 
 typedef struct s_colors
 {
-    unsigned int alpha;
-    unsigned int red;
-    unsigned int green;
-    unsigned int blue;
-	double angle;
-    double coef;
-    double color;
+	unsigned int	alpha;
+	unsigned int	red;
+	unsigned int	green;
+	unsigned int	blue;
+	double			angle;
+	double			coef;
+	double			color;
 }	t_colors;
 
 typedef struct s_fl_params
@@ -57,17 +57,17 @@ typedef struct s_pixels
 	int		y;
 	double	x_value;
 	double	y_value;
-	int 	color;
+	int		color;
 	double	w_move;
 	double	h_move;
 	double	w_scale;
 	double	h_scale;
 }	t_pixels;
 
-typedef struct	s_data
+typedef struct s_data
 {
 	char	*addr;
-	void	*img_ID;
+	void	*img_id;
 	int		endian;
 	int		line_length;
 	int		bits_per_pixel;
@@ -82,6 +82,8 @@ typedef struct s_mlx
 	t_fl_params	f_params;
 	int			ac;
 	char		**av;
+	double		divizor;
+	int			max_iter;
 }	t_mlx;
 
 int				main(int ac, char **av);
@@ -93,6 +95,7 @@ void			draw_fractals(t_mlx *mlx);
 void			set_mlx_datas(t_mlx *mlx);
 void			error(char *error_message, t_mlx *mlx);
 void			julia_presets(t_mlx *mlx, char preset_choice);
+void			multibrot_presets(t_mlx *mlx, char preset_choice);
 void			set_fractal_datas(t_mlx *mlx, int ac, char **av);
 char			*set_args(char *arg, int arg_nb, t_mlx *mlx);
 void			image_refresh(t_mlx *mlx);
@@ -107,12 +110,12 @@ int				multibrot_equation(double x, double y, double d);
 int				julia_equation(double x, double y, double c_re, double c_im);
 
 //libft
-int			ft_strcmp_frctl(char *s1, char *s2);
-void		*ft_calloc(size_t nmemb, size_t size);
-void		ft_putstr_fd(char *s, int fd);
-void		ft_bzero(void *s, size_t n);
-double		ft_atod(char *nptr);
-size_t		ft_strlen(const char *s);
+int				ft_strcmp_frctl(char *s1, char *s2);
+void			*ft_calloc(size_t nmemb, size_t size);
+void			ft_putstr_fd(char *s, int fd);
+void			ft_bzero(void *s, size_t n);
+double			ft_atod(char *nptr);
+size_t			ft_strlen(const char *s);
 
 //nom des fractales
 # define MANDELBROT "Mandelbrot"
@@ -126,7 +129,7 @@ size_t		ft_strlen(const char *s);
 //parametres mlx et verif des equations
 # define WIDTH 1400
 # define HEIGHT 1000
-# define MAX_ITER 100
+# define MAX_ITER 150
 
 // Définitions de la souris
 # define LEFT_CLICK 1
@@ -157,7 +160,7 @@ size_t		ft_strlen(const char *s);
 # define WHITE       "\033[37m"  // Couleur blanche
 
 # define BRIGHT_BLACK  "\033[90m"  // Couleur noire claire
-# define BRIGHT_RED    "\033[91m"  // Couleur rouge clairUM_LOCK 65407     // Touche Num Lock
+# define BRIGHT_RED    "\033[91m"  // Couleur rouge clair
 /* Définition des couleurs de fond */
 # define BG_BLACK     "\033[40m"  // Fond noir
 # define BG_RED       "\033[41m"  // Fond rouge
@@ -208,6 +211,5 @@ size_t		ft_strlen(const char *s);
 # define OX_CHARTREUSE  0x0000FF00  // Couleur chartreuse
 # define OX_CORAL       0x007F5042  // Couleur corail
 # define OX_PEARL       0x00E68C8C  // Couleur perle
-
 
 #endif

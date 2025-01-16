@@ -26,7 +26,7 @@ t_btree	*btree_create_node(void *item)
 
 /* #include <stdio.h>
 
-int main(void)
+int	main(void)
 {
 	t_btree *new_btree;
 	int i = 1;

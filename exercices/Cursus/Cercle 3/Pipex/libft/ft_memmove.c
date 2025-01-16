@@ -43,15 +43,15 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 #define TEST_FAILED ("C'est faux")
 #define TEST_SUCCESS ("C'est valide")
 
-int main(void)
+int	main(void)
 {
- 	memmove(((void*)0), ((void*)0), 5);
- 	ft_memmove(((void*)0), ((void*)0), 5);
+	memmove(((void*)0), ((void*)0), 5);
+	ft_memmove(((void*)0), ((void*)0), 5);
 	printf("original : %s\ncopie : %s\n", (char *)memmove(((void*)0), \
 	((void*)0), 5), (char *)ft_memmove(((void*)0), ((void*)0), 5));
 	return(0);
 } */
 /* printf("%s", TEST_SUCCESS);
- 	printf("%s", TEST_FAILED);
+	printf("%s", TEST_FAILED);
 	printf("original : %s\ncopie : %s\n", (char *)memmove(dst1 + 3, dst1, \
 	size), (char *)ft_memmove(dst2 + 3, dst2, size)) */

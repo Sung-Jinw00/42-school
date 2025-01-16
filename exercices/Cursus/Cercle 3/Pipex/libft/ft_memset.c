@@ -27,7 +27,7 @@ void	*ft_memset(void *s, int c, size_t n)
 
 /* #include <stdio.h>
 
-int main(void)
+int	main(void)
 {
 	void *s = malloc(30);
 	int c = 49;

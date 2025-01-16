@@ -14,15 +14,14 @@
 
 int	ft_isalpha(int c)
 {
-	if ((c >= 'A' && c <= 'Z')
-		|| (c >= 'a' && c <= 'z'))
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
 		return (1);
 	return (0);
 }
 
 /* #include <stdio.h>
 
-int main(void)
+int	main(void)
 {
 	printf("%d\n", ft_isalpha(97));
 	return(0);

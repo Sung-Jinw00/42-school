@@ -14,12 +14,12 @@
 
 char	*itoa(int nbr)
 {
-	char *	cpy;
-	int i;
-	long nb;
-	long n;
-	int sign;
-	
+	char	*cpy;
+	int		i;
+	long	nb;
+	long	n;
+	int		sign;
+
 	i = -1;
 	sign = 0;
 	nb = nbr;
@@ -50,7 +50,6 @@ char	*itoa(int nbr)
 	if (sign == 1)
 		cpy[0] = '-';
 	return (cpy);
-	
 }
 
 #include <stdio.h>

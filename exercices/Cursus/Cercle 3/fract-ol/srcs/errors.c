@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 17:14:34 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/15 20:17:31 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/16 19:28:17 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ void	error(char *error_message, t_mlx *mlx)
 
 void	help_message2(void)
 {
+	ft_printf("your "BOLD"3rd argument"RESET" to chose between");
 	ft_printf(" 5 pretty different variants of Julia's fratal.\n\n");
 	ft_printf(" \t\t- For "BOLD"Multibrot"RESET", you can specify the ");
 	ft_printf("amount of Mandelbrot fractals you want to merge between ");
-	ft_printf(BOLD"1 and 5\n\t\t "RESET" like "BOLD"Julia's presets."RESET);
+	ft_printf(BOLD "1 and 5\n\t\t "RESET" like "BOLD"Julia's presets."RESET);
 	ft_printf("\n\t\t (There's a secret preset for Multibrot, will you be ");
 	ft_printf("the one who find it ? >:3)\n\n\t[4] ");
 	ft_printf(UNDERLINE"Close the window :\n"RESET"\t\tYou can close the ");
@@ -41,7 +42,7 @@ void	help_message(void)
 	ft_printf("properly :\n\t[1] "BOLD"Compile the program :\n"RESET);
 	ft_printf("\t\tYou should have created");
 	ft_printf(" the "BOLD"./fract-ol"RESET" executable.\n\n\t"RESET);
-	ft_printf("[2] "BOLD"Choose your fractal, but how ?"RESET"\n\t\t");
+	ft_printf("[2] "BOLD"Choose your fractal, but how ?"RESET"\n\t\t  ");
 	ft_printf("Theses are "BOLD"the valid names"RESET" that you will use as ");
 	ft_printf("your "BOLD"first argument"RESET" :\n\t\t- "BOLD"Mandelbrot");
 	ft_printf(RESET"\n\t\t- "BOLD"Julia"RESET"\n\t\t- "BOLD"Multibrot"RESET);
@@ -59,7 +60,6 @@ void	help_message(void)
 	ft_printf("arguments.\n"RESET"\n \t\t- Always on "BOLD"Julia's fractal");
 	ft_printf(RESET", you can type \"preset\" as the "BOLD"2nd argument");
 	ft_printf(RESET" and a number between "BOLD"1 and 5"RESET" as\n\t\t  ");
-	ft_printf("your "BOLD"3rd argument"RESET" to chose between");
 	help_message2();
 	ft_printf("\n\n Now, you're ready to do all the tests ");
 	ft_printf("that you want, "BOLD"enjoy !\n"RESET);

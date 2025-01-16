@@ -12,6 +12,7 @@
 
 #include "ft_list.h"
 #include <stdlib.h>
+
 /* #include <stdio.h>
 		printf("%s\n", (char *)begin_list->data); */
 
@@ -34,12 +35,12 @@ void	ft_list_clear(t_list *begin_list, void (*free_fct)(void *))
 	free(data);
 }
 
-t_list *add_elems(t_list *elem, char **strs, int mark, int pos)
+t_list	*add_elems(t_list *elem, char **strs, int mark, int pos)
 {
-	t_list *cur;
-	t_list *prev;
-	t_list *cell;
-	int i;
+	t_list	*cur;
+	t_list	*prev;
+	t_list	*cell;
+	int		i;
 
 	i = 1;
 	cur = elem;
@@ -57,12 +58,12 @@ t_list *add_elems(t_list *elem, char **strs, int mark, int pos)
 	}
 	prev->next = cell;
 	return (elem);
-} 
+}
 
-t_list *ft_list_push_strs(int size, char **strs)
+t_list	*ft_list_push_strs(int size, char **strs)
 {
-	t_list *newlist;
-	int i;
+	t_list	*newlist;
+	int		i;
 
 	i = 1;
 	newlist = ft_create_elem(strs[size - 1]);

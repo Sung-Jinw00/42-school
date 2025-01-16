@@ -72,7 +72,7 @@ t_list	*free_list(t_list *L)
 	}
 }
 
-int main(void)
+int	main(void)
 {
 	t_list *lst;
 

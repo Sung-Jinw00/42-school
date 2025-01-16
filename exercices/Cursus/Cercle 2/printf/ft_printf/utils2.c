@@ -86,10 +86,10 @@ void	ptr_print(size_t nb, t_struct v)
 		nb_cpy = nb;
 		while (nb_cpy >= base)
 			nb_cpy /= 16;
-		write (1, &str[nb_cpy % 16], 1);
+		write(1, &str[nb_cpy % 16], 1);
 		base *= 16;
 	}
-	write (1, &str[nb % 16], 1);
+	write(1, &str[nb % 16], 1);
 }
 
 size_t	ft_strlen(const char *s)

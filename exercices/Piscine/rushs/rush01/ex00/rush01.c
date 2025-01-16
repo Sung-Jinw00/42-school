@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-int	ft_error(void);
-int	start_check(int *conditions, int *answer, int cases, int val_max);
+int		ft_error(void);
+int		start_check(int *conditions, int *answer, int cases, int val_max);
 
 int	*ft_write_malloc(int *cond_gril, char **av, int indice)
 {
@@ -94,7 +94,7 @@ int	rush01(char **av, int indice)
 	cases = 0;
 	i = 0;
 	j = 0;
-	answer = (int *)malloc(sizeof(int) *((indice * indice) + 1));
+	answer = (int *)malloc(sizeof(int) * ((indice * indice) + 1));
 	if (!answer)
 		return (0);
 	cond_gril = (int *)malloc(sizeof(int) * 32);

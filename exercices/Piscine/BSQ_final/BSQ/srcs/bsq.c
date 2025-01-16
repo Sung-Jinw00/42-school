@@ -90,9 +90,9 @@ int	loop_main(char *x, int c)
 
 int	check_map(char **res)
 {
-	int			i;
-	int			j;
-	int			c;
+	int	i;
+	int	j;
+	int	c;
 
 	i = 0;
 	j = 0;

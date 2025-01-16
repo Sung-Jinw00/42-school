@@ -36,10 +36,10 @@ void	ft_list_merge(t_list **begin_list1, t_list *begin_list2)
 
 t_list	*add_at(t_list *L, void *data, int pos)
 {
-	t_list *prec;
-	t_list *cur;
-	t_list *cell;
-	int i;
+	t_list	*prec;
+	t_list	*cur;
+	t_list	*cell;
+	int		i;
 
 	i = 0;
 	cur = L;

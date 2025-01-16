@@ -80,7 +80,7 @@ void	ft_sort_string_tab(char **tab)
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(void)
+int	main(void)
 {
 	char *tab1[4];
 	char *tab2[10];
@@ -93,7 +93,7 @@ int main(void)
 	tab1[1] = "bataille";
 	tab1[2] = "blaireau";
 	tab1[3] = NULL;
-	
+
 	tab2[0] = "echarpe";
 	tab2[1] = "ecran";
 	tab2[2] = "enum";
@@ -104,7 +104,7 @@ int main(void)
 	tab2[7] = "BSQ";
 	tab2[8] = "banane";
 	tab2[9] = NULL;
-	
+
 	tab3[0] = "hallo";
 	tab3[1] = "hallo";
 	tab3[2] = "monsieur";
@@ -112,12 +112,12 @@ int main(void)
 	tab3[4] = "ordi";
 	tab3[5] = "nateur";
 	tab3[6] = NULL;
-	
+
 	tab4[0] = "oui";
 	tab4[1] = "non";
 	tab4[2] = NULL;
-	
-	
+
+
 	result = ft_sort_string_tab(tab1);
 	while (result[i])
 	{

@@ -16,6 +16,8 @@
 
 void	print_list(t_list *L)
 {
+	int	i;
+
 	while (L)
 	{
 		printf("%s ", (char *)L->data);
@@ -23,11 +25,8 @@ void	print_list(t_list *L)
 	}
 	printf("\n");
 } */
-
 t_list	*lastelem(t_list *L, int size)
 {
-	int	i;
-
 	i = 0;
 	while (i < size)
 	{
@@ -71,10 +70,10 @@ void	ft_list_reverse(t_list **begin_list)
 
 /* t_list	*add_at(t_list *L, void *data, int pos)
 {
-	t_list *prec;
-	t_list *cur;
-	t_list *cell;
-	int i;
+	t_list	*prec;
+	t_list	*cur;
+	t_list	*cell;
+	int		i;
 
 	i = 0;
 	cur = L;

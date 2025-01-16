@@ -11,16 +11,17 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+
 /* #include <stdio.h>
 
 void	f(void *content)
 {
+	t_list	*cur;
+
 	*(int *)content += 5;
 } */
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	t_list	*cur;
-
 	if (!lst)
 		return ;
 	cur = lst;
@@ -37,7 +38,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 	t_list	*cur;
 	int		i;
 	t_list	*cell;
-	int *nb;
+	int		*nb;
 
 	nb = malloc(4);
 	*nb = data;
@@ -88,7 +89,7 @@ void	print_list(t_list *L)
 	printf("\n");
 }
 
-int main(void)
+int	main(void)
 {
 	t_list *lst;
 

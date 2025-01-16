@@ -22,11 +22,11 @@ void	ft_swap(int *a, int *b)
 }
 
 /*
-int main(void)
+int	main(void)
 {
 	int a;
 	int b;
-	
+
 	a = 3;
 	b = 6;
 	ft_swap(&a, &b);

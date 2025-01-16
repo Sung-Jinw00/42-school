@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 17:02:06 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/15 19:30:30 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/16 19:25:47 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	free_all(t_mlx *mlx)
 {
-	if (mlx->img.img_ID)
-		mlx_destroy_image(mlx->init, mlx->img.img_ID);
+	if (mlx->img.img_id)
+		mlx_destroy_image(mlx->init, mlx->img.img_id);
 	if (mlx->window)
 		mlx_destroy_window(mlx->init, mlx->window);
 	if (mlx->init)
@@ -26,7 +26,7 @@ void	free_all(t_mlx *mlx)
 
 int	main(int ac, char **av)
 {
-	t_mlx *mlx;
+	t_mlx	*mlx;
 
 	mlx = ft_calloc(sizeof(t_mlx), 1);
 	if (ac >= 2 && ac <= 4)

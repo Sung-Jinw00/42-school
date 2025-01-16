@@ -104,7 +104,7 @@ void	ft_print_memory(void *addr, unsigned int size)
 		print_add(adr, hexa);
 		print_sxtnchar(memadd + i, hexa);
 		print_txt(memadd + i);
-		write (1, "\n", 1);
+		write(1, "\n", 1);
 		i += 16;
 	}
 }
@@ -112,8 +112,8 @@ void	ft_print_memory(void *addr, unsigned int size)
 /* int main(void)
 {
 	ft_print_memory("Bonjour les amis, c'est fou tout ce qu'on peut faire avec\
-	 print_memory... lol lol lol.          ....xxxxo...........xxxx...........\
-	 ox 	xxxoo.....o....xxxx.o...o.........o..........o.o.......o.........o\
-	 .....o...", 208);
+		print_memory... lol lol lol.          ....xxxxo...........xxxx...........\
+		ox 	xxxoo.....o....xxxx.o...o.........o..........o.o.......o.........o\
+		.....o...", 208);
 	return (0);
 } */

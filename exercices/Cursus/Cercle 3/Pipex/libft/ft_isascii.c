@@ -21,7 +21,7 @@ int	ft_isascii(int c)
 
 /* #include <stdio.h>
 
-int main(void)
+int	main(void)
 {
 	printf("%d\n", ft_isascii(127));
 	return(0);

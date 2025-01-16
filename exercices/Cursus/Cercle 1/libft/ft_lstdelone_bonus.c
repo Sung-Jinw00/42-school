@@ -16,7 +16,6 @@
 {
 	free(content);
 }  */
-
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
 	if (!lst)
@@ -44,7 +43,7 @@ t_list	*add_at(t_list *L, int data, int pos)
 	t_list	*cur;
 	int		i;
 	t_list	*cell;
-	int *nb;
+	int		*nb;
 
 	nb = malloc(4);
 	*nb = data;
@@ -85,9 +84,9 @@ void	print_list(t_list *L)
 	printf("\n");
 }
 
-int main(void)
+int	main(void)
 {
-	t_list *lst;
+	t_list	*lst;
 
 	lst = NULL;
 	lst = add_at(lst, 5, 0);

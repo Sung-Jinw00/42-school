@@ -36,18 +36,18 @@ void	ft_print_comb2(void)
 		while (y <= 99)
 		{
 			ft_putnbr(x);
-			write (1, " ", 1);
+			write(1, " ", 1);
 			ft_putnbr(y);
 			if (x != 98)
-				write (1, ", ", 2);
+				write(1, ", ", 2);
 			y++;
 		}
 		x++;
 	}
 }
 
-int main(void)
+int	main(void)
 {
 	ft_print_comb2();
-	return(0);
+	return (0);
 }

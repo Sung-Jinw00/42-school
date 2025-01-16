@@ -43,8 +43,8 @@ int	*find_another_square(int *coords, char **map, t_coords *save)
 
 int	*search_square(char **tab, char *buffer, t_coords *save)
 {
-	int			*coords;
-	int			i;
+	int	*coords;
+	int	i;
 
 	i = 0;
 	coords = (int *)malloc(sizeof(int) * 3);

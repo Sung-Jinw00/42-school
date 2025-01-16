@@ -14,7 +14,9 @@
 
 void	tests_c(void)
 {
-	char c = 0;
+	char	c;
+
+	c = 0;
 	printf("//////////////////// Tests avec 'c' = 0 ////////////////////\n");
 	printf("/////test sans flags/////\n");
 	printf("original : %d\n", printf("original :   |%c|\n", c));
@@ -58,7 +60,8 @@ void	tests_c(void)
 	printf("copie    : %d\n", ft_printf("copie    :   |%#c|\n", c));
 	printf("\n\n\n");
 	c = 'l';
-	printf("//////////////////// Tests avec 'c' = '%c' ////////////////////\n", c);
+	printf("//////////////////// Tests avec 'c' = '%c' ////////////////////\n",
+		c);
 	printf("/////test sans flags/////\n");
 	printf("original : %d\n", printf("original :   |%c|\n", c));
 	fflush(stdout);
@@ -112,8 +115,11 @@ void	tests_c(void)
 
 void	tests_s(void)
 {
-	char *s = 0;
-	printf("//////////////////// Tests avec 's' = %s ////////////////////\n", s);
+	char	*s;
+
+	s = 0;
+	printf("//////////////////// Tests avec 's' = %s ////////////////////\n",
+		s);
 	printf("/////test sans flags/////\n");
 	printf("original : %d\n", printf("original :   |%s|\n", s));
 	fflush(stdout);
@@ -164,7 +170,8 @@ void	tests_s(void)
 	printf("copie    : %d\n", ft_printf("copie    :   |%#s|\n", s));
 	printf("\n\n\n");
 	s = "Yo boi";
-	printf("//////////////////// Tests avec 's' = \"%s\" ////////////////////\n", s);
+	printf("//////////////////// Tests avec 's' = \"%s\"
+		////////////////////\n", s);
 	printf("/////test sans flags/////\n");
 	printf("original : %d\n", printf("original :   |%s|\n", s));
 	fflush(stdout);
@@ -218,8 +225,12 @@ void	tests_s(void)
 
 void	tests_d(void)
 {
-	char *ptr = 0;
-	printf("//////////////////// Tests avec 'p' = %p ////////////////////\n", ptr);
+	char	*ptr;
+	void	*ptr2;
+
+	ptr = 0;
+	printf("//////////////////// Tests avec 'p' = %p ////////////////////\n",
+		ptr);
 	printf("/////test sans flags/////\n");
 	printf("original : %d\n", printf("original :   |%p|\n", ptr));
 	fflush(stdout);
@@ -269,7 +280,7 @@ void	tests_d(void)
 	fflush(stdout);
 	printf("copie    : %d\n", ft_printf("copie    :   |%#p|\n", ptr));
 	printf("\n\n\n");
-	void *ptr2 = (void *)0x343545;
+	ptr2 = (void *)0x343545;
 	printf("/////test sans flags/////\n");
 	printf("original : %d\n", printf("original :   |%p|\n", ptr2));
 	fflush(stdout);
@@ -323,8 +334,11 @@ void	tests_d(void)
 
 void	tests_i(void)
 {
-	int d = 0;
-	printf("//////////////////// Tests avec 'd' = %d ////////////////////\n", d);
+	int	d;
+
+	d = 0;
+	printf("//////////////////// Tests avec 'd' = %d ////////////////////\n",
+		d);
 	printf("/////test sans flags/////\n");
 	printf("original : %d\n", printf("original :   |%d|\n", d));
 	fflush(stdout);
@@ -375,7 +389,8 @@ void	tests_i(void)
 	printf("copie    : %d\n", ft_printf("copie    :   |%#d|\n", d));
 	printf("\n\n\n");
 	d = -123;
-	printf("//////////////////// Tests avec 'd' = %d ////////////////////\n", d);
+	printf("//////////////////// Tests avec 'd' = %d ////////////////////\n",
+		d);
 	printf("/////test sans flags/////\n");
 	printf("original : %d\n", printf("original :   |%d|\n", d));
 	fflush(stdout);
@@ -426,7 +441,8 @@ void	tests_i(void)
 	printf("copie    : %d\n", ft_printf("copie    :   |%#d|\n", d));
 	printf("\n\n\n");
 	d = 1;
-	printf("//////////////////// Tests avec 'd' = %d ////////////////////\n", d);
+	printf("//////////////////// Tests avec 'd' = %d ////////////////////\n",
+		d);
 	printf("/////test sans flags/////\n");
 	printf("original : %d\n", printf("original :   |%d|\n", d));
 	fflush(stdout);
@@ -480,8 +496,11 @@ void	tests_i(void)
 
 void	tests_u(void)
 {
-	long u = 0;
-	printf("//////////////////// Tests avec 'u' = %u ////////////////////\n", u);
+	long	u;
+
+	u = 0;
+	printf("//////////////////// Tests avec 'u' = %u ////////////////////\n",
+		u);
 	printf("/////test sans flags/////\n");
 	printf("original : %d\n", printf("original :   |%u|\n", u));
 	fflush(stdout);
@@ -532,7 +551,8 @@ void	tests_u(void)
 	printf("copie    : %d\n", ft_printf("copie    :   |%#u|\n", u));
 	printf("\n\n\n");
 	u = 1;
-	printf("//////////////////// Tests avec 'u' = %u ////////////////////\n", u);
+	printf("//////////////////// Tests avec 'u' = %u ////////////////////\n",
+		u);
 	printf("/////test sans flags/////\n");
 	printf("original : %d\n", printf("original :   |%u|\n", u));
 	fflush(stdout);
@@ -583,7 +603,8 @@ void	tests_u(void)
 	printf("copie    : %d\n", ft_printf("copie    :   |%#u|\n", u));
 	printf("\n\n\n");
 	u = -1;
-	printf("//////////////////// Tests avec 'u' = %i ////////////////////\n", u);
+	printf("//////////////////// Tests avec 'u' = %i ////////////////////\n",
+		u);
 	printf("/////test sans flags/////\n");
 	printf("original : %d\n", printf("original :   |%u|\n", u));
 	fflush(stdout);
@@ -637,8 +658,11 @@ void	tests_u(void)
 
 void	tests_x(void)
 {
-	int x = 0;
-	printf("//////////////////// Tests avec 'x' pour x = %i ////////////////////\n", x);
+	int	x;
+
+	x = 0;
+	printf("//////////////////// Tests avec 'x' pour x = %i
+		////////////////////\n", x);
 	printf("/////test sans flags/////\n");
 	printf("original : %d\n", printf("original :   |%x|\n", x));
 	fflush(stdout);
@@ -689,7 +713,8 @@ void	tests_x(void)
 	printf("copie    : %d\n", ft_printf("copie    :   |%#x|\n", x));
 	printf("\n\n\n");
 	x = -1;
-	printf("//////////////////// Tests avec 'x' pour x = %i ////////////////////\n", x);
+	printf("//////////////////// Tests avec 'x' pour x = %i
+		////////////////////\n", x);
 	printf("/////test sans flags/////\n");
 	printf("original : %d\n", printf("original :   |%x|\n", x));
 	fflush(stdout);
@@ -740,7 +765,8 @@ void	tests_x(void)
 	printf("copie    : %d\n", ft_printf("copie    :   |%#x|\n", x));
 	printf("\n\n\n");
 	x = 1;
-	printf("//////////////////// Tests avec 'x' pour x = %i ////////////////////\n", x);
+	printf("//////////////////// Tests avec 'x' pour x = %i
+		////////////////////\n", x);
 	printf("/////test sans flags/////\n");
 	printf("original : %d\n", printf("original :   |%x|\n", x));
 	fflush(stdout);
@@ -794,8 +820,11 @@ void	tests_x(void)
 
 void	tests_x_maj(void)
 {
-	int x = 0;
-	printf("//////////////////// Tests avec 'X' pour x = %i ////////////////////\n", x);
+	int	x;
+
+	x = 0;
+	printf("//////////////////// Tests avec 'X' pour x = %i
+		////////////////////\n", x);
 	printf("/////test sans flags/////\n");
 	printf("original : %d\n", printf("original :   |%X|\n", x));
 	fflush(stdout);
@@ -846,7 +875,8 @@ void	tests_x_maj(void)
 	printf("copie    : %d\n", ft_printf("copie    :   |%#X|\n", x));
 	printf("\n\n\n");
 	x = -1;
-	printf("//////////////////// Tests avec 'X' pour x = %i ////////////////////\n", x);
+	printf("//////////////////// Tests avec 'X' pour x = %i
+		////////////////////\n", x);
 	printf("/////test sans flags/////\n");
 	printf("original : %d\n", printf("original :   |%X|\n", x));
 	fflush(stdout);
@@ -897,7 +927,8 @@ void	tests_x_maj(void)
 	printf("copie    : %d\n", ft_printf("copie    :   |%#X|\n", x));
 	printf("\n\n\n");
 	x = 1;
-	printf("//////////////////// Tests avec 'X' pour x = %i ////////////////////\n", x);
+	printf("//////////////////// Tests avec 'X' pour x = %i
+		////////////////////\n", x);
 	printf("/////test sans flags/////\n");
 	printf("original : %d\n", printf("original :   |%X|\n", x));
 	fflush(stdout);

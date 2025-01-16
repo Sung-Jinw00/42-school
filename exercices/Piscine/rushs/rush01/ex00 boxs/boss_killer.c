@@ -12,11 +12,11 @@
 
 #include "r01boxs.h"
 
-int		**ft_strdup(int **src, int val_max)
+int	**ft_strdup(int **src, int val_max)
 {
-	int		**cpy;
-	int		i;
-	int		j;
+	int	**cpy;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = -1;
@@ -27,12 +27,12 @@ int		**ft_strdup(int **src, int val_max)
 	{
 		cpy[i] = malloc(sizeof(int) * (val_max * val_max));
 		if (!cpy[i]) // Vérifiez l'allocation
-        {
-            while (i > 0)
-                free(cpy[--i]); // Libération de la mémoire déjà allouée
-            free(cpy);
-            return (NULL);
-        }
+		{
+			while (i > 0)
+				free(cpy[--i]); // Libération de la mémoire déjà allouée
+			free(cpy);
+			return (NULL);
+		}
 		while (++j < val_max * val_max)
 			cpy[i][j] = src[i][j];
 		i++;
@@ -46,5 +46,5 @@ int		**ft_strdup(int **src, int val_max)
 	int **answer_copy;
 	answer_copy = ft_strdup(answer, val_max);
 
-	free(answer_copy); 
+	free(answer_copy);
 } */

@@ -19,16 +19,15 @@
 
 void	*f(void *content)
 {
-	*(int *)content += 5;
-	return (content);
-} */
-
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
-{
 	t_list	*newlist;
 	t_list	*start_newlist;
 	t_list	*temp;
 
+	*(int *)content += 5;
+	return (content);
+} */
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+{
 	newlist = malloc(sizeof(t_list));
 	if (!lst || !newlist)
 		return (NULL);
@@ -71,7 +70,7 @@ t_list	*add_at(t_list *L, int data, int pos)
 	t_list	*cur;
 	int		i;
 	t_list	*cell;
-	int *nb;
+	int		*nb;
 
 	nb = malloc(4);
 	*nb = data;
@@ -109,7 +108,7 @@ void	print_list(t_list *L)
 	printf("\n");
 }
 
-int main(void)
+int	main(void)
 {
 	t_list *lst;
 

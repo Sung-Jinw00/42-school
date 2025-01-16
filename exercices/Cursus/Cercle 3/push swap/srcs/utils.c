@@ -46,7 +46,7 @@ int	ft_natoi(const char *nptr, int *i, t_list *a_list)
 			sign = -sign;
 		*i += 1;
 		if (!(nptr[*i] >= '0' && nptr[*i] <= '9'))
-			error(RED"Error : Invalid arguments !\n"RESET, a_list);
+			error(RED "Error : Invalid arguments !\n" RESET, a_list);
 	}
 	while (nptr[*i] >= '0' && nptr[*i] <= '9')
 	{
@@ -54,7 +54,7 @@ int	ft_natoi(const char *nptr, int *i, t_list *a_list)
 		*i += 1;
 	}
 	if (result < INT_MIN || result > INT_MAX)
-		error(RED"Error : Number bigger than int !\n"RESET, a_list);
+		error(RED "Error : Number bigger than int !\n" RESET, a_list);
 	return (result * sign);
 }
 

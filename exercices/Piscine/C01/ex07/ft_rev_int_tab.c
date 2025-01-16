@@ -38,9 +38,9 @@ void	ft_rev_int_tab(int *tab, int size)
 } */
 
 //////////a mettre a la fin de ft_rev_int_tab//////
-	/* i = 0;
-	while (i < size)
-	{
-		printf("%d\n", tab[i]);
-		i++;
-	} */
+/* i = 0;
+while (i < size)
+{
+	printf("%d\n", tab[i]);
+	i++;
+} */

@@ -10,30 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "ft_list.h"
+#include <stdlib.h>
+
 /* #include <stdio.h>
 
 void	print_elem(t_list *elem)
 {
+	t_list	*elem;
+
 	while (elem)
 	{
 		printf("%s\n", (char *)elem->data);
 		elem = elem->next;
 	}
 } */
-
 t_list	*ft_create_elem(void *data)
 {
-	t_list	*elem;
-
 	elem = malloc(sizeof(t_list));
 	elem->data = data;
 	elem->next = NULL;
 	return (elem);
 }
 
-	//print_elem(elem);
+// print_elem(elem);
 /* int main (void)
 {
 	void *data = "Hello world";

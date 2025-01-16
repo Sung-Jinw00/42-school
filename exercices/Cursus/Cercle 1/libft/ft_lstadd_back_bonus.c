@@ -37,7 +37,7 @@ t_list	*add_at(t_list *L, int data, int pos)
 	t_list	*cur;
 	int		i;
 	t_list	*cell;
-	int *nb;
+	int		*nb;
 
 	nb = malloc(4);
 	*nb = data;
@@ -88,9 +88,10 @@ void	print_list(t_list *L)
 	printf("\n");
 }
 
-int main(void)
+int	main(void)
 {
-	t_list *lst;
+	t_list	*lst;
+	int		*nb;
 
 	lst = NULL;
 	lst = add_at(lst, 5, 0);
@@ -100,7 +101,7 @@ int main(void)
 	lst = add_at(lst, 9, 0);
 	lst = add_at(lst, 2, 0);
 	print_list(lst);
-	int *nb = malloc(4);
+	nb = malloc(4);
 	*nb = 13;
 	ft_lstadd_back(&lst, ft_lstnew(nb));
 	print_list(lst);
@@ -113,20 +114,20 @@ int main(void)
 /* #include <stdio.h>
 #include <string.h>
 
-int main(void)
+int	main(void)
 {
 	t_list *l = ((void*)0);
- 	t_list *n = ft_lstnew(strdup("OK"));
- 
- 	ft_lstadd_back(&l, n);
- 	if (l == n && !strcmp(l->content, "OK"))
- 	{
- 		free(l->next);
- 		free(l);
- 		printf("gg mec");
+	t_list *n = ft_lstnew(strdup("OK"));
+
+	ft_lstadd_back(&l, n);
+	if (l == n && !strcmp(l->content, "OK"))
+	{
+		free(l->next);
+		free(l);
+		printf("gg mec");
 		return (0);
- 	}
- 	free(l->next);
- 	free(l);
+	}
+	free(l->next);
+	free(l);
 	return (0);
 } */

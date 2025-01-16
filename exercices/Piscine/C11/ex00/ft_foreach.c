@@ -14,6 +14,8 @@
 
 void	ft_putnbr(int n)
 {
+	int	i;
+
 	if (n == -2147483648)
 	{
 		write (1, "-2147483648", 11);
@@ -29,11 +31,8 @@ void	ft_putnbr(int n)
 	n = n % 10 + '0';
 	write (1, &n, 1);
 } */
-
 void	ft_foreach(int *tab, int length, void (*f)(int))
 {
-	int	i;
-
 	i = 0;
 	while (i < length)
 	{
@@ -44,9 +43,10 @@ void	ft_foreach(int *tab, int length, void (*f)(int))
 
 /* #include <stdio.h>
 #include <limits.h>
+
 		write (1, "\n", 1);
 
-int main(void)
+int	main(void)
 {
 	int tab1[6] = {INT_MIN, -146, 0, 237, 724, INT_MAX};
 	int tab2[1] = {0};

@@ -19,8 +19,8 @@ void	ft_putchar(char c)
 
 void	ft_putstr_non_printable(char *str)
 {
-	int			i;
-	char		*hexa;
+	int		i;
+	char	*hexa;
 
 	i = 0;
 	hexa = "0123456789abcdef";

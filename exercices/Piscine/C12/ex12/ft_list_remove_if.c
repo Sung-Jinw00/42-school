@@ -12,14 +12,14 @@
 
 #include "ft_list.h"
 /* #include <stdio.h>
-#include <unistd.h>
 #include <string.h>
+#include <unistd.h>
 
 int	ft_strcmp(void *s1, void *s2)
 {
-	char *a;
-	char *b;
-	int i;
+	char	*a;
+	char	*b;
+	int		i;
 
 	i = -1;
 	a = (char *)s1;
@@ -32,13 +32,13 @@ int	ft_strcmp(void *s1, void *s2)
 
 void	free_fct(void *data)
 {
-	free(data);
-} */
-void	ft_list_remove_if2(t_list **cur, t_list **prev, void *data_ref, \
-int (*cmp)())
-{
 	t_list	*temp;
 
+	free(data);
+} */
+void	ft_list_remove_if2(t_list **cur, t_list **prev, void *data_ref,
+		int (*cmp)())
+{
 	temp = NULL;
 	while (*cur)
 	{
@@ -48,7 +48,7 @@ int (*cmp)())
 			*cur = (*cur)->next;
 			(*prev)->next = *cur;
 			free_fct(temp->data);
-			free (temp);
+			free(temp);
 		}
 		else
 			*cur = (*prev)->next;
@@ -56,8 +56,8 @@ int (*cmp)())
 	}
 }
 
-void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), \
-void (*free_fct)(void *))
+void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(),
+		void (*free_fct)(void *))
 {
 	t_list	*cur;
 	t_list	*prev;
@@ -67,7 +67,7 @@ void (*free_fct)(void *))
 	{
 		cur = prev->next;
 		free_fct(prev->data);
-		free (prev);
+		free(prev);
 		prev = cur;
 	}
 	cur = prev->next;
@@ -86,10 +86,10 @@ void (*free_fct)(void *))
 
 t_list	*add_at(t_list *L, void *data, int pos)
 {
-	t_list *prec;
-	t_list *cur;
-	t_list *cell;
-	int i;
+	t_list	*prec;
+	t_list	*cur;
+	t_list	*cell;
+	int		i;
 
 	i = 0;
 	cur = L;

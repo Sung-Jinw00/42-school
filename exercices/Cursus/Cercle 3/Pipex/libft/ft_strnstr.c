@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	*ft_strnstr(const char	*big, const char *little, size_t len)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	i;
 	size_t	j;
@@ -37,40 +37,41 @@ char	*ft_strnstr(const char	*big, const char *little, size_t len)
 
 /* #include <stdio.h>
 
-char *strnstr(const char *haystack, const char *needle, size_t len) 
+char	*strnstr(const char *haystack, const char *needle, size_t len)
 {
-    if (!*needle) 
-        return (char *)haystack;
+	size_t	i;
+	size_t	j;
 
-    size_t i = 0;
-    while (i < len && haystack[i] != '\0') 
-    {
-        size_t j = 0;
-        while (haystack[i + j] == needle[j] && (i + j) < len) 
-        {
-            if (needle[j + 1] == '\0') 
-            {
-                return (char *)(haystack + i);
-            }
-            ++j;
-        }
-        ++i;
-    }
-
-    return (NULL);
+	if (!*needle)
+		return ((char *)haystack);
+	i = 0;
+	while (i < len && haystack[i] != '\0')
+	{
+		j = 0;
+		while (haystack[i + j] == needle[j] && (i + j) < len)
+		{
+			if (needle[j + 1] == '\0')
+			{
+				return (char *)(haystack + i);
+			}
+			++j;
+		}
+		++i;
+	}
+	return (NULL);
 }
 
-int main(void)
+int	main(void)
 {
 	const size_t size = 20;
- 	char *s1 = "is there a nyacat ?";
- 	char *s2 = "is there a nyacat ?";
+	char *s1 = "is there a nyacat ?";
+	char *s2 = "is there a nyacat ?";
 
- 	char *i1 = strnstr(s1, s1, size);
- 	char *i2 = ft_strnstr(s1, ((void*)0), size);
+	char *i1 = strnstr(s1, s1, size);
+	char *i2 = ft_strnstr(s1, ((void*)0), size);
 
 	printf("original : %s\nreplique : %s\n", i1, i2);
- 	if (i1 == i2)
+	if (i1 == i2)
 		printf("c'est bon");
 	return (0);
 } */

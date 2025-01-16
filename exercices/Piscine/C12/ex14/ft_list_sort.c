@@ -26,9 +26,10 @@ void	print_list(t_list *L)
 
 int	ft_strcmp(void *s1, void *s2)
 {
-	char *a;
-	char *b;
-	int i;
+	char	*a;
+	char	*b;
+	int		i;
+	t_list	*temp;
 
 	i = -1;
 	a = (char *)s1;
@@ -38,11 +39,8 @@ int	ft_strcmp(void *s1, void *s2)
 			return (a[i] - b[i]);
 	return (0);
 } */
-
 void	ft_swap_list(t_list **pos1, t_list **pos2, t_list **pos3)
 {
-	t_list	*temp;
-
 	temp = NULL;
 	if (*pos1 && *pos2 && *pos3)
 	{
@@ -55,8 +53,8 @@ void	ft_swap_list(t_list **pos1, t_list **pos2, t_list **pos3)
 	}
 }
 
-void	switch_start(t_list **pos1, t_list **pos2, \
-t_list **pos3, t_list **begin_list)
+void	switch_start(t_list **pos1, t_list **pos2, t_list **pos3,
+		t_list **begin_list)
 {
 	t_list	*temp1;
 
@@ -130,10 +128,10 @@ void	ft_list_sort(t_list **begin_list, int (*cmp)())
 
 /* t_list	*add_at(t_list *L, void *data, int pos)
 {
-	t_list *prec;
-	t_list *cur;
-	t_list *cell;
-	int i;
+	t_list	*prec;
+	t_list	*cur;
+	t_list	*cell;
+	int		i;
 
 	i = 0;
 	cur = L;

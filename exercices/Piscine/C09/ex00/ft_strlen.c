@@ -22,7 +22,7 @@ int	ft_strlen(char *str)
 	return (i);
 }
 /*
-int main(void)
+int	main(void)
 {
 	char str[] = "Yeppi";
 	int i;

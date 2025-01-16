@@ -14,6 +14,9 @@
 
 /* char f(unsigned int i, char s)
 {
+	char			*cpy;
+	unsigned int	i;
+
 	if (s >= 'A' && s <= 'Z')
 		return (s += 32);
 	else if (s >= 'a' && s <= 'z')
@@ -24,12 +27,8 @@
 		return (s);
 	return (s);
 } */
-
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char			*cpy;
-	unsigned int	i;
-
 	i = 0;
 	cpy = malloc(ft_strlen(s) + 1);
 	if (!cpy)
@@ -45,7 +44,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 
 /* #include <stdio.h>
 
-int main(void)
+int	main(void)
 {
 	char *s = "Hello World";
 

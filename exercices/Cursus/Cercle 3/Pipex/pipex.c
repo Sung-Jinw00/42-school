@@ -62,9 +62,10 @@ int	main(int ac, char **av, char **env)
 	}
 	else
 	{
-		ft_putstr_fd(RED BOLD"Error : Invalid arguments !\n\n"RESET, 2);
-		ft_printf(BRIGHT_GREEN BOLD"Please, enter valid arguments like so :\n");
-		ft_printf(RESET CYAN"	./pipex file1 \"cmd1\" \"cmd2\" file2\n"RESET);
+		ft_putstr_fd(RED BOLD "Error : Invalid arguments !\n\n" RESET, 2);
+		ft_printf(BRIGHT_GREEN BOLD "Please,
+			enter valid arguments like so :\n");
+		ft_printf(RESET CYAN "	./pipex file1 \"cmd1\" \"cmd2\" file2\n" RESET);
 	}
 	return (0);
 }

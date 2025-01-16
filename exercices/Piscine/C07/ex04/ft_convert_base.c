@@ -12,8 +12,8 @@
 
 #include <stdlib.h>
 
-int	ft_atoi_base(char *str, char *base);
-int	ft_error(char *base);
+int		ft_atoi_base(char *str, char *base);
+int		ft_error(char *base);
 
 char	*ft_rev_int_tab(char *tab, int size)
 {
@@ -101,7 +101,7 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 #include <stdio.h>
 #include <unistd.h>
 
-int main(void)
+int	main(void)
 {
 	char nbr[] = " 300";
 	char base_from[] = "0123456789";

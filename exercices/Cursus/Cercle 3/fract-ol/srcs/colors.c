@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 19:29:59 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/15 16:52:33 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/16 19:27:19 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ unsigned int	rotate_hue(double iter)
 	colors.red = (unsigned int)(255 * (1 - my_cos(colors.angle)));
 	colors.green = (unsigned int)(255 * (1 - my_cos(colors.angle)));
 	colors.blue = (unsigned int)(255 * my_sin(colors.angle));
-	return ((colors.alpha << 24) | (colors.red << 16) | (colors.green << 8) | colors.blue);
+	return ((colors.alpha << 24) | (colors.red << 16)
+		| (colors.green << 8) | colors.blue);
 }

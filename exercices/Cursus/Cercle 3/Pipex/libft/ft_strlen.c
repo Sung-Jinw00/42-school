@@ -24,7 +24,7 @@ size_t	ft_strlen(const char *s)
 
 /* #include <stdio.h>
 
-int main(void)
+int	main(void)
 {
 	char str[] = "Yeppi";
 

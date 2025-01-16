@@ -21,7 +21,7 @@ int	ft_tolower(int c)
 
 /* #include <stdio.h>
 
-int main(void)
+int	main(void)
 {
 	printf("%c\n", (char)ft_tolower('z'));
 	return (0);

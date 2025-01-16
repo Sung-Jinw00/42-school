@@ -12,16 +12,15 @@
 
 /* int	ft_char(char *tab)
 {
+	int	i;
+	int	count;
+
 	if (tab[0])
 		return (1);
 	return (0);
 } */
-
-int	ft_count_if(char **tab, int length, int (*f)(char*))
+int	ft_count_if(char **tab, int length, int (*f)(char *))
 {
-	int	i;
-	int	count;
-
 	count = 0;
 	i = 0;
 	while (i < length)
@@ -36,7 +35,7 @@ int	ft_count_if(char **tab, int length, int (*f)(char*))
 /* #include <stdlib.h>
 #include <stdio.h>
 
-int main(void)
+int	main(void)
 {
 	char *tab1[4];
 	char *tab2[13];
@@ -59,7 +58,7 @@ int main(void)
 	tab2[10] = "";
 	tab2[11] = "non";
 	tab2[12] = NULL;
-	
+
 	printf("%d\n", ft_count_if(tab1, 3, &ft_char));
 	printf("%d\n", ft_count_if(tab2, 12, &ft_char));
 	return (0);

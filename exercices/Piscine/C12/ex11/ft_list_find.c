@@ -26,7 +26,6 @@ int	ft_strcmp(void *s1, void *s2)
 		}
 	return (result);
 } */
-
 t_list	*ft_list_find(t_list *begin_list, void *data_ref, int (*cmp)())
 {
 	while (begin_list)
@@ -50,10 +49,10 @@ t_list	*ft_list_find(t_list *begin_list, void *data_ref, int (*cmp)())
 
 t_list	*add_at(t_list *L, void *data, int pos)
 {
-	t_list *prec;
-	t_list *cur;
-	t_list *cell;
-	int i;
+	t_list	*prec;
+	t_list	*cur;
+	t_list	*cell;
+	int		i;
 
 	i = 0;
 	cur = L;

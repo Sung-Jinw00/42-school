@@ -25,7 +25,7 @@ void	ft_swap(int *a, int *b)
 {
 	int a;
 	int b;
-	
+
 	a = 3;
 	b = 6;
 	printf("a = %d\nb = %d\n\n", a, b);

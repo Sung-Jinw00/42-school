@@ -35,7 +35,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dsize)
 /* #include <stdio.h>
 #include <string.h>
 
-int main(void)
+int	main(void)
 {
 	char dest1[100] = "Hello ";
 	char src[] = "World";

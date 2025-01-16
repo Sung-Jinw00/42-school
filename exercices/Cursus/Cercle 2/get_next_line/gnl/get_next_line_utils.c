@@ -28,10 +28,10 @@ char	*ft_strchr(const char *s, int c)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	char		*new_string;
-	size_t		len;
-	size_t		i;
-	size_t		j;
+	char	*new_string;
+	size_t	len;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	j = 0;

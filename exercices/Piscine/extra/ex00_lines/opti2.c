@@ -12,14 +12,14 @@
 
 #include "lib.h"
 
-int *ft_calloc(int *tab, int size)
+int	*ft_calloc(int *tab, int size)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	tab = malloc(sizeof(int) * size);
 	if (!tab)
-		return(NULL);
+		return (NULL);
 	while (i < size)
 	{
 		tab[i] = 0;
@@ -28,14 +28,17 @@ int *ft_calloc(int *tab, int size)
 	return (tab);
 }
 
-int cond_peers_validity(int * conditions, int val_max)
+int	cond_peers_validity(int *conditions, int val_max)
 {
-	int cases = 0;
-	int peers = 0;
+	int	cases;
+	int	peers;
+
+	cases = 0;
+	peers = 0;
 	while (cases < val_max - 1)
 	{
-		peers = conditions[up_line_conds(cases, val_max)] \
-		+ conditions[low_line_conds(cases, val_max)];
+		peers = conditions[up_line_conds(cases, val_max)]
+			+ conditions[low_line_conds(cases, val_max)];
 		if (peers < 3 || peers > val_max + 1)
 			return (0);
 		cases++;
@@ -43,15 +46,15 @@ int cond_peers_validity(int * conditions, int val_max)
 	cases = 0;
 	while (!low_border(cases, val_max))
 	{
-		peers = conditions[left_col_conds(cases, val_max)] \
-		+ conditions[right_col_conds(cases, val_max)];
+		peers = conditions[left_col_conds(cases, val_max)]
+			+ conditions[right_col_conds(cases, val_max)];
 		if (peers < 3 || peers > val_max + 1)
 			return (0);
 		cases += val_max;
 		if (low_border(cases, val_max))
 		{
-			peers = conditions[left_col_conds(cases, val_max)] \
-			+ conditions[right_col_conds(cases, val_max)];
+			peers = conditions[left_col_conds(cases, val_max)]
+				+ conditions[right_col_conds(cases, val_max)];
 			if (peers < 3 || peers > val_max + 1)
 				return (0);
 		}
@@ -70,7 +73,7 @@ int	ft_recursive_factorial(int nb)
 
 int	if_charset(int val, int *charset, int k)
 {
-	int	j;
+	int j;
 
 	j = 0;
 	while (charset[j] && j < k)

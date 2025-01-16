@@ -11,22 +11,22 @@
 /* ************************************************************************** */
 
 #include "ft_list.h"
+
 /* #include <stdio.h>
 
 void	print_elem(t_list *elem)
 {
+	t_list	*last;
+	t_list	*begin;
+
 	while (elem)
 	{
 		printf("%s\n", (char *)elem->data);
 		elem = elem->next;
 	}
 }  */
-
 t_list	*add_elem(t_list *elem, void *data)
 {
-	t_list	*last;
-	t_list	*begin;
-
 	begin = elem;
 	while (elem->next)
 		elem = elem->next;
