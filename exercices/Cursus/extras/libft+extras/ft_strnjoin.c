@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:26:24 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/18 16:02:20 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/18 16:03:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* creates a new string by concatenate 2 strings */
+/* creates a new string by concatenate 2 strings, it adds n characters of s2
+	into s1 */
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strnjoin(char const *s1, char const *s2, size_t n)
 {
 	char	*new_string;
 	size_t	len;
@@ -29,7 +30,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	while (s1[++i] != '\0')
 		new_string[i] = s1[i];
-	while (s2[j] != '\0')
+	while (s2[j] != '\0' && j < n)
 		new_string[i++] = s2[j++];
 	new_string[i] = '\0';
 	return (new_string);
