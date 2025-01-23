@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 17:03:41 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/22 18:17:19 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/23 20:10:27 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	help_message(void)
 	printf("Please, try again !\n");
 }
 
-void	events(long long timelaps, int philosopher, char *action,\
-pthread_mutex_t writing)
+void	events(/* long long timelaps, int philosopher, char *action,\
+pthread_mutex_t writing */)
 {
-	pthread_mutex_lock(&writing);
+	/* pthread_mutex_lock(&writing);
 	if (ft_strcmp(action, "has taken a fork"))
 		printf(GREEN"%lld %d has taken a fork\n"RESET, timelaps, philosopher + 1);
 	else if (ft_strcmp(action, "is eating"))
@@ -34,5 +34,5 @@ pthread_mutex_t writing)
 		printf(CYAN"%lld %d is thinking\n"RESET, timelaps, philosopher + 1);
 	else if (ft_strcmp(action, "died"))
 		printf(RED"%lld %d died\n"RESET, timelaps, philosopher + 1);
-	pthread_mutex_unlock(&writing);
+	pthread_mutex_unlock(&writing); */
 }
