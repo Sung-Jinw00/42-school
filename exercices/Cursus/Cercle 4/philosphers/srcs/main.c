@@ -6,66 +6,61 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:58:02 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/23 20:32:56 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/24 18:05:31 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
-/*
+
 int	dead(t_philo *philo)
 {
-	t_philo *philo;
-
-	philo = philo;
 	pthread_mutex_lock(&(philo->writing));
-	if (philo[philo[philo->name].name].last_burger != 0 && timestamp() - \
-		philo[philo[philo->name].name].last_burger > philo->rules.life_expectancy)
+	if (timestamp() - philo->last_burger >= philo->rules->life_expectancy)
 	{
 		pthread_mutex_unlock(&(philo->writing));
-		return (events(timestamp() - \
-		philo[philo[philo->name].name].last_burger, philo[philo->name].name + 1, "died", philo->writing), 1);
+		return (1);
 	}
 	pthread_mutex_unlock(&(philo->writing));
 	return (0);
 }
 
-void	eat(t_philo	*philo)
+int	eat(t_philo	*philo)
 {
-	t_philo *philo;
-
-	philo = philo;
-	pthread_mutex_lock(&(philo->forks[philo->left_fork]));
-	events(timestamp() - philo->birth_time, philo[philo[philo->name].name].name, "has taken a fork", philo->writing);
-	pthread_mutex_lock(&(philo->forks[philo->right_fork]));
-	events(timestamp() - philo->birth_time, philo[philo->name].name, "has taken a fork", philo->writing);
-	pthread_mutex_lock(&(philo->order_of_the_burger));
-	events(timestamp() - philo->birth_time, philo[philo->name].name, "is eating", philo->writing);
-	usleep(philo->rules.burger_time);
+	if (philo->left_fork == philo->right_fork)
+		return (events(timestamp() - philo->last_burger, philo, "died"), 1);
+	pthread_mutex_lock(&(philo->rules->forks[philo->left_fork]));
+	if (events(timestamp() - philo->birth_time, philo, "has taken a fork"))
+		return (1);
+	pthread_mutex_lock(&(philo->rules->forks[philo->right_fork]));
+	if (events(timestamp() - philo->birth_time, philo, "has taken a fork")
+		|| events(timestamp() - philo->birth_time, philo, "is eating"))
+		return (1);
 	philo->last_burger = timestamp();
-	pthread_mutex_unlock(&(philo->order_of_the_burger));
-	pthread_mutex_unlock(&(philo->forks[philo->left_fork]));
-	pthread_mutex_unlock(&(philo->forks[philo->right_fork]));
+	smart_sleep(philo->rules->burger_time, philo);
+	pthread_mutex_unlock(&(philo->rules->forks[philo->left_fork]));
+	pthread_mutex_unlock(&(philo->rules->forks[philo->right_fork]));
+	return (0);
 }
-*/
+
 
 void	*survival(void *arg)
 {
-	t_philo *philo;
+	t_philo philo;
 
-	philo = (t_philo *)arg;
+	philo = *(t_philo *)arg;
+	philo.birth_time = timestamp();
+	philo.last_burger = philo.birth_time;
 	if (philo.name % 2)
-		usleep(15000);
-	philo->birth_time = timestamp();
-	printf("Bigup de philo %i\n", philo->name);
-	//exit(1);
-/*	while (!dead(philo))
+		smart_sleep(philo.rules->burger_time, &philo);
+	while (!dead(&philo))
 	{
-		eat(philo);
-		events(timestamp() - philo->birth_time, philo[philo->name].name, "is sleeping", philo->writing);
-		usleep(philo->rules.sleep_routine);
-		events(timestamp() - philo->birth_time, philo[philo->name].name, "is thinking", philo->writing);
+		if (eat(&philo)
+			|| events(timestamp() - philo.birth_time, &philo, "is sleeping"))
+			break ;
+		smart_sleep(philo.rules->sleep_routine, &philo);
+		if (events(timestamp() - philo.birth_time, &philo, "is thinking"))
+			break ;
 	}
-	*/
 	return (NULL);
 }
 
@@ -75,11 +70,13 @@ int	main(int ac, char **av)
  	int i;
 
 	i = -1;
+	philo = NULL;
 	if (ac == 5)
 	{
-		if (init(philo, av))
+		philo = init(philo, av);
+		if (philo == NULL)
 			return (1);
-		while (++i < philo->rules.demography)
+		while (++i < philo->rules->demography)
 			if (pthread_create(&(philo[i].id), NULL, survival, &philo[i]))
 				return (ft_putstr_fd("Error : thread creation failed\n", 2), 1);
 		kill_threads(philo);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_extras.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:00:12 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/18 16:25:00 by marvin           ###   ########.fr       */
+/*   Updated: 2025/01/20 16:46:13 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,82 +25,84 @@ typedef struct s_list
 # define RESET "\033[0m"   //Réinitialisation
 # define RED   "\033[31m"   //Couleur rouge
 
-char	*ft_itoa(int n);
-int		ft_sqrt(int nb);
-int		ft_min(int *tab);
-int		ft_max(int *tab);
-int		ft_isalnum(int c);
-int		ft_isalpha(int c);
-int		ft_isascii(int c);
-int		ft_isdigit(int c);
-int		ft_isprint(int c);
-int		ft_absolu(int nb);
-int		ft_tolower(int c);
-int		ft_toupper(int c);
-int		ft_is_prime(int nb);
-double	ft_atod(char *nptr);
-float	ft_atof(char *nptr);
-size_t	ft_strlen(const char *s);
-int		ft_atoi(const char *nptr);
-int		ft_find_next_prime(int nb);
-void	ft_bzero(void *s, size_t n);
-void	ft_putnbr_fd(int n, int fd);
-char	*ft_strdup(const char *src);
-void	ft_putstr_fd(char *s, int fd);
-void	ft_putchar_fd(char c, int fd);
-void	ft_putendl_fd(char *s, int fd);
-int		ft_recursive_factorial(int nb);
-char	*ft_strchr(const char *s, int c);
-char	*ft_itoa_base(int n, char *base);
-char	*ft_strrchr(const char *s, int c);
-char	*ft_strcat(char *dest, char *src);
-size_t	ft_strclen(const char *s, char c);
-int		ft_natoi(const char *nptr, int *i);
-char	*ft_strndup(const char *src, int n);
-void	ft_putnbr_base(int nbr, char *base);
-void	*ft_memset(void *s, int c, size_t n);
-int		ft_recursive_power(int nb, int power);
-void	*ft_calloc(size_t nmemb, size_t size);
-char	**ft_split(char const *str, char charset);
-int		ft_strcmp(const char *s1, const char *s2);
-int		ft_atoi_base(const char *nptr, char *base);
-void	*ft_memchr(const void *s, int c, size_t n);
-char	*ft_strjoin(char const *s1, char const *s2);
-void	*ft_upgrade_realloc(void *ptr, size_t size);
-char	*ft_strtrim(char const *s1, char const *set);
-char	*ft_strncat(char *dest, char *src, size_t nb);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-void	*ft_memmove(void *dest, const void *src, size_t n);
-int		ft_memcmp(const void *s1, const void *s2, size_t n);
-size_t	ft_strlcat(char *dst, const char *src, size_t dsize);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dsize);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-void	ft_striteri(char *s, void (*f)(unsigned int, char *));
-char	*ft_strnjoin(char const *s1, char const *s2, size_t n);
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strnstr(const char *big, const char *little, size_t len);
+char		*ft_itoa(int n);
+int			ft_sqrt(int nb);
+int			ft_min(int *tab);
+int			ft_max(int *tab);
+int			ft_isalnum(int c);
+int			ft_isalpha(int c);
+int			ft_isascii(int c);
+int			ft_isdigit(int c);
+int			ft_isprint(int c);
+int			ft_absolu(int nb);
+int			ft_tolower(int c);
+int			ft_toupper(int c);
+int			ft_is_prime(int nb);
+double		ft_atod(char *nptr);
+float		ft_atof(char *nptr);
+long		ft_atol(char *nptr);
+long long	ft_atold(char *nptr);
+size_t		ft_strlen(const char *s);
+int			ft_atoi(const char *nptr);
+int			ft_find_next_prime(int nb);
+void		ft_bzero(void *s, size_t n);
+void		ft_putnbr_fd(int n, int fd);
+char		*ft_strdup(const char *src);
+void		ft_putstr_fd(char *s, int fd);
+void		ft_putchar_fd(char c, int fd);
+void		ft_putendl_fd(char *s, int fd);
+int			ft_recursive_factorial(int nb);
+char		*ft_strchr(const char *s, int c);
+char		*ft_itoa_base(int n, char *base);
+char		*ft_strrchr(const char *s, int c);
+char		*ft_strcat(char *dest, char *src);
+size_t		ft_strclen(const char *s, char c);
+int			ft_natoi(const char *nptr, int *i);
+char		*ft_strndup(const char *src, int n);
+void		ft_putnbr_base(int nbr, char *base);
+void		*ft_memset(void *s, int c, size_t n);
+int			ft_recursive_power(int nb, int power);
+void		*ft_calloc(size_t nmemb, size_t size);
+char		**ft_split(char const *str, char charset);
+int			ft_strcmp(const char *s1, const char *s2);
+int			ft_atoi_base(const char *nptr, char *base);
+void		*ft_memchr(const void *s, int c, size_t n);
+char		*ft_strjoin(char const *s1, char const *s2);
+void		*ft_upgrade_realloc(void *ptr, size_t size);
+char		*ft_strtrim(char const *s1, char const *set);
+char		*ft_strncat(char *dest, char *src, size_t nb);
+void		*ft_memcpy(void *dest, const void *src, size_t n);
+void		*ft_memmove(void *dest, const void *src, size_t n);
+int			ft_memcmp(const void *s1, const void *s2, size_t n);
+size_t		ft_strlcat(char *dst, const char *src, size_t dsize);
+size_t		ft_strlcpy(char *dst, const char *src, size_t dsize);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+void		ft_striteri(char *s, void (*f)(unsigned int, char *));
+char		*ft_strnjoin(char const *s1, char const *s2, size_t n);
+char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+char		*ft_substr(char const *s, unsigned int start, size_t len);
+char		*ft_strnstr(const char *big, const char *little, size_t len);
 
 //chain lists
-long	len_list(t_list *L);
-void	print_list(t_list *L);
-t_list	*free_list(t_list *L);
-t_cell	*create_cell(int data);
-t_list	*ft_listdup(t_list *src);
-int		get_at(t_list *L, int pos);
-t_list	*free_at(t_list *L, int pos);
-t_list	*ft_listndup(t_list *src, int n);
-void	ft_list_sort(t_list **begin_list);
-void	ft_list_reverse(t_list **begin_list);
-void	set_at(t_list *L, int data, int pos);
-t_list	*add_at(t_list *L, int data, int pos);
-t_list	*ft_list_find_pos(t_list *begin_list, void *data_ref);
-void	ft_list_remove_if(t_list **begin_list, void *data_ref);
-t_list	*ft_list_find_data(t_list *begin_list, void *data_ref);
-void	ft_list_merge(t_list **begin_list1, t_list *begin_list2);
-void	ft_list_foreach_data(t_list *begin_list, void (*f)(void *));
-void	ft_sorted_list_merge(t_list **begin_list1, t_list *begin_list2);
-void	ft_list_foreach_data_if(t_list *begin_list, void (*f)(void *), \
+long		len_list(t_list *L);
+void		print_list(t_list *L);
+t_list		*free_list(t_list *L);
+t_cell		*create_cell(int data);
+t_list		*ft_listdup(t_list *src);
+int			get_at(t_list *L, int pos);
+t_list		*free_at(t_list *L, int pos);
+t_list		*ft_listndup(t_list *src, int n);
+void		ft_list_sort(t_list **begin_list);
+void		ft_list_reverse(t_list **begin_list);
+void		set_at(t_list *L, int data, int pos);
+t_list		*add_at(t_list *L, int data, int pos);
+t_list		*ft_list_find_pos(t_list *begin_list, void *data_ref);
+void		ft_list_remove_if(t_list **begin_list, void *data_ref);
+t_list		*ft_list_find_data(t_list *begin_list, void *data_ref);
+void		ft_list_merge(t_list **begin_list1, t_list *begin_list2);
+void		ft_list_foreach_data(t_list *begin_list, void (*f)(void *));
+void		ft_sorted_list_merge(t_list **begin_list1, t_list *begin_list2);
+void		ft_list_foreach_data_if(t_list *begin_list, void (*f)(void *), \
 void *data_ref);
 
 #endif

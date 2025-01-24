@@ -17,6 +17,10 @@
 		"wait.h": "c",
 		"colors.h": "c",
 		"push_swap.h": "c",
-		"fract_ol.h": "c"
+		"fract_ol.h": "c",
+		"libft_extras.h": "c",
+		"ft_printf_fd.h": "c",
+		"philosophers.h": "c",
+		"string.h": "c"
 	}
 }

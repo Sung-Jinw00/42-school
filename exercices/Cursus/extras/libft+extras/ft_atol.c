@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/24 16:40:15 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:42:49 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philosophers.h"
+#include "libft_extras.h"
 
-long long	ft_atold(char *nptr)
+/* turn a decimal number string into an long */
+long	ft_atol(char *nptr)
 {
-	int			i;
-	int			sign;
-	long long	result;
+	int		i;
+	int		sign;
+	long	result;
 
 	if (!nptr)
 		return (0);
@@ -37,46 +38,6 @@ long long	ft_atold(char *nptr)
 		i++;
 	}
 	return (result * sign);
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
-}
-
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	size_t	i;
-
-	i = 0;
-	while (s1[i] || s2[i])
-	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
-	}
-	return (0);
-}
-
-long long	timestamp(void)
-{
-	struct timeval	t;
-
-	gettimeofday(&t, NULL);
-	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
-}
-
-void	free_all(t_philo *philo)
-{
-	free(philo->rules->forks);
-	free(philo);
 }
 
 /* #include <stdio.h>

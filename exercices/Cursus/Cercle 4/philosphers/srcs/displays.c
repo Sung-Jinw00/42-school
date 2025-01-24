@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 17:03:41 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/23 20:10:27 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/24 16:47:11 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,23 @@ void	help_message(void)
 	printf("Please, try again !\n");
 }
 
-void	events(/* long long timelaps, int philosopher, char *action,\
-pthread_mutex_t writing */)
+int	events(long long timelaps, t_philo *philo, char *action)
 {
-	/* pthread_mutex_lock(&writing);
-	if (ft_strcmp(action, "has taken a fork"))
-		printf(GREEN"%lld %d has taken a fork\n"RESET, timelaps, philosopher + 1);
-	else if (ft_strcmp(action, "is eating"))
-		printf(YELLOW"%lld %d is eating\n"RESET, timelaps, philosopher + 1);
-	else if (ft_strcmp(action, "is sleeping"))
-		printf(BLUE"%lld %d is sleeping\n"RESET, timelaps, philosopher + 1);
-	else if (ft_strcmp(action, "is thinking"))
-		printf(CYAN"%lld %d is thinking\n"RESET, timelaps, philosopher + 1);
-	else if (ft_strcmp(action, "died"))
-		printf(RED"%lld %d died\n"RESET, timelaps, philosopher + 1);
-	pthread_mutex_unlock(&writing); */
+	pthread_mutex_lock(&philo->writing);
+	if (!ft_strcmp(action, "has taken a fork") && philo->rules->deaths == 0)
+		printf(GREEN"%lld %d has taken a fork\n"RESET, timelaps, philo->name + 1);
+	else if (!ft_strcmp(action, "is eating") && philo->rules->deaths == 0)
+		printf(YELLOW"%lld %d is eating\n"RESET, timelaps, philo->name + 1);
+	else if (!ft_strcmp(action, "is sleeping") && philo->rules->deaths == 0)
+		printf(BLUE"%lld %d is sleeping\n"RESET, timelaps, philo->name + 1);
+	else if (!ft_strcmp(action, "is thinking") && philo->rules->deaths == 0)
+		printf(CYAN"%lld %d is thinking\n"RESET, timelaps, philo->name + 1);
+	else if (!ft_strcmp(action, "died") && philo->rules->deaths == 1)
+	{
+		printf(RED"%lld %d died\n"RESET, timelaps, philo->name + 1);
+		pthread_mutex_unlock(&philo->writing);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->writing);
+	return (0);
 }

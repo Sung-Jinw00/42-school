@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:58:52 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/23 20:32:30 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/24 17:20:57 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_rules
 	long long		burger_time;
 	long long		sleep_routine;
 	long long		life_expectancy;
+	unsigned int	deaths;
 	pthread_mutex_t	*forks;
 } t_rules;
 
@@ -44,11 +45,12 @@ typedef struct s_philo
 	int				name;
 	int				left_fork;
 	int				right_fork;
-	int				dead;
 	pthread_t		id;
-	t_rules			rules;
+	t_rules			rule;
+	t_rules			*rules;
 	pthread_mutex_t	writing;
 	pthread_mutex_t	order_of_the_burger;
+	pthread_mutex_t	funerals;
 	long long		last_burger;
 	long long		birth_time;
 } t_philo;
@@ -56,14 +58,13 @@ typedef struct s_philo
 long long	timestamp(void);
 void		help_message(void);
 long long	ft_atold(char *nptr);
-int			init2(t_philo *commu);
 int			main(int ac, char **av);
 void		free_all(t_philo	*commu);
 void		ft_putstr_fd(char *s, int fd);
-int			init(t_philo *commu, char **av);
-int			ft_strcmp(const char *s1, const char *s2);
 void		kill_threads(t_philo *philos);
-void		events(long long timelaps, int philosopher, char *action,\
-pthread_mutex_t writing);
+t_philo		*init(t_philo *philo, char **av);
+int			ft_strcmp(const char *s1, const char *s2);
+void		smart_sleep(double time_to_sleep, t_philo *philo);
+int			events(long long timelaps, t_philo *philo, char *action);
 
 #endif
