@@ -1,0 +1,1324 @@
+1 : readline
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	char *readline(const char *prompt);
+
+	La fonction readline lit une ligne de texte depuis l'entrée standard
+	et retourne cette ligne sous forme de chaîne de caractères.
+
+	on doit liberer la chaine de charactere recuperee avec free.
+
+		ex :
+		char *input = readline("Entrez quelque chose: ");
+    
+		if (input) {
+			printf("Vous avez entré: %s\n", input);
+			free(input);  // Libère la mémoire allouée par readline()
+		}
+
+
+
+2 : rl_clear_history
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_clear_history(void);
+
+	supprime l'historique de commandes de readline.
+
+		ex :
+		add_history("commande_1");
+		add_history("commande_2");
+
+		rl_clear_history();
+
+
+
+3 : rl_on_new_line
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_on_new_line(void);
+
+	force readline a lire sur une nouvelle ligne, ne change rien a ce que j'ai pu voir.
+
+		ex :
+		printf("Texte avant la nouvelle ligne.\n");
+
+		// Forcer readline à placer le curseur sur une nouvelle ligne
+		rl_on_new_line();
+		
+		// Demander une entrée après avoir explicitement sauté à la nouvelle ligne
+		char *input = readline("Entrez quelque chose: ");
+		
+		if (input) {
+			printf("Vous avez entré : %s\n", input);
+			free(input);  // Libérer la mémoire allouée par readline
+   		}
+
+
+
+4 : rl_replace_line
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	int rl_replace_line(const char *text, int clear_undo);
+
+	remplace la ligne actuelle dans le tampon de readline.
+	Le premier paramètre, text, est la chaîne de caractères
+	qui remplacera la ligne actuelle. Le second paramètre,
+	clear_undo, indique si l'historique de modification de la
+	ligne (le tampon d'annulation) doit être effacé ou non. Si
+	clear_undo est non nul, l'annulation des modifications précédentes
+	est désactivée.
+
+		ex :
+		int main()
+		{
+			char *line = readline("Entrez quelque chose : ");
+			
+			if (line)
+			{
+				// Remplacer la ligne actuelle par un texte différent
+				rl_replace_line("Ligne remplacée!", 0);
+				
+				// Afficher la nouvelle ligne après remplacement
+				printf("Ligne après remplacement : %s\n", rl_line_buffer);
+				
+				free(line);  // Libérer la mémoire allouée
+			}
+			
+			return 0;
+		}
+
+
+
+5 : rl_redisplay
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+6 : add_history
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void add_history(const char *line);
+
+	ajoute une ligne de texte a l'historique de readline.
+
+		ex :
+		input = readline("Entrez une commande: ");
+    
+		if (input)
+		{
+			add_history(input);// Ajouter la commande à l'historique
+			printf("Commande ajoutée à l'historique: %s\n", input);
+			
+			free(input);
+		}
+
+
+
+7 : printf
+	pas besoin d'expliquer.
+
+8 : malloc
+	pas besoin d'expliquer.
+
+ : free
+	pas besoin d'expliquer.
+
+10 : write
+	pas besoin d'expliquer.
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+11 : access
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+12 : open
+	pas besoin d'expliquer.
+
+13 : read
+	pas besoin d'expliquer.
+
+14 : close
+	pas besoin d'expliquer.
+
+15 : fork
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+16 : wait
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+17 : waitpid
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+18 : wait3
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+19 : wait4
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+20 : signal
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+21 : sigaction
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+22 : sigemptyset
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+23 : sigaddset
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+24 : kill
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+25 : exit
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+26 : getcwd
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+27 : chdir
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+28 : stat
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+29 : lstat
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+30 : fstat
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+31 : unlink
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+32 : execve
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+33 : dup
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+34 : dup2
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+35 : pipe
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+36 : opendir
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+37 : readdir
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+38 : closedir
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+39 : strerror
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+40 : perror
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+41 : isatty
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+42 : ttyname
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+43 : ttyslot
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+44 : ioctl
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+45 : getenv
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+46 : tcsetattr
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+47 : tcgetattr
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+48 : tgetent
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+49 : tgetflag
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+50 : tgetnum
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+51 : tgetstr
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+52 : tgoto
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
+
+
+
+53 : tputs
+	#include <readline/readline.h>
+	#include <readline/history.h>
+
+	void rl_redisplay(void);
+
+	refresh l'affichage si un changement exerne arrive.
+
+		ex :
+		int main()
+		{
+			char *input;
+
+			input = readline("Entrez quelque chose: ");
+			
+			if (input)
+			{
+				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
+				rl_redisplay();  // Redessine l'entrée actuelle dans readline
+				
+				printf("Vous avez entré: %s\n", input);
+				free(input);  // Libère la mémoire allouée par readline
+			}
+			
+			return 0;
+		}
