@@ -12,7 +12,8 @@
 		ex :
 		char *input = readline("Entrez quelque chose: ");
     
-		if (input) {
+		if (input)
+		{
 			printf("Vous avez entré: %s\n", input);
 			free(input);  // Libère la mémoire allouée par readline()
 		}
@@ -52,7 +53,8 @@
 		// Demander une entrée après avoir explicitement sauté à la nouvelle ligne
 		char *input = readline("Entrez quelque chose: ");
 		
-		if (input) {
+		if (input)
+		{
 			printf("Vous avez entré : %s\n", input);
 			free(input);  // Libérer la mémoire allouée par readline
    		}
@@ -155,31 +157,60 @@
 
 10 : write
 	pas besoin d'expliquer.
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 11 : access
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <unistd.h>
 
-	void rl_redisplay(void);
+	int access(const char *pathname, int mode);
 
-	refresh l'affichage si un changement exerne arrive.
+	permet de vérifier l'accessibilité d'un fichier ou d'un répertoire
+	spécifié par pathname en fonction des droits d'accès spécifiés par mode.
+
+	Les valeurs possibles pour mode sont :
+		R_OK : pour vérifier si le fichier peut être lu.
+		W_OK : pour vérifier si le fichier peut être écrit.
+		X_OK : pour vérifier si le fichier peut être exécuté.
+		F_OK : pour vérifier l'existence du fichier
 
 		ex :
 		int main()
 		{
-			char *input;
+			const char *filename = "test.txt";
 
-			input = readline("Entrez quelque chose: ");
-			
-			if (input)
-			{
-				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
-				rl_redisplay();  // Redessine l'entrée actuelle dans readline
-				
-				printf("Vous avez entré: %s\n", input);
-				free(input);  // Libère la mémoire allouée par readline
+			// Vérifier si le fichier existe
+			if (access(filename, F_OK) == -1)
+		{
+				perror("Erreur : fichier non trouvé");
+				return 1;
 			}
-			
+
+			// Vérifier si le fichier peut être lu
+			if (access(filename, R_OK) == -1)
+		{
+				perror("Erreur : fichier non lisible");
+			} else
+		{
+				printf("Le fichier peut être lu.\n");
+			}
+
+			// Vérifier si le fichier peut être écrit
+			if (access(filename, W_OK) == -1)
+		{
+				perror("Erreur : fichier non modifiable");
+			} else
+		{
+				printf("Le fichier peut être écrit.\n");
+			}
+
+			// Vérifier si le fichier peut être exécuté
+			if (access(filename, X_OK) == -1)
+		{
+				perror("Erreur : fichier non exécutable");
+			} else
+		{
+				printf("Le fichier peut être exécuté.\n");
+			}
+
 			return 0;
 		}
 
@@ -195,443 +226,798 @@
 	pas besoin d'expliquer.
 
 15 : fork
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <unistd.h>
 
-	void rl_redisplay(void);
+	pid_t fork(void);
 
-	refresh l'affichage si un changement exerne arrive.
+	creer un processus enfant du programme parent.
 
 		ex :
 		int main()
 		{
-			char *input;
-
-			input = readline("Entrez quelque chose: ");
-			
-			if (input)
-			{
-				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
-				rl_redisplay();  // Redessine l'entrée actuelle dans readline
-				
-				printf("Vous avez entré: %s\n", input);
-				free(input);  // Libère la mémoire allouée par readline
-			}
-			
+			pid_t pid = fork();  // Création du processus enfant
+			if (pid < 0)
+				return (perror("Erreur fork"), 1);// Si fork échoue
+			if (pid == 0)// Code exécuté par l'enfant
+				printf("Je suis le processus enfant avec PID %d\n", getpid());
+			else// Code exécuté par le parent
+				printf("Je suis le processus parent avec PID %d, mon enfant a le PID %d\n", getpid(), pid);
 			return 0;
 		}
 
 
 
 16 : wait
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/types.h>
+	#include <sys/wait.h>
+	#include <unistd.h>
 
-	void rl_redisplay(void);
+	pid_t wait(int *status);
 
-	refresh l'affichage si un changement exerne arrive.
+	fait attendre le processus appelant (généralement le processus parent)
+	jusqu'à ce qu'un de ses enfants termine son exécution. Si plusieurs
+	processus enfants se terminent en même temps, wait retournera l'un d'eux.
 
 		ex :
 		int main()
 		{
-			char *input;
-
-			input = readline("Entrez quelque chose: ");
-			
-			if (input)
+			pid_t pid = fork();  // Création du processus enfant
+			if (pid < 0)
+				return (perror("Erreur fork"), 1);// Si fork échoue
+			if (pid == 0)
+				printf("Je suis l'enfant, mon PID est %d\n", getpid());
+			else
 			{
-				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
-				rl_redisplay();  // Redessine l'entrée actuelle dans readline
-				
-				printf("Vous avez entré: %s\n", input);
-				free(input);  // Libère la mémoire allouée par readline
+				// Code exécuté par le parent
+				int status;
+				pid_t child_pid = wait(&status);  // Le parent attend que l'enfant se termine
+
+				if (child_pid > 0)
+		{
+					if (WIFEXITED(status))
+		{
+						printf("Le processus enfant %d a terminé avec le code de sortie %d\n", child_pid, WEXITSTATUS(status));
+					} else
+		{
+						printf("Le processus enfant %d a terminé de manière anormale\n", child_pid);
+					}
+				}
 			}
-			
-			return 0;
 		}
 
 
 
 17 : waitpid
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/types.h>
+	#include <sys/wait.h>
+	#include <unistd.h>
 
-	void rl_redisplay(void);
+	pid_t waitpid(pid_t pid, int *status, int options);
 
-	refresh l'affichage si un changement exerne arrive.
+	attend la fin d'un processus enfant spécifique, identifié par son PID.
+	Elle permet aussi de spécifier des options de comportement de l'attente.
+
+	pid : Si pid est positif, waitpid attend que le processus ayant ce PID
+	se termine.
+
+	Si pid == -1, waitpid attend la fin de n'importe quel processus
+	enfant (comportement similaire à wait).
+	Si pid == 0, waitpid attend la fin de n'importe quel processus
+	enfant dont le groupe de processus est le même que celui du parent.
+	Si pid est négatif, waitpid attend la fin de n'importe quel processus
+	enfant dont le groupe de processus est le même que -pid.
 
 		ex :
 		int main()
 		{
-			char *input;
-
-			input = readline("Entrez quelque chose: ");
-			
-			if (input)
+			pid_t pid = fork();  // Création du processus enfant
+			if (pid < 0)
+				return (perror("Erreur fork"), 1);// Si fork échoue
+			if (pid == 0)
+				printf("Je suis l'enfant, mon PID est %d\n", getpid());
+			else
 			{
-				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
-				rl_redisplay();  // Redessine l'entrée actuelle dans readline
-				
-				printf("Vous avez entré: %s\n", input);
-				free(input);  // Libère la mémoire allouée par readline
+				// Code exécuté par le parent
+				int status;
+				pid_t child_pid = waitpid(pid, &status, 0);   // Le parent attend spécifiquement cet enfant
+
+				if (child_pid > 0)
+		{
+					if (WIFEXITED(status))
+		{
+						printf("Le processus enfant %d a terminé avec le code de sortie %d\n", child_pid, WEXITSTATUS(status));
+					} else
+		{
+						printf("Le processus enfant %d a terminé de manière anormale\n", child_pid);
+					}
+				}
 			}
-			
-			return 0;
 		}
 
 
 
 18 : wait3
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/types.h>
+	#include <sys/wait.h>
+	#include <sys/resource.h>
+	#include <unistd.h>
 
-	void rl_redisplay(void);
+	pid_t wait3(int *status, int options, struct rusage *usage);
 
-	refresh l'affichage si un changement exerne arrive.
+	attend la fin d'un processus enfant et permet de récupérer des
+	informations sur l'utilisation des ressources via la structure rusage.
+	Elle fonctionne de manière similaire à waitpid, mais en plus, elle
+	remplit la structure rusage avec des informations sur les ressources
+	utilisées par l'enfant (temps CPU, mémoire, etc.).
+
+	* status : Un pointeur vers un entier où l'état de l'enfant est stocké.
+	On peut utiliser des macros comme WIFEXITED(status) ou WEXITSTATUS(status)
+	pour examiner cet état.
+	* options : Permet de spécifier des options, comme WNOHANG pour éviter de
+	bloquer le parent si aucun processus enfant n'est terminé.
+	* usage : Un pointeur vers une structure rusage dans laquelle seront
+	stockées des informations sur l'utilisation des ressources par l'enfant
+	(temps CPU, nombre de pages mémoires, etc.).
+
+	Valeur de retour :
+
+	Si wait3 réussit, elle retourne le PID de l'enfant qui a terminé.
+	Si un erreur se produit, elle retourne -1 et définit errno.
 
 		ex :
 		int main()
 		{
-			char *input;
+			pid_t pid = fork();  // Créer un processus enfant
 
-			input = readline("Entrez quelque chose: ");
-			
-			if (input)
+			if (pid < 0)
 			{
-				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
-				rl_redisplay();  // Redessine l'entrée actuelle dans readline
-				
-				printf("Vous avez entré: %s\n", input);
-				free(input);  // Libère la mémoire allouée par readline
+				// Gestion d'erreur de fork
+				perror("Erreur fork");
+				return 1;
 			}
-			
+
+			if (pid == 0)
+			{
+				// Code exécuté par l'enfant
+				printf("Je suis l'enfant, mon PID est %d\n", getpid());
+				for (int i = 0; i < 1000000; i++);  // Faire un peu de travail pour consommer du temps CPU
+				exit(42);  // L'enfant termine avec un code de sortie
+			}
+			else
+			{
+				// Code exécuté par le parent
+				int status;
+				struct rusage usage;
+				
+				pid_t child_pid = wait3(&status, 0, &usage);  // Le parent attend spécifiquement cet enfant et récupère des infos sur l'utilisation des ressources
+
+				if (child_pid > 0)
+				{
+					if (WIFEXITED(status))
+					{
+						printf("Le processus enfant %d a terminé avec le code de sortie %d\n", child_pid, WEXITSTATUS(status));
+						printf("Temps utilisateur : %ld.%06ld secondes\n", usage.ru_utime.tv_sec, usage.ru_utime.tv_usec);
+						printf("Temps système : %ld.%06ld secondes\n", usage.ru_stime.tv_sec, usage.ru_stime.tv_usec);
+					}
+					else
+						printf("Le processus enfant %d a terminé de manière anormale\n", child_pid);
+				}
+				else
+					perror("Erreur wait3");
+			}
+
 			return 0;
 		}
 
 
 
 19 : wait4
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/types.h>
+	#include <sys/wait.h>
+	#include <sys/resource.h>
+	#include <unistd.h>
 
-	void rl_redisplay(void);
+	pid_t wait4(pid_t pid, int *status, int options, struct rusage *usage);
 
-	refresh l'affichage si un changement exerne arrive.
+	fonctionne de manière similaire à wait3, mais elle offre plus de flexibilité
+	en permettant de spécifier un processus particulier.
+
+	* pid : Le PID de l'enfant à attendre. Si pid est -1, wait4 attend n'importe
+	quel enfant. Si pid est 0, wait4 attend n'importe quel enfant du même groupe
+	de processus que le parent. Si pid est positif, wait4 attend spécifiquement
+	ce processus enfant.
+	* status : Un pointeur vers un entier qui recevra l'état de l'enfant (terminé
+	ou arrêté). Des macros comme WIFEXITED(status) et WEXITSTATUS(status) peuvent
+	être utilisées pour interpréter cet état.
+	* options : Permet de spécifier des options, comme WNOHANG pour éviter de
+	bloquer si l'enfant n'est pas encore terminé, ou WUNTRACED pour aussi
+	attendre les enfants arrêtés.
+	* usage : Un pointeur vers une structure rusage dans laquelle seront
+	stockées des informations sur l'utilisation des ressources par l'enfant
+	(temps CPU, mémoire, etc.).
+
+	Valeur de retour :
+
+	Si wait4 réussit, elle retourne le PID de l'enfant qui a terminé.
+	Si un erreur se produit, elle retourne -1 et définit errno.
 
 		ex :
 		int main()
 		{
-			char *input;
+			pid_t pid = fork();  // Créer un processus enfant
 
-			input = readline("Entrez quelque chose: ");
-			
-			if (input)
+			if (pid < 0)
 			{
-				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
-				rl_redisplay();  // Redessine l'entrée actuelle dans readline
-				
-				printf("Vous avez entré: %s\n", input);
-				free(input);  // Libère la mémoire allouée par readline
+				// Gestion d'erreur de fork
+				perror("Erreur fork");
+				return 1;
 			}
-			
+
+			if (pid == 0)
+			{
+				// Code exécuté par l'enfant
+				printf("Je suis l'enfant, mon PID est %d\n", getpid());
+				for (int i = 0; i < 1000000; i++);  // Faire un peu de travail pour consommer du temps CPU
+				exit(42);  // L'enfant termine avec un code de sortie
+			}
+			else
+			{
+				// Code exécuté par le parent
+				int status;
+				struct rusage usage;
+				
+				pid_t child_pid = wait4(pid, &status, 0, &usage);  // Le parent attend spécifiquement cet enfant et récupère des infos sur l'utilisation des ressources
+
+				if (child_pid > 0)
+				{
+					if (WIFEXITED(status))
+					{
+						printf("Le processus enfant %d a terminé avec le code de sortie %d\n", child_pid, WEXITSTATUS(status));
+						printf("Temps utilisateur : %ld.%06ld secondes\n", usage.ru_utime.tv_sec, usage.ru_utime.tv_usec);
+						printf("Temps système : %ld.%06ld secondes\n", usage.ru_stime.tv_sec, usage.ru_stime.tv_usec);
+					}
+					else
+						printf("Le processus enfant %d a terminé de manière anormale\n", child_pid);
+				}
+				else
+					perror("Erreur wait3");
+			}
+
 			return 0;
 		}
 
 
 
 20 : signal
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <signal.h>
 
-	void rl_redisplay(void);
+	typedef void (*sighandler_t)(int);
 
-	refresh l'affichage si un changement exerne arrive.
+	sighandler_t signal(int sig, sighandler_t handler);
+
+	permet de définir un gestionnaire pour un signal spécifique.
+	Lorsqu'un signal est reçu, le gestionnaire spécifié est exécuté.
+
+	* sig : Le signal que l'on souhaite capturer (par exemple, SIGINT,
+	SIGTERM, etc.). Le signal SIGKILL ne peut pas être capturé, ignoré
+	ou modifié.
+	* handler : Un pointeur vers une fonction qui sera exécutée lorsque
+	le signal spécifié est reçu. Cette fonction prend un seul argument,
+	l'identifiant du signal, et retourne void.
+		Si handler est SIG_IGN, cela signifie que le signal sera ignoré.
+		Si handler est SIG_DFL, cela signifie que le comportement par défaut
+		du signal sera rétabli.
+
+	Valeur de retour :
+	En cas de succès, signal retourne l'ancien gestionnaire de signal.
+	En cas d'erreur, elle retourne SIG_ERR et définit errno.
 
 		ex :
+		void handler_SIGINT(int sig)
+		{
+			printf("\nLe signal SIGINT a été capté (Ctrl+C).\n");
+			// On peut choisir de quitter le programme après avoir capté le signal
+			exit(0);  // Quitte le programme
+		}
+
 		int main()
 		{
-			char *input;
-
-			input = readline("Entrez quelque chose: ");
-			
-			if (input)
+			// Définir le gestionnaire pour SIGINT
+			if (signal(SIGINT, handler_SIGINT) == SIG_ERR)
 			{
-				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
-				rl_redisplay();  // Redessine l'entrée actuelle dans readline
-				
-				printf("Vous avez entré: %s\n", input);
-				free(input);  // Libère la mémoire allouée par readline
+				perror("Erreur lors de la définition du gestionnaire pour SIGINT");
+				return 1;
 			}
-			
+
+			printf("Le programme est en cours d'exécution.\n");
+			printf("Appuyez sur Ctrl+C pour tester le gestionnaire de signal.\n");
+
+			// Programme qui attend un signal
+			while (1)
+				sleep(1);  // Le programme attend sans rien faire, il sera réveillé par le signal
+
 			return 0;
 		}
 
 
 
 21 : sigaction
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <signal.h>
 
-	void rl_redisplay(void);
+	int sigaction(int sig, const struct sigaction *act, struct sigaction *oldact);
 
-	refresh l'affichage si un changement exerne arrive.
+	permet de définir l'action à prendre lors de la réception d'un signal
+	spécifique. Contrairement à signal, sigaction offre un contrôle plus
+	fin et permet de définir des options supplémentaires.
+
+	* sig : Le signal pour lequel définir l'action (par exemple, SIGINT,
+	SIGTERM, etc.).
+	* act : Un pointeur vers une structure sigaction qui contient
+	l'action à prendre pour le signal.
+	* oldact : Un pointeur vers une structure sigaction où sera stockée
+	l'ancienne action associée à ce signal (si non nul). Cela permet
+	de restaurer l'action précédente si nécessaire.
+
+	La structure sigaction contient les éléments suivants :
+
+	struct sigaction
+	{
+		void (*sa_handler)(int);        // Gestionnaire de signal
+		void (*sa_sigaction)(int, siginfo_t *, void *); // Gestionnaire de signal plus détaillé (utilisé pour des signaux comme SIGSEGV)
+		sigset_t sa_mask;               // Masque de signaux à bloquer pendant l'exécution du gestionnaire
+		int sa_flags;                   // Options pour l'action
+		void (*sa_restorer)(void);      // Réservé pour une utilisation interne
+	};
+
+	* sa_handler : Un pointeur vers la fonction qui gère le signal, ou un des
+	mots-clés SIG_IGN (ignorer) ou SIG_DFL (comportement par défaut).
+	* sa_mask : Définit les signaux à bloquer pendant l'exécution du gestionnaire
+	de signal.
+	* sa_flags : Des options supplémentaires, par exemple :
+	* SA_RESTART : Redémarre les appels systèmes interrompus par le signal.
+	* SA_SIGINFO : Utilise sa_sigaction au lieu de sa_handler pour gérer des
+	signaux plus complexes, permettant d'obtenir plus d'informations sur le
+	signal (par exemple, siginfo_t).
+
+	Valeur de retour :
+		En cas de succès, sigaction retourne 0.
+		En cas d'erreur, elle retourne -1 et définit errno.
 
 		ex :
+		void handler_SIGINT(int sig)
+		{
+			printf("\nLe signal SIGINT a été capté (Ctrl+C).\n");
+			// Le programme peut choisir de quitter après avoir capté le signal
+			exit(0);  // Quitte le programme
+		}
+
 		int main()
 		{
-			char *input;
+			struct sigaction sa;
 
-			input = readline("Entrez quelque chose: ");
-			
-			if (input)
+			// Définir le gestionnaire pour SIGINT
+			sa.sa_handler = handler_SIGINT;   // Définir le gestionnaire de signal
+			sa.sa_flags = 0;                   // Pas de flags
+			sigemptyset(&sa.sa_mask);          // Aucun signal à bloquer pendant l'exécution du gestionnaire
+
+			// Installer le gestionnaire pour SIGINT
+			if (sigaction(SIGINT, &sa, NULL) == -1)
 			{
-				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
-				rl_redisplay();  // Redessine l'entrée actuelle dans readline
-				
-				printf("Vous avez entré: %s\n", input);
-				free(input);  // Libère la mémoire allouée par readline
+				perror("Erreur sigaction");
+				return 1;
 			}
-			
+
+			printf("Le programme est en cours d'exécution.\n");
+			printf("Appuyez sur Ctrl+C pour tester le gestionnaire de signal.\n");
+
+			// Programme qui attend un signal
+			while (1)
+			{
+				sleep(1);  // Le programme attend sans rien faire, il sera réveillé par le signal
+			}
+
 			return 0;
 		}
 
 
 
 22 : sigemptyset
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <signal.h>
 
-	void rl_redisplay(void);
+	int sigemptyset(sigset_t *set);
 
-	refresh l'affichage si un changement exerne arrive.
+	initialise l'ensemble de signaux pointé par set à un ensemble vide,
+	c'est-à-dire qu'aucun signal n'est inclus dans cet ensemble.
+
+	set : Un pointeur vers un objet de type sigset_t, qui est utilisé
+	pour contenir des ensembles de signaux.
+
+	Valeur de retour :
+		En cas de succès, sigemptyset retourne 0.
+		En cas d'erreur, elle retourne -1 et définit errno.
 
 		ex :
 		int main()
 		{
-			char *input;
+			sigset_t set;
 
-			input = readline("Entrez quelque chose: ");
-			
-			if (input)
-			{
-				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
-				rl_redisplay();  // Redessine l'entrée actuelle dans readline
-				
-				printf("Vous avez entré: %s\n", input);
-				free(input);  // Libère la mémoire allouée par readline
-			}
-			
+			// Initialiser l'ensemble de signaux à vide (aucun signal bloqué)
+			if (sigemptyset(&set) == -1)
+				return (perror("sigemptyset"), 1);
+
+			// Afficher l'état initial de l'ensemble de signaux
+			printf("Ensemble de signaux vide créé.\n");
+
+			// Exemple : On bloque le signal SIGINT
+			if (sigaddset(&set, SIGINT) == -1)
+				return (perror("sigaddset"), 1);
+
+			// Appliquer l'ensemble de signaux pour bloquer SIGINT
+			if (sigprocmask(SIG_BLOCK, &set, NULL) == -1)
+				return (perror("sigprocmask"), 1);
+
+			// Attendre un signal pendant 10 secondes
+			printf("SIGINT est bloqué. Attente pendant 10 secondes...\n");
+			sleep(10);
+
+			// Débloquer les signaux
+			if (sigprocmask(SIG_UNBLOCK, &set, NULL) == -1)
+				return (perror("sigprocmask"), 1);
+
+			printf("SIGINT est maintenant débloqué.\n");
+
 			return 0;
 		}
 
 
 
 23 : sigaddset
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <signal.h>
 
-	void rl_redisplay(void);
+	int sigaddset(sigset_t *set, int sig);
 
-	refresh l'affichage si un changement exerne arrive.
+	ajoute le signal sig à l'ensemble de signaux set.
+
+	* set : Un pointeur vers un objet de type sigset_t, qui est utilisé
+	pour contenir des ensembles de signaux.
+	* sig : Le signal à ajouter à l'ensemble. Cela peut être un signal
+	comme SIGINT, SIGTERM, etc.
+	
+	Valeur de retour :
+		En cas de succès, sigaddset retourne 0.
+		En cas d'erreur, elle retourne -1 et définit errno.
+
 
 		ex :
 		int main()
 		{
-			char *input;
+			sigset_t set;
 
-			input = readline("Entrez quelque chose: ");
-			
-			if (input)
-			{
-				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
-				rl_redisplay();  // Redessine l'entrée actuelle dans readline
-				
-				printf("Vous avez entré: %s\n", input);
-				free(input);  // Libère la mémoire allouée par readline
-			}
-			
+			// Initialiser l'ensemble de signaux à vide (aucun signal bloqué)
+			if (sigemptyset(&set) == -1)
+				return (perror("sigemptyset"), 1);
+
+			// Ajouter le signal SIGINT (Ctrl+C) à l'ensemble
+			if (sigaddset(&set, SIGINT) == -1)
+				return (perror("sigaddset"), 1);
+
+			// Appliquer l'ensemble de signaux pour bloquer SIGINT
+			if (sigprocmask(SIG_BLOCK, &set, NULL) == -1)
+				return (perror("sigprocmask"), 1);
+
+			// Attendre un signal pendant 10 secondes
+			printf("SIGINT est bloqué. vous pouvez appuyer sur Ctrl+C, mais le signal sera ignoré pendant 10 secondes...\n");
+			sleep(10);
+
+			// Débloquer les signaux
+			if (sigprocmask(SIG_UNBLOCK, &set, NULL) == -1)
+				return (perror("sigprocmask"), 1);
+
+			printf("SIGINT est maintenant débloqué.\n");
+
 			return 0;
 		}
 
 
 
 24 : kill
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <signal.h>
 
-	void rl_redisplay(void);
+	int kill(pid_t pid, int sig);
 
-	refresh l'affichage si un changement exerne arrive.
+	permet d'envoyer un signal à un ou plusieurs processus.
+
+	pid : L'identifiant du processus cible.
+		* Si pid > 0, le signal est envoyé au processus avec l'identifiant
+		de processus pid.
+		* Si pid == 0, le signal est envoyé à tous les processus dans le même
+		groupe de processus que le processus appelant.
+		* Si pid == -1, le signal est envoyé à tous les processus dont l'appelant
+		a les droits d'envoyer un signal.
+		* Si pid < -1, le signal est envoyé à tous les processus dans le groupe
+
+	de processus avec l'identifiant pid (en utilisant la valeur absolue de pid).
+	sig : Le signal à envoyer. Cela peut être un signal standard comme SIGINT,
+	SIGTERM, SIGKILL, etc.
+
+	Valeur de retour :
+		En cas de succès, kill retourne 0.
+		En cas d'erreur, elle retourne -1 et définit errno.
 
 		ex :
 		int main()
 		{
-			char *input;
+			pid_t pid;
+			pid = fork();  // Créer un processus fils
 
-			input = readline("Entrez quelque chose: ");
-			
-			if (input)
+			if (pid < 0)
+				return (perror("fork"), 1);
+			if (pid == 0)
 			{
-				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
-				rl_redisplay();  // Redessine l'entrée actuelle dans readline
-				
-				printf("Vous avez entré: %s\n", input);
-				free(input);  // Libère la mémoire allouée par readline
+				printf("Le processus fils est en cours d'exécution, pid = %d\n", getpid());
+				sleep(10);  // Le processus fils attend pendant 10 secondes avant de se terminer
+				printf("Le processus fils se termine\n");
+				exit(0);
 			}
-			
+			else
+			{
+				printf("Le processus père envoie un signal SIGTERM au processus fils (pid = %d)\n", pid);
+				sleep(3);  // Le père attend 3 secondes avant d'envoyer le signal
+				if (kill(pid, SIGTERM) == -1)// Envoi du signal SIGTERM
+					return (perror("kill"), 1);
+				printf("Signal SIGTERM envoyé au processus fils\n");
+			}
+
 			return 0;
 		}
 
 
 
 25 : exit
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <stdlib.h>
 
-	void rl_redisplay(void);
+	void exit(int status);
 
-	refresh l'affichage si un changement exerne arrive.
+	termine le programme en cours d'exécution. Avant de quitter, exit
+	effectue plusieurs opérations de nettoyage, telles que la fermeture
+	des fichiers ouverts et l'appel des gestionnaires de termination enregistrés
+	(via atexit).
+
+	status : Le code de sortie du programme. Ce code sera renvoyé à
+	l'environnement d'exécution.
+	Par convention :
+		Un code de sortie égal à 0 signifie que le programme s'est exécuté
+		correctement.
+		Un code de sortie différent de 0 indique une erreur ou une fin
+		anormale du programme.
 
 		ex :
 		int main()
 		{
-			char *input;
+			int val;
 
-			input = readline("Entrez quelque chose: ");
-			
-			if (input)
+			printf("Entrez un nombre entier positif : ");
+			if (scanf("%d", &val) != 1)
 			{
-				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
-				rl_redisplay();  // Redessine l'entrée actuelle dans readline
-				
-				printf("Vous avez entré: %s\n", input);
-				free(input);  // Libère la mémoire allouée par readline
+				// Si l'entrée n'est pas un entier, on termine le programme avec un code d'erreur
+				printf("Erreur : entrée invalide.\n");
+				exit(1);  // Code de sortie 1 pour signaler une erreur
 			}
+
+			if (val < 0)
+			{
+				// Si la valeur est négative, on termine également avec un code d'erreur
+				printf("Erreur : le nombre doit être positif.\n");
+				exit(2);  // Code de sortie 2 pour signaler une erreur spécifique
+			}
+
+			printf("Vous avez entré le nombre : %d\n", val);
 			
-			return 0;
+			// Terminer le programme avec succès
+			exit(0);  // Code de sortie 0 pour signaler une exécution réussie
 		}
 
 
 
 26 : getcwd
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <unistd.h>
 
-	void rl_redisplay(void);
+	char *getcwd(char *buf, size_t size);
 
-	refresh l'affichage si un changement exerne arrive.
+	retourne le chemin absolu du répertoire de travail actuel du processus.
+
+	* buf : Un pointeur vers un tampon où le chemin sera stocké. Si buf est
+	NULL, la fonction alloue un tampon pour le chemin.
+	* size : La taille du tampon. Elle doit être suffisante pour contenir
+	le chemin, y compris le caractère nul de fin de chaîne (\0).
+	
+	Si NULL est passé a buf, getcwd allouera dynamiquement un tampon pour
+	contenir le chemin. Dans ce cas, la mémoire allouée devra etre libérée
+	après utilisation.
+	
+	Si le répertoire de travail actuel ne tient pas dans le tampon,
+	getcwd renvoie NULL et définit errno sur ERANGE.
+
+	Valeur de retour :
+		En cas de succès, getcwd retourne un pointeur vers buf, qui
+		contient le chemin du répertoire actuel.
+		En cas d'échec, elle retourne NULL et définit errno.
 
 		ex :
 		int main()
 		{
-			char *input;
+			char *cwd;
+			char buffer[1024];
 
-			input = readline("Entrez quelque chose: ");
-			
-			if (input)
-			{
-				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
-				rl_redisplay();  // Redessine l'entrée actuelle dans readline
-				
-				printf("Vous avez entré: %s\n", input);
-				free(input);  // Libère la mémoire allouée par readline
-			}
-			
+			// Utiliser getcwd pour obtenir le répertoire de travail actuel
+			cwd = getcwd(buffer, sizeof(buffer));
+
+			if (cwd == NULL)// Si une erreur se produit, afficher un message d'erreur
+				return (perror("getcwd"), 1);
+
+			printf("Le répertoire de travail actuel est : %s\n", cwd);
 			return 0;
 		}
 
 
 
 27 : chdir
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <unistd.h>
 
-	void rl_redisplay(void);
+	int chdir(const char *path);
 
-	refresh l'affichage si un changement exerne arrive.
+	change le répertoire de travail courant du processus appelant pour celui
+	spécifié par path.
+
+	path : Le chemin du répertoire à définir comme répertoire de travail
+	courant. Il peut être relatif ou absolu.
+		* Si path est un chemin absolu (commence par /), il spécifie un
+		emplacement exact dans le système de fichiers.
+		* Si path est un chemin relatif (sans / au début), il est interprété
+		par rapport au répertoire courant avant l'appel de chdir.
+
+	Valeur de retour :
+		En cas de succès, chdir retourne 0.
+		En cas d'erreur, elle retourne -1 et définit errno pour indiquer
+		l'erreur. Les erreurs courantes incluent :
+			ENOENT : Le répertoire spécifié n'existe pas.
+			EACCES : Le processus n'a pas les permissions nécessaires pour
+			accéder au répertoire.
+			ENOTDIR : Le chemin spécifié n'est pas un répertoire.
 
 		ex :
 		int main()
 		{
-			char *input;
+			char currentDir[1024];
 
-			input = readline("Entrez quelque chose: ");
-			
-			if (input)
-			{
-				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
-				rl_redisplay();  // Redessine l'entrée actuelle dans readline
-				
-				printf("Vous avez entré: %s\n", input);
-				free(input);  // Libère la mémoire allouée par readline
-			}
-			
+			// Afficher le répertoire courant avant de changer
+			if (getcwd(currentDir, sizeof(currentDir)) != NULL)
+				printf("Répertoire actuel : %s\n", currentDir);
+			else
+				return (perror("getcwd"), 1);
+
+			// Essayer de changer le répertoire de travail
+			if (chdir("/tmp") == -1)// Si l'appel échoue, afficher un message d'erreur
+				return (perror("chdir"), 1);
+
+			// Afficher le répertoire courant après le changement
+			if (getcwd(currentDir, sizeof(currentDir)) != NULL)
+				printf("Nouveau répertoire de travail : %s\n", currentDir);
+			else
+				return (perror("getcwd"), 1);
+
 			return 0;
 		}
 
 
 
 28 : stat
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
-	void rl_redisplay(void);
+	int stat(const char *path, struct stat *buf);
 
-	refresh l'affichage si un changement exerne arrive.
+	permet d'obtenir des informations sur un fichier ou un répertoire.
+	Elle remplit une structure stat avec des informations sur le fichier
+	spécifié par le chemin path.
+
+	* path : Le chemin du fichier ou du répertoire pour lequel les informations
+	doivent être récupérées.
+	* buf : Un pointeur vers une structure stat qui sera remplie avec les
+	informations du fichier.
+	La structure stat contient diverses informations :
+		st_dev : Identifiant du périphérique contenant le fichier
+		st_ino : Numéro d'inode du fichier
+		st_mode : Mode du fichier (type et permissions)
+		st_nlink : Nombre de liens physiques vers le fichier
+		st_uid : Identifiant de l'utilisateur propriétaire du fichier
+		st_gid : Identifiant du groupe propriétaire du fichier
+		st_rdev : Identifiant du périphérique (si c'est un fichier spécial)
+		st_size : Taille du fichier en octets
+		st_blksize : Taille de bloc optimale pour les opérations d'E/S
+		st_blocks : Nombre de blocs alloués pour le fichier
+		st_atime : Dernier accès au fichier
+		st_mtime : Dernière modification du fichier
+		st_ctime : Dernier changement d'état du fichier
+
+	Valeur de retour :
+		En cas de succès, stat retourne 0.
+		En cas d'erreur, elle retourne -1 et définit errno pour indiquer
+		l'erreur (par exemple, si le fichier n'existe pas).
 
 		ex :
 		int main()
 		{
-			char *input;
+			const char *file_path = "example.txt";
+			struct stat file_info;
 
-			input = readline("Entrez quelque chose: ");
-			
-			if (input)
-			{
-				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
-				rl_redisplay();  // Redessine l'entrée actuelle dans readline
-				
-				printf("Vous avez entré: %s\n", input);
-				free(input);  // Libère la mémoire allouée par readline
-			}
-			
+			// Appeler stat pour obtenir des informations sur le fichier
+			if (stat(file_path, &file_info) == -1)
+				return (perror("stat"), 1);
+
+			// Afficher certaines informations sur le fichier
+			printf("Informations sur le fichier '%s':\n", file_path);
+			printf("Taille du fichier : %ld octets\n", file_info.st_size);
+			printf("Permissions : %o\n", file_info.st_mode & 0777);  // Afficher les permissions en octal
+			printf("Numéro d'inode : %ld\n", file_info.st_ino);
+			printf("Dernière modification : %ld secondes depuis l'époque Unix\n", file_info.st_mtime);
+
 			return 0;
 		}
 
 
 
 29 : lstat
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
-	void rl_redisplay(void);
+	int lstat(const char *path, struct stat *buf);
 
-	refresh l'affichage si un changement exerne arrive.
+	fonctionne de la même manière que stat, à l'exception qu'elle ne suit
+	pas les liens symboliques.
+
+	* path : Le chemin du fichier ou du répertoire pour lequel obtenir des
+	informations.
+	* buf : Un pointeur vers une structure stat qui sera remplie avec les
+	informations sur le fichier.
+	Si le chemin correspond à un lien symbolique, lstat retourne des
+	informations sur le lien lui-même et non sur le fichier cible du lien.
+
+	Valeur de retour :
+		En cas de succès, lstat retourne 0.
+		En cas d'échec, lstat retourne -1 et définit errno pour indiquer
+		l'erreur.
 
 		ex :
 		int main()
 		{
-			char *input;
+			const char *path = "mon_lien_symbolique";
+			struct stat file_info;
 
-			input = readline("Entrez quelque chose: ");
-			
-			if (input)
-			{
-				// Supposons qu'un événement externe nécessite une mise à jour de l'affichage
-				rl_redisplay();  // Redessine l'entrée actuelle dans readline
-				
-				printf("Vous avez entré: %s\n", input);
-				free(input);  // Libère la mémoire allouée par readline
-			}
-			
+			// Utiliser lstat pour obtenir des informations sur le fichier ou le lien
+			if (lstat(path, &file_info) == -1)
+				return (perror("lstat"), 1);
+
+			// Vérifier si c'est un lien symbolique
+			if (S_ISLNK(file_info.st_mode))
+				printf("'%s' est un lien symbolique.\n", path);
+			else
+				printf("'%s' n'est pas un lien symbolique.\n", path);
+
+			// Afficher des informations sur le fichier ou le lien
+			printf("Numéro d'inode : %ld\n", file_info.st_ino);
+			printf("Taille du fichier : %ld octets\n", file_info.st_size);
+			printf("Permissions : %o\n", file_info.st_mode & 0777);  // Masquer les bits de type
+			printf("Dernière modification : %ld secondes depuis l'époque Unix\n", file_info.st_mtime);
+
 			return 0;
 		}
 
 
-
+donne moi le man de fstat avec un exemple
 30 : fstat
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -659,8 +1045,8 @@
 
 
 31 : unlink
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -688,8 +1074,8 @@
 
 
 32 : execve
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -717,8 +1103,8 @@
 
 
 33 : dup
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -746,8 +1132,8 @@
 
 
 34 : dup2
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -775,8 +1161,8 @@
 
 
 35 : pipe
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -804,8 +1190,8 @@
 
 
 36 : opendir
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -833,8 +1219,8 @@
 
 
 37 : readdir
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -862,8 +1248,8 @@
 
 
 38 : closedir
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -891,8 +1277,8 @@
 
 
 39 : strerror
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -920,8 +1306,8 @@
 
 
 40 : perror
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -949,8 +1335,8 @@
 
 
 41 : isatty
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -978,8 +1364,8 @@
 
 
 42 : ttyname
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -1007,8 +1393,8 @@
 
 
 43 : ttyslot
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -1036,8 +1422,8 @@
 
 
 44 : ioctl
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -1065,8 +1451,8 @@
 
 
 45 : getenv
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -1094,8 +1480,8 @@
 
 
 46 : tcsetattr
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -1123,8 +1509,8 @@
 
 
 47 : tcgetattr
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -1152,8 +1538,8 @@
 
 
 48 : tgetent
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -1181,8 +1567,8 @@
 
 
 49 : tgetflag
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -1210,8 +1596,8 @@
 
 
 50 : tgetnum
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -1239,8 +1625,8 @@
 
 
 51 : tgetstr
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -1268,8 +1654,8 @@
 
 
 52 : tgoto
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
@@ -1297,8 +1683,8 @@
 
 
 53 : tputs
-	#include <readline/readline.h>
-	#include <readline/history.h>
+	#include <sys/stat.h>
+	#include <unistd.h>
 
 	void rl_redisplay(void);
 
