@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:34:47 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/16 19:22:36 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/27 21:20:11 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	arrow_controls(int key, t_mlx *mlx)
 {
 	if (key == XK_Left)
-		mlx->f_params.shift_x -= 0.01;
-	else if (key == XK_Right)
 		mlx->f_params.shift_x += 0.01;
+	else if (key == XK_Right)
+		mlx->f_params.shift_x -= 0.01;
 	else if (key == XK_Up)
-		mlx->f_params.shift_y -= 0.01;
-	else if (key == XK_Down)
 		mlx->f_params.shift_y += 0.01;
+	else if (key == XK_Down)
+		mlx->f_params.shift_y -= 0.01;
 	else if (key == XK_r)
 	{
 		set_fractal_datas(mlx, mlx->ac, mlx->av);

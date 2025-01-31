@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:20:51 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/14 19:28:12 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/27 21:13:20 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	check_list(t_list *a_list, t_list *b_list)
 	{
 		ft_printf("KO\n");
 		free_list(a_list);
+		free_list(b_list);
 		return ;
 	}
 	if (sorted_a_list(a_list))

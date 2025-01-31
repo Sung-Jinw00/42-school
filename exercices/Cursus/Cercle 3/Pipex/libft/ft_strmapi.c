@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:05 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/04 13:32:05 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:31:35 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 } */
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	i = 0;
-	cpy = malloc(ft_strlen(s) + 1);
+	int i = 0;
+	char *cpy = malloc(ft_strlen(s) + 1);
 	if (!cpy)
 		return (NULL);
 	while (s[i])

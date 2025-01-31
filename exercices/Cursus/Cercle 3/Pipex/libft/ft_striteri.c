@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:45 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/04 13:31:45 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:31:12 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 } */
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
+	int i;
+	
 	i = 0;
 	while (s[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:11:55 by locagnio          #+#    #+#             */
-/*   Updated: 2024/12/26 18:40:12 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:14:17 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,4 @@ void	execute(char *av, char **env)
 		perror(RED "Error -> execution failure\n" RESET);
 		exit(EXIT_FAILURE);
 	}
-	free(path);
-	free_dbl_tab(cmd);
 }

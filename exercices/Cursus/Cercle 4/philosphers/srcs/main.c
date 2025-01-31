@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:52:21 by locavnio          #+#    #+#             */
-/*   Updated: 2025/01/31 17:26:08 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/31 17:52:19 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,15 @@ static int	init_params_mutex(t_rules *rules)
 	rules->fork = 0;
 	rules->death = malloc(sizeof(pthread_mutex_t));
 	if (!rules->death)
-		return (error_msg("Error\nMutex death: malloc failed\n", rules, 0, 1));
+		return (error_msg("Error : mutex failed his birth\n", rules, 0, 1));
 	rules->fork = malloc(sizeof(pthread_mutex_t) * rules->demography);
 	if (!rules->fork)
-		return (error_msg("Error\nMutex fork: malloc failed\n", rules, 0, 1));
+		return (error_msg("Error : Fork isn't forking\n", rules, 0, 1));
 	if (pthread_mutex_init(rules->death, NULL) == -1)
-		return (error_msg("Error\nMutex init failed\n", rules, 0, 1));
+		return (error_msg("Error : Mutex isn't mutexing\n", rules, 0, 1));
 	while (++i < rules->demography)
 		if (pthread_mutex_init(&rules->fork[i], NULL) == -1)
-			return (error_msg("Error\nMutex init failed\n", rules, 0, 1));
+			return (error_msg("Error : Mutex isn't mutexing\n", rules, 0, 1));
 	return (0);
 }
 
@@ -73,8 +73,8 @@ static int	init_params(t_rules *rules, char **av)
 	rules->over = 0;
 	if (rules->demography > 0)
 		mutex = init_params_mutex(rules);
-	return (mutex || rules->demography <= 0 || rules->t2die <= 0 || rules->t2eat <= 0
-		|| rules->t2sleep <= 0 || rules->max_iter == 0);
+	return (mutex || rules->demography <= 0 || rules->t2die <= 0
+		|| rules->t2eat <= 0 || rules->t2sleep <= 0 || rules->max_iter == 0);
 }
 
 int	main(int ac, char **av)

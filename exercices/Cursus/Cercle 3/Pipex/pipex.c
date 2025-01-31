@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:14:22 by locagnio          #+#    #+#             */
-/*   Updated: 2024/12/26 18:38:05 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:45:13 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	son_program(char **av, char **env, int *fd)
 	dup2(fd[1], STDOUT_FILENO);
 	dup2(fd_son, STDIN_FILENO);
 	close(fd[0]);
-	execute(av[2], env);
+	close(fd[1]);
 	close(fd_son);
+	execute(av[2], env);
 }
 
 void	dad_program(char **av, char **env, int *fd)
@@ -35,9 +36,10 @@ void	dad_program(char **av, char **env, int *fd)
 		error();
 	dup2(fd[0], STDIN_FILENO);
 	dup2(fd_dad, STDOUT_FILENO);
+	close(fd[0]);
 	close(fd[1]);
-	execute(av[3], env);
 	close(fd_dad);
+	execute(av[3], env);
 }
 
 int	main(int ac, char **av, char **env)
@@ -63,8 +65,7 @@ int	main(int ac, char **av, char **env)
 	else
 	{
 		ft_putstr_fd(RED BOLD "Error : Invalid arguments !\n\n" RESET, 2);
-		ft_printf(BRIGHT_GREEN BOLD "Please,
-			enter valid arguments like so :\n");
+		ft_printf(BRIGHT_GREEN BOLD "Please, enter valid arguments like so :\n");
 		ft_printf(RESET CYAN "	./pipex file1 \"cmd1\" \"cmd2\" file2\n" RESET);
 	}
 	return (0);

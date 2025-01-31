@@ -2,7 +2,7 @@ MAKEFLAGS += -s  # Active le mode silencieux globalement
 
 # Définition des variables
 CC				= cc
-FLAGS			= -Wall -Wextra -Werror -g3
+FLAGS			= -Wall -Wextra -Werror -g
 HDRS			= includes
 
 SRCS			=  srcs/main.c srcs/utils.c srcs/utils2.c srcs/philo.c srcs/threads.c

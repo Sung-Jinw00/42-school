@@ -13,7 +13,6 @@ SRCS_BONUS  = pipex_bonus.c utils_bonus.c
 OBJS        = $(SRCS:.c=.o)
 OBJS_BONUS  = $(SRCS_BONUS:.c=.o)
 RM          = rm -f
-CREATE      = ar rcs
 
 # Couleurs
 RESET       = \033[0m

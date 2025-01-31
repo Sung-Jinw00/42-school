@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:35:02 by locagnio          #+#    #+#             */
-/*   Updated: 2024/11/04 13:35:02 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:33:08 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ void	*f(void *content)
 } */
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
+	t_list *newlist;
+	t_list *start_newlist;
+	t_list *temp;
+
 	newlist = malloc(sizeof(t_list));
 	if (!lst || !newlist)
 		return (NULL);
