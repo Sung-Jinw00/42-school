@@ -5,87 +5,72 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 13:32:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/24 16:40:15 by locagnio         ###   ########.fr       */
+/*   Created: 2025/01/31 16:32:04 by locagnio          #+#    #+#             */
+/*   Updated: 2025/01/31 17:08:37 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philosophers.h"
+#include "../includes/philo.h"
 
-long long	ft_atold(char *nptr)
+long int	time_now(void)
 {
-	int			i;
-	int			sign;
-	long long	result;
+	struct timeval	now;
 
-	if (!nptr)
-		return (0);
-	i = 0;
-	sign = 1;
-	result = 0;
-	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	gettimeofday(&now, NULL);
+	return ((now.tv_sec * 1000) + (now.tv_usec / 1000));
+}
+
+int	ft_usleep(long int time)
+{
+	long int	start_time;
+
+	start_time = time_now();
+	while ((time_now() - start_time) < time)
+		usleep(150);
+	return (1);
+}
+
+int	error_msg(char *s, t_rules *rules, t_philo *p, int malloc)
+{
+	if (malloc)
 	{
-		if (nptr[i] == '-')
-			sign = -sign;
-		i++;
-	}
-	while (nptr[i] >= '0' && nptr[i] <= '9')
+		if (rules->death)
+			free(rules->death);
+		if (rules->fork)
+			free(rules->fork);
+		if (p)
+			free(p);
+	}		
+	return (printf("%s", s));
+}
+
+void	print_routine(t_philo *p, char *action)
+{
+	pthread_mutex_lock(p->rules->death);
+	if (p->rules->over)
 	{
-		result = result * 10 + nptr[i] - '0';
-		i++;
+		pthread_mutex_unlock(p->rules->death);
+		return ;
 	}
-	return (result * sign);
+	if (!ft_strcmp(action, FORK))
+		printf(GREEN"%ld %d %s\n"RESET, time_now() - p->thread_start, p->id + 1, action);
+	else if (!ft_strcmp(action, SLEEP))
+		printf(BLUE"%ld %d %s\n"RESET, time_now() - p->thread_start, p->id + 1, action);
+	else if (!ft_strcmp(action, THINK))
+		printf(CYAN"%ld %d %s\n"RESET, time_now() - p->thread_start, p->id + 1, action);
+	else if (!ft_strcmp(action, EAT))
+		printf(YELLOW"%ld %d %s\n"RESET, time_now() - p->thread_start, p->id + 1, action);
+	else
+		printf(RED"%ld %d %s\n"RESET, time_now() - p->thread_start, p->id + 1, action);
+	pthread_mutex_unlock(p->rules->death);
 }
 
-void	ft_putstr_fd(char *s, int fd)
+void	final_print(int alive)
 {
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
+	printf("						\n");
+	if (alive)
+		printf("       No one died today, noice.\n");
+	else
+		printf("	¯\\_(ツ)_/¯			\n");
+	printf("						\n");
 }
-
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	size_t	i;
-
-	i = 0;
-	while (s1[i] || s2[i])
-	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
-	}
-	return (0);
-}
-
-long long	timestamp(void)
-{
-	struct timeval	t;
-
-	gettimeofday(&t, NULL);
-	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
-}
-
-void	free_all(t_philo *philo)
-{
-	free(philo->rules->forks);
-	free(philo);
-}
-
-/* #include <stdio.h>
-
-int	main(void)
-{
-	const char nptr[] = "   +1234ab567";
-
-	printf("%d\n", ft_atoi(nptr));
-	return(0);
-
-} */

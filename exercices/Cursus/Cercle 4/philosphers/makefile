@@ -5,7 +5,7 @@ CC				= cc
 FLAGS			= -Wall -Wextra -Werror -g3
 HDRS			= includes
 
-SRCS			=  srcs/main.c srcs/utils.c srcs/utils2.c srcs/displays.c
+SRCS			=  srcs/main.c srcs/utils.c srcs/utils2.c srcs/philo.c srcs/threads.c
 SRC_O			= $(SRCS:srcs/.c=.o)
 PHILO_NAME		= philo
 RM				= rm -f
