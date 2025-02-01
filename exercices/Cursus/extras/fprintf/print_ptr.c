@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_ptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 16:48:01 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/31 17:54:19 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/01 13:02:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_null_ptr(t_struct v, int *count)
 	char	*nil;
 
 	nil = "(nil)";
-	if (v.nb1 - 5 > 0 && ft_strcmp(nil, "(nil)"))
+	if (v.nb1 - 5 > 0 && !ft_strcmp(nil, "(nil)"))
 	{
 		if (v.nb1 >= 5)
 			*count += v.nb1 - 5;

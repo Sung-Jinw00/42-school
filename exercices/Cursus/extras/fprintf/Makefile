@@ -2,7 +2,7 @@ CC = cc
 
 FLAGS = -Wall -Wextra -Werror -w
 
-NAME = fprintf
+NAME = libfprintf.a
 
 LIBFT = ft_fprintf.h
 
@@ -15,7 +15,7 @@ OBJS = $(FILES:.c=.o)
 all: ${NAME}
 
 ${NAME}: ${OBJS}
-	@$(CC) $(FLAGS) $(OBJS) -o $(NAME)
+	ar rcs $@ $^
 
 %.o: %.c
 	${CC} ${FLAGS} -c $< -o $@

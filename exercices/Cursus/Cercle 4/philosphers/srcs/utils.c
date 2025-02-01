@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/31 17:08:37 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/01 13:33:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,17 @@ int	ft_usleep(long int time)
 	return (1);
 }
 
-int	error_msg(char *s, t_rules *rules, t_philo *p, int malloc)
+int	error_msg(char *s, t_rules *rules, t_philo *p)
 {
-	if (malloc)
-	{
-		if (rules->death)
-			free(rules->death);
-		if (rules->fork)
-			free(rules->fork);
-		if (p)
-			free(p);
-	}		
-	return (printf("%s", s));
+	if (rules->death)
+		free(rules->death);
+	if (rules->writing)
+		free(rules->writing);
+	if (rules->fork)
+		free(rules->fork);
+	if (p)
+		free(p);	
+	return (ft_fprintf(2, "%s", s));
 }
 
 void	print_routine(t_philo *p, char *action)
@@ -52,13 +51,13 @@ void	print_routine(t_philo *p, char *action)
 		pthread_mutex_unlock(p->rules->death);
 		return ;
 	}
-	if (!ft_strcmp(action, FORK))
+	if (!ft_strcmp_philo(action, FORK))
 		printf(GREEN"%ld %d %s\n"RESET, time_now() - p->thread_start, p->id + 1, action);
-	else if (!ft_strcmp(action, SLEEP))
+	else if (!ft_strcmp_philo(action, SLEEP))
 		printf(BLUE"%ld %d %s\n"RESET, time_now() - p->thread_start, p->id + 1, action);
-	else if (!ft_strcmp(action, THINK))
+	else if (!ft_strcmp_philo(action, THINK))
 		printf(CYAN"%ld %d %s\n"RESET, time_now() - p->thread_start, p->id + 1, action);
-	else if (!ft_strcmp(action, EAT))
+	else if (!ft_strcmp_philo(action, EAT))
 		printf(YELLOW"%ld %d %s\n"RESET, time_now() - p->thread_start, p->id + 1, action);
 	else
 		printf(RED"%ld %d %s\n"RESET, time_now() - p->thread_start, p->id + 1, action);

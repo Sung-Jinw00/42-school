@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_char_and_string.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 16:45:58 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/31 17:54:14 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/01 13:02:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_print_str(char *str, t_struct v, int *count)
 
 	if (!str)
 		str = "(null)";
-	if (ft_strcmp(str, "(null)") && srch_flag(v.flags, '.') && v.nb2 <= 5)
+	if (!ft_strcmp(str, "(null)") && srch_flag(v.flags, '.') && v.nb2 <= 5)
 	{
 		str = "";
 		print_chars = 0;

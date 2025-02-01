@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:58:52 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/31 17:17:33 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/01 13:34:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <limits.h>
+# include "ft_fprintf.h"
 
 # define RESET		"\033[0m"   //Réinitialisation
 # define RED		"\033[31m"   //Couleur rouge
@@ -50,6 +51,7 @@ typedef struct s_rules
 	int				nb_of_meals;
 	int				over;
 	long int		start;
+	pthread_mutex_t	*writing;
 	pthread_mutex_t	*death;
 	pthread_mutex_t	*fork;
 }	t_rules;
@@ -71,13 +73,13 @@ long int	time_now(void);
 void		final_print(int alive);
 int			main(int ac, char **ag);
 int			check_death(t_philo *p);
-int			ft_atoi(const char *str);
+int			ft_atoi_philo(const char *str);
 int			ft_usleep(long int time);
 void		*thread_routine(void *job);
 int			philosophers(t_rules *params);
-int			init_philo(t_rules *p, t_philo *philo);
+int			ft_strcmp_philo(char *s1, char *s2);
 void		print_routine(t_philo *p, char *action);
-int			ft_strcmp(const char *s1, const char *s2);
-int			error_msg(char *s, t_rules *par, t_philo *p, int malloc);
+void		end_thread(t_rules *rules, t_philo *philo);
+int			error_msg(char *s, t_rules *par, t_philo *p);
 
 #endif

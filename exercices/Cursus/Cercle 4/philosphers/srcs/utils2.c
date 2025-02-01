@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:01 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/31 16:54:29 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/01 13:17:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	check_overflow(int sign)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+int	ft_atoi_philo(const char *str)
 {
 	int						i;
 	int						sign;
@@ -71,16 +71,16 @@ int	ft_atoi(const char *str)
 	return (sign * (int)n);
 }
 
-int	ft_strcmp(const char *s1, const char *s2)
+void	end_thread(t_rules *rules, t_philo *philo)
 {
-	size_t	i;
+	int	i;
 
-	i = 0;
-	while (s1[i] || s2[i])
-	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
-	}
-	return (0);
+	i = -1;
+	while (++i < rules->demography)
+		pthread_join(philo[i].life_tid, (void *)&philo[i]);
+	pthread_mutex_destroy(rules->death);
+	pthread_mutex_destroy(rules->fork);
+	free(rules->death);
+	free(rules->fork);
+	free(philo);
 }

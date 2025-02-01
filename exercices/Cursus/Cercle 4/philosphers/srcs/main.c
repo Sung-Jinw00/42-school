@@ -3,30 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:52:21 by locavnio          #+#    #+#             */
-/*   Updated: 2025/01/31 17:52:19 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/01 13:36:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	init_philo(t_rules *rules, t_philo *philo)
+int	ft_strcmp_philo(char *s1, char *s2)
 {
-	int	i;
+	size_t	i;
 
-	i = -1;
-	while (++i < rules->demography)
+	if (!s1 || !s2)
+		return (0);
+	i = 0;
+	while (s1[i] || s2[i])
 	{
-		philo[i].id = i;
-		philo[i].dead = 0;
-		philo[i].iter_num = 0;
-		philo[i].thread_start = 0;
-		philo[i].meal = 0;
-		philo[i].rules = rules;
-		philo[i].left_fork = &rules->fork[i];
-		philo[i].right_fork = 0;
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
 	}
 	return (0);
 }
@@ -40,15 +37,18 @@ static int	init_params_mutex(t_rules *rules)
 	rules->fork = 0;
 	rules->death = malloc(sizeof(pthread_mutex_t));
 	if (!rules->death)
-		return (error_msg("Error : mutex failed his birth\n", rules, 0, 1));
+		return (error_msg("Error : mutex failed his birth\n", rules, 0));
+	rules->writing = malloc(sizeof(pthread_mutex_t));
+	if (!rules->writing)
+		return (error_msg("Error : writing never exist\n", rules, 0));
 	rules->fork = malloc(sizeof(pthread_mutex_t) * rules->demography);
 	if (!rules->fork)
-		return (error_msg("Error : Fork isn't forking\n", rules, 0, 1));
+		return (error_msg("Error : The fork isn't forking\n", rules, 0));
 	if (pthread_mutex_init(rules->death, NULL) == -1)
-		return (error_msg("Error : Mutex isn't mutexing\n", rules, 0, 1));
+		return (error_msg("Error : Death is a concept\n", rules, 0));
 	while (++i < rules->demography)
 		if (pthread_mutex_init(&rules->fork[i], NULL) == -1)
-			return (error_msg("Error : Mutex isn't mutexing\n", rules, 0, 1));
+			return (error_msg("Error : We lost a fork\n", rules, 0));
 	return (0);
 }
 
@@ -57,10 +57,10 @@ static int	init_params(t_rules *rules, char **av)
 	int	mutex;
 
 	mutex = -1;
-	rules->demography = ft_atoi(av[1]);
-	rules->t2die = ft_atoi(av[2]);
-	rules->t2eat = ft_atoi(av[3]);
-	rules->t2sleep = ft_atoi(av[4]);
+	rules->demography = ft_atoi_philo(av[1]);
+	rules->t2die = ft_atoi_philo(av[2]);
+	rules->t2eat = ft_atoi_philo(av[3]);
+	rules->t2sleep = ft_atoi_philo(av[4]);
 	rules->max_iter = -1;
 	rules->nb_of_meals = 0;
 	rules->start = 0;
@@ -68,7 +68,7 @@ static int	init_params(t_rules *rules, char **av)
 	if (av[5])
 	{
 		rules->nb_of_meals = 1;
-		rules->max_iter = ft_atoi(av[5]);
+		rules->max_iter = ft_atoi_philo(av[5]);
 	}
 	rules->over = 0;
 	if (rules->demography > 0)
@@ -79,11 +79,11 @@ static int	init_params(t_rules *rules, char **av)
 
 int	main(int ac, char **av)
 {
-	t_rules	p;
+	t_rules	rules;
 
-	if ((ac != 5 && ac != 6) || init_params(&p, av))
-		return (error_msg("Error: invalid arguments\n", &p, 0, 1));
-	if (philosophers(&p))
+	if ((ac != 5 && ac != 6) || init_params(&rules, av))
+		return (error_msg("Error : invalid arguments\n", &rules, 0));
+	if (philosophers(&rules))
 		return (1);
 	return (0);
 }

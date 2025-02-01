@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:10 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/31 17:18:03 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/01 13:41:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ static void	check_thread(t_rules *rules, t_philo *philo)
 	{
 		ft_usleep(5 * rules->demography);
 		printf("						\n");
-		printf("  All philosophers have eaten %d times\n", rules->max_iter);
+		printf(BOLD GREEN"  All philosophers have eaten %d times !\n"RESET, rules->max_iter);
 		return (final_print(1));
 	}
-	return (final_print(0));
+	else
+		return (final_print(0));
 }
 
 static int	init_thread(t_rules *rules, t_philo *philo)
@@ -54,7 +55,7 @@ static int	init_thread(t_rules *rules, t_philo *philo)
 		philo[i].right_fork = philo[(i + 1) % rules->demography].left_fork;
 		if (pthread_create(&philo[i].life_tid, NULL,
 				&thread_routine, &philo[i]) == -1)
-			return (error_msg("Error\nFailed to create thread\n", rules, philo, 2));
+			return (error_msg("Error : philo failed in being born\n", rules, philo));
 	}
 	i = -1;
 	rules->start = time_now();
@@ -67,18 +68,23 @@ static int	init_thread(t_rules *rules, t_philo *philo)
 	return (0);
 }
 
-static void	end_thread(t_rules *rules, t_philo *philo)
+static int	init_philo(t_rules *rules, t_philo *philo)
 {
 	int	i;
 
 	i = -1;
 	while (++i < rules->demography)
-		pthread_join(philo[i].life_tid, (void *)&philo[i]);
-	pthread_mutex_destroy(rules->death);
-	pthread_mutex_destroy(rules->fork);
-	free(rules->death);
-	free(rules->fork);
-	free(philo);
+	{
+		philo[i].id = i;
+		philo[i].dead = 0;
+		philo[i].iter_num = 0;
+		philo[i].thread_start = 0;
+		philo[i].meal = 0;
+		philo[i].rules = rules;
+		philo[i].left_fork = &rules->fork[i];
+		philo[i].right_fork = 0;
+	}
+	return (0);
 }
 
 int	philosophers(t_rules *rules)
