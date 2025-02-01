@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:52:21 by locavnio          #+#    #+#             */
-/*   Updated: 2025/02/01 13:36:15 by marvin           ###   ########.fr       */
+/*   Updated: 2025/02/01 15:44:16 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,15 @@ static int	init_params_mutex(t_rules *rules)
 	rules->fork = 0;
 	rules->death = malloc(sizeof(pthread_mutex_t));
 	if (!rules->death)
-		return (error_msg("Error : mutex failed his birth\n", rules, 0));
-	rules->writing = malloc(sizeof(pthread_mutex_t));
-	if (!rules->writing)
-		return (error_msg("Error : writing never exist\n", rules, 0));
+		return (error_msg("Error : mutex failed his birth\n", rules, 0, 1));
 	rules->fork = malloc(sizeof(pthread_mutex_t) * rules->demography);
 	if (!rules->fork)
-		return (error_msg("Error : The fork isn't forking\n", rules, 0));
+		return (error_msg("Error : The fork isn't forking\n", rules, 0, 1));
 	if (pthread_mutex_init(rules->death, NULL) == -1)
-		return (error_msg("Error : Death is a concept\n", rules, 0));
+		return (error_msg("Error : Death is a concept\n", rules, 0, 1));
 	while (++i < rules->demography)
 		if (pthread_mutex_init(&rules->fork[i], NULL) == -1)
-			return (error_msg("Error : We lost a fork\n", rules, 0));
+			return (error_msg("Error : We lost a fork\n", rules, 0, 1));
 	return (0);
 }
 
@@ -82,7 +79,7 @@ int	main(int ac, char **av)
 	t_rules	rules;
 
 	if ((ac != 5 && ac != 6) || init_params(&rules, av))
-		return (error_msg("Error : invalid arguments\n", &rules, 0));
+		return (error_msg("Error : invalid arguments\n", &rules, 0, 0));
 	if (philosophers(&rules))
 		return (1);
 	return (0);

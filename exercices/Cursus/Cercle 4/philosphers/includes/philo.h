@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:58:52 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/01 13:34:04 by marvin           ###   ########.fr       */
+/*   Updated: 2025/02/01 15:43:37 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ typedef struct s_rules
 	int				nb_of_meals;
 	int				over;
 	long int		start;
-	pthread_mutex_t	*writing;
 	pthread_mutex_t	*death;
 	pthread_mutex_t	*fork;
 }	t_rules;
@@ -80,6 +79,6 @@ int			philosophers(t_rules *params);
 int			ft_strcmp_philo(char *s1, char *s2);
 void		print_routine(t_philo *p, char *action);
 void		end_thread(t_rules *rules, t_philo *philo);
-int			error_msg(char *s, t_rules *par, t_philo *p);
+int			error_msg(char *s, t_rules *rules, t_philo *p, int malloc);
 
 #endif

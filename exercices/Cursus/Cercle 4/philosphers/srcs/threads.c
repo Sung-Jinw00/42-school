@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:06 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/31 17:15:55 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/01 16:28:58 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,26 +51,26 @@ void	ft_eat(t_philo *p)
 	pthread_mutex_lock(p->right_fork);
 	print_routine(p, FORK);
 	p->meal = time_now();
-	ft_usleep(p->rules->t2eat);
 	print_routine(p, EAT);
+	ft_usleep(p->rules->t2eat);
 	p->iter_num++;
 	pthread_mutex_unlock(p->left_fork);
 	pthread_mutex_unlock(p->right_fork);
 }
 
-void	*thread_routine(void *job)
+void	*thread_routine(void *arg)
 {
-	t_philo	*p;
+	t_philo	*philo;
 
-	p = (t_philo *)job;
-	while (!p->rules->ready)
+	philo = (t_philo *)arg;
+	while (!philo->rules->ready)
 		continue ;
-	if (p->id & 1)
-		ft_usleep(p->rules->t2eat * 0.9 + 1);
-	while (!p->rules->over)
+	if (philo->id & 1)
+		ft_usleep(philo->rules->t2eat);
+	while (!philo->rules->over)
 	{
-		ft_eat(p);
-		ft_sleep_and_think(p);
+		ft_eat(philo);
+		ft_sleep_and_think(philo);
 	}
 	return (NULL);
 }
