@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:58:52 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/02 19:22:15 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/02 19:49:46 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/stat.h>
 # include <pthread.h>
 # include <fcntl.h>
+# include <sys/wait.h>
 # include <limits.h>
 # include "ft_fprintf.h"
 # include <semaphore.h>

@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:06 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/02 19:33:43 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/02 19:46:28 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void	*thread_routine(void *arg)
 		ft_usleep(philo->rules->t2eat * 0.9 + 1);
 	while (!philo->rules->over)
 	{
+		if (check_death(philo))
+			break;
 		ft_eat(philo);
 		ft_sleep_and_think(philo);
 	}
