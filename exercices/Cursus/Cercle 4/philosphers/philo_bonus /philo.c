@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:10 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/02 19:50:35 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/02 19:52:22 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static int	init_philo(t_rules *rules, t_philo *philo)
 static int	init_pipe(t_rules *rules, t_philo *philo)
 {
 	int i;
+	pid_t pid;
 
 	i = -1;
 	rules->start = time_now();
@@ -39,11 +40,14 @@ static int	init_pipe(t_rules *rules, t_philo *philo)
 	{
 		philo[i].thread_start = rules->start;
 		philo[i].last_meal = rules->start;
-		if (fork() == 0)
+		pid = fork();
+		if (pid == 0)
 		{
 			thread_routine(&philo[i]);
 			exit(0);
 		}
+		else if (pid == -1)
+			return (perror("Failed to create philosopher process"), -1);
 	}
 	rules->ready = 1;
 	for (i = 0; i < rules->demography; i++)
