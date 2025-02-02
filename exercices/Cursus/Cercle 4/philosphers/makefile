@@ -5,9 +5,14 @@ CC				= cc
 FLAGS			= -Wall -Wextra -Werror -g
 HDRS			= includes
 
-SRCS			=  srcs/main.c srcs/utils.c srcs/utils2.c srcs/philo.c srcs/threads.c
-SRC_O			= $(SRCS:srcs/.c=.o)
+SRCS			=  philo\ /main.c philo\ /utils.c philo\ /utils2.c philo\ /philo.c\
+				   philo\ /threads.c
+SRC_O			= $(SRCS:philo\ /.c=.o)
+B_SRCS			=  philo_bonus\ /main.c philo_bonus\ /utils.c philo_bonus\ /utils2.c\
+				   philo_bonus\ /threads.c philo_bonus\ /philo.c
+B_SRCS_O		= $(B_SRCS:philo_bonus\ /.c=.o)
 PHILO_NAME		= philo
+B_PHILO_NAME	= philo_bonus
 RM				= rm -f
 CYAN			= "\033[36m"
 RED				= "\033[31m"
@@ -25,7 +30,7 @@ $(PHILO_NAME): $(SRC_O)
 
 # Compilation des fichiers sources en objets
 # On compiles les fichiers .c dans srcs/ en .o dans le répertoire racine
-%.o: srcs/%.c $(HDRS)/*.h
+%.o: philo\ /%.c $(HDRS)/*.h
 	@echo $(CYAN)"Compilation de $<..."$(RESET)
 	@$(CC) $(FLAGS) -I $(HDRS) -c $< -o $@
 
@@ -36,14 +41,21 @@ clean:
 
 # Nettoyage complet
 fclean: clean
-	@echo $(CYAN)"Suppression de l'exécutable $(PHILO_NAME)..."$(RESET)
+	@echo $(CYAN)"Suppression de l'exécutable..."$(RESET)
 	@$(RM) $(PHILO_NAME)
 
 # Récompilation depuis zéro
 re: fclean all
 
-checker/%.o: checker/%.c $(HDRS)/*.h
-	@echo $(CYAN)"Compilation du fichier bonus $<..."$(RESET)
+bonus: $(B_SRCS_O)
+	@echo $(CYAN)"Création du bonus..."$(RESET)
+	@$(CC) $(FLAGS) $(B_SRCS_O) -L lib -lfprintf -I $(HDRS) -o $(B_PHILO_NAME)
+	@echo $(GREEN)"Exécutable $(B_PHILO_NAME) créé !"$(RESET)
+
+# Compilation des fichiers sources en objets (version bonus)
+# On compile les fichiers .c dans philo_bonus/ en .o dans le répertoire racine
+%.o: philo_bonus\ /%.c $(HDRS)/*.h
+	@echo $(CYAN)"Compilation de $<..."$(RESET)
 	@$(CC) $(FLAGS) -I $(HDRS) -c $< -o $@
 
 # Sécurité des règles

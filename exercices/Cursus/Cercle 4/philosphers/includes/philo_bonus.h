@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:58:52 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/02 15:56:59 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/02 19:22:15 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#ifndef PHILO_BONUS_H
+# define PHILO_BONUS_H
 
 # include <stdio.h>
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
 # include <sys/time.h>
+# include <sys/stat.h>
 # include <pthread.h>
+# include <fcntl.h>
 # include <limits.h>
 # include "ft_fprintf.h"
+# include <semaphore.h>
 
 # define RESET		"\033[0m"   //Réinitialisation
 # define RED		"\033[31m"   //Couleur rouge
@@ -51,8 +54,9 @@ typedef struct s_rules
 	int				nb_of_meals;
 	int				over;
 	long int		start;
-	pthread_mutex_t	*death;
-	pthread_mutex_t	*fork;
+	sem_t			*death;
+	sem_t			*fork;
+	void			*philo;
 }	t_rules;
 
 typedef struct s_philo
@@ -61,10 +65,8 @@ typedef struct s_philo
 	int				dead;
 	int				iter_num;
 	long int		thread_start;
-	long int		meal;
+	long int		last_meal;
 	pthread_t		life_tid;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
 	t_rules			*rules;
 }	t_philo;
 
