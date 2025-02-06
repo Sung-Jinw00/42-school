@@ -4,7 +4,8 @@ MAKEFLAGS += -s  # Active le mode silencieux globalement
 CC				= cc
 FLAGS			= -Wall -Wextra -Werror -lreadline -g
 HDRS			= includes
-SRCS			=  srcs/minishell.c srcs/print.c
+SRCS			=  srcs/minishell.c srcs/print.c srcs/exec.c srcs/free.c srcs/utils/utils.c\
+				   srcs/utils/ft_split.c srcs/buildins/pwd.c srcs/buildins/env.c
 SRC_O			= $(SRCS:srcs/.c=.o)
 PHILO_NAME		= minishell
 RM				= rm -f
