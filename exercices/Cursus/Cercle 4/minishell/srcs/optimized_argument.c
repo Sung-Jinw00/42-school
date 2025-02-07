@@ -6,13 +6,13 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 15:31:28 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/07 17:38:02 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/07 19:12:00 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static int	valid_quotes(char c, bool *single_quote, bool *double_quote)
+static void	valid_quotes(char c, bool *single_quote, bool *double_quote)
 {
 	if (!(*single_quote) && !(*double_quote))
 	{
@@ -23,7 +23,7 @@ static int	valid_quotes(char c, bool *single_quote, bool *double_quote)
 	}
 	else if ((*single_quote) || (*double_quote))
 	{
-		if (c = '\'' && (*single_quote) && !(*double_quote))
+		if (c == '\'' && (*single_quote) && !(*double_quote))
 			(*single_quote) = 0;
 		else if (c == '"' && (*double_quote) && !(*single_quote))
 			(*double_quote) = 0;
@@ -118,6 +118,8 @@ static char	**split_line(char *line, char **splited_line, t_minishell *mini)
 		while (line[i] == ' ')// 1)j'avance dans ma string jusqu'a croiser autre chose qu'un white space
 			i++;
 	}
+	splited_line[j] = NULL;
+	return (splited_line);
 }
 
 char	**optimised_line(char *line, t_minishell *mini)

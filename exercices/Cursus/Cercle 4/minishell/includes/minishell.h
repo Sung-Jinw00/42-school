@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 18:03:29 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/07 19:03:53 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/07 19:12:29 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ char	*ft_itoa(int n);
 void	print_list(t_env *L);
 void	free_dbl_tab(char **str);
 char	*ft_strdup(const char *src);
-char	**optimised_line(char *line);
 void	ft_print_dlb_tabs(char **tab);
 void	ft_putstr_fd(char *s, int fd);
 void	exec_cmd(char **line, t_minishell *mini);
 char	**ft_split(char *str, char *charset);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	**optimised_line(char *line, t_minishell *mini);
 char	*ft_remove_from_string(char *str, char *to_delete);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 

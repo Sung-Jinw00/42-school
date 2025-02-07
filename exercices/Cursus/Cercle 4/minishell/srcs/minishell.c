@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 18:03:17 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/07 19:03:28 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/07 19:09:43 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int main(int ac, char **av, char **env)
 	init_env(&(mini->env), env);
 	while (1)
 	{
-		line = optimised_line(readline(YELLOW"minishell> "RESET));
+		line = optimised_line(readline(YELLOW"minishell> "RESET), mini);
 		if (line && line[0] && line[0][0] == 0)
 			continue ;
 		exec_cmd(line, mini);
