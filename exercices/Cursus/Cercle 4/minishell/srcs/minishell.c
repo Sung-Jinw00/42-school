@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 18:03:17 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/06 20:58:37 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/07 00:28:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ void	init_env(t_env	**my_env, char **env)
 {
 	t_env	*tmp;
 	int		i;
+	char	*shlvl;
 
 	i = 0;
 	tmp = *my_env;
+	shlvl = NULL;
 	while (env[++i])
 	{
 		tmp->next = create_cell(ft_strdup(env[i]));
@@ -40,7 +42,9 @@ void	init_env(t_env	**my_env, char **env)
 		if (!ft_strncmp("SHLVL=", env[i], 6))
 		{
 			free(tmp->data);
-			tmp->data = ft_strjoin("SHLVL=", ft_itoa(ft_atoi(env[i] + 6) + 1));
+			shlvl = ft_itoa(ft_atoi(env[i] + 6) + 1);
+			tmp->data = ft_strjoin("SHLVL=", shlvl);
+			free(shlvl);
 		}
 	}
 }
@@ -53,10 +57,12 @@ int main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	//welcome();
+	line = NULL;
 	my_env = create_cell(env[0]);
 	init_env(&my_env, env);
 	while (1)
 	{
+		free(line);
 		line = readline(YELLOW"minishell> "RESET);
 		if (!ft_strcmp(line, ""))
 			continue ;
