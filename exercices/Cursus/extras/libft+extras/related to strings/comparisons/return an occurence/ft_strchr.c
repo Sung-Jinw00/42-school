@@ -1,24 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/06 19:15:45 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/07 15:04:50 by locagnio         ###   ########.fr       */
+/*   Created: 2024/11/04 13:33:42 by locagnio          #+#    #+#             */
+/*   Updated: 2025/02/06 17:23:30 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft_extras.h"
 
-void	pwd(t_env *env)
+/* search the first iteration of c in s */
+
+char	*ft_strchr(const char *s, int c)
 {
-	char cwd[1024];
+	int	i;
 
-	while (ft_strncmp(env->data, "PWD=", 4))
-		env = env->next;
-	printf("%s\n", env->data + 4);
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
-    	printf("Répertoire courant : %s\n", cwd);
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+			return ((char *)(s + i));
+		i++;
+	}
+	return (0);
 }
+
+/* #include <stdio.h>
+
+int	main(void)
+{
+	const char *s = NULL;
+
+	s = ft_strchr(s, 'H');
+	printf("%s\n", s);
+	return (0);
+} */

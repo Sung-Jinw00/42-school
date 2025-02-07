@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 18:03:17 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/07 00:28:28 by marvin           ###   ########.fr       */
+/*   Updated: 2025/02/07 17:31:46 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,20 @@ void	init_env(t_env	**my_env, char **env)
 
 int main(int ac, char **av, char **env)
 {
-	char *line;
-	t_env	*my_env;
+	char		**line;
+	t_minishell	*mini;
 	
 	(void)ac;
 	(void)av;
 	//welcome();
-	line = NULL;
-	my_env = create_cell(env[0]);
-	init_env(&my_env, env);
+	mini->env = create_cell(env[0]);
+	init_env(&(mini->env), env);
 	while (1)
 	{
-		free(line);
-		line = readline(YELLOW"minishell> "RESET);
+		line = optimised_line(readline(YELLOW"minishell> "RESET));
 		if (!ft_strcmp(line, ""))
 			continue ;
-		exec_cmd(line, my_env);
+		exec_cmd(line, mini);
 	}
 	free(line);
 	return (0);

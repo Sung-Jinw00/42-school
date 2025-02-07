@@ -1,50 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   ft_putcstr_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/02 20:17:08 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/06 20:09:51 by locagnio         ###   ########.fr       */
+/*   Created: 2024/11/04 13:31:23 by locagnio          #+#    #+#             */
+/*   Updated: 2025/02/06 20:10:55 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft_extras.h"
 
-void	welcome(void)
-{
-	char	str[] = CYAN ITALIC" Welcome..."RESET CYAN"\n to...\n"BOLD GREEN" MINISHELL !\n\n"RESET;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 50000000;
-	while (str[i])
-	{
-		write(1, &str[i++], 1);
-		/* if (i == 26 || i == 36)
-			j *= 10; */
-		while (j > 0)
-			j--;
-		j = 50000000;
-	}
-}
-
-void	error(void)
-{
-	perror(RED "Error ");
-	exit(EXIT_FAILURE);
-}
-
-void	ft_print_dlb_tabs(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab && tab[i])
-		printf("%s\n", tab[i++]);
-}
+/* write a string until c occurs in the fd chosen */
 
 void	ft_putcstr_fd(char *s, int fd, char c)
 {
@@ -57,3 +25,11 @@ void	ft_putcstr_fd(char *s, int fd, char c)
 		i++;
 	}
 }
+
+/* int main(void)
+{
+	char *s = "Hello World";
+
+	ft_putstr_fd(s, 1);
+	return (0);
+}  */

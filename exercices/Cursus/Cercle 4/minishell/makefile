@@ -5,9 +5,9 @@ CC				= cc
 FLAGS			= -Wall -Wextra -Werror -lreadline -g
 HDRS			= includes
 SRCS			=  srcs/minishell.c srcs/print.c srcs/exec.c srcs/free.c srcs/utils/utils.c\
-				   srcs/utils/ft_split.c srcs/buildins/pwd.c srcs/buildins/env.c
+				   srcs/utils/ft_split.c srcs/buildins/pwd.c srcs/buildins/env.c srcs/buildins/echo.c
 SRC_O			= $(SRCS:srcs/.c=.o)
-MINISHELL_NAME	= minishell
+PHILO_NAME		= minishell
 RM				= rm -f
 CYAN			= "\033[36m"
 RED				= "\033[31m"
@@ -15,17 +15,17 @@ GREEN			= "\033[32m"
 RESET			= "\033[0m"
 
 # Règle par défaut : création de l'exécutable
-all: $(MINISHELL_NAME)
+all: $(PHILO_NAME)
 
 # Création de l'exécutable
-$(MINISHELL_NAME): $(SRC_O)
-	@echo $(CYAN)"Création de l'exécutable $(MINISHELL_NAME)..."$(RESET)
-	@$(CC) $(FLAGS) $(SRC_O) -L lib -lfprintf -I $(HDRS) -o $(MINISHELL_NAME) $(shell pkg-config --libs readline)
-	@echo $(GREEN)"Exécutable $(MINISHELL_NAME) créé !"$(RESET)
+$(PHILO_NAME): $(SRC_O)
+	@echo $(CYAN)"Création de l'exécutable $(PHILO_NAME)..."$(RESET)
+	@$(CC) $(FLAGS) $(SRC_O) -L lib -lfprintf -I $(HDRS) -o $(PHILO_NAME)
+	@echo $(GREEN)"Exécutable $(PHILO_NAME) créé !"$(RESET)
 
 # Compilation des fichiers sources en objets
 # On compiles les fichiers .c dans srcs/ en .o dans le répertoire racine
-%.o: srcs/%.c $(HDRS)/*.h
+%.o: philo\ /%.c $(HDRS)/*.h
 	@echo $(CYAN)"Compilation de $<..."$(RESET)
 	@$(CC) $(FLAGS) -I $(HDRS) -c $< -o $@
 
@@ -37,7 +37,7 @@ clean:
 # Nettoyage complet
 fclean: clean
 	@echo $(CYAN)"Suppression de l'exécutable..."$(RESET)
-	@$(RM) $(MINISHELL_NAME)
+	@$(RM) $(PHILO_NAME)
 
 # Récompilation depuis zéro
 re: fclean all

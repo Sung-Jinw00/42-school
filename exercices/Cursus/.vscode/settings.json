@@ -21,6 +21,9 @@
 		"libft_extras.h": "c",
 		"ft_printf_fd.h": "c",
 		"philosophers.h": "c",
-		"string.h": "c"
+		"string.h": "c",
+		"philo_bonus.h": "c",
+		"text_encoding": "c",
+		"minishell.h": "c"
 	}
 }

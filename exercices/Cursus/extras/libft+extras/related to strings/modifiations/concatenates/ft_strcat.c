@@ -1,24 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/06 19:15:45 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/07 15:04:50 by locagnio         ###   ########.fr       */
+/*   Created: 2024/09/08 20:00:24 by locagnio          #+#    #+#             */
+/*   Updated: 2025/02/06 17:14:53 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft_extras.h"
 
-void	pwd(t_env *env)
+/* concatenates a fixed string to another fixed string */
+
+char	*ft_strcat(char *dest, char *src)
 {
-	char cwd[1024];
+	int	i;
+	int	j;
 
-	while (ft_strncmp(env->data, "PWD=", 4))
-		env = env->next;
-	printf("%s\n", env->data + 4);
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
-    	printf("Répertoire courant : %s\n", cwd);
+	i = 0;
+	j = 0;
+	while (dest[i] != '\0')
+		i++;
+	while (src[j] != '\0')
+		dest[i++] = src[j++];
+	dest[i] = '\0';
+	return (dest);
 }
+
+/*int main(void)
+{
+	char dest[] = "Hello ";
+	char src[] = "World";
+
+	printf("%s\n", ft_strcat(dest, src));
+	return (0);
+}*/

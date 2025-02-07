@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 18:03:29 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/07 01:21:32 by marvin           ###   ########.fr       */
+/*   Updated: 2025/02/07 17:30:20 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,20 @@ typedef struct s_env
 	struct s_env	*next;	
 } t_env;
 
+typedef struct s_minishell
+{
+	bool	single_quote;
+	bool	double_quote;
+	t_env	*env;
+} t_minishell;
+
 void	error(void);
 void	welcome(void);
 char	*ft_itoa(int n);
 void	print_list(t_env *L);
 void	free_dbl_tab(char **str);
 char	*ft_strdup(const char *src);
+char	**optimised_line(char *line);
 void	ft_print_dlb_tabs(char **tab);
 void	ft_putstr_fd(char *s, int fd);
 void	exec_cmd(char *line, t_env *env);

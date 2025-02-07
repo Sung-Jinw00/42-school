@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"libft_extras.h": "c",
+		"unistd.h": "c",
+		"stdlib.h": "c"
+	}
+}

@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_print_dbl_tabs.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/06 19:15:45 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/07 15:04:50 by locagnio         ###   ########.fr       */
+/*   Created: 2025/02/06 18:51:34 by locagnio          #+#    #+#             */
+/*   Updated: 2025/02/06 18:53:47 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft_extras.h"
 
-void	pwd(t_env *env)
+void	ft_print_dlb_tabs(char **tab)
 {
-	char cwd[1024];
+	int	i;
 
-	while (ft_strncmp(env->data, "PWD=", 4))
-		env = env->next;
-	printf("%s\n", env->data + 4);
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
-    	printf("Répertoire courant : %s\n", cwd);
+	i = 0;
+	while (tab && tab[i])
+		printf("%s\n", tab[i++]);
 }

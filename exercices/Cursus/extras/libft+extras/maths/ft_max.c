@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_max.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/06 19:15:45 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/07 15:04:50 by locagnio         ###   ########.fr       */
+/*   Created: 2025/01/17 17:25:29 by locagnio          #+#    #+#             */
+/*   Updated: 2025/02/06 17:02:39 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft_extras.h"
 
-void	pwd(t_env *env)
+/* fint the highest number of a list */
+
+int	ft_max(int *tab)
 {
-	char cwd[1024];
+	int	i;
+	int	max;
 
-	while (ft_strncmp(env->data, "PWD=", 4))
-		env = env->next;
-	printf("%s\n", env->data + 4);
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
-    	printf("Répertoire courant : %s\n", cwd);
+	if (!tab)
+		return (404);
+	i = 0;
+	max = tab[0];
+	while (tab[++i])
+		if (tab[i] > max)
+			max = tab[i];
+	return (max);
 }

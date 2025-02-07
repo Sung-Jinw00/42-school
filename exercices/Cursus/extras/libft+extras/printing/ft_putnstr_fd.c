@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_putnstr_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/06 19:15:45 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/07 15:04:50 by locagnio         ###   ########.fr       */
+/*   Created: 2024/11/04 13:31:23 by locagnio          #+#    #+#             */
+/*   Updated: 2025/02/06 20:10:44 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft_extras.h"
 
-void	pwd(t_env *env)
+/* write n characters of a string into the fd chosen */
+
+void	ft_putnstr_fd(char *s, int fd, int n)
 {
-	char cwd[1024];
+	int	i;
 
-	while (ft_strncmp(env->data, "PWD=", 4))
-		env = env->next;
-	printf("%s\n", env->data + 4);
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
-    	printf("Répertoire courant : %s\n", cwd);
+	i = 0;
+	while (s[i] && i < n)
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
 }
+
+/* int main(void)
+{
+	char *s = "Hello World";
+
+	ft_putstr_fd(s, 1);
+	return (0);
+}  */
