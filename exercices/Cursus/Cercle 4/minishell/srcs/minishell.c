@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 18:03:17 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/07 17:31:46 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/07 19:03:28 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,13 @@ int main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	//welcome();
+	mini = malloc(sizeof(t_minishell));
 	mini->env = create_cell(env[0]);
 	init_env(&(mini->env), env);
 	while (1)
 	{
 		line = optimised_line(readline(YELLOW"minishell> "RESET));
-		if (!ft_strcmp(line, ""))
+		if (line && line[0] && line[0][0] == 0)
 			continue ;
 		exec_cmd(line, mini);
 	}
