@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 15:31:28 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/07 19:12:00 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/07 19:49:08 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	count_tokens(char *line, bool single_quote, bool double_quote)
 	return (count++);//sinon, je renvoie le nombre de mots
 }
 
-static char	*ft_substr(char *line, t_minishell *mini, int i, int j)
+static char	*ft_substr(char *line, t_minishell *mini, int i, int j, int *new_i)
 {
 	int	len;
 	char *str;
@@ -83,6 +83,7 @@ static char	*ft_substr(char *line, t_minishell *mini, int i, int j)
 		while(line[len] && line[len] != '\'' && line[len] != '"' && line[len] != ' ')//si j'ai des characteres, quotes exclues, j'avance jusqu'a un white space ou une quote
 			len++;
 	}
+	*new_i += len;
 	str = malloc(len + 1);
 	if (!str)
 		return (NULL);
@@ -109,7 +110,8 @@ static char	**split_line(char *line, char **splited_line, t_minishell *mini)
 	{
 		while (line[i] && line[i] != ' ')//tant que je suis pas arriver a la fin de la ligne ou a un espace
 		{
-			splited_line[j] = ft_substr(line + i, mini, 0, 0);
+			printf("valeur de i : %d\n", i);
+			splited_line[j] = ft_substr(line + i, mini, 0, 0, &i);
 			if (!splited_line[j])
 				return (free_dbl_tab(splited_line), free(line), NULL);
 		}

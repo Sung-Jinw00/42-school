@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:58:52 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/02 19:49:46 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/08 21:17:28 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <limits.h>
+# include <signal.h>
 # include "ft_fprintf.h"
 # include <semaphore.h>
 
@@ -76,12 +77,12 @@ void		final_print(int alive);
 int			main(int ac, char **ag);
 int			check_death(t_philo *p);
 int			ft_atoi_philo(const char *str);
-int			ft_usleep(long int time);
-void		*thread_routine(void *job);
+int			ft_usleep(long int time, t_philo *philo);
+void		*sem_routine(void *job);
 int			philosophers(t_rules *params);
 int			ft_strcmp_philo(char *s1, char *s2);
 void		print_routine(t_philo *p, char *action);
-void		end_thread(t_rules *rules, t_philo *philo);
+void		end_sem(t_rules *rules, t_philo *philo);
 int			error_msg(char *s, t_rules *rules, t_philo *p, int malloc);
 
 #endif

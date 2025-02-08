@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:01 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/02 19:08:36 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/08 21:04:15 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ int	ft_atoi_philo(const char *str)
 	return (sign * (int)n);
 }
 
-void	end_thread(t_rules *rules, t_philo *philo)
+void	end_sem(t_rules *rules, t_philo *philo)
 {
 	int	i;
 
 	i = -1;
 	while (++i < rules->demography)
 		pthread_join(philo[i].life_tid, NULL);
-	ft_usleep(2 * rules->demography);
+	ft_usleep(2 * rules->demography, philo);
 	sem_close(rules->death);
 	sem_unlink("/death");
 	sem_close(rules->fork);

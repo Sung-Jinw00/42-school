@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:10 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/02 19:52:22 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/08 21:36:45 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,40 @@ static int	init_pipe(t_rules *rules, t_philo *philo)
 		philo[i].last_meal = rules->start;
 		pid = fork();
 		if (pid == 0)
-		{
-			thread_routine(&philo[i]);
-			exit(0);
-		}
+			sem_routine(&philo[i]);
 		else if (pid == -1)
 			return (perror("Failed to create philosopher process"), -1);
 	}
-	rules->ready = 1;
-	for (i = 0; i < rules->demography; i++)
-		wait(NULL);
+	return (0);
+}
+
+int	monitor_philosophers(t_rules *rules)
+{
+	int	i;
+	int	status;
+	int	all_eat;
+
+	i = 0;
+	all_eat = 0;
+	while (i < rules->demography)
+	{
+		waitpid(-1, &status, 0);
+		if (WIFEXITED(status))
+		{
+			if (WEXITSTATUS(status) == 0)
+				all_eat++;
+			else if (WEXITSTATUS(status) == 1)
+				return (final_print(0), 1);
+		}
+		if (all_eat == rules->demography)
+		{
+			printf("						\n");
+			printf(BOLD GREEN "  All philosophers have eaten %d times !\n"
+			RESET, rules->max_iter);
+			return (final_print(1), kill(0, SIGINT), 0);
+		}
+		i++;
+	}
 	return (0);
 }
 
@@ -62,6 +86,8 @@ int	philosophers(t_rules *rules)
 		return (1);
 	if (init_pipe(rules, rules->philo))
 		return (1);
-	end_thread(rules, rules->philo);
+	if (monitor_philosophers(rules))
+		kill(0, SIGINT);
+	end_sem(rules, rules->philo);
 	return (0);
 }

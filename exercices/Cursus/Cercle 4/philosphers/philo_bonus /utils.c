@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/02 19:05:52 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/08 21:39:22 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,17 @@ long int	time_now(void)
 	return ((now.tv_sec * 1000) + (now.tv_usec / 1000));
 }
 
-int	ft_usleep(long int time)
+int	ft_usleep(long int time, t_philo *philo)
 {
-	long int	start_time;
+	long	start_time;
 
 	start_time = time_now();
 	while ((time_now() - start_time) < time)
+	{
+		if (check_death(philo))
+			exit(1);
 		usleep(150);
+	}
 	return (1);
 }
 
@@ -74,5 +78,4 @@ void	final_print(int alive)
 		printf("       No one died today, noice.\n");
 	else
 		printf("	¯\\_(ツ)_/¯			\n");
-	printf("						\n");
 }
