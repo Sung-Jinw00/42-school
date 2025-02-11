@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:00:12 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/07 14:47:34 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:55:31 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ void		ft_list_sort(t_list **begin_list);
 void		ft_list_reverse(t_list **begin_list);
 void		set_at(t_list *L, int data, int pos);
 t_list		*add_at(t_list *L, int data, int pos);
+void		ft_list_add_front(t_list **lst, t_list *new);
+void		ft_list_add_back(t_list **lst, t_list *new);
 t_list		*ft_list_find_pos(t_list *begin_list, void *data_ref);
 void		ft_list_remove_if(t_list **begin_list, void *data_ref);
 t_list		*ft_list_find_data(t_list *begin_list, void *data_ref);
