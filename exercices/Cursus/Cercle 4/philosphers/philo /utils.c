@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/01 15:43:50 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/14 20:35:33 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_usleep(long int time)
 
 	start_time = time_now();
 	while ((time_now() - start_time) < time)
-		usleep(150);
+		usleep(1000);
 	return (1);
 }
 
