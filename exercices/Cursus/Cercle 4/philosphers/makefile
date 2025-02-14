@@ -42,7 +42,7 @@ clean:
 # Nettoyage complet
 fclean: clean
 	@echo $(CYAN)"Suppression de l'exécutable..."$(RESET)
-	@$(RM) $(PHILO_NAME)
+	@$(RM) $(PHILO_NAME) $(B_PHILO_NAME)
 
 # Récompilation depuis zéro
 re: fclean all

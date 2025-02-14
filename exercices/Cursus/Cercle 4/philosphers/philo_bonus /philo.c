@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:10 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/08 21:36:45 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/14 20:24:01 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static int	init_philo(t_rules *rules, t_philo *philo)
 
 static int	init_pipe(t_rules *rules, t_philo *philo)
 {
-	int i;
-	pid_t pid;
+	int		i;
+	pid_t	pid;
 
 	i = -1;
 	rules->start = time_now();
@@ -42,20 +42,26 @@ static int	init_pipe(t_rules *rules, t_philo *philo)
 		philo[i].last_meal = rules->start;
 		pid = fork();
 		if (pid == 0)
-			sem_routine(&philo[i]);
+		{
+			if (rules->demography > 1)
+				sem_routine(&philo[i]);
+			else
+			{
+				print_routine(philo, FORK);
+				ft_usleep(philo->rules->t2die + 100, philo);
+			}
+		}
 		else if (pid == -1)
 			return (perror("Failed to create philosopher process"), -1);
 	}
 	return (0);
 }
 
-int	monitor_philosophers(t_rules *rules)
+int	monitor_philosophers(t_rules *rules, int i)
 {
-	int	i;
 	int	status;
 	int	all_eat;
 
-	i = 0;
 	all_eat = 0;
 	while (i < rules->demography)
 	{
@@ -71,7 +77,7 @@ int	monitor_philosophers(t_rules *rules)
 		{
 			printf("						\n");
 			printf(BOLD GREEN "  All philosophers have eaten %d times !\n"
-			RESET, rules->max_iter);
+				RESET, rules->max_iter);
 			return (final_print(1), kill(0, SIGINT), 0);
 		}
 		i++;
@@ -86,7 +92,7 @@ int	philosophers(t_rules *rules)
 		return (1);
 	if (init_pipe(rules, rules->philo))
 		return (1);
-	if (monitor_philosophers(rules))
+	if (monitor_philosophers(rules, 0))
 		kill(0, SIGINT);
 	end_sem(rules, rules->philo);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 19:10:05 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/17 21:21:08 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:55:16 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	print_list(t_list *L)
 		printf("(null)");
 	while (L)
 	{
-		printf("%d ", L->data);
+		printf("%d ", *(int *)(L->data));
 		L = L->next;
 	}
 	printf("\n");

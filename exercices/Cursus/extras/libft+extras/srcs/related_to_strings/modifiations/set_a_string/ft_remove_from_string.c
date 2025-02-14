@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 14:46:21 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/07 14:47:13 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:02:05 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_remove_from_string(char *str, char *to_delete)
 	{
 		tmp = ft_strjoin(line, tab[i++]);
 		if (!tmp)
-			return(ft_free_bouble_tabs(tab), free(line), NULL);
+			return(free_dbl_tab(tab), free(line), NULL);
 		free(line);
 		line = tmp;
 	}

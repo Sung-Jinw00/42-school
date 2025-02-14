@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:52:21 by locavnio          #+#    #+#             */
-/*   Updated: 2025/02/08 21:06:50 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/14 19:55:51 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ static int	init_rules(t_rules *rules, char **ag)
 	rules->over = 0;
 	if (rules->demography > 0)
 		sem = init_rules_semaphore(rules);
-	return (sem || rules->demography <= 0 || rules->t2die <= 0 || rules->t2eat <= 0
-		|| rules->t2sleep <= 0 || rules->max_iter == 0);
+	return (sem || rules->demography <= 0 || rules->t2die <= 0
+		|| rules->t2eat <= 0 || rules->t2sleep <= 0 || rules->max_iter == 0);
 }
 
 int	main(int ac, char **ag)

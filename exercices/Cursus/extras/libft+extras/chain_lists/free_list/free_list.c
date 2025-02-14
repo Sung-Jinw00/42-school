@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 19:10:05 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/17 17:43:01 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:40:24 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* free the whole list */
 
-t_list	*free_list(t_list *L)
+void	free_list(t_list *L)
 {
 	t_list	*tmp;
 

@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 19:10:05 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/17 19:47:38 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:42:40 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* find the position of the data in the list */
 
-t_list	*ft_list_find_pos(t_list *begin_list, void *data_ref)
+int	ft_list_find_pos(t_list *begin_list, void *data_ref)
 {
 	t_list	*tmp;
 	int		pos;

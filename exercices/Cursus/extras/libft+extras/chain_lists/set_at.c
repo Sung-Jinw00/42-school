@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 19:10:05 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/17 18:34:38 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:49:09 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,16 @@
 
 /* change the value of a cell of the list at the wished position */
 
-void	set_at(t_list *L, int data, int pos)
+void	set_at(t_list *L, void *data, int pos)
 {
 	int	i;
 
 	i = 0;
 	if (!L)
-	{
-		printf("liste vide\n");
-		return ;
-	}
+		return ((void)printf("liste vide\n"));
 	else if (pos > len_list(L))
-	{
-		printf("position invalide\n");
-		return ;
-	}
-	while (i < pos)
-	{
-		i++;
+		return ((void)printf("position invalide\n"));
+	while (++i < pos)
 		L = L->next;
-	}
 	L->data = data;
 }

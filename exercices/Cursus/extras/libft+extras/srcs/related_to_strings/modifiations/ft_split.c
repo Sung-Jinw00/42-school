@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:37 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/17 17:54:45 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:00:59 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,21 @@
 
 /* split a string into a chain of strings depending on a character */
 
-static int	ft_cnt_words(const char *str, char charset)
+int	skip_charset(char i, char *charset)
+{
+	int	j;
+
+	j = 0;
+	while (charset[j])
+	{
+		if (i == charset[j])
+			return (1);
+		j++;
+	}
+	return (0);
+}
+
+int	ft_cnt_words(char *str, char *charset)
 {
 	int	i;
 	int	trigger;
@@ -25,55 +39,49 @@ static int	ft_cnt_words(const char *str, char charset)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] != charset && trigger == 0)
+		if (!skip_charset(str[i], charset) && trigger == 0)
 		{
 			trigger = 1;
 			count++;
 		}
-		if (str[i] == charset && trigger == 1)
+		if (skip_charset(str[i], charset) && trigger == 1)
 			trigger = 0;
 		i++;
 	}
 	return (count);
 }
 
-static int	len_word(const char *str, char charset)
+int	len_word(char *str, char *charset)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] && str[i] != charset)
+	while (str[i] && !skip_charset(str[i], charset))
 		i++;
 	return (i);
 }
 
-static char	**ft_free(char **split, int j)
-{
-	while (j >= 0)
-		free(split[j--]);
-	free(split);
-	return (NULL);
-}
-
-static char	**write_split(const char *str, char **split, char charset, int i)
+char	**write_split(char *str, char **split, char *charset, int i)
 {
 	int	j;
+	int	k;
 	int	len_wrd;
 
 	j = 0;
+	k = 0;
 	len_wrd = 0;
+	while (skip_charset(str[i], charset))
+		i++;
 	while (str[i])
 	{
 		len_wrd = len_word(str + i, charset);
-		if (len_wrd > 0 && str[i] != charset)
+		if (len_wrd != 0 && !skip_charset(str[i], charset))
 		{
-			split[j] = ft_substr(str, i, len_wrd);
-			if (!split[j])
-				return (ft_free(split, j));
-			i += len_wrd;
-			if (str[i] == '\0')
-				break ;
+			split[j] = (char *)malloc(sizeof(char) * (len_wrd + 1));
+			while (k < len_wrd)
+				split[j][k++] = str[i++];
 			j++;
+			k = 0;
 		}
 		i++;
 	}
@@ -81,20 +89,16 @@ static char	**write_split(const char *str, char **split, char charset, int i)
 	return (split);
 }
 
-char	**ft_split(char const *str, char charset)
+char	**ft_split(char *str, char *charset)
 {
 	char	**split;
-	int		i;
 
 	if (!str)
 		return (NULL);
-	split = malloc(sizeof(char *) * (ft_cnt_words(str, charset) + 1));
+	split = (char **)malloc(sizeof(char *) * (ft_cnt_words(str, charset) + 1));
 	if (!split)
 		return (NULL);
-	i = 0;
-	while (str[i] == charset)
-		i++;
-	return (write_split(str, split, charset, i));
+	return (write_split(str, split, charset, 0));
 }
 
 /* #include <stdio.h>

@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:06 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/08 21:42:22 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/14 20:15:53 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static int	someone_died(t_philo *philo)
 	sem_post(philo->rules->fork);
 	sem_post(philo->rules->fork);
 	sem_wait(philo->rules->death);
-	printf(RED"%ld %d %s\n"RESET, time_now() - philo->thread_start,
-		philo->id + 1, DIE);
+	printf(RED "%ld %d %s\n" RESET, time_now() - philo->thread_start, philo->id
+		+ 1, DIE);
 	return (1);
 }
 
@@ -48,6 +48,8 @@ void	ft_eat(t_philo *philo)
 	print_routine(philo, FORK);
 	sem_wait(philo->rules->fork);
 	print_routine(philo, FORK);
+	if (check_death(philo))
+		exit(1);
 	philo->last_meal = time_now();
 	print_routine(philo, EAT);
 	ft_usleep(philo->rules->t2eat, philo);
