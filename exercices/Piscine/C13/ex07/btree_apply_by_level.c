@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   btree_apply_by_level.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 21:39:42 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/12 21:39:42 by marvin           ###   ########.fr       */
+/*   Updated: 2025/02/17 20:58:51 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 void	apply_recursivity(t_btree *root, int cur_lvl, void (*applyf)(void *item,
 			int current_level, int is_first_elem))
 {
+	t_btree *prev;
+
 	prev = root;
 	if (root)
 	{

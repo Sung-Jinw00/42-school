@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 12:50:31 by locagnio          #+#    #+#             */
-/*   Updated: 2024/09/22 13:18:39 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/17 20:51:01 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ int	ft_char(char *tab)
 } */
 int	ft_any(char **tab, int (*f)(char *))
 {
+	int	count;
+	int	i;
+
 	count = 0;
 	i = 0;
 	while (tab[i])

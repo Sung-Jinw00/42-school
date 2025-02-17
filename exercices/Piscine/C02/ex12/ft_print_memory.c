@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_memory.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 19:55:35 by locagnio          #+#    #+#             */
-/*   Updated: 2024/10/23 15:31:32 by marvin           ###   ########.fr       */
+/*   Updated: 2025/02/17 21:06:46 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,20 @@ void	ft_print_memory(void *addr, unsigned int size)
 	}
 }
 
-/* int main(void)
+/* int	ft_strlen(char *str)
 {
-	ft_print_memory("Bonjour les amis, c'est fou tout ce qu'on peut faire avec\
-		print_memory... lol lol lol.          ....xxxxo...........xxxx...........\
-		ox 	xxxoo.....o....xxxx.o...o.........o..........o.o.......o.........o\
-		.....o...", 208);
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
+
+int main(void)
+{
+	char *str = "Bonjour les amis, c'est fou tout ce qu'on peut faire avec print_memory... lol lol lol.          ....xxxxo...........xxxx...........oxxxxoo.....o....xxxx.o...o.........o..........o.o.......o.........o.....o...";
+
+	ft_print_memory(str, ft_strlen(str));
 	return (0);
 } */

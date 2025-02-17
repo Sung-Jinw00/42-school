@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_list_remove_if.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 17:04:42 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/10 17:04:42 by marvin           ###   ########.fr       */
+/*   Updated: 2025/02/17 20:50:30 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	free_fct(void *data)
 void	ft_list_remove_if2(t_list **cur, t_list **prev, void *data_ref,
 		int (*cmp)())
 {
+	t_list	*temp;
+
 	temp = NULL;
 	while (*cur)
 	{

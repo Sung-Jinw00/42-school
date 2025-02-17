@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   btree_search_item.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 20:43:27 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/12 20:43:27 by marvin           ###   ########.fr       */
+/*   Updated: 2025/02/17 20:56:20 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 void	*btree_search_item(t_btree *root, void *data_ref, int (*cmpf)(void *,
 			void *))
 {
+	void *answer;
+
 	answer = NULL;
 	if (root)
 	{
