@@ -6,101 +6,108 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:15:45 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/11 21:15:40 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/15 18:21:54 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_strndup(const char *src, int n)
+void	add_directory(t_env **tmp, char *path, int *i)
 {
-	char	*cpy;
-	int		i;
+	char	str[257];
+	int		j;
 
-	i = 0;
-	if (n > (int)ft_strlen(src))
-		n = (int)ft_strlen(src);
-	cpy = (char *)malloc(sizeof(char) * (n + 1));
-	if (!cpy)
-		return (NULL);
-	while (src[i] && i < n)
-	{
-		cpy[i] = src[i];
-		i++;
-	}
-	cpy[i] = '\0';
-	return (cpy);
+	j = 0;
+	ft_bzero(str, 257);
+	if (ft_strcmp((*tmp)->data, "PWD=/"))
+		str[j++] = '/';
+	if (path[*i] == '/')
+		(*i)++;
+	while (path[*i] != '/' && path[*i])
+		str[j++] = path[(*i)++];
+	(*tmp)->data = ft_strjoin_n_free((*tmp)->data, ft_strdup(str), 12);		
 }
 
-int	ft_strrchr(const char *s, int c)
+void	new_location2(t_env **tmp)
 {
-	int	len;
-
-	len = (int)ft_strlen(s);
-	while (len >= 0)
-	{
-		if (s[len] == (char)c)
-			return (len);
-		len--;
-	}
-	return (0);
-}
-
-void	switch_slash(char *path)
-{
-	char	c;
-	char	c2;
-	int		i;
-
-	c = path[0];
-	path[0] = '/';
-	i = 0;
-	while (path[++i])
-	{
-		c2 = path[i];
-		path[i] = c;
-		c = c2;
-	}
-}
-
-char	*new_location(t_env *env, char *path)
-{
-	t_env	*tmp;
 	char	*str;
 
-	tmp = env;
-	while (ft_strncmp(tmp->data, "PWD", 3))
-		tmp = tmp->next;
-	if (!ft_strcmp(path, ".."))
-	{
-		str = tmp->data;
-		printf ("%s\n", tmp->data);
-		tmp->data = ft_strndup(str, ft_strrchr(str, '/'));
-		printf ("%s\n", tmp->data);
-		free(str);
-		return (tmp->data);
-	}
-	switch_slash(path);
-	printf ("%s\n", tmp->data);
-	str = tmp->data;
-	tmp->data = ft_strjoinm(str, path);
-	printf ("%s\n", tmp->data);
+	str = (*tmp)->data;
+	(*tmp)->data = ft_strndup(str, ft_strrchr(str, '/'));
 	free(str);
-	return (tmp->data);
+	if (!ft_strcmp((*tmp)->data, "PWD="))
+	{
+		free((*tmp)->data);
+		(*tmp)->data = ft_strdup("PWD=/");
+	}
 }
 
-void	cd(char *path, t_minishell **mini)
+void	change_old_pwd(char *data, t_minishell **mini)
+{
+	t_env	*tmp;
+	
+	tmp = (*mini)->env;
+	ft_get_env(&tmp, "OLDPWD=");
+	free(tmp->data);
+	tmp->data = ft_strjoin("OLD", data);
+	tmp = (*mini)->env_export;
+	ft_get_env(&tmp, "OLDPWD=");
+	free(tmp->data);
+	tmp->data = ft_strjoin("OLD", data);
+}
+
+char	*new_location(t_minishell **mini, char *path, int i)
+{
+	t_env	*tmp;
+
+	tmp = (*mini)->env;
+	ft_get_env(&tmp, "PWD=");
+	change_old_pwd(tmp->data, mini);
+	while (path[++i] && i < (int)ft_strlen(path))
+	{
+		if ((i == 0 && path[i] == '/'))
+		{
+			free(tmp->data);
+			tmp->data = ft_strdup("PWD=/");
+		}
+		else if (!ft_strncmp(path + i, "../", 3) || !ft_strncmp(path + i, "..\0", 3))
+		{
+			new_location2(&tmp);
+			i++;
+		}
+		else if (!ft_strncmp(path + i, "./", 2) || !ft_strncmp(path + i, ".\0", 2))
+			i++;
+		else if (path[i + 1] != '.')
+			add_directory(&tmp, path, &i);
+	}
+	return (tmp->data + 4);
+}
+
+void	cd(char **path, t_minishell **mini)
 {
 	struct stat	info;
+	t_env		*tmp;
+	char		*str;
 
-	if (access(path, F_OK) == -1)
-		return (perror("Erreur : Le répertoire n'existe pas"));
-	if (stat(path, &info) == -1)
-		return (perror("Erreur lors de l'accès aux informations du répertoire"));
+	if (path[1] && path[2])
+		return ((void)ft_fprintf(2, "bash: cd: too many arguments\n"));
+	str = path[1];
+	if (!path[1])
+		str = getenv("HOME");
+	if (access(str, F_OK) == -1)
+		return (perror("Error "));
+	if (stat(str, &info) == -1)
+		return (perror("Error : Cannot acces to infos of directory\n"));
 	if (!S_ISDIR(info.st_mode))
-		return ((void)ft_fprintf(2, "Erreur : Ce n'est pas un répertoire\n"));
-	if (chdir(path) == -1)
-		return (perror("Erreur lors du changement de répertoire"));
-	(*mini)->current_location = new_location((*mini)->env, path);
-	printf("Répertoire changé avec succès : %s\n", (*mini)->current_location);
+		return ((void)ft_fprintf(2, "bash: cd: %s: Not a directory\n", str));
+	if (chdir(str) == -1)
+		return (perror("Error while changing repository\n"));
+	remove_multiple_slashs(str, 0);
+	free((*mini)->current_location);
+	(*mini)->current_location = new_location(mini, str, -1);
+	tmp = (*mini)->env_export;
+	ft_get_env(&tmp, "PWD=");
+	free(tmp->data);
+	tmp->data = ft_strjoin("PWD=", (*mini)->current_location);
+	(*mini)->current_location = replace_by_tilde((*mini)->env, (*mini)->current_location);
 }

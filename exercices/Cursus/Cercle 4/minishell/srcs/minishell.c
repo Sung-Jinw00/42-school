@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 18:03:17 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/11 20:50:07 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:05:52 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ int	init_env(t_env	**my_env, char **env)
 		{
 			free(tmp->data);
 			shlvl = ft_itoa(ft_atoi(env[i] + 6) + 1);
-			tmp->data = ft_strjoinm("SHLVL=", shlvl);
-			free(shlvl);
+			tmp->data = ft_strjoinm("SHLVL=", shlvl, 2);
 			if (!tmp->data || !tmp->data[6])
 				return (ft_list_clear(*my_env), 1);
 		}
@@ -68,14 +67,28 @@ t_minishell *init_vals(char **env)
 	mini->env_export = ft_envdup(mini->env);
 	ft_env_sort((&mini->env_export));
 	sig_init();
-	mini->current_location = getenv("PWD");
+	mini->current_location = replace_by_tilde(mini->env, getenv("PWD"));
+	init_user(mini);
 	return (mini);
+}
+
+char	*toprint(t_minishell *mini, char *cur_loc)
+{
+	char	*str;
+	
+	str = ft_strdup(YELLOW);
+	if (mini->user.final)
+		str = ft_strjoin_n_free(str, mini->user.final, 1);
+	str = ft_strjoin_n_free(str, cur_loc, 1);
+	str = ft_strjoin_n_free(str, "$ ", 1);
+	str = ft_strjoin_n_free(str, RESET, 1);
+	return (str);	
 }
 
 int main(int ac, char **av, char **env)
 {
-	char		**line;
 	char		*str;
+	char		*print;
 	t_minishell	*mini;
 	
 	(void)ac;
@@ -83,16 +96,21 @@ int main(int ac, char **av, char **env)
 	//welcome();
 	str = NULL;
 	mini = init_vals(env);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-		str = replace_var(mini, readline(YELLOW"minishell> "RESET));
-		/* printf("your function : %s \n", str); */
-		line = optimised_line(str, mini);
-		/* for (int i = 0; line[i]; i++)
-			printf("my split : %s\n", line[i]); */
-		if (!line || !line[0] || line[0][0] == 0)
+		print = toprint(mini, mini->current_location);
+		str = readline(print);
+		free(print);
+		if (check_quotes(str))
 			continue ;
-		exec_cmd(line, mini);
+		str = replace_var(mini, str);
+		optimised_line(str, &mini);
+		is_redir_or_pipes(mini->pipes_redirs, 0, 0);
+		print_pipes_redirs(mini->pipes_redirs, ft_count_words(mini->tokens));
+		if (!mini->tokens || !mini->tokens[0] || mini->tokens[0][0] == 0)
+			continue ;
+		exec_cmd(mini);
 	}
 	return (0);
 }

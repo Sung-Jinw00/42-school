@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:01:31 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/11 18:22:58 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/14 17:14:20 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,7 @@ void sigint_handler(int sig)
 	rl_redisplay();
 }
 
-void sigquit_handler(int sig)
-{
-	g_signal = sig;
-	printf("^\\Quit (core dumped)\n");
-}
-
 void	sig_init(void)
 {
-	signal(SIGINT, sigint_handler);  // Gérer SIGINT (Ctrl+C)
-	/* signal(SIGQUIT, sigquit_handler); */
+	signal(SIGINT, sigint_handler);
 }

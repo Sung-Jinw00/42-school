@@ -6,114 +6,122 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 20:38:24 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/08 14:34:03 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:14:38 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_strjoinm(char const *s1, char const *s2)
+char	*ft_strjoinm(char *s1, char *s2, int tab_to_free)
 {
 	char	*new_string;
 	size_t	len;
 	size_t	i;
 	size_t	j;
 
-	i = 0;
+	i = -1;
 	j = 0;
 	len = ft_strlen(s1) + ft_strlen(s2) + 1;
 	new_string = ft_calloc(len, 1);
 	if (!new_string)
 		return (NULL);
-	while (s1[i] != '\0')
-	{
+	while (s1[++i] != '\0')
 		new_string[i] = s1[i];
-		i++;
-	}
 	while (s2[j] != '\0')
 		new_string[i++] = s2[j++];
 	new_string[i] = '\0';
+	if (tab_to_free == 1)
+		free(s1);
+	else if (tab_to_free == 2)
+		free(s2);
+	else if (tab_to_free == 12)
+		return (free(s1), free(s2), new_string);
 	return (new_string);
 }
 
-static int	init_vals(long nb, int *sign)
+char	*replace_by_tilde(t_env *env, char *str)
 {
-	int	i;
-	int	digits;
-
-	i = 0;
-	digits = 1;
-	if (nb < 0)
-	{
-		nb = -nb;
-		*sign = 1;
-	}
-	while (nb >= 10)
-	{
-		nb /= 10;
-		digits++;
-	}
-	i = digits + *sign;
-	return (i);
-}
-
-char	*ft_itoa(int n)
-{
-	char	*cpy;
-	long	nb;
 	int		i;
-	int		sign;
-
-	nb = n;
-	sign = 0;
-	i = init_vals(nb, &sign);
-	if (nb < 0)
-		nb = -nb;
-	cpy = ft_calloc(sizeof(char), i + 1);
-	if (!cpy)
-		return (NULL);
-	if (sign == 1)
-		cpy[0] = '-';
-	cpy[i--] = '\0';
-	while (i >= sign)
-	{
-		cpy[i] = nb % 10 + '0';
-		nb /= 10;
-		i--;
-	}
-	return (cpy);
-}
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	size_t	i;
+	int		j;
+	char	*home;
+	char	cpy[10000];
 
 	i = 0;
-	while ((s1[i] || s2[i]) && i < n)
+	j = 0;
+	ft_bzero(cpy, 10000);
+	while (ft_strncmp(env->data, "HOME=", 5))
+		env = env->next;
+	home = env->data + 5;
+	if (str && home && !ft_strncmp(str, home, ft_strlen(home)))
 	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
+		while (str[i] && home[i] && str[i] == home[i])
+			i++;
+		cpy[j++] = '~';
+		while (str[i])
+			cpy[j++] = str[i++];
+		return (ft_strdup(cpy));
+	}
+	return (ft_strdup(str));
+}
+
+void	ft_get_env(t_env **env, char *env_var)
+{
+	while (ft_strncmp((*env)->data, env_var, ft_strlen(env_var)))
+		(*env) = (*env)->next;
+}
+
+char	*ft_substr_with_quotes(char *line, t_minishell *mini, int len)
+{
+	char *str;
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;	
+	mini->sgl_q = 0;
+	mini->dbl_q = 0;
+	str = ft_calloc(len + 2, 1);
+	if (!str)
+		return (NULL);
+	while (i < len)
+		str[j++] = line[i++];
+	str[j] = 0;
+	return (str);
+}
+
+int	check_valid_quotes(char *str, bool *sgl_q, bool *dbl_q)
+{
+	int j;
+
+	j = 0;
+	while (str[j])
+	{
+		valid_quotes(str[j], sgl_q, dbl_q);
+		if (!*sgl_q && !*dbl_q && (str[j] == '|' || str[j] == '>'
+			|| str[j] == '<'))
+			return (1);
+		j++;
 	}
 	return (0);
 }
 
-char	*ft_strdup(const char *src)
+void	is_redir_or_pipes(char **raw, bool sgl_q, bool dbl_q)
 {
-	char	*cpy;
-	int		len_src;
-	int		i;
+	int i;
+	int j;
 
 	i = 0;
-	len_src = (int)ft_strlen(src);
-	cpy = (char *)ft_calloc(sizeof(char), (len_src + 1));
-	if (!cpy)
-		return (NULL);
-	while (src[i] != '\0')
+	j = 0;
+	while (raw[i])
 	{
-		cpy[i] = src[i];
+		if (!check_valid_quotes(raw[i], &sgl_q, &dbl_q))
+		{
+			free(raw[i]);
+			raw[i] = NULL;
+		}
+		sgl_q = 0;
+		dbl_q = 0;
+		j = 0;
 		i++;
 	}
-	cpy[i] = '\0';
-	return (cpy);
 }

@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/06 19:15:45 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/13 19:12:47 by locagnio         ###   ########.fr       */
+/*   Created: 2025/02/14 16:45:29 by locagnio          #+#    #+#             */
+/*   Updated: 2025/02/19 20:54:44 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
-void	pwd(t_env *env)
+char	*ft_strsrch(const char *s, char *c)
 {
-	while (ft_strncmp(env->data, "PWD=", 4))
-		env = env->next;
-	printf("%s\n", env->data + 4);
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (!ft_strncmp(s + i, c, ft_strlen(c)))
+			return ((char *)(s + i));
+		i++;
+	}
+	return (0);
 }
 
-	/*char cwd[1024];
+int		ispipe(char **line)
+{
+	int i;
 
-	 if (getcwd(cwd, sizeof(cwd)) != NULL)
-    	printf("Répertoire courant : %s\n", cwd); */
+	i = 0;
+	while (line[i])
+		if (!ft_strcmp(line[i++], "|"))
+			return (1);
+	return (0);
+}
