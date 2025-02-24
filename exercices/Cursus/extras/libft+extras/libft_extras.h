@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:00:12 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/24 00:15:13 by marvin           ###   ########.fr       */
+/*   Updated: 2025/02/24 01:23:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ int			ft_isprint(int c);
 int			ft_isupalpha(int c);
 int			ft_islowalpha(int c);
 int			ft_iswhitespace(int c);
+int			ft_isnum_equal_al(int c);
 int			ft_strnchr(const char *s, const char *to_find, int len);
 
 //* chain lists
