@@ -6,139 +6,118 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:14:22 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/19 20:51:41 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:26:13 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
-void	son_program(char *av, char **env, pid_t pid_son)
+char	*get_first_arg(char *av)
 {
-	int	fd[2];
+	char	*first_arg;
+	int		i;
 
-	if (pipe(fd) == -1)
-	{
-		perror(RED "Error -> issue creating pipe\n" RESET);
-		exit(EXIT_FAILURE);
-	}
-	pid_son = fork();
-	if (pid_son == -1)
-	{
-		perror(RED "Error -> pid failure\n" RESET);
-		exit(EXIT_FAILURE);
-	}
-	if (pid_son == 0)
-	{
-		close(fd[0]);
-		dup2(fd[1], STDOUT_FILENO);
-		execute(av, env);
-	}
-	else
-	{
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-		waitpid(pid_son, NULL, 0);
-	}
-}
-
-void	get_file_nd_redir(char *av, int *filein, int *fileout)
-{
-	if (!ft_strcmp(av, ">"))
-		*fileout = open(av, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	else if (!ft_strcmp(av, ">>"))
-		*fileout = open(av, O_WRONLY | O_CREAT | O_APPEND, 0777);
-	else if (!ft_strcmp(av, "<"))
-		*filein = open(av, O_RDONLY);
-	else if (!ft_strcmp(av, "<<"))
-		*filein = open(av, O_WRONLY | O_CREAT | O_APPEND, 0777);
-	if (*filein == -1 || *fileout == -1)
-	{
-		perror(RED "Error -> cannot open file\n" RESET);
-		exit(EXIT_FAILURE);
-	}
-	if (*filein != STDIN_FILENO)
-		dup2(*filein, STDIN_FILENO);
-	if (*fileout != STDOUT_FILENO)
-		dup2(*fileout, STDOUT_FILENO);
-}
-
-void	here_doc(char *limiter)
-{
-	pid_t	reader;
-	int		fd[2];
-
-	if (pipe(fd) == -1)
-	{
-		perror(RED "Error -> issue creating pipe\n" RESET);
-		exit(EXIT_FAILURE);
-	}
-	reader = fork();
-	if (reader == -1)
-	{
-		perror(RED "Error -> pid failure\n" RESET);
-		exit(EXIT_FAILURE);
-	}
-	if (reader == 0)
-		read_stdin(fd, limiter);
-	else
-	{
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-		wait(NULL);
-	}
-}
-
-void	exec_redir(char *av, char **env, pid_t pid_son)
-{
-	int	fd[2];
-
-	if (pipe(fd) == -1)
-	{
-		perror(RED "Error -> issue creating pipe\n" RESET);
-		exit(EXIT_FAILURE);
-	}
-	pid_son = fork();
-	if (pid_son == -1)
-	{
-		perror(RED "Error -> pid failure\n" RESET);
-		exit(EXIT_FAILURE);
-	}
-	if (pid_son == 0)
-	{
-		close(fd[0]);
-		execute(av, env);
-	}
-	else
-	{
-		close(fd[1]);
-		waitpid(pid_son, NULL, 0);
-	}
-}
-
-int	pipex(char **av, char **env)
-{
-	int	i;
-	int j;
-	int	filein;//0
-	int	fileout;//1
-
+	if (!av)
+		return (NULL);
+	first_arg = malloc(sizeof(char) * (ft_strclen(av, ' ') + 1));
+	if (!first_arg)
+		return (printf("error : couldn't get first arg"), exit(1), NULL);
 	i = 0;
-	j = 0;
-	filein = 0;
-	fileout = 1;
-	while (av[i])
+	while (av[i] && av[i] != ' ')
 	{
-		if (!ft_strcmp(av[i], ">") || !ft_strcmp(av[i], ">>")
-			|| !ft_strcmp(av[i], "<") || !ft_strcmp(av[i], "<<"))
-		{
-			get_file_nd_redir(av[i + 1], &filein, &fileout);
-			j = i;
-			while (j >= 0 || ft_strcmp(av[i], ">") || ft_strcmp(av[i], ">>")
-			|| ft_strcmp(av[i], "<") || ft_strcmp(av[i], "<<")
-			|| ft_strcmp(av[i], "|"))
-				j--;
-			exec_redir(get_cmd(av, j), env, 0);
-		}
+		first_arg[i] = av[i];
+		i++;
 	}
-	return (0);
+	first_arg[i] = 0;
+	return (first_arg);
+}
+
+void	exec_child(char **env, t_minishell *mini)
+{
+	char *prev_cmd;
+	
+	prev_cmd = NULL;
+	if (mini->p.i - 1 >= 0)
+		prev_cmd = get_first_arg(mini->cmd_s[mini->p.i - 1]);
+	if (mini->p.nb_pipes != 0)
+		close_and_redirect_pipes(&mini->p, mini->p.i, prev_cmd);
+	free(prev_cmd);
+	if (is_buildin(get_first_arg(mini->cmd_s[mini->p.i]), 1))
+		exec_buildin(ft_split(mini->cmd_s[mini->p.i], " "), mini, 1);
+	else
+		execute(mini->cmd_s, env, mini);
+	if (mini->p.i > 0)
+		close(mini->p.pipes[mini->p.i - 1][0]);
+	if (mini->p.pipes)
+		free_pipes(mini->p.pipes, mini->p.nb_pipes);
+	free_dbl_tab(mini->cmd_s);
+	free(mini->p.pids);
+	free_all(mini, "all");
+	free_dbl_tab(env);
+	exit(0);
+}
+
+int	son_program(char **env, t_minishell *mini)
+{
+	int	signal;
+
+	signal = 0;
+	mini->p.pids[mini->p.i] = fork();
+	if (mini->p.pids[mini->p.i] == -1)
+		return (perror(RED "Error -> pid failure\n" RESET), 0);
+	if (mini->p.pids[mini->p.i] == 0)
+		exec_child(env, mini);
+	else
+		close_curr_pipe(&mini->p, mini->p.i);
+	if (mini->p.i == mini->p.nb_pipes)
+		return (waitpid(mini->p.pids[mini->p.i - 1], &signal, 0), signal);
+	mini->p.i++;
+	signal += son_program(env, mini);
+	waitpid(mini->p.pids[mini->p.i - 1], NULL, 0);
+	return (signal);
+}
+
+char	**get_cmd_s(t_minishell *mini, int i)
+{
+	int		j;
+	char	**cmd_s;
+
+	if (!mini->tokens)
+		return (NULL);
+	cmd_s = (char **)ft_calloc(sizeof(char *), (mini->p.nb_pipes + 2));
+	if (!cmd_s)
+		return (printf("fail getting cmd's\n"), NULL);
+	j = 0;
+	while (mini->tokens[i])
+	{
+		if (!ft_strncmp(mini->pipes_redirs[i], "|", 1))
+			j++;
+		else
+		{
+			if (cmd_s[j])
+				cmd_s[j] = ft_strjoin_n_free(cmd_s[j], " ", 1);
+			cmd_s[j] = ft_strjoin_n_free(cmd_s[j], mini->tokens[i], 1);
+		}
+		i++;
+	}
+	return (cmd_s);
+}
+
+void	pipex(t_minishell *mini, char **env)
+{
+	mini->p.nb_pipes = pipe_count(mini);
+	mini->cmd_s = get_cmd_s(mini, 0);
+	mini->p.i = 0;
+	mini->p.pids = (pid_t *)ft_calloc(sizeof(pid_t), (mini->p.nb_pipes + 1));
+	if (!mini->p.pids)
+		return ((void)ft_fprintf(2, RED"Error : fail initiate pid's\n"RESET));
+	if (mini->p.nb_pipes != 0)
+		create_pipes(&mini->p);
+	else
+		mini->p.pipes = NULL;
+	g_signal = son_program(env, mini);
+	free_pipes(mini->p.pipes, mini->p.nb_pipes);
+	free_dbl_tab(mini->cmd_s);
+	free(mini->p.pids);
+	free_dbl_tab(env);
 }

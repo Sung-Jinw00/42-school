@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_extras.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:00:12 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/24 01:23:16 by marvin           ###   ########.fr       */
+/*   Updated: 2025/02/27 16:04:54 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <stdint.h>
+# include <limits.h>
 
 typedef struct s_list
 {
@@ -46,6 +48,7 @@ float		ft_atof(char *nptr);
 long		ft_atol(char *nptr);
 long long	ft_atold(char *nptr);
 int			ft_atoi(const char *nptr);
+int64_t		ft_atoi64(const char *nptr);
 int			ft_natoi(const char *nptr, int *i);
 int			ft_atoi_base(const char *nptr, char *base);
 char		*ft_convert_base(char *nbr, char *base_from, char *base_to);
@@ -56,12 +59,13 @@ int			ft_toupper(int c);
 //* memory allocation
 void		ft_bzero(void *s, size_t n);
 char		*ft_strdup(const char *src);
+char		**ft_splitdup(char **split);
 char		*ft_strndup(const char *src, int n);
 void		*ft_calloc(size_t nmemb, size_t size);
 void		*ft_upgrade_realloc(void *ptr, size_t size);
+char		**ft_splitndup(char **split, int len_split, int start, int end);
 
 //* printing
-void		print_list(t_list *L);
 void		ft_putnbr_fd(int n, int fd);
 void		ft_putstr_fd(char *s, int fd);
 void		ft_putchar_fd(char c, int fd);
@@ -85,6 +89,7 @@ int			ft_memcmp(const void *s1, const void *s2, size_t n);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 //	-lenght :
 size_t		ft_strlen(const char *s);
+int			ft_count_words(char **split);
 size_t		ft_strclen(const char *s, char c);
 //	-modifications :
 char		**ft_split(char *str, char *charset);
@@ -106,7 +111,7 @@ void		*ft_memmove(void *dest, const void *src, size_t n);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dsize);
 //		+ set a string :
 void		*ft_memset(void *s, int c, size_t n);
-char		*ft_remove_from_string(char *str, char *to_delete);
+char		*ft_remove_from_string(char *str, char *to_delete, int free_str);
 
 //* verifications
 int			ft_isalnum(int c);
@@ -122,6 +127,7 @@ int			ft_strnchr(const char *s, const char *to_find, int len);
 
 //* chain lists
 long		len_list(t_list *L);
+void		print_list(t_list *L);
 t_cell		*create_cell(void *data);
 t_list		*ft_listdup(t_list *src);
 void		*get_at(t_list *L, int pos);

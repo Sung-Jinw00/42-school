@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:45:29 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/15 18:35:58 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/03 23:14:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 void	remove_multiple_slashs(char *path, int i)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (path[j])
 	{
-		if (path[j] == '/' && path[j + 1] == '/')//if there's multiple slashs
+		if (path[j] == '/' && path[j + 1] == '/')
 		{
-			i++;//i keep the first slash
-			while (path[j] == '/')//while i'm in the slashs
+			i++;
+			while (path[j] == '/')
 				j++;
 		}
 		if (i != j)
-			path[i] = path[j];//i copy the characters
+			path[i] = path[j];
 		i++;
 		j++;
 	}
@@ -53,13 +53,15 @@ void	valid_quotes(char c, bool *sgl_q, bool *dbl_q)
 
 int	check_quotes(char *str)
 {
-	int i;
-	bool sgl_q;
-	bool dbl_q;
+	int		i;
+	bool	sgl_q;
+	bool	dbl_q;
 
 	if (!str)
 		return (0);
 	add_history(str);
+	if (!ft_strcmp(str, ""))
+		return (free(str), 1);
 	i = 0;
 	sgl_q = 0;
 	dbl_q = 0;
@@ -74,22 +76,22 @@ int	check_quotes(char *str)
 	return (0);
 }
 
-t_env	*add_at(t_env *L, char *data, int pos)
+t_env	*add_at(t_env *env, char *data, int pos)
 {
 	t_env	*prec;
 	t_env	*cur;
 	int		i;
 	t_cell	*cell;
 
-	cur = L;
+	cur = env;
 	cell = create_cell(data);
 	if (!cell)
 		return (NULL);
-	if (!L)
+	if (!env)
 		return (cell);
 	else if (pos == 0)
 	{
-		cell->next = L;
+		cell->next = env;
 		return (cell);
 	}
 	i = 0;
@@ -100,7 +102,7 @@ t_env	*add_at(t_env *L, char *data, int pos)
 	}
 	prec->next = cell;
 	cell->next = cur;
-	return (L);
+	return (env);
 }
 
 t_env	*ft_envdup(t_env *src)

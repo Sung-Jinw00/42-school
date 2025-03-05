@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_list.c                                        :+:      :+:    :+:   */
+/*   ft_count_words.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 19:10:05 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/26 18:46:32 by locagnio         ###   ########.fr       */
+/*   Created: 2024/11/04 13:33:59 by locagnio          #+#    #+#             */
+/*   Updated: 2025/02/27 16:08:43 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* free the whole list */
+/* returns the number of strings in a split */
 
-void	free_list(t_list *L)
+int	ft_count_words(char **split)
 {
-	t_list	*tmp;
+	int	i;
 
-	tmp = NULL;
-	while (L)
-	{
-		tmp = L->next;
-		free(L);
-		L = tmp;
-	}
+	i = 0;
+	if (!split)
+		return (0);
+	while (split[i])
+		i++;
+	return (i);
 }

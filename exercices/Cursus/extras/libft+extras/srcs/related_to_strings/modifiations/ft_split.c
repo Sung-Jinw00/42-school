@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:37 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/12 17:00:59 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:12:16 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,24 +64,22 @@ int	len_word(char *str, char *charset)
 char	**write_split(char *str, char **split, char *charset, int i)
 {
 	int	j;
-	int	k;
 	int	len_wrd;
 
 	j = 0;
-	k = 0;
 	len_wrd = 0;
 	while (skip_charset(str[i], charset))
 		i++;
-	while (str[i])
+	while (str && i < (int)ft_strlen(str))
 	{
 		len_wrd = len_word(str + i, charset);
 		if (len_wrd != 0 && !skip_charset(str[i], charset))
 		{
-			split[j] = (char *)malloc(sizeof(char) * (len_wrd + 1));
-			while (k < len_wrd)
-				split[j][k++] = str[i++];
+			split[j] = ft_strndup(str + i, len_wrd);
+			if (!split[j])
+				return (free_dbl_tab(split), NULL);
 			j++;
-			k = 0;
+			i += len_wrd;
 		}
 		i++;
 	}
@@ -100,95 +98,3 @@ char	**ft_split(char *str, char *charset)
 		return (NULL);
 	return (write_split(str, split, charset, 0));
 }
-
-/* #include <stdio.h>
-
-int	main(void)
-{
-	const char *str = malloc(0);
-	str = 0;
-	char **split = ft_split(str, 0);
-	int i = 0;
-
-	if (!split)
-		printf("tableau null\n");
-	else if (!split[0])
-		printf("tableau vide : %s\n", split[0]);
-	else if (split[i])
-	{
-		while (split[i])
-		{
-			printf("tableau %d de split1 : %s\n", i, split[i]);
-			free(split[i]);
-			i++;
-		}
-		printf("tableau %d de split1 : %s\n", i, split[i]);
-	}
-	free(split);
-} */
-
-/* #include <stdio.h>
-#include <unistd.h>
-
-int	main(void)
-{
-	char *str1 = "   J'adore le C07   ";
-	char charset1 = ' ';
-
-	char *str2 = "              ";
-	char charset2 = ' ';
-
-	char *str3 = " J'adore le C07 ";
-	char charset3 = 0;
-
-	char **split;
-	int i = 0;
-
-	split = ft_split(str1, charset1);
-	if (split[i])
-	{
-		while (split[i])
-		{
-			printf("tableau %d de split1 : %s\n", i, split[i]);
-			free(split[i]);
-			i++;
-		}
-		printf("tableau %d de split1 : %s\n", i, split[i]);
-	}
-	else
-		printf("tableau vide1 : %s\n", split[0]);
-	free(split);
-	printf("\n");
-	i = 0;
-	split = ft_split(str2, charset2);
-	if (split[i])
-	{
-		while (split[i])
-		{
-			printf("tableau %d de split2 : %s\n", i, split[i]);
-			free(split[i]);
-			i++;
-		}
-		printf("tableau %d de split2 : %s\n", i, split[i]);
-	}
-	else
-		printf("tableau vide2 : %s\n", split[0]);
-	free(split);
-	printf("\n");
-	i = 0;
-	split = ft_split(str3, charset3);
-	if (split[i])
-	{
-		while (split[i])
-		{
-			printf("tableau %d de split3 : %s\n", i, split[i]);
-			free(split[i]);
-			i++;
-		}
-		printf("tableau %d de split3 : %s\n", i, split[i]);
-	}
-	else
-		printf("tableau vide3 : %s\n", split[0]);
-	free(split);
-	return (0);
-} */

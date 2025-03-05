@@ -6,11 +6,11 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:45:29 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/19 20:54:44 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/04 16:56:09 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 char	*ft_strsrch(const char *s, char *c)
 {
@@ -26,13 +26,47 @@ char	*ft_strsrch(const char *s, char *c)
 	return (0);
 }
 
-int		ispipe(char **line)
+int	pipe_count(t_minishell *mini)
 {
-	int i;
+	int	i;
+	int	count;
+	int	len_split;
 
 	i = 0;
-	while (line[i])
-		if (!ft_strcmp(line[i++], "|"))
-			return (1);
+	count = 0;
+	len_split = ft_count_words(mini->tokens);
+	while (i < len_split)
+	{
+		if (mini->pipes_redirs[i] && !ft_strncmp(mini->pipes_redirs[i], "|", 1))
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+void	ft_get_env(t_env **env, char *env_var)
+{
+	while (ft_strncmp((*env)->data, env_var, ft_strlen(env_var)))
+		(*env) = (*env)->next;
+}
+
+int	first_letter_valid(char *str)
+{
+	if (ft_isalpha(str[0]) || str[0] == '_')
+		return (1);
 	return (0);
+}
+
+void	if_pipes_or_redirs(char *line, int *i, int *count)
+{
+	if (line[*i] == '<' || line[*i] == '>' || line[*i] == '|')
+	{
+		(*count)++;
+		while (line[*i + 1] == '<' || line[*i + 1] == '>'
+			|| line[*i + 1] == '|')
+			(*i)++;
+		if (line[*i + 1] != ' ')
+			(*count)++;
+	}
+	(*i)++;
 }

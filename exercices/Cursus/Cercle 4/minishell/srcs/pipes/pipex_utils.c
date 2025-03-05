@@ -6,38 +6,32 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:11:55 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/19 20:46:03 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/04 16:54:29 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-char	*get_cmd(char **av, int i)
-{
-	char *cmd;
-
-	if (!av || !av[i])
-		return (NULL);
-	cmd = ft_strdup(av[i++]);
-	while (av[i] || ft_strcmp(av[i], ">") || ft_strcmp(av[i], ">>")
-			|| ft_strcmp(av[i], "<") || ft_strcmp(av[i], "<<")
-			|| ft_strcmp(av[i], "|"))
-		cmd = ft_strjoin_n_free(ft_strjoin_n_free(cmd, " ", 1), av[i++], 1);
-	return (cmd);
-}
+#include "../../includes/minishell.h"
 
 char	**splited_env(t_env *env)
 {
-	int i;
-	char **tab_env;
-	
+	int		i;
+	char	**tab_env;
+
+	if (!env)
+		return (NULL);
 	i = len_list(env);
-	tab_env = ft_calloc(sizeof(char *), i + 1);
+	tab_env = (char **)malloc(sizeof(char *) * (i + 1));
+	if (!tab_env)
+		return (NULL);
 	i = 0;
 	while (env)
 	{
-		tab_env[i++] = ft_strdup(env->data);
+		tab_env[i] = ft_strdup(env->data);
+		if (!tab_env[i])
+			return (free_dbl_tab(tab_env),
+				printf("Error : changing env into split failed\n"), NULL);
 		env = env->next;
+		i++;
 	}
 	tab_env[i] = NULL;
 	return (tab_env);
@@ -87,30 +81,46 @@ char	*find_path(char *cmd, char **env)
 	return (0);
 }
 
-void	execute(char *av, char **env)
+char	*check_path(char **path, t_minishell *mini)
+{
+	t_env	*tmp;
+
+	tmp = mini->env;
+	if (!ft_strncmp(*path, "./", 2) || !ft_strncmp(*path, "../", 3))
+	{
+		ft_get_env(&tmp, "PWD=");
+		*path = ft_strjoin_n_free(ft_strjoin(tmp->data + 4, "/"), *path, 1);
+	}
+	if (access(*path, F_OK) == 0 || access(*path, X_OK) == 0)
+		return (ft_strdup(*path));
+	return (NULL);
+}
+
+void	execute(char **av, char **env, t_minishell *mini)
 {
 	char	*path;
 	char	**cmd;
 
-	cmd = ft_split(av, " ");
-	free(av);
+	cmd = ft_split(av[mini->p.i], " ");
+	free_dbl_tab(av);
 	if (!cmd)
-	{
-		perror(RED "Error -> issue spliting command\n" RESET);
-		exit(EXIT_FAILURE);
-	}
-	path = find_path(cmd[0], env);
+		return (free_all(mini, "all"), free_dbl_tab(env),
+			perror(RED "Error -> issue spliting command\n" RESET), exit(1));
+	if (!(cmd[0][0] == '/' || !ft_strncmp(cmd[0], "./", 2)
+		|| !ft_strncmp(cmd[0], "../", 2)))
+		path = find_path(cmd[0], env);
+	else
+		path = check_path(&cmd[0], mini);
+	(free(mini->p.pids), free_all(mini, "all"));
 	if (!path)
-	{
-		free_dbl_tab(cmd);
-		perror(RED "Error -> issue finding path\n" RESET);
-		exit(EXIT_FAILURE);
-	}
+		return (ft_fprintf(2, RED "%s: command not found\n" RESET, cmd[0]),
+			free_dbl_tab(cmd), free_dbl_tab(env), exit(1));
 	if (execve(path, cmd, env) == -1)
 	{
 		free(path);
+		free_dbl_tab(env);
 		free_dbl_tab(cmd);
 		perror(RED "Error -> execution failure\n" RESET);
-		exit(EXIT_FAILURE);
+		exit(1);
 	}
 }

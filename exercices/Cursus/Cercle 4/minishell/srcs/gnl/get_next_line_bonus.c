@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 17:48:48 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/13 20:32:56 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/04 16:46:35 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ char	*ft_line_save(char *line_save, int fd)
 		if (bytes_read == -1)
 			return (free(buffer), free(line_save), NULL);
 		if (!line_save[0] && bytes_read == 0)
-			return (free(buffer), free(line_save), printf("\nexit\n"),
-				exit(1), NULL);
+			return (free(buffer), free(line_save), NULL);
 		else if (line_save[0] && bytes_read == 0)
 			continue ;
 		buffer[bytes_read] = '\0';

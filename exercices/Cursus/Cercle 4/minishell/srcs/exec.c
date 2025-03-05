@@ -3,20 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:33:34 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/19 20:55:31 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/03 23:11:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
+
+char	**ft_splitdup_pipes_redirs(char **split, int len_split)
+{
+	char	**dup;
+	int		i;
+
+	if (!split)
+		return (NULL);
+	i = 0;
+	dup = (char **)malloc(sizeof(char *) * (len_split + 1));
+	if (!dup)
+		return (NULL);
+	i = 0;
+	while (i < len_split)
+	{
+		dup[i] = split[i];
+		if (!dup[i])
+			return (free_dbl_tab(dup), NULL);
+		i++;
+	}
+	dup[i] = NULL;
+	return (dup);
+}
 
 void	exec_cmd(t_minishell *mini)
 {
-	/* if (ispipe(mini->tokens))
-		pipes(mini);
-	else  */if (!ft_strcmp(mini->tokens[0], "pwd"))
+	if (mini->p.nb_pipes > 0)
+		pipex(mini, splited_env(mini->env));
+	else if (isredir(mini))
+		redir(mini, splited_env(mini->env), mini->tokens, mini->pipes_redirs);
+	else if (!ft_strcmp(mini->tokens[0], "pwd"))
 		pwd(mini->env);
 	else if (!ft_strcmp(mini->tokens[0], "echo"))
 		echo(mini->tokens);
@@ -31,6 +56,8 @@ void	exec_cmd(t_minishell *mini)
 	else if (!ft_strcmp(mini->tokens[0], "exit"))
 		ft_exit(mini);
 	else
-		ft_fprintf(2, "%s: command not found\n", mini->tokens[0]);
+		pipex(mini, splited_env(mini->env));
 	free_all(mini, "tabs");
+	mini->tokens = NULL;
+	mini->pipes_redirs = NULL;
 }

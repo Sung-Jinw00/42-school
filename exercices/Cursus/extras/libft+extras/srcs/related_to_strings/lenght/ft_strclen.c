@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:59 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/17 19:12:25 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/26 19:17:01 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t	ft_strclen(const char *s, char c)
 	size_t	i;
 
 	i = 0;
-	while (s[i] != '\0' && s[i] != c)
+	while (s && s[i] != '\0' && s[i] != c)
 		i++;
 	return (i);
 }

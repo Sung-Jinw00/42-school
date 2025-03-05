@@ -6,11 +6,11 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 20:38:24 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/19 21:14:38 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/04 17:41:41 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 char	*ft_strjoinm(char *s1, char *s2, int tab_to_free)
 {
@@ -64,20 +64,14 @@ char	*replace_by_tilde(t_env *env, char *str)
 	return (ft_strdup(str));
 }
 
-void	ft_get_env(t_env **env, char *env_var)
-{
-	while (ft_strncmp((*env)->data, env_var, ft_strlen(env_var)))
-		(*env) = (*env)->next;
-}
-
 char	*ft_substr_with_quotes(char *line, t_minishell *mini, int len)
 {
-	char *str;
-	int i;
-	int j;
+	char	*str;
+	int		i;
+	int		j;
 
 	i = 0;
-	j = 0;	
+	j = 0;
 	mini->sgl_q = 0;
 	mini->dbl_q = 0;
 	str = ft_calloc(len + 2, 1);
@@ -91,37 +85,56 @@ char	*ft_substr_with_quotes(char *line, t_minishell *mini, int len)
 
 int	check_valid_quotes(char *str, bool *sgl_q, bool *dbl_q)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (str[j])
 	{
 		valid_quotes(str[j], sgl_q, dbl_q);
 		if (!*sgl_q && !*dbl_q && (str[j] == '|' || str[j] == '>'
-			|| str[j] == '<'))
+				|| str[j] == '<'))
 			return (1);
 		j++;
 	}
 	return (0);
 }
 
-void	is_redir_or_pipes(char **raw, bool sgl_q, bool dbl_q)
+void	pipe_only(char **str, int i)
 {
-	int i;
 	int j;
 
-	i = 0;
 	j = 0;
+	while (str[i][j])
+	{
+		if (str[i][j++] != '|')
+		{
+			free(str[i]);
+			str[i] = NULL;
+			break ;
+		}
+	}
+}
+
+
+int	is_redir_or_pipes(char **raw, int i)
+{
 	while (raw[i])
 	{
-		if (!check_valid_quotes(raw[i], &sgl_q, &dbl_q))
+		if (raw[i][0] == '|')
+			pipe_only(raw, i);
+		else if (!((ft_strlen(raw[i]) == 2 &&
+					(!ft_strcmp(raw[i], "<<") || !ft_strcmp(raw[i], ">>")))
+					|| (ft_strlen(raw[i]) == 1 && (!ft_strcmp(raw[i], "<")
+						|| !ft_strcmp(raw[i], ">")))))
 		{
 			free(raw[i]);
 			raw[i] = NULL;
 		}
-		sgl_q = 0;
-		dbl_q = 0;
-		j = 0;
+		if (i > 0 && raw[i] && raw[i - 1] && raw[i][0] == '|'
+			&& raw[i - 1][0] == '|')
+			return (ft_fprintf(2, "bash: syntax error"),
+				ft_fprintf(2, " near unexpected token `|'\n"));
 		i++;
 	}
+	return (0);
 }
