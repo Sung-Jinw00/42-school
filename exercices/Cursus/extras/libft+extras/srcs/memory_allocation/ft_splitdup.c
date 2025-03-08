@@ -6,19 +6,18 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:46 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/28 20:10:30 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/08 17:28:31 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
 /* create a dublicate of a splited string */
-
 char	**ft_splitdup(char **split)
 {
 	char	**dup;
 	int		i;
-	
+
 	if (!split)
 		return (NULL);
 	dup = (char **)malloc(sizeof(char *) * (ft_count_words(split) + 1));

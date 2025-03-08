@@ -12,12 +12,16 @@
 
 #include "libft_extras.h"
 
+/* free a splited tab */
 void	free_dbl_tab(char **str)
 {
 	int	j;
 
+	if (!str)
+		return ;
 	j = 0;
-	while (str[j])
+	while (str && str[j])
 		free(str[j++]);
-	free(str);
+	if (str)
+		free(str);
 }

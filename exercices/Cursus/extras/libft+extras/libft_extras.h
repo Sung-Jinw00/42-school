@@ -6,18 +6,19 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:00:12 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/27 16:04:54 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/08 16:08:17 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_EXTRAS_H
 # define LIBFT_EXTRAS_H
 
-# include <stdlib.h>
 # include <stdio.h>
+# include <stdlib.h>
 # include <unistd.h>
 # include <stdint.h>
 # include <limits.h>
+# include <stdbool.h>
 
 typedef struct s_list
 {
@@ -84,7 +85,9 @@ void		*ft_memchr(const void *s, int c, size_t n);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strnstr(const char *big, const char *little, size_t len);
 //		+ return the difference :
+int			str_multi_cmp(const char *s1, ...);
 int			ft_strcmp(const char *s1, const char *s2);
+int			str_multi_ncmp(const char *s1, size_t n, ...);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 //	-lenght :

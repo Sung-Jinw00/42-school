@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/27 16:31:08 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/05 15:26:05 by locagnio         ###   ########.fr       */
+/*   Created: 2025/03/05 17:03:22 by locagnio          #+#    #+#             */
+/*   Updated: 2025/03/07 20:24:59 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,16 +134,15 @@ int		rest_letters_of_name(char *str);
 int		is_redir_or_pipes(char **raw, int i);
 void	ft_get_env(t_env **env, char *env_var);
 t_env	*add_at(t_env *env, char *data, int pos);
-char	*replace_by_tilde(t_env *env, char *str);
 char	*replace_var(t_minishell *mini, char *str);
 void	valid_quotes(char c, bool *sgl_q, bool *dbl_q);
 void	optimised_line(char *line, t_minishell **mini);
 int		just_export_or_unset(char **vars, char *command);
 char	*ft_strjoinm(char *s1, char *s2, int tab_to_free);
+char	*replace_by_tilde(t_env *env, char *str, int free_str);
 char	*ft_substr_with_quotes(char *line, t_minishell *mini, int len);
 
 //print
-void	error(void);
 void	welcome(void);
 void	print_list(t_env *L);
 void	ft_print_dlb_tabs(char **tab, char *arg);
@@ -158,6 +157,7 @@ void	free_pipes_redirs(char **str, int nb_words);
 
 
 //pipes
+char	*get_first_arg(char *av);
 char	**splited_env(t_env *env);
 int		get_file(char *av, int i);
 char	*get_cmd(char **av, int i);
@@ -168,9 +168,9 @@ void	read_stdin(int *fd, char *limiter);
 void	create_pipes(t_pipes *pipes_struct);
 void	pipex(t_minishell *mini, char **env);
 void	execute(char **av, char **env, t_minishell *mini);
-void	close_curr_pipe(t_pipes *pipes_struct, int current_pipe);
-char	**get_redir_split(t_minishell *mini, int *j, int len_split);
-void	close_and_redirect_pipes(t_pipes *pipes_struct, int current_pipe, char *last_cmd);
+char	**get_redir_split(t_minishell *mini, int cur_cmd);
+void	close_and_redirect_pipes(t_pipes *pipes_struct, int current_pipe);
+void	close_curr_pipe(t_pipes *pipes_struct, int current_pipe, char **cmd_s);
 
 //buildins
 void	pwd(t_env *env);
@@ -184,24 +184,28 @@ void	export(char **vars, t_minishell *mini);
 
 //redirs
 void	restore_dup(t_redirs *r);
-int	isredir(t_minishell *mini);
+int		isredir(t_minishell *mini);
 char	**copy_tokens(char **tokens);
-int	is_buildin(char *tab, int to_free);
-int	redir(t_minishell *mini, char **env, char **tokens, char **pipes_redirs);
+int		is_buildin(char *tab, int to_free);
+int		redir(t_minishell *mini, char **env, char **tokens, char **pipes_redirs);
 int		valid_filename(char **tab, char **ntab);
 int		syntax_error_redir(char **tab, char **ntab);
 void	find_tab(int *y, char **tab, char **tokens);
-int	handle_files(char **tokens, char **pipes_redirs, t_redirs *r, int make_dup);
+int		handle_files(char **tokens, char **pipes_redirs, t_redirs *r, int make_dup);
 void	exec_buildin(char **tab, t_minishell *mini, int free);
 void	join_command_free_tab(char **tab, char **tokens);
-int	handle_heredoc (char **tokens, char **pipes_redirs);
+int		handle_heredoc (char **tokens, char **pipes_redirs);
 char	**find_eofs(int *sum, char **tokens, char **pipes_redirs);
 void	copy_eofs(int *sum, char **eofs, char **tokens, char **pipes_redirs);
-int	heredoc (char **tokens, char **pipes_redirs);
+int		heredoc (char **tokens, char **pipes_redirs);
 void	free_strs(char **str1, char **str2, char **str3);
-int	hd_filename(char **tokens, char ** pipes_redirs);
+int		hd_filename(char **tokens, char ** pipes_redirs);
 void	correct_null_tabs(int size_tokens, char **tokens, char **pipes_redirs);
-int	syntax_error_before_hd(char **tokens, char **pipes_redirs);
+int		syntax_error_before_hd(char **tokens, char **pipes_redirs);
+int		error_in_heredoc(char **tokens, char **pipes_redirs, bool *error);
+void	write_in_heredoc(int *first, int fd, char *line, char **eofs);
+int		init_r(t_redirs *r, char **tokens);
+void	restore_and_free(char **tab1, char *path, t_redirs *r);
 
 //utils
 char	*hostname(void);

@@ -6,20 +6,21 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:46 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/17 17:55:15 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/08 17:28:34 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
 /* create a dublicate of a string */
-
 char	*ft_strdup(const char *src)
 {
 	char	*cpy;
 	int		len_src;
 	int		i;
 
+	if (!src)
+		return (NULL);
 	i = 0;
 	len_src = (int)ft_strlen(src);
 	cpy = (char *)malloc(sizeof(char) * (len_src + 1));

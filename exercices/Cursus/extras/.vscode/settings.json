@@ -1,5 +1,6 @@
 {
 	"files.associations": {
-		"libft_extras.h": "c"
+		"libft_extras.h": "c",
+		"ft_fprintf.h": "c"
 	}
 }

@@ -5,6 +5,7 @@
 		"stdlib.h": "c",
 		"compare": "c",
 		"cstdint": "c",
-		"stdint.h": "c"
+		"stdint.h": "c",
+		"stdarg.h": "c"
 	}
 }
