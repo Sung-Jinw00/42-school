@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:58:28 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/08 17:31:25 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:56:06 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static int	ft_error(char *base)
 	return (0);
 }
 
-/* converts a string of numbers on a certain base into another base */
+/* converts a string of numbers on a certain base into another base
+*/
 char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 {
 	if (!ft_error(base_from) && !ft_error(base_to))

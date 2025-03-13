@@ -43,7 +43,8 @@ int	ft_error(char *base)
 	return (1);
 }
 
-/* write an int into the base chosen */
+/* write an int into the base chosen
+*/
 void	ft_putnbr_base(int nbr, char *base)
 {
 	long	nb;

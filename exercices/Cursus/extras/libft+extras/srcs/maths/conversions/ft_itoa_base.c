@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:07 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/08 17:31:17 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:56:02 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ static int	init_vals(long nb, int *sign, char *base)
 	return (i);
 }
 
-/* turn a number into a string in a certain base */
+/* turn a number into a string in a certain base
+*/
 char	*ft_itoa_base(int n, char *base)
 {
 	char	*cpy;

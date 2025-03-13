@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:26:37 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/08 17:36:45 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:56:13 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ static int	cmp_64(char *nptr)
 
 /* turn a string into an int64 (or long long int).
 	if the number in the string is out of the limits of int64,
-	the program returns -1*/
+	the program returns -1
+*/
 int64_t	ft_atoi64(const char *nptr)
 {
 	int		i;

@@ -6,13 +6,14 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:35 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/08 17:17:52 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:52:54 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* set n bytes of s with c */
+/* set n bytes of s with c
+*/
 void	*ft_memset(void *s, int c, size_t n)
 {
 	size_t	i;

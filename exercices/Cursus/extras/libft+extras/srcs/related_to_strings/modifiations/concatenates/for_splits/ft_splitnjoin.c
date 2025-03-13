@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_splitnjoin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:26:24 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/08 17:21:14 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:08:23 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* creates a new string by concatenate 2 strings */
-char	*ft_strjoin(char const *s1, char const *s2)
+/* creates a new split by concatenate n tabs of 2 splits
+*/
+char	**ft_splitnjoin(char const **s1, size_t n1, char const **s2, size_t n2)
 {
-	char	*new_string;
+	char	**new_split;
 	size_t	len;
 	size_t	i;
 	size_t	j;
 
 	i = -1;
 	j = 0;
-	len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	new_string = malloc(len);
-	if (!new_string)
+	len = n1 + n2 + 1;
+	new_split = malloc(len);
+	if (!new_split)
 		return (NULL);
-	while (s1[++i] != '\0')
-		new_string[i] = s1[i];
-	while (s2[j] != '\0')
-		new_string[i++] = s2[j++];
-	new_string[i] = '\0';
-	return (new_string);
+	while (s1[++i] && i < n1)
+		new_split[i] = ft_strdup(s1[i]);
+	while (s2[j] && j < n2)
+		new_split[i++] = ft_strdup(s2[j++]);
+	new_split[i] = NULL;
+	return (new_split);
 }
 
 /* #include <stdio.h>

@@ -6,13 +6,14 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:44 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/08 17:18:52 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:52:30 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* return true if the argument is an alphanumeric argument */
+/* return true if the argument is an alphanumeric argument
+*/
 int	ft_isalnum(int c)
 {
 	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0'

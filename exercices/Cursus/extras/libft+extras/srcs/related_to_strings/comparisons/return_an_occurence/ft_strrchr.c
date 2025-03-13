@@ -6,13 +6,14 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:34:14 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/08 17:24:16 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:54:25 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* search for the last iteration of c in s */
+/* search for the last iteration of c in s
+*/
 char	*ft_strrchr(const char *s, int c)
 {
 	int	len;

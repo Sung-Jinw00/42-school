@@ -6,18 +6,22 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:34:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/08 17:24:02 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/10 17:32:06 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* return 0 if a comparison was successful, else it returns 1 */
+/* return 0 if a comparison was successful, else it returns 1, the last argument
+	should be NULL.
+*/
 int	str_multi_cmp(const char *s1, ...)
 {
 	const char	*arg;
 	va_list		args;
 
+	if (!s1)
+		return (1);
 	va_start(args, s1);
 	arg = va_arg(args, const char *);
 	while (arg)

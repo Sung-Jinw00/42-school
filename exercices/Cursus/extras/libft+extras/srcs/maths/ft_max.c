@@ -6,13 +6,14 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:29 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/08 17:30:47 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:55:41 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* fint the highest number of a list */
+/* fint the highest number of a list
+*/
 int	ft_max(int *tab)
 {
 	int	i;

@@ -1,49 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strndup.c                                       :+:      :+:    :+:   */
+/*   ft_splitjoin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 13:33:46 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:55:13 by locagnio         ###   ########.fr       */
+/*   Created: 2024/09/12 14:26:24 by locagnio          #+#    #+#             */
+/*   Updated: 2025/03/13 16:36:31 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* create a dublicate of a string on n characters
+/* creates a new split by concatenate 2 splits
 */
-char	*ft_strndup(const char *src, int n)
+char	**ft_splitjoin(char const **s1, char const **s2)
 {
-	char	*cpy;
-	int		i;
+	char	**new_split;
+	size_t	len;
+	size_t	i;
+	size_t	j;
 
-	i = 0;
-	if (n > (int)ft_strlen(src))
-		n = (int)ft_strlen(src);
-	cpy = (char *)malloc(sizeof(char) * (n + 1));
-	if (!cpy)
+	i = -1;
+	j = 0;
+	len = ft_count_words(s1) + ft_count_words(s2) + 1;
+	new_split = malloc(len);
+	if (!new_split)
 		return (NULL);
-	while (src[i] && i < n)
-	{
-		cpy[i] = src[i];
-		i++;
-	}
-	cpy[i] = '\0';
-	return (cpy);
+	while (s1[++i])
+		new_split[i] = ft_strdup(s1[i]);
+	while (s2[j])
+		new_split[i++] = ft_strdup(s2[j++]);
+	new_split[i] = NULL;
+	return (new_split);
 }
 
 /* #include <stdio.h>
 
 int	main(void)
 {
-	char src[] = "Hello";
-	char *cpy;
+	char *s1 = "Hello ";
+	char *s2 = "World";
 
-	cpy = ft_strdup(src);
-	printf("adresse de src : %p\nsrc : %s\nadresse de cpy : %p\ncpy : %s\n",\
-	src, src, cpy, cpy);
-	free (cpy);
+	s1 = ft_strjoin(s1, s2);
+	printf("%s\n", s1);
+	free(s1);
 	return (0);
 } */

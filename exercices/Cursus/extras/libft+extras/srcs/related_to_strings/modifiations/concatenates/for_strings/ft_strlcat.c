@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:50 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/08 17:21:12 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:53:23 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 /* Concatenates 2 strings and guarantee to NUL-terminate the result if dsize
 	is at least greater than the len of dst. Both src and dst must be
-	NUL-terminated. It returns the final len of the concatenated string */
+	NUL-terminated. It returns the final len of the concatenated string
+*/
 size_t	ft_strlcat(char *dst, const char *src, size_t dsize)
 {
 	unsigned int	i;

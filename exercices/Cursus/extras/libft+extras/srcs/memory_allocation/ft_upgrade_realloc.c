@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:39 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/08 17:29:40 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:55:10 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	*ft_calloc_(size_t nmemb, size_t size)
 	content is unchanged. If "ptr" is NULL, then the call is equivalent to
 	calloc(size). If "size" is equal to  zero, and "ptr" is not NULL, then the call
 	is equivalent to free(ptr). If the area pointed to was moved, a free(ptr)
-	is done. */
+	is done.
+*/
 void	*ft_upgrade_realloc(void *ptr, size_t size)
 {
 	void	*new_ptr;

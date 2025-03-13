@@ -1,43 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_strintlen.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 13:33:07 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:54:34 by locagnio         ###   ########.fr       */
+/*   Created: 2024/11/04 13:33:59 by locagnio          #+#    #+#             */
+/*   Updated: 2025/03/09 17:45:36 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* scans n bytes of a string for the first instance of c and return the rest of
-	the string where c was found
+/* returns the len of as string of chars that will be turned in a string of int
 */
-void	*ft_memchr(const void *s, int c, size_t n)
+int	ft_strintlen(char *str_char)
 {
-	size_t	i;
+	int i;
+	int len;
+	int trigger;
 
+	if (!str_char)
+		return (0);
 	i = 0;
-	while (i < n)
+	len = 0;
+	trigger = 0;
+	while (str_char[i])
 	{
-		if (*(unsigned char *)(s + i) == (unsigned char)c)
-			return ((void *)(s + i));
+		if (ft_isnum(str_char[i]) && !trigger)
+		{
+			len++;
+			trigger = 1;
+		}
+		else if (!ft_isnum(str_char[i]) && trigger)
+			trigger = 0;
 		i++;
 	}
-	return (0);
+	return (len);
 }
 
 /* #include <stdio.h>
 
 int	main(void)
 {
-	const char *tab = "Hello world";
-	int c = 'o';
-	const void *s = tab;
+	char str[] = "Yeppi";
 
-	s = ft_memchr(s, c, 3);
-	printf("%s\n", (unsigned char *)s);
+	printf("%zu\n", ft_strlen(str));
 	return(0);
 } */

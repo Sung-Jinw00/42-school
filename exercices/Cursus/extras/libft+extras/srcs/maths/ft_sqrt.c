@@ -6,13 +6,14 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 19:36:44 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/08 17:30:42 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:55:32 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* return the square root of a number */
+/* return the square root of a number
+*/
 int	ft_sqrt(int nb)
 {
 	int	i;

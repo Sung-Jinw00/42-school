@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 17:11:55 by locagnio          #+#    #+#             */
-/*   Updated: 2024/12/26 18:40:35 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:00:21 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,4 @@ void	execute(char *av, char **env)
 		free_dbl_tab(cmd);
 		error();
 	}
-	free(path);
-	free_dbl_tab(cmd);
 }

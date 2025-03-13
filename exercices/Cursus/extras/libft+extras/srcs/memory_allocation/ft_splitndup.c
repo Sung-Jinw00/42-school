@@ -6,22 +6,20 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:46 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/08 21:13:00 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:55:17 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* create a dublicate of a splited string at "start" tab up to "end" tab
-	- if start is greater than end, or if split is NULL, the function return NULL
-	- if end is above the len of the split, it's automatically relocated to
-	the end of the string */
+/* create a dublicate of a splited string at start tab up to end tab
+*/
 char	**ft_splitndup(char **split, int len_split, int start, int end)
 {
 	char	**dup;
 	int		i;
 
-	if (split && end > len_split)
+	if (end > len_split)
 		end = len_split;
 	if (start > end || !split)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:07 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/08 17:31:05 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:55:59 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static int	init_vals(long nb, int *sign)
 	return (i);
 }
 
-/* turn a number into an string */
+/* turn a number into an string
+*/
 char	*ft_itoa(int n)
 {
 	char	*cpy;

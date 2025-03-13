@@ -6,13 +6,14 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:34:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/08 20:59:32 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:54:16 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* return the difference of a string */
+/* return the difference of a string
+*/
 int	ft_strcmp(const char *s1, const char *s2)
 {
 	size_t	i;

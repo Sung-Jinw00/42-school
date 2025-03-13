@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:59 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/08 17:22:50 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:54:02 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 /* returns the len of as string when :
 	- it reaches the first iteration of c
-	- it reaches the end of the string */
+	- it reaches the end of the string
+*/
 size_t	ft_strclen(const char *s, char c)
 {
 	size_t	i;

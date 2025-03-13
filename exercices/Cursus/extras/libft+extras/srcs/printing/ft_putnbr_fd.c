@@ -6,13 +6,14 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:30:58 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/08 17:27:59 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:54:50 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* write an int into the fd chosen */
+/* write an int into the fd chosen
+*/
 void	ft_putnbr_fd(int n, int fd)
 {
 	if (n == -2147483648)

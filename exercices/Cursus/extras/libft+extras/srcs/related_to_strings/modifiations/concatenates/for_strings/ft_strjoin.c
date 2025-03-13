@@ -1,45 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_n_free.c                                :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 16:07:25 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/08 17:21:39 by locagnio         ###   ########.fr       */
+/*   Created: 2024/09/12 14:26:24 by locagnio          #+#    #+#             */
+/*   Updated: 2025/03/09 16:53:26 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* join 2 strings and free whatever used string you want to free :
-	- 1 : free s1
-	- 2 : free s2
-	- 12 : free both s1 and s2 */
-char	*ft_strjoin_n_free(char *s1, char *s2, int tab_to_free)
+/* creates a new string by concatenate 2 strings
+*/
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*new_string;
+	size_t	len;
 	size_t	i;
 	size_t	j;
 
-	i = 0;
+	i = -1;
 	j = 0;
-	new_string = ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, 1);
+	len = ft_strlen(s1) + ft_strlen(s2) + 1;
+	new_string = malloc(len);
 	if (!new_string)
 		return (NULL);
-	while (s1 && s1[i] != '\0')
-	{
+	while (s1[++i] != '\0')
 		new_string[i] = s1[i];
-		i++;
-	}
-	while (s2 && s2[j] != '\0')
+	while (s2[j] != '\0')
 		new_string[i++] = s2[j++];
 	new_string[i] = '\0';
-	if (tab_to_free == 1)
-		free(s1);
-	else if (tab_to_free == 2)
-		free(s2);
-	else if (tab_to_free == 12)
-		return (free(s1), free(s2), new_string);
 	return (new_string);
 }
+
+/* #include <stdio.h>
+
+int	main(void)
+{
+	char *s1 = "Hello ";
+	char *s2 = "World";
+
+	s1 = ft_strjoin(s1, s2);
+	printf("%s\n", s1);
+	free(s1);
+	return (0);
+} */

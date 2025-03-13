@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:37 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/08 17:17:43 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:52:39 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ char	**write_split(char *str, char **split, char *charset, int i)
 	return (split);
 }
 
-/* split a string into a chain of strings depending on the characters of "charset" */
+/* split a string into a chain of strings depending on the characters of "charset"
+*/
 char	**ft_split(char *str, char *charset)
 {
 	char	**split;

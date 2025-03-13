@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/08 17:37:02 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:56:20 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static int	ft_error(char *base)
 	return (0);
 }
 
-/* turn a decimal string into an int in a certain base */
+/* turn a decimal string into an int in a certain base
+*/
 int	ft_atoi_base(const char *nptr, char *base)
 {
 	int		i;

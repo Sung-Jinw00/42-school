@@ -1,41 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
+/*   ft_splitjoin_n_free.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:26:24 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/08 17:21:07 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:37:07 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* creates a new string by concatenate n characters of 2 strings */
-char	*ft_strnjoin(char const *s1, size_t n_s1, char const *s2, size_t n_s2)
+/* join 2 splits and free whatever used split you want to free :
+	- 1 : free s1
+	- 2 : free s2
+	- 12 : free both s1 and s2
+*/
+char	**ft_splitjoin_n_free(char **s1, char **s2, int tab_to_free)
 {
-	char	*new_string;
+	char	**new_split;
 	size_t	len;
 	size_t	i;
 	size_t	j;
 
 	i = -1;
 	j = 0;
-	if (n_s1 > ft_strlen(s1))
-		n_s1 = ft_strlen(s1);
-	if (n_s2 > ft_strlen(s2))
-		n_s2 = ft_strlen(s2);
-	len = n_s1 + n_s2 + 1;
-	new_string = malloc(len);
-	if (!new_string)
+	len = ft_count_words((const char **)s1) +
+		ft_count_words((const char **)s2) + 1;
+	new_split = malloc(len);
+	if (!new_split)
 		return (NULL);
-	while (s1[++i] != '\0' && i < n_s1)
-		new_string[i] = s1[i];
-	while (s2[j] != '\0' && j < n_s2)
-		new_string[i++] = s2[j++];
-	new_string[i] = '\0';
-	return (new_string);
+	while (s1[++i])
+		new_split[i] = ft_strdup(s1[i]);
+	while (s2[j])
+		new_split[i++] = ft_strdup(s2[j++]);
+	new_split[i] = NULL;
+	if (tab_to_free == 1)
+		free_dbl_tab(s1);
+	else if (tab_to_free == 2)
+		free_dbl_tab(s2);
+	else if (tab_to_free == 12)
+		return (free_dbl_tab(s1), free_dbl_tab(s2), new_split);
+	return (new_split);
 }
 
 /* #include <stdio.h>

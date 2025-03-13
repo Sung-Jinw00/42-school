@@ -6,14 +6,15 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 14:46:21 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/08 17:17:49 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:52:49 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
 /* remove every characters of to_delete string to str and return the new line,
-	can free str */
+	can free str
+*/
 char	*ft_remove_from_string(char *str, char *to_delete, int free_str)
 {
 	char	**tab;
