@@ -6,14 +6,14 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:55 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/17 18:10:52 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:53:01 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* erase and copy d_size of src in dst, returns the len of src */
-
+/* erase and copy d_size of src in dst, returns the len of src
+*/
 size_t	ft_strlcpy(char *dst, const char *src, size_t dsize)
 {
 	size_t	i;

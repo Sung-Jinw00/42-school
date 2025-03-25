@@ -3,28 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi64.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:26:37 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/25 21:23:53 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/21 13:27:26 by kgiannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* turn a string into an number */
-
 #define INT64_Max "9223372036854775807"
 #define INT64_Min "-9223372036854775808"
 
-int	error64(const char *str)
+static int	error64(const char *str)
 {
 	printf("bash: exit: %s: numeric argument required\n", str);
-	exit(1);
-	return (0);
+	return (-1);
 }
 
-int	cmp_64(char *nptr)
+static int	cmp_64(char *nptr)
 {
 	size_t	len_max;
 	size_t	len_min;
@@ -51,6 +48,10 @@ int	cmp_64(char *nptr)
 	return (free(nptr), 0);
 }
 
+/* turn a string into an int64 (or long long int).
+	if the number in the string is out of the limits of int64,
+	the program returns -1
+*/
 int64_t	ft_atoi64(const char *nptr)
 {
 	int		i;
@@ -61,7 +62,7 @@ int64_t	ft_atoi64(const char *nptr)
 	sign = 1;
 	result = 0;
 	if (cmp_64(ft_remove_from_string((char *)nptr, " \t+", 0)))
-		return(error64(nptr));
+		return (error64 (nptr));
 	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
 		i++;
 	if (nptr[i] == '-' || nptr[i] == '+')

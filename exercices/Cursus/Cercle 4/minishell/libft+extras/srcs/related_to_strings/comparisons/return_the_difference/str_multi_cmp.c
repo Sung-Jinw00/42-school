@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   str_multi_cmp.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:34:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:54:13 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/21 13:25:21 by kgiannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* return the difference of a string by comparing n bytes
+/* return 0 if a comparison was successful, else it returns 1, the last argument
+	should be NULL.
 */
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	str_multi_cmp(const char *s1, ...)
 {
-	size_t	i;
+	const char	*arg;
+	va_list		args;
 
-	i = 0;
-	if (!s1 && !s2)
-		return (0);
-	else if (!s1 || !s2)
+	if (!s1)
 		return (1);
-	while ((s1[i] || s2[i]) && i < n)
+	va_start(args, s1);
+	arg = va_arg(args, const char *);
+	while (arg)
 	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
+		if (!ft_strcmp(s1, arg))
+			return (va_end(args), 0);
+		else
+			arg = va_arg(args, const char *);
 	}
-	return (0);
+	va_end(args);
+	return (1);
 }
 
 /* #include <stdio.h>

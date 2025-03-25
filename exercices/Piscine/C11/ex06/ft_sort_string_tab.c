@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:48:36 by locagnio          #+#    #+#             */
-/*   Updated: 2024/09/22 13:21:29 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/21 16:41:47 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,7 @@ char	**ft_check(int ac, char **av)
 void	ft_sort_string_tab(char **tab)
 {
 	int	len;
-	int	i;
 
-	i = 0;
 	len = ft_strlen(tab);
 	tab = ft_check(len, tab);
 }

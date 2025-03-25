@@ -6,14 +6,14 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 20:00:24 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/06 17:14:53 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:53:33 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* concatenates a fixed string to another fixed string */
-
+/* concatenates a fixed string to another fixed string
+*/
 char	*ft_strcat(char *dest, char *src)
 {
 	int	i;

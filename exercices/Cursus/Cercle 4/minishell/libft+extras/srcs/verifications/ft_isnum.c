@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_isnum.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 13:33:07 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:54:34 by locagnio         ###   ########.fr       */
+/*   Created: 2025/03/09 16:52:11 by locagnio          #+#    #+#             */
+/*   Updated: 2025/03/09 16:52:13 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* scans n bytes of a string for the first instance of c and return the rest of
-	the string where c was found
+/* return true if the argument is an number
 */
-void	*ft_memchr(const void *s, int c, size_t n)
+int	ft_isnum(int c)
 {
-	size_t	i;
-
-	i = 0;
-	while (i < n)
-	{
-		if (*(unsigned char *)(s + i) == (unsigned char)c)
-			return ((void *)(s + i));
-		i++;
-	}
+	if (c >= '0' && c <= '9')
+		return (1);
 	return (0);
 }
 
@@ -33,11 +25,6 @@ void	*ft_memchr(const void *s, int c, size_t n)
 
 int	main(void)
 {
-	const char *tab = "Hello world";
-	int c = 'o';
-	const void *s = tab;
-
-	s = ft_memchr(s, c, 3);
-	printf("%s\n", (unsigned char *)s);
+	printf("%d\n", ft_isnum(47));
 	return(0);
 } */

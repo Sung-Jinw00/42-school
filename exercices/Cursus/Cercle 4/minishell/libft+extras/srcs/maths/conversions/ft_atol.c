@@ -6,13 +6,14 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/20 16:42:49 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:56:10 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* turn a decimal number string into an long */
+/* turn a decimal number string into an long
+*/
 long	ft_atol(char *nptr)
 {
 	int		i;

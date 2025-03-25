@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:14:22 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/05 18:01:11 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/21 16:55:46 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ char	*get_first_arg(char *av)
 
 void	exec_child(char **env, t_minishell *mini, char **split, char **redirs)
 {
-	if (mini->p.nb_pipes != 0)
-		close_and_redirect_pipes(&mini->p, mini->p.i);
+	close_and_redirect_pipes(&mini->p, mini->p.i);
 	if (isredir_pipex(mini->cmd_s[mini->p.i]))
 	{
 		split = ft_split(mini->cmd_s[mini->p.i], " ");
@@ -52,31 +51,27 @@ void	exec_child(char **env, t_minishell *mini, char **split, char **redirs)
 		close(mini->p.pipes[mini->p.i - 1][0]);
 	if (mini->p.pipes)
 		free_pipes(mini->p.pipes, mini->p.nb_pipes);
-	free_dbl_tab(mini->cmd_s);
-	free(mini->p.pids);
+	multi_free("2, 1, 2", mini->cmd_s, mini->p.pids, env);
 	free_all(mini, "all");
-	free_dbl_tab(env);
 	exit(0);
 }
 
-int	son_program(char **env, t_minishell *mini)
+void	son_program(char **env, t_minishell *mini)
 {
-	int	signal;
-
-	signal = 0;
 	mini->p.pids[mini->p.i] = fork();
 	if (mini->p.pids[mini->p.i] == -1)
-		return (perror(RED "Error -> pid failure\n" RESET), 0);
+		return (perror(RED "Error -> pid failure\n" RESET));
 	if (mini->p.pids[mini->p.i] == 0)
 		exec_child(env, mini, NULL, NULL);
 	else
 		close_curr_pipe(&mini->p, mini->p.i, mini->cmd_s);
+	if (mini->p.nb_pipes == 0)
+		return ((void)waitpid(mini->p.pids[0], &g_signal, 0));
 	if (mini->p.i == mini->p.nb_pipes)
-		return (waitpid(mini->p.pids[mini->p.i - 1], &signal, 0), signal);
+		return ((void)waitpid(mini->p.pids[mini->p.i - 1], &g_signal, 0));
 	mini->p.i++;
-	signal = son_program(env, mini);
+	son_program(env, mini);
 	waitpid(mini->p.pids[mini->p.i - 1], NULL, 0);
-	return (signal);
 }
 
 char	**get_cmd_s(t_minishell *mini, int i)
@@ -107,6 +102,9 @@ char	**get_cmd_s(t_minishell *mini, int i)
 
 void	pipex(t_minishell *mini, char **env)
 {
+	int		i;
+
+	i = -1;
 	mini->p.nb_pipes = pipe_count(mini);
 	mini->cmd_s = get_cmd_s(mini, 0);
 	mini->p.i = 0;
@@ -117,9 +115,7 @@ void	pipex(t_minishell *mini, char **env)
 		create_pipes(&mini->p);
 	else
 		mini->p.pipes = NULL;
-	g_signal = son_program(env, mini);
+	son_program(env, mini);
 	free_pipes(mini->p.pipes, mini->p.nb_pipes);
-	free_dbl_tab(mini->cmd_s);
-	free(mini->p.pids);
-	free_dbl_tab(env);
+	multi_free("2, 1, 2", mini->cmd_s, mini->p.pids, env);
 }

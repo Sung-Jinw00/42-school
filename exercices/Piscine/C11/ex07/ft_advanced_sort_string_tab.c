@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 18:06:36 by locagnio          #+#    #+#             */
-/*   Updated: 2024/09/22 13:22:23 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/21 16:43:20 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 } */
 void	ft_advanced_sort_string_tab(char **tab, int (*cmp)(char *, char *))
 {
+	int		i;
+	char	*temp;
+
 	i = 0;
 	while (tab[i + 1])
 	{

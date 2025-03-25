@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atodl.c                                         :+:      :+:    :+:   */
+/*   ft_atold.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/20 16:46:11 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:56:09 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* turn a decimal number string into an long long */
+/* turn a decimal number string into an long long
+*/
 long long	ft_atold(char *nptr)
 {
 	int			i;

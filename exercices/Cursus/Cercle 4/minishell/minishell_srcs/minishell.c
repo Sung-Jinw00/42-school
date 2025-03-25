@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 18:03:17 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/07 18:18:24 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/10 21:20:11 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,7 @@ char	*toprint(t_minishell *mini, char *cur_loc)
 	str = ft_strdup(BOLD MAGENTA);
 	if (mini->user.final)
 		str = ft_strjoin_n_free(str, mini->user.final, 1);
-	str = ft_strjoin_n_free(str, cur_loc, 1);
-	str = ft_strjoin_n_free(str, "$ ", 1);
-	str = ft_strjoin_n_free(str, RESET, 1);
+	str = multi_join_n_free("0", str, cur_loc, "$ ", RESET, NULL);
 	return (str);
 }
 

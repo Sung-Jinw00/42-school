@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_upgrade_realloc.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:39 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/17 19:05:25 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/21 13:27:58 by kgiannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
-
-/* changes the size of the memory block pointed to by ptr to size bytes. The
-	content is unchanged. If ptr is NULL, then the call is equivalent to
-	calloc(size). If size is equal to  zero, and ptr is not NULL, then the call
-	is equivalent to free(ptr). If the area pointed to was moved, a free(ptr)
-	is done. */
 
 void	*ft_calloc_(size_t nmemb, size_t size)
 {
@@ -37,6 +31,13 @@ void	*ft_calloc_(size_t nmemb, size_t size)
 	return (tab);
 }
 
+/* changes the size of the memory block pointed to by "ptr" to "size" bytes. The
+	content is unchanged. If "ptr" is NULL, then the call is equivalent to
+	calloc(size). If "size" is equal to  zero,
+	and "ptr" is not NULL, then the call
+	is equivalent to free(ptr). If the area pointed to was moved, a free(ptr)
+	is done.
+*/
 void	*ft_upgrade_realloc(void *ptr, size_t size)
 {
 	void	*new_ptr;

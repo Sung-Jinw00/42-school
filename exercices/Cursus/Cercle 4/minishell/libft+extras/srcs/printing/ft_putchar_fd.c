@@ -6,14 +6,14 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 16:47:12 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/17 17:52:44 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:55:03 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* write a char in the fd chosen */
-
+/* write a char in the fd chosen
+*/
 void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);

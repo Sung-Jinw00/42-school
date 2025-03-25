@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 15:56:24 by locagnio          #+#    #+#             */
-/*   Updated: 2024/09/22 13:18:55 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/21 16:42:17 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 } */
 int	ft_count_if(char **tab, int length, int (*f)(char *))
 {
+	int count;
+	int i;
+
 	count = 0;
 	i = 0;
 	while (i < length)

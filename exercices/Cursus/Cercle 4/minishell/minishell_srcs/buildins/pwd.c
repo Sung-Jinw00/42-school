@@ -3,18 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:15:45 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/05 19:37:27 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/20 15:48:52 by kgiannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	pwd(t_env *env)
+void	pwd(void)
 {
-	(void)env;
+	char	*str;
+
+	str = getcwd(NULL, 0);
+	printf("%s\n", str);
+	free(str);
 	g_signal = 0;
-	printf("%s\n", getcwd(NULL, 0));
 }

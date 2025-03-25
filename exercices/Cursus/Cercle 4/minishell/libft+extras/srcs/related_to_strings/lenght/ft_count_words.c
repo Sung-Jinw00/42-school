@@ -6,14 +6,14 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:59 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/27 16:08:43 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:53:59 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* returns the number of strings in a split */
-
+/* returns the number of strings in a split
+*/
 int	ft_count_words(char **split)
 {
 	int	i;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 21:07:06 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/07 17:37:34 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/20 16:02:49 by kgiannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	strcmp_64(char *nptr)
 void	error_exit(const char *str, int nb)
 {
 	if (nb == 1)
-		ft_fprintf(2, "exit\nminishell: exit: %s: numeric argument required\n", str);
+		ft_fprintf(2, \
+"exit\nminishell: exit: %s: numeric argument required\n", str);
 	else
 		ft_fprintf(2, "minishell: exit: too many arguments\n");
 }
@@ -54,12 +55,12 @@ int	valid_nb(char *str)
 	i = 0;
 	while (ft_iswhitespace(str[i]))
 		i++;
-	if (str[i] && (ft_isdigit(str[i]) || str[i] == '+' || str[i] == '-'))
+	if (str[i] && (ft_isnum(str[i]) || str[i] == '+' || str[i] == '-'))
 		i++;
 	else
 		return (0);
 	while (str[i])
-		if (!ft_isdigit(str[i++]))
+		if (!ft_isnum(str[i++]))
 			return (0);
 	return (1);
 }
@@ -83,6 +84,7 @@ void	ft_exit(t_minishell *mini)
 	}
 	if (mini->tokens && mini->tokens[0] && mini->tokens[0][0] && mini->tokens[1]
 		&& mini->tokens[2])
-		return (g_signal = 0, error_exit(mini->tokens[2], 2));
-	return (g_signal = 0, /* printf("exit\n"),  */free_all(mini, "all"), exit(nb % 256));
+		return (g_signal = 1, error_exit(mini->tokens[2], 2));
+	return (g_signal = nb % 256, printf("exit\n"), free_all(mini, "all"),
+		exit(nb % 256));
 }

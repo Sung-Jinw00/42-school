@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 20:38:24 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/07 18:27:46 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:18:47 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ char	*replace_by_tilde(t_env *env, char *str, int free_str)
 			NULL);
 	tmp = env;
 	ft_get_env(&tmp, "HOME=");
-	if (tmp && !ft_strncmp(str, tmp->data + 5, ft_strlen(tmp->data + 5)))
+	if (tmp && !ft_strncmp(str, tmp->data + 5, ft_strlen(tmp->data + 5))
+		&& tmp->data[ft_strlen(tmp->data) - 1] != '/')
 	{
 		new_str = ft_strjoin("~", str + ft_strlen(tmp->data + 5));
 		free(str);
@@ -99,7 +100,7 @@ int	check_valid_quotes(char *str, bool *sgl_q, bool *dbl_q)
 
 void	pipe_only(char **str, int i)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (str[i][j])
@@ -113,17 +114,13 @@ void	pipe_only(char **str, int i)
 	}
 }
 
-
 int	is_redir_or_pipes(char **raw, int i)
 {
 	while (raw[i])
 	{
 		if (raw[i][0] == '|')
 			pipe_only(raw, i);
-		else if (!((ft_strlen(raw[i]) == 2 &&
-					(!ft_strcmp(raw[i], "<<") || !ft_strcmp(raw[i], ">>")))
-					|| (ft_strlen(raw[i]) == 1 && (!ft_strcmp(raw[i], "<")
-						|| !ft_strcmp(raw[i], ">")))))
+		else if (str_multi_cmp(raw[i], "<<", ">>", "<", ">", NULL))
 		{
 			free(raw[i]);
 			raw[i] = NULL;

@@ -1,29 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strclen.c                                       :+:      :+:    :+:   */
+/*   ft_strintlen.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:59 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:54:02 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/21 13:17:07 by kgiannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* returns the len of as string when :
-	- it reaches the first iteration of c
-	- it reaches the end of the string
+/* returns the len of as string of chars that will be turned in a string of int
 */
-size_t	ft_strclen(const char *s, char c)
+int	ft_strintlen(char *str_char)
 {
-	size_t	i;
+	int	i;
+	int	len;
+	int	trigger;
 
+	if (!str_char)
+		return (0);
 	i = 0;
-	while (s && s[i] != '\0' && s[i] != c)
+	len = 0;
+	trigger = 0;
+	while (str_char[i])
+	{
+		if (ft_isnum(str_char[i]) && !trigger)
+		{
+			len++;
+			trigger = 1;
+		}
+		else if (!ft_isnum(str_char[i]) && trigger)
+			trigger = 0;
 		i++;
-	return (i);
+	}
+	return (len);
 }
 
 /* #include <stdio.h>

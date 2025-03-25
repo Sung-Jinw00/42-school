@@ -1,7 +1,7 @@
 MAKEFLAGS += -s
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 SRCS_DIR = ../
 OBJ_DIR = ../obj

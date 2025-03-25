@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 16:11:44 by locagnio          #+#    #+#             */
-/*   Updated: 2024/09/26 12:13:59 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/21 16:42:33 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	ft_strcmp(int *s1, int length)
 } */
 int	ft_is_sort(int *tab, int length, int (*f)(int, int))
 {
+	int i;
+
 	i = 0;
 	while (i + 1 < length && tab[i] == tab[i + 1])
 		i++;

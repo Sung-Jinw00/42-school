@@ -6,15 +6,15 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:39 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/17 17:37:26 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:55:22 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
 /* memory allocate depending on the size of the type of argument and the amount
-	of arguments, and set it to zero */
-
+	of arguments, and set it to zero
+*/
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*tab;

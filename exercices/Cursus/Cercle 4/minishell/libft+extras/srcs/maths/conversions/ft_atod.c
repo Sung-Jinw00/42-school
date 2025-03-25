@@ -6,13 +6,11 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/17 17:32:13 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/09 16:56:25 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
-
-/* turn a decimal number string into an double */
 
 static double	decimal(char *nptr)
 {
@@ -32,6 +30,8 @@ static double	decimal(char *nptr)
 	return (result);
 }
 
+/* turn a decimal number string into an double
+*/
 double	ft_atod(char *nptr)
 {
 	int		i;
