@@ -6,74 +6,92 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 19:05:10 by marvin            #+#    #+#             */
-/*   Updated: 2025/02/17 20:27:23 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/27 20:29:51 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* sort a list */
-
 static int	ft_sorted_list(t_list *list)
 {
 	t_list	*tmp;
-	int i;
 
-	i = 0;
 	tmp = list;
 	while (tmp && tmp->next)
 	{
-		while (*(char *)(tmp->data + i) && *(char *)(tmp->next->data + i))
-		{
-			if (*(char *)(tmp->data + i) > *(char *)(tmp->next->data + i))
-				return (0);
-			else if (*(char *)(tmp->data + i) < *(char *)(tmp->next->data + i))
-				break ;
-			i++;
-		}
-		i = 0;
+		if (tmp->data > tmp->next->data)
+			return (0);
 		tmp = tmp->next;
 	}
 	return (1);
 }
 
-static void	ft_list_sort2(t_list **prev, t_list **cur, t_list **after)
+static void	sort_one_go2(t_list **prev, t_list **cur, t_list **after,
+		t_list **tmp)
 {
 	while (*after)
 	{
-		if (ft_strcmp((*cur)->data, (*after)->data) > 0)
+		if ((*cur)->data > (*after)->data)
 		{
-			(*cur)->next = (*after)->next;
-			(*after)->next = *cur;
-			(*prev)->next = *after;
-			break ;
+			*tmp = *after;
+			*after = *cur;
+			*cur = *tmp;
+			(*after)->next = (*cur)->next;
+			(*prev)->next = *cur;
+			(*cur)->next = *after;
 		}
-		*prev = (*prev)->next;
-		*cur = (*prev)->next;
-		*after = (*cur)->next;
+		(*prev) = (*cur);
+		(*cur) = (*after);
+		(*after) = (*after)->next;
 	}
 }
 
+static void	sort_one_go(t_list **begin_list)
+{
+	t_list	*prev;
+	t_list	*cur;
+	t_list	*after;
+	t_list	*tmp;
+
+	prev = *begin_list;
+	cur = prev->next;
+	after = cur->next;
+	if (prev->data > cur->data && after)
+	{
+		prev->next = after;
+		cur->next = prev;
+		*begin_list = cur;
+	}
+	sort_one_go2(&prev, &cur, &after, &tmp);
+}
+
+/* sort a list that contain strings as arguments
+*/
 void	ft_list_sort(t_list **begin_list)
 {
-	t_list *prev;
-	t_list *cur;
-	t_list *after;
+	t_list	*prev;
+	t_list	*cur;
+	t_list	*after;
+	t_list	*tmp;
 
-	while (!ft_sorted_list(*begin_list))
+	if (!*begin_list)
+		return ;
+	tmp = NULL;
+	prev = *begin_list;
+	cur = prev->next;
+	if (!cur)
+		return ;
+	after = cur->next;
+	if (prev->data > cur->data && !after)
 	{
-		prev = *begin_list;
-		cur = prev->next;
-		after = cur->next;
-		if (ft_strcmp(prev->data, cur->data) > 0)
-		{
-			prev->next = cur->next;
-			cur->next = prev;
-			*begin_list = cur;
-			continue ;
-		}
-		ft_list_sort2(&prev, &cur, &after);
+		prev->next = NULL;
+		cur->next = prev;
+		*begin_list = cur;
+		return ;
 	}
+	else
+		while (!ft_sorted_list(*begin_list))
+			sort_one_go(begin_list);
 }
 
 /* int main(void)

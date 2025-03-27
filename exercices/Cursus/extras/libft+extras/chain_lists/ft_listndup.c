@@ -6,14 +6,14 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 19:10:05 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/17 21:54:24 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/27 20:28:33 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* duplicate a list on n cells of the list */
-
+/* duplicate a list on n cells of the list
+*/
 t_list	*ft_listndup(t_list *src, int n)
 {
 	t_list	*cpy;

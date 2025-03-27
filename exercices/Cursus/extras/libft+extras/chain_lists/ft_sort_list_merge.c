@@ -6,14 +6,14 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 19:10:05 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/17 21:49:24 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/27 20:28:30 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* merge 2 sorted lists together */
-
+/* merge 2 sorted lists together
+*/
 void	ft_sorted_list_merge(t_list **begin_list1, t_list *begin_list2)
 {
 	t_list	*cur;

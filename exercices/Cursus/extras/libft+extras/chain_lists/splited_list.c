@@ -5,15 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/15 18:01:40 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/15 18:02:37 by locagnio         ###   ########.fr       */
+/*   Created: 2025/03/27 20:27:09 by locagnio          #+#    #+#             */
+/*   Updated: 2025/03/27 20:27:21 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* turn a list into a splited string */
-
+/* turn a list into a splited string
+*/
 char	**splited_list(t_list *list)
 {
 	int i;

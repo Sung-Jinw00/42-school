@@ -6,24 +6,33 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 19:10:05 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/12 16:47:32 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/27 20:28:24 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* display a value at the wished position */
-
-void	*get_at(t_list *L, int pos)
+/* display a value at the wished position
+*/
+int	get_at(t_list *L, int pos)
 {
 	int	i;
 
 	i = 0;
 	if (!L)
-		return (printf("liste vide\n"), NULL);
+	{
+		printf("liste vide\n");
+		return (-1);
+	}
 	else if (pos > len_list(L))
-		return (printf("position invalide\n"), NULL);
-	while (++i < pos)
+	{
+		printf("position invalide\n");
+		return (-1);
+	}
+	while (i < pos)
+	{
+		i++;
 		L = L->next;
+	}
 	return (L->data);
 }

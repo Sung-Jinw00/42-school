@@ -1,28 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_list.c                                       :+:      :+:    :+:   */
+/*   ft_splitstr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/13 19:10:05 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/12 16:55:16 by locagnio         ###   ########.fr       */
+/*   Created: 2024/11/04 13:33:42 by locagnio          #+#    #+#             */
+/*   Updated: 2025/03/25 20:39:17 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
-#include <stdio.h>
 
-/* print a chain list */
-
-void	print_list(t_list *L)
+/* search the first iteration of str in split
+*/
+char	**ft_splitstr(char **split, char *str)
 {
-	if (!L)
-		printf("(null)");
-	while (L)
+	int	i;
+
+	i = 0;
+	while (split[i])
 	{
-		printf("%d ", *(int *)(L->data));
-		L = L->next;
+		if (!ft_strcmp(split[i], str))
+			return ((char **)(split + i));
+		i++;
 	}
-	printf("\n");
+	return (NULL);
 }
+
+/* #include <stdio.h>
+
+int	main(void)
+{
+	const char *s = NULL;
+
+	s = ft_strchr(s, 'H');
+	printf("%s\n", s);
+	return (0);
+} */

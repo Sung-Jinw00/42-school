@@ -6,14 +6,14 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 19:10:05 by locagnio          #+#    #+#             */
-/*   Updated: 2025/01/17 17:42:51 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/27 20:30:37 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* free a cell in the list at the position wished */
-
+/* free a cell in the list at the position wished
+*/
 t_list	*free_at(t_list *L, int pos)
 {
 	t_list	*prec;

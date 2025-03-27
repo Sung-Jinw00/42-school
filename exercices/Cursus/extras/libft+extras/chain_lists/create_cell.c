@@ -6,15 +6,15 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 19:10:05 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/12 16:43:56 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/27 20:30:26 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* create a new cell */
-
-t_cell	*create_cell(void *data)
+/* create a new cell
+*/
+t_cell	*create_cell(int data)
 {
 	t_cell	*cell;
 
