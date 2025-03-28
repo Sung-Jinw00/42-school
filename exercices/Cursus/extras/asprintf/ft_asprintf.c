@@ -91,7 +91,7 @@ int	ft_asprintf(char **buffer, const char *str, ...)
 	return (count);
 }
 
-#include <limits.h>
+/* #include <limits.h>
 #include <stdio.h>
 
 int	main(void)
@@ -99,16 +99,18 @@ int	main(void)
 	char *buff = NULL;
 	char str[] = "Yes do it after minishell maybe in your vacations";
 
-	printf("copie    : %d\n", asprintf(&buff, "original : test = |%s|\n", str));
+	printf("original : %d\n", asprintf(&buff, "original : test = |%s|\n", str));
+	fflush(stdout);
 	printf("%s", buff);
 	fflush(stdout);
 	free(buff);
-	printf("original : %d\n", ft_asprintf(&buff, "copie    : test = |%s|\n", str));
+	printf("copie    : %d\n", ft_asprintf(&buff, "copie    : test = |%s|\n", str));
+	fflush(stdout);
 	printf("%s", buff);
 	free(buff);
 	printf("\n\n\n");
 	return (0);
-}
+} */
 
 /*
 "%#-76.67x%-178c%#126.17x%-178.97%%-80.63i" ,2705358650u,-128,4292242043u,

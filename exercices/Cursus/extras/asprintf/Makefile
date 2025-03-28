@@ -2,10 +2,10 @@ MAKEFLAGS += -s
 
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror -w -g
+FLAGS = -Wall -Wextra -Werror -g
 
-# NAME = libasprintf.a
-NAME = asprintf
+NAME = libasprintf.a
+# NAME = asprintf
 
 LIBFT = ft_asprintf.h
 
@@ -24,18 +24,18 @@ $(OBJ_DIR):
 
 all: message ${NAME}
 
-message :
-	@echo $(GREEN)"Exécutable créé !"$(RESET)
 # message :
-# 	@echo $(GREEN)"lib crée !"$(RESET)
-
-$(NAME): $(OBJS)
-	$(CC) $(FLAGS) -o $@ $^ -L ./lib -lft
-# ${NAME}: ${OBJS}
-# 	ar rcs $@ $^
+# 	@echo $(GREEN)"Exécutable créé !"$(RESET)
+message :
+	@echo $(GREEN)"lib créée !"$(RESET)
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
-	$(CC) $(FLAGS) -I ./ -L ./lib -lft -c $< -o $@
+	$(CC) $(FLAGS) -I ./ -I lib/libft.a -c $< -o $@
+
+# $(NAME): $(OBJS)
+# 	$(CC) $(FLAGS) -o $@ $^ -L ./lib -lft
+${NAME}: ${OBJS}
+	ar rcs $@ $^
 
 clean:
 	@echo $(GREEN)"objets supprimés !"$(RESET)
