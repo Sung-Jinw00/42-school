@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_hexa.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 20:46:57 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/27 20:46:51 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:42:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ void	print_hexa_if_no_0(t_struct *v, int len_hexa, unsigned int nb, int i)
 	v->nb1 -= len_hexa;
 	if (!srch_flag(v->flags, '-'))
 		while (v->nb1-- > 0)
-			write(1, " ", 1);
+			v->buffer = add_char_realloc(v->buffer, ' ');
 	hexa_print(nb, v, v->str[i]);
 	if (srch_flag(v->flags, '-'))
 		while (v->nb1-- > 0)
-			write(1, " ", 1);
+			v->buffer = add_char_realloc(v->buffer, ' ');
 }
 
 int	reset_len_hexa(int len_hexa, t_struct *v)
@@ -62,7 +62,7 @@ void	ft_print_hexa(unsigned int nb, t_struct *v, int i, int *count)
 		ft_print_int(0, v, count);
 		return ;
 	}
-	len_hexa = ft_len_hexa(nb, &v);
+	len_hexa = ft_len_hexa(nb, v);
 	*count += len_hexa;
 	len_hexa -= reset_len_hexa(len_hexa, v);
 	if (v->nb1 > len_hexa)

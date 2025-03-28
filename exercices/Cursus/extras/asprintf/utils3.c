@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 17:08:53 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/27 20:58:05 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:51:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asprintf.h"
 
-void	ft_putnbr_base_aspf(unsigned int nbr, char *base, int fd)
+char	*ft_putnbr_base_aspf(char *buffer, unsigned int nbr, char *base)
 {
 	if (nbr >= 16)
-		ft_putnbr_base_aspf(nbr / 16, base, fd);
-	write(fd, &base[nbr % 16], 1);
+		buffer = ft_putnbr_base_aspf(buffer, nbr / 16, base);
+	buffer = add_char_realloc(buffer, base[nbr % 16]);
+	return (buffer);
 }
 
 void	hexa_print(unsigned int nb, t_struct *v, char x)
@@ -24,16 +25,16 @@ void	hexa_print(unsigned int nb, t_struct *v, char x)
 	char	*str;
 
 	if (x == 'x' && srch_flag(v->flags, '#'))
-		write(1, "0x", 2);
+	v->buffer = ft_strjoin_n_free(v->buffer, "0x", 1);
 	else if (x == 'X' && srch_flag(v->flags, '#'))
-		write(1, "0X", 2);
+		v->buffer = ft_strjoin_n_free(v->buffer, "0X", 1);
 	while (v->zeros-- > 0)
-		write(1, "0", 1);
+		v->buffer = add_char_realloc(v->buffer, '0');
 	if (x == 'x')
 		str = "0123456789abcdef";
 	else
 		str = "0123456789ABCDEF";
-	ft_putnbr_base_aspf(nb, str, 1);
+	v->buffer = ft_putnbr_base_aspf(v->buffer, nb, str);
 }
 
 int	ft_digits(long n)
@@ -52,4 +53,14 @@ int	ft_digits(long n)
 		count++;
 	}
 	return (count);
+}
+
+char	*add_char_realloc(char *buffer, char c)
+{
+	int newlen;
+
+	newlen = ft_strlen(buffer) + 1;
+	buffer = ft_upgrade_realloc(buffer, newlen);
+	buffer[newlen - 1] = c;
+	return (buffer);
 }

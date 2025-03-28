@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_char_and_string.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 16:45:58 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/27 20:44:34 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:44:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ void	ft_print_char(char c, t_struct *v, int *count)
 	{
 		*count += v->nb1;
 		if (srch_flag(v->flags, '-'))
-			write(1, &c, 1);
+			v->buffer = add_char_realloc(v->buffer, c);
 		while (--v->nb1 > 0)
-			write(1, " ", 1);
+			v->buffer = add_char_realloc(v->buffer, ' ');
 		if (!srch_flag(v->flags, '-'))
-			write(1, &c, 1);
+			v->buffer = add_char_realloc(v->buffer, c);
 	}
 	else
 	{
-		write(1, &c, 1);
+		v->buffer = add_char_realloc(v->buffer, c);
 		*count += 1;
 	}
 }
@@ -36,12 +36,12 @@ void	print_str_if_field(t_struct *v, int print_chars, char *str, int *count)
 	if (v->nb1 >= print_chars)
 		*count += v->nb1 - print_chars;
 	if (srch_flag(v->flags, '-'))
-		ft_putstr(str, count, print_chars, 1);
+		ft_putstr(str, count, print_chars, &v->buffer);
 	v->nb1 -= print_chars;
 	while (v->nb1-- > 0)
-		write(1, " ", 1);
+		v->buffer = add_char_realloc(v->buffer, ' ');
 	if (!srch_flag(v->flags, '-'))
-		ft_putstr(str, count, print_chars, 1);
+		ft_putstr(str, count, print_chars, &v->buffer);
 }
 
 void	ft_print_str(char *str, t_struct *v, int *count)
@@ -63,11 +63,11 @@ void	ft_print_str(char *str, t_struct *v, int *count)
 	if (v->nb1 - print_chars > 0)
 		print_str_if_field(v, print_chars, str, count);
 	else
-		ft_putstr(str, count, print_chars, 1);
+		ft_putstr(str, count, print_chars, &v->buffer);
 }
 
-void	ft_print_percent(char percent, int *count, int fd)
+void	ft_print_percent(char **buffer, char percent, int *count)
 {
-	write(fd, &percent, 1);
+	*buffer = add_char_realloc(*buffer, percent);
 	*count += 1;
 }

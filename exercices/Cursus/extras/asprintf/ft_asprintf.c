@@ -27,7 +27,7 @@ void	parser(int i, int *count, t_struct *v, va_list args)
 	else if (v->str[i] == 'x' || v->str[i] == 'X')
 		ft_print_hexa(va_arg(args, int), v, i, count);
 	else if (v->str[i] == '%')
-		ft_print_percent('%', count, 1);
+		ft_print_percent(&v->buffer, '%', count);
 }
 
 int	parse_nd_flags(int i, int *count, t_struct *v, va_list args)
@@ -56,11 +56,9 @@ int	parse_nd_flags(int i, int *count, t_struct *v, va_list args)
 int	print_this_bs(va_list args, t_struct *v)
 {
 	int	i;
-	int newlen;
 	int	count;
 
 	i = 0;
-	newlen = 0;
 	count = 0;
 	while (v->str[i])
 	{
@@ -68,9 +66,7 @@ int	print_this_bs(va_list args, t_struct *v)
 			i = parse_nd_flags(i + 1, &count, v, args);
 		else
 		{
-			newlen = ft_strlen(v->buffer) + 1;
-			ft_upgrade_realloc(v->buffer, newlen);
-			v->buffer[newlen - 1] = v->str[i];
+			v->buffer = add_char_realloc(v->buffer, v->str[i]);
 			count++;
 		}
 		i++;
@@ -89,28 +85,30 @@ int	ft_asprintf(char **buffer, const char *str, ...)
 	v = (t_struct){0};
 	v.str = str;
 	va_start(args, str);
-	if (*buffer)
-	{
-		free(*buffer);
-		*buffer = NULL;
-	}
 	count = print_this_bs(args, &v);
 	*buffer = v.buffer;
 	va_end(args);
 	return (count);
 }
 
-/* #include <limits.h>
+#include <limits.h>
 #include <stdio.h>
 
 int	main(void)
 {
-	printf("original : %d\n", printf("original : |^.^/%-15.6s^.^/|\n", NULL));
+	char *buff = NULL;
+	char str[] = "Yes do it after minishell maybe in your vacations";
+
+	printf("copie    : %d\n", asprintf(&buff, "original : test = |%s|\n", str));
+	printf("%s", buff);
 	fflush(stdout);
-	printf("copie    : %d\n", ft_fprintf(1, "copie    : |^.^/%-15.5s^.^/|\n", NULL));
+	free(buff);
+	printf("original : %d\n", ft_asprintf(&buff, "copie    : test = |%s|\n", str));
+	printf("%s", buff);
+	free(buff);
 	printf("\n\n\n");
 	return (0);
-} */
+}
 
 /*
 "%#-76.67x%-178c%#126.17x%-178.97%%-80.63i" ,2705358650u,-128,4292242043u,

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_signed.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 17:01:22 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/27 20:46:47 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:33:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,18 @@ void	print_nb_if_no_0(t_struct *v, int len_nb, long nb)
 	v->nb1 -= len_nb;
 	if (!srch_flag(v->flags, '-'))
 		while (v->nb1-- > 0)
-			write(1, " ", 1);
+			v->buffer = add_char_realloc(v->buffer, ' ');
 	ft_putnbr(nb, v, 10, 0);
 	if (srch_flag(v->flags, '-'))
 		while (v->nb1-- > 0)
-			write(1, " ", 1);
+			v->buffer = add_char_realloc(v->buffer, ' ');
 }
 
 void	ft_print_int(long nb, t_struct *v, int *count)
 {
 	int	len_nb;
 
-	len_nb = ft_len_nb(nb, &v);
+	len_nb = ft_len_nb(nb, v);
 	*count += len_nb;
 	if (v->nb1 > len_nb)
 	{

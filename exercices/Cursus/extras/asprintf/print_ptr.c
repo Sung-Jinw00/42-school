@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_ptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 16:48:01 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/27 20:46:49 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:44:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ void	ft_null_ptr(t_struct *v, int *count)
 		if (v->nb1 >= 5)
 			*count += v->nb1 - 5;
 		if (srch_flag(v->flags, '-'))
-			ft_putstr(nil, count, 5, 1);
+			ft_putstr(nil, count, 5, &v->buffer);
 		v->nb1 -= 5;
 		while (v->nb1-- > 0)
-			write(1, " ", 1);
+			v->buffer = add_char_realloc(v->buffer, ' ');
 		if (!srch_flag(v->flags, '-'))
-			ft_putstr(nil, count, 5, 1);
+			ft_putstr(nil, count, 5, &v->buffer);
 	}
 	else
-		ft_putstr(nil, count, 5, 1);
+		ft_putstr(nil, count, 5, &v->buffer);
 }
 
 int	ft_len_ptr(size_t ptr, t_struct *v)
@@ -59,11 +59,11 @@ void	print_ptr_if_no_0(t_struct *v, int len_ptr, size_t ptr)
 	v->nb1 -= len_ptr;
 	if (!srch_flag(v->flags, '-'))
 		while (v->nb1-- > 0)
-			write(1, " ", 1);
+			v->buffer = add_char_realloc(v->buffer, ' ');
 	ptr_print(ptr, v);
 	if (srch_flag(v->flags, '-'))
 		while (v->nb1-- > 0)
-			write(1, " ", 1);
+			v->buffer = add_char_realloc(v->buffer, ' ');
 }
 
 void	ft_print_ptr(size_t ptr, t_struct *v, int *count)
@@ -75,7 +75,7 @@ void	ft_print_ptr(size_t ptr, t_struct *v, int *count)
 		ft_null_ptr(v, count);
 		return ;
 	}
-	len_ptr = ft_len_ptr(ptr, &v);
+	len_ptr = ft_len_ptr(ptr, v);
 	*count += len_ptr;
 	if (v->nb1 > len_ptr)
 	{

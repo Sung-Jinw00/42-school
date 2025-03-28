@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_unsigned.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 17:02:22 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/27 20:46:44 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:36:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,20 @@ void	print_unb_if_no_0(t_struct *v, int len_unb, long nb)
 	v->nb1 -= len_unb;
 	if (!srch_flag(v->flags, '-'))
 		while (v->nb1-- > 0)
-			write(1, " ", 1);
+			v->buffer = add_char_realloc(v->buffer, ' ');
 	while (v->zeros-- > 0)
-		write(1, "0", 1);
-	ft_putunbr(nb, v);
+		v->buffer = add_char_realloc(v->buffer, '0');
+	ft_putunbr_aspf(nb, v);
 	if (srch_flag(v->flags, '-'))
 		while (v->nb1-- > 0)
-			write(1, " ", 1);
+			v->buffer = add_char_realloc(v->buffer, ' ');
 }
 
 void	ft_print_uns_int(long nb, t_struct *v, int *count)
 {
 	int	len_unb;
 
-	len_unb = ft_len_unb(nb, &v);
+	len_unb = ft_len_unb(nb, v);
 	*count += len_unb;
 	if (nb < 0)
 		nb += (long)INT_MAX * 2 + 2;
@@ -58,8 +58,8 @@ void	ft_print_uns_int(long nb, t_struct *v, int *count)
 		{
 			v->zeros += v->nb1 - len_unb;
 			while (v->zeros-- > 0)
-				write(1, "0", 1);
-			ft_putunbr(nb, v);
+				v->buffer = add_char_realloc(v->buffer, '0');
+			ft_putunbr_aspf(nb, v);
 		}
 		else
 			print_unb_if_no_0(v, len_unb, nb);
@@ -67,7 +67,7 @@ void	ft_print_uns_int(long nb, t_struct *v, int *count)
 	else
 	{
 		while (v->zeros-- > 0)
-			write(1, "0", 1);
-		ft_putunbr(nb, v);
+			v->buffer = add_char_realloc(v->buffer, '0');
+		ft_putunbr_aspf(nb, v);
 	}
 }

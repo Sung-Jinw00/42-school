@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 20:52:22 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/27 20:46:35 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/28 13:52:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asprintf.h"
 
-void	ft_putstr(char *s, int *count, int limit, int fd)
+void	ft_putstr(char *s, int *count, int limit, char **buffer)
 {
 	int	i;
 
@@ -21,48 +21,49 @@ void	ft_putstr(char *s, int *count, int limit, int fd)
 		return ;
 	while (s[i] && i < limit)
 	{
-		write(fd, &s[i], 1);
+		*buffer = add_char_realloc(*buffer, s[i]);
 		*count += 1;
 		i++;
 	}
 }
 
-void	ft_putunbr(unsigned long n, t_struct *v)
+char *ft_putunbr_aspf(unsigned long n, t_struct *v)
 {
 	if (n > 9)
-		ft_putunbr(n / 10, v);
+		v->buffer = ft_putunbr_aspf(n / 10, v);
 	if (!(n == 0 && srch_flag(v->flags, '.') && v->nb2 == 0))
 	{
 		n = n % 10 + '0';
-		write(1, &n, 1);
+		v->buffer = add_char_realloc(v->buffer, n);
 	}
+	return (v->buffer);
 }
 
 void	ft_putnbr(long n, t_struct *v, long base, long print)
 {
 	if (n < 0)
 	{
-		write(1, "-", 1);
+		v->buffer = add_char_realloc(v->buffer, '-');
 		n = -n;
 	}
 	else if (srch_flag(v->flags, '+'))
-		write(1, "+", 1);
+		v->buffer = add_char_realloc(v->buffer, '+');
 	else if (srch_flag(v->flags, ' '))
-		write(1, " ", 1);
+		v->buffer = add_char_realloc(v->buffer, ' ');
 	while (v->zeros-- > 0)
-		write(1, "0", 1);
+		v->buffer = add_char_realloc(v->buffer, '0');
 	while (base <= n)
 	{
 		print = n;
 		while (print >= base)
 			print /= 10;
 		print = print % 10 + '0';
-		write(1, &print, 1);
+		v->buffer = add_char_realloc(v->buffer, print);
 		base *= 10;
 	}
 	print = n % 10 + '0';
 	if (!(n == 0 && srch_flag(v->flags, '.') && v->nb2 == 0))
-		write(1, &print, 1);
+		v->buffer = add_char_realloc(v->buffer, print);
 }
 
 void	ptr_print(size_t nb, t_struct *v)
@@ -75,21 +76,21 @@ void	ptr_print(size_t nb, t_struct *v)
 	base = 16;
 	str = "0123456789abcdef";
 	if (srch_flag(v->flags, '+'))
-		write(1, "+", 1);
+		v->buffer = add_char_realloc(v->buffer, '+');
 	else if (srch_flag(v->flags, ' '))
-		write(1, " ", 1);
-	write(1, "0x", 2);
+		v->buffer = add_char_realloc(v->buffer, ' ');
+	v->buffer = ft_strjoin_n_free(v->buffer, "0x", 1);
 	while (v->zeros-- > 0)
-		write(1, "0", 1);
+		v->buffer = add_char_realloc(v->buffer, '0');
 	while (!(base > nb || base == 0))
 	{
 		nb_cpy = nb;
 		while (nb_cpy >= base)
 			nb_cpy /= 16;
-		write(1, &str[nb_cpy % 16], 1);
+		v->buffer = add_char_realloc(v->buffer, str[nb_cpy % 16]);
 		base *= 16;
 	}
-	write(1, &str[nb % 16], 1);
+	v->buffer = add_char_realloc(v->buffer, str[nb_cpy % 16]);
 }
 
 size_t	ft_strlen(const char *s)
