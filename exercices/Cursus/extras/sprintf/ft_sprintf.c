@@ -10,32 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_fprintf.h"
+#include "ft_sprintf.h"
 
-void	parser(int i, int *count, t_struct v, va_list args)
+void	parser(int i, int *count, t_struct *v, va_list args)
 {
-	if (v.str[i] == 'c')
+	if (v->str[i] == 'c')
 		ft_print_char((char)va_arg(args, int), v, count);
-	else if (v.str[i] == 's')
+	else if (v->str[i] == 's')
 		ft_print_str(va_arg(args, char *), v, count);
-	else if (v.str[i] == 'p')
+	else if (v->str[i] == 'p')
 		ft_print_ptr((size_t)va_arg(args, void *), v, count);
-	else if (v.str[i] == 'd' || v.str[i] == 'i')
+	else if (v->str[i] == 'd' || v->str[i] == 'i')
 		ft_print_int(va_arg(args, int), v, count);
-	else if (v.str[i] == 'u')
+	else if (v->str[i] == 'u')
 		ft_print_uns_int(va_arg(args, int), v, count);
-	else if (v.str[i] == 'x' || v.str[i] == 'X')
+	else if (v->str[i] == 'x' || v->str[i] == 'X')
 		ft_print_hexa(va_arg(args, int), v, i, count);
-	else if (v.str[i] == '%')
-		ft_print_percent('%', count, v.fd);
+	else if (v->str[i] == '%')
+		ft_print_percent(v->buffer, &v->i, '%', count);
 }
 
-int	parse_nd_flags(int i, int *count, t_struct v, va_list args)
+int	parse_nd_flags(int i, int *count, t_struct *v, va_list args)
 {
 	while (!standard_conds(v, i))
 	{
-		if ((v.str[i] >= '1' && v.str[i] <= '9') || v.str[i] == '.'
-			|| v.str[i] == '*')
+		if ((v->str[i] >= '1' && v->str[i] <= '9') || v->str[i] == '.'
+			|| v->str[i] == '*')
 			v = parse_nd_flags2(&i, v, args);
 		else
 		{
@@ -43,30 +43,30 @@ int	parse_nd_flags(int i, int *count, t_struct v, va_list args)
 			i += 1;
 		}
 	}
-	if (v.nb1 < 0)
+	if (v->nb1 < 0)
 	{
 		v = flags('-', v);
-		v.nb1 = -v.nb1;
+		v->nb1 = -v->nb1;
 	}
 	v = flag_filter(i, v);
 	parser(i, count, v, args);
 	return (i);
 }
 
-int	print_this_bs(va_list args, t_struct v)
+int	print_this_bs(va_list args, t_struct *v)
 {
 	int	i;
 	int	count;
 
 	i = 0;
 	count = 0;
-	while (v.str[i])
+	while (v->str[i])
 	{
-		if (v.str[i] == '%')
+		if (v->str[i] == '%')
 			i = parse_nd_flags(i + 1, &count, v, args);
 		else
 		{
-			write(v.fd, &v.str[i], 1);
+			v->buffer[v->i++] = v->str[i];
 			count++;
 		}
 		i++;
@@ -75,28 +75,27 @@ int	print_this_bs(va_list args, t_struct v)
 }
 
 /**
- * @brief Behaves like printf, but allows printing to any specified file descriptor.
+ * @brief 
+ * This function stores the formatted result like the behavior of printf in
+ * an already allocated string.
  * @return The number of characters written.
+ * @note The user is responsible for the potential overflow if the string is
+ * too short for the formated result.
  */
-int	ft_fprintf(int fd, const char *str, ...)
+int	ft_sprintf(char *buffer, const char *str, ...)
 {
 	va_list		args;
 	t_struct	v;
 	int			count;
-	int			i;
 
 	if (!str)
 		return (0);
-	i = 0;
+	v = (t_struct){0};
 	v.str = str;
-	while (i < 7)
-		v.flags[i++] = 0;
-	v.nb1 = 0;
-	v.nb2 = 0;
-	v.zeros = 0;
-	v.fd = fd;
 	va_start(args, str);
-	count = print_this_bs(args, v);
+	v.buffer = buffer;
+	count = print_this_bs(args, &v);
+	v.buffer[v.i] = 0;
 	va_end(args);
 	return (count);
 }
@@ -106,9 +105,16 @@ int	ft_fprintf(int fd, const char *str, ...)
 
 int	main(void)
 {
-	printf("original : %d\n", printf("original : |^.^/%-15.6s^.^/|\n", NULL));
+	char buff[100];
+	int d = 255;
+
+	printf("original : %d\n", sprintf(buff, "original : test = |%p|\n", d));
 	fflush(stdout);
-	printf("copie    : %d\n", ft_fprintf(1, "copie    : |^.^/%-15.5s^.^/|\n", NULL));
+	printf("%s", buff);
+	fflush(stdout);
+	printf("copie    : %d\n", ft_sprintf(buff, "copie    : test = |%p|\n", d));
+	fflush(stdout);
+	printf("%s", buff);
 	printf("\n\n\n");
 	return (0);
 } */

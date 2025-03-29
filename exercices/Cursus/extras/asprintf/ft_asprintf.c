@@ -74,6 +74,14 @@ int	print_this_bs(va_list args, t_struct *v)
 	return (count);
 }
 
+/**
+ * @brief 
+ * This function dynamically allocates a buffer and stores the formatted result
+ * like the behavior of printf in it.
+ * @return The number of characters written.
+ * @note The user is responsible for freeing the buffer when it is no longer
+ * needed.
+ */
 int	ft_asprintf(char **buffer, const char *str, ...)
 {
 	va_list		args;

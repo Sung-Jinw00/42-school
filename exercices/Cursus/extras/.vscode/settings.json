@@ -3,6 +3,7 @@
 		"libft_extras.h": "c",
 		"ft_fprintf.h": "c",
 		"*.tcc": "c",
-		"ft_asprintf.h": "c"
+		"ft_asprintf.h": "c",
+		"ft_sprintf.h": "c"
 	}
 }
