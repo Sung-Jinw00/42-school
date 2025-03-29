@@ -4,8 +4,8 @@ CC = cc
 
 FLAGS = -Wall -Wextra -Werror -w -g
 
-# NAME = libsprintf.a
-NAME = sprintf
+NAME = libsprintf.a
+# NAME = sprintf
 
 LIBFT = ft_sprintf.h
 
@@ -24,18 +24,18 @@ $(OBJ_DIR):
 
 all: message ${NAME}
 
-message :
-	@echo $(GREEN)"Exécutable créé !"$(RESET)
 # message :
-# 	@echo $(GREEN)"lib créée !"$(RESET)
+# 	@echo $(GREEN)"Exécutable créé !"$(RESET)
+message :
+	@echo $(GREEN)"lib créée !"$(RESET)
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	$(CC) $(FLAGS) -I ./ -c $< -o $@
 
-$(NAME): $(OBJS)
-	$(CC) $(FLAGS) -o $@ $^ 
-# ${NAME}: ${OBJS}
-# 	ar rcs $@ $^
+# $(NAME): $(OBJS)
+# 	$(CC) $(FLAGS) -o $@ $^
+${NAME}: ${OBJS}
+	ar rcs $@ $^
 
 clean:
 	@echo $(GREEN)"objets supprimés !"$(RESET)
