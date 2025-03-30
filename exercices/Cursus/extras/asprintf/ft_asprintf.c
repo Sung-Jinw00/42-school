@@ -112,7 +112,8 @@ int	main(void)
 	printf("%s", buff);
 	fflush(stdout);
 	free(buff);
-	printf("copie    : %d\n", ft_asprintf(&buff, "copie    : test = |%s|\n", str));
+	printf("copie    : %d\n", ft_asprintf(&buff, "copie    : test = |%s|\n",
+	str));
 	fflush(stdout);
 	printf("%s", buff);
 	free(buff);

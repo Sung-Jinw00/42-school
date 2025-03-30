@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 20:52:22 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/28 13:52:13 by marvin           ###   ########.fr       */
+/*   Updated: 2025/03/30 22:43:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_putstr(char *s, int *count, int limit, char **buffer)
 	}
 }
 
-char *ft_putunbr_aspf(unsigned long n, t_struct *v)
+char	*ft_putunbr_aspf(unsigned long n, t_struct *v)
 {
 	if (n > 9)
 		v->buffer = ft_putunbr_aspf(n / 10, v);

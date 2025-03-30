@@ -22,7 +22,7 @@
 typedef struct s_struct
 {
 	const char	*str;
-	char 		*buffer;
+	char		*buffer;
 	char		flags[7];
 	int			nb1;
 	int			nb2;

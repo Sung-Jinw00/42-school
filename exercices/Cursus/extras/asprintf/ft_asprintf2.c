@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_asprintf2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 22:22:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/27 20:46:13 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/30 22:42:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,9 @@ t_struct	*parse_nd_flags2(int *i, t_struct *v, va_list args)
 
 int	standard_conds(t_struct *v, int i)
 {
-	if (v->str[i] == 'c' || v->str[i] == 's' || v->str[i] == 'p' || v->str[i] == 'd'
-		|| v->str[i] == 'i' || v->str[i] == 'u' || v->str[i] == 'x'
-		|| v->str[i] == 'X' || v->str[i] == '%')
+	if (v->str[i] == 'c' || v->str[i] == 's' || v->str[i] == 'p'
+		|| v->str[i] == 'd' || v->str[i] == 'i' || v->str[i] == 'u'
+		|| v->str[i] == 'x' || v->str[i] == 'X' || v->str[i] == '%')
 		return (1);
 	return (0);
 }

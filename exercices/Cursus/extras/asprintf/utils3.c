@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 17:08:53 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/28 13:51:39 by marvin           ###   ########.fr       */
+/*   Updated: 2025/03/30 22:44:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	hexa_print(unsigned int nb, t_struct *v, char x)
 	char	*str;
 
 	if (x == 'x' && srch_flag(v->flags, '#'))
-	v->buffer = ft_strjoin_n_free(v->buffer, "0x", 1);
+		v->buffer = ft_strjoin_n_free(v->buffer, "0x", 1);
 	else if (x == 'X' && srch_flag(v->flags, '#'))
 		v->buffer = ft_strjoin_n_free(v->buffer, "0X", 1);
 	while (v->zeros-- > 0)
@@ -57,7 +57,7 @@ int	ft_digits(long n)
 
 char	*add_char_realloc(char *buffer, char c)
 {
-	int newlen;
+	int	newlen;
 
 	newlen = ft_strlen(buffer) + 1;
 	buffer = ft_upgrade_realloc(buffer, newlen);

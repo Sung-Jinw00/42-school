@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   splited_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:27:09 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/27 20:27:21 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/30 22:45:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 */
 char	**splited_list(t_list *list)
 {
-	int i;
-	char **tab_env;
-	
+	int		i;
+	char	**tab_env;
+
 	i = len_list(list);
 	tab_env = ft_calloc(sizeof(char *), i + 1);
 	i = 0;
