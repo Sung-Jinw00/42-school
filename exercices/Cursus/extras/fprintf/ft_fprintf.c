@@ -75,7 +75,8 @@ int	print_this_bs(va_list args, t_struct v)
 }
 
 /**
- * @brief Behaves like printf, but allows printing to any specified file descriptor.
+ * @brief Behaves like printf, but allows printing to any specified file
+ * descriptor.
  * @return The number of characters written.
  */
 int	ft_fprintf(int fd, const char *str, ...)
@@ -108,7 +109,8 @@ int	main(void)
 {
 	printf("original : %d\n", printf("original : |^.^/%-15.6s^.^/|\n", NULL));
 	fflush(stdout);
-	printf("copie    : %d\n", ft_fprintf(1, "copie    : |^.^/%-15.5s^.^/|\n", NULL));
+	printf("copie    : %d\n", ft_fprintf(1, "copie    : |^.^/%-15.5s^.^/|\n",
+	NULL));
 	printf("\n\n\n");
 	return (0);
 } */
