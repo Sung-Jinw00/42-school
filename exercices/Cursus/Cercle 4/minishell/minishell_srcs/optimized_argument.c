@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   optimized_argument.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 15:31:28 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/03 23:06:26 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/03 19:07:25 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	count_tokens(char *line, bool sgl_q, bool dbl_q, int i)
 	int	count;
 
 	count = 0;
-	while (line[i])
+	while (line && line[i])
 	{
 		while (line[i] == ' ')
 			i++;
@@ -40,6 +40,7 @@ static int	count_tokens(char *line, bool sgl_q, bool dbl_q, int i)
 	return (count++);
 }
 
+//cmd1 || cmd2 || (cmd3)
 static char	*ft_substr2(char *line, t_minishell **mini, int len)
 {
 	char	*str;
@@ -70,16 +71,23 @@ static char	*ft_substr2(char *line, t_minishell **mini, int len)
 
 static char	*ft_substr_mini(char *line, t_minishell **mini, int *new_i, int tab)
 {
-	int	len;
+	int		len;
+	char	c;
 
 	len = 0;
 	if (line[0] && ((line[0] == DBL_Q && line[1] == DBL_Q)
 			|| (line[0] == SGL_Q && line[1] == SGL_Q)))
 		return ((*mini)->pipes_redirs[tab] = return_tab(tab, new_i),
 			return_tab(tab, new_i));
-	if (line[len] == '<' || line[len] == '>' || line[len] == '|')
-		while (line[len] == '<' || line[len] == '>' || line[len] == '|')
+	if (!char_multi_cmp(line[len], '<', '>', '|', '&', '(', ')', 0))
+	{
+		c = get_multi_char_cmp(line[len], '<', '>', '|', '&', '(', ')', 0);
+		if (c == '(' || c == ')')
 			len++;
+		else
+			while (line[len] == c)
+				len++;
+	}
 	else
 		ft_substr_mini_2(line, mini, &len);
 	*new_i += len;
@@ -87,21 +95,23 @@ static char	*ft_substr_mini(char *line, t_minishell **mini, int *new_i, int tab)
 	return (ft_substr2(line, mini, len));
 }
 
-void	split_line(char *line, t_minishell **mini, int i)
+void	split_line(char *line, t_minishell **mini, int i, int len_line)
 {
 	int	j;
 
 	j = 0;
-	while (line[i])
+	while (line && line[i])
 	{
 		while (line[i] && line[i] != ' ')
 		{
 			(*mini)->tokens[j] = ft_substr_mini(line + i, mini, &i, j);
+			if (i > len_line)
+				i = len_line;
 			if (!(*mini)->tokens[j])
 				return (free_all(*mini, "tabs"));
-			else if ((line[i] == '<' || line[i] == '>' || line[i] == '|')
-				|| ((*mini)->tokens[j][0] == '<' || (*mini)->tokens[j][0] == '>'
-				|| (*mini)->tokens[j][0] == '|'))
+			else if (!char_multi_cmp(line[i], '<', '>', '|', '&', '(', ')', 0)
+				|| !char_multi_cmp((*mini)->tokens[j][0], '<', '>', '|', '&',
+				'(', ')', 0))
 				break ;
 		}
 		j++;
@@ -125,6 +135,6 @@ void	optimised_line(char *line, t_minishell **mini)
 	i = 0;
 	while (line[i] == ' ')
 		i++;
-	split_line(line + i, mini, 0);
+	split_line(line + i, mini, 0, (int)ft_strlen(line));
 	free(line);
 }

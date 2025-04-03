@@ -6,7 +6,7 @@
 /*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 13:12:44 by kgiannou          #+#    #+#             */
-/*   Updated: 2025/03/20 15:27:11 by kgiannou         ###   ########.fr       */
+/*   Updated: 2025/04/03 17:33:08 by kgiannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	last_eof(char *line, char **eofs, int *y, int sum)
 at line %d delimited by end-of-file (wanted `%s')\n",
 				sum, eofs[*y]);
 		(*y)++;
-		if (*y == ft_count_words(eofs))
+		if (*y == ft_count_words((const char **)eofs))
 		{
 			if (line)
 				free(line);
@@ -101,15 +101,16 @@ int	create_heredoc(char **eofs, int sum)
 	line = NULL;
 	while (++sum)
 	{
-		ft_fprintf(0, ">");
+		if (g_signal != 0)
+			return (free_line(&line), close(fd), 0);
+		else
+			ft_fprintf(0, ">");
 		line = get_next_line(STDIN_FILENO);
 		if (last_eof(line, eofs, &y, sum))
 			break ;
-		if (y == ft_count_words(eofs) - 1)
+		if (y == ft_count_words((const char **)eofs) - 1)
 			write_in_heredoc(&first, fd, line, eofs);
-		if (line)
-			free(line);
-		line = NULL;
+		free_line(&line);
 	}
 	return (1);
 }
@@ -121,9 +122,10 @@ int	handle_heredoc(char **tokens, char **pipes_redirs)
 	int		sum;
 	int		size_tokens;
 
+	g_signal = 0;
 	if (!tokens)
 		return (0);
-	size_tokens = ft_count_words(tokens);
+	size_tokens = ft_count_words((const char **)tokens);
 	sum = 0;
 	error = false;
 	if (error_in_heredoc(tokens, pipes_redirs, &error))

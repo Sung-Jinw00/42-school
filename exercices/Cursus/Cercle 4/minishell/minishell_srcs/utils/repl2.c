@@ -6,7 +6,7 @@
 /*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 17:25:54 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/20 16:51:11 by kgiannou         ###   ########.fr       */
+/*   Updated: 2025/03/21 19:53:37 by kgiannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,9 @@ char	*replace_var(t_minishell *mini, char *str)
 		start_replace(&v, str, mini, current);
 	v.line[v.k] = '\0';
 	free(str);
-	return (ft_strdup(v.line));
+	str = NULL;
+	str = ft_strdup(v.line);
+	if (wildcars_exist_at(str, 0, true))
+		str = handle_wildcards(str, mini);
+	return (str);
 }

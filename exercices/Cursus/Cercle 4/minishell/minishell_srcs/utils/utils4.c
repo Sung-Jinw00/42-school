@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:45:29 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/05 18:49:12 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:48:06 by kgiannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,29 @@ char	*ft_strsrch(const char *s, char *c)
 	return (0);
 }
 
-int	pipe_count(t_minishell *mini)
+void	set_symbols(char **tokens, char **p_r, t_prior *prior)
 {
 	int	i;
-	int	count;
 	int	len_split;
 
 	i = 0;
-	count = 0;
-	len_split = ft_count_words(mini->tokens);
+	*prior = (t_prior){0};
+	len_split = ft_count_words((const char **)tokens);
 	while (i < len_split)
 	{
-		if (mini->pipes_redirs[i] && !ft_strncmp(mini->pipes_redirs[i], "|", 1))
-			count++;
+		if (p_r[i])
+		{
+			if (!ft_strcmp(p_r[i], "|"))
+				prior->pipes++;
+			else if (!ft_strcmp(p_r[i], "||"))
+				prior->or++;
+			else if (!ft_strcmp(p_r[i], "&&"))
+				prior->and++;
+			else if (!ft_strcmp(p_r[i], "("))
+				prior->parenthesis++;
+		}
 		i++;
 	}
-	return (count);
 }
 
 void	ft_get_env(t_env **env, char *env_var)
@@ -55,19 +62,26 @@ int	first_letter_valid(char *str)
 {
 	if (ft_isalpha(str[0]) || str[0] == '_')
 		return (1);
-	return (0);
+	return (g_signal = 1, 0);
 }
 
 void	if_pipes_or_redirs(char *line, int *i, int *count)
 {
-	if (line[*i] == '<' || line[*i] == '>' || line[*i] == '|')
+	char	c;
+
+	c = 0;
+	if (!char_multi_cmp(line[*i], '<', '>', '|', '&', '(', ')', 0))
 	{
 		(*count)++;
-		while (line[*i + 1] == '<' || line[*i + 1] == '>'
-			|| line[*i + 1] == '|')
-			(*i)++;
-		if (line[*i + 1] != ' ')
+		c = get_multi_char_cmp(line[*i], '<', '>', '|', '&', '(', ')', 0);
+		if ((c == '(' || c == ')') && line[*i + 1]
+			&& char_multi_cmp(line[*i + 1], '<', '>', '|', '&', '(', ')', 0))
 			(*count)++;
+		else if ((c == '(' || c == ')') && !line[*i + 1])
+			(*count)--;
+		else
+			while (line[*i] == c)
+				(*i)++;
 	}
 	(*i)++;
 }

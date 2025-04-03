@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 18:14:22 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/20 14:58:30 by kgiannou         ###   ########.fr       */
+/*   Updated: 2025/03/30 22:51:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	**get_redir_split(t_minishell *mini, int cur_cmd)
 	while (mini->tokens[end] && ft_strncmp(mini->tokens[end], "|", 1))
 		end++;
 	return (ft_splitndup(mini->pipes_redirs,
-			ft_count_words(mini->tokens), start, end));
+			ft_count_words((const char **)mini->tokens), start, end));
 }
 
 int	isredir_pipex(char *tokens)
@@ -70,41 +70,11 @@ void	create_pipes(t_pipes *pipes_struct)
 	}
 }
 
-//cat | cat | ls
-
-void	close_and_redirect_pipes(t_pipes *pipes_struct, int current_pipe)
-{
-	int	i;
-
-	i = 0;
-	while (pipes_struct->pipes && i < pipes_struct->nb_pipes)
-	{
-		if (i == current_pipe)
-		{
-			close(pipes_struct->pipes[i][0]);
-			dup2(pipes_struct->pipes[i][1], STDOUT_FILENO);
-			close(pipes_struct->pipes[i][1]);
-		}
-		else if (current_pipe != 0 && i == current_pipe - 1)
-		{
-			close(pipes_struct->pipes[i][1]);
-			dup2(pipes_struct->pipes[i][0], STDIN_FILENO);
-			close(pipes_struct->pipes[i][0]);
-		}
-		else
-		{
-			close(pipes_struct->pipes[i][0]);
-			close(pipes_struct->pipes[i][1]);
-		}
-		i++;
-	}
-}
-
 int	cat_ls(char **cmd_s)
 {
 	int	i;
 
-	i = ft_count_words(cmd_s) - 1;
+	i = ft_count_words((const char **)cmd_s) - 1;
 	if (!ft_strcmp(cmd_s[i], "ls"))
 	{
 		i--;

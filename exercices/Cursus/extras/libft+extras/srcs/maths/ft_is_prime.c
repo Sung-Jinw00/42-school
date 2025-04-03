@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 09:58:38 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:55:44 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/03/29 17:07:41 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,24 @@
 
 /* return true if nb is an prime number
 */
-int	ft_is_prime(int nb)
+int	ft_is_prime(int num)
 {
-	int	i;
+	int i;
 
-	i = nb / 2 + 1;
-	if (nb <= 1)
-		return (0);
-	while (--i > 1)
-		if (nb % i == 0)
-			return (0);
-	return (1);
+	i = 5;
+	if (num < 2)
+		return (false);
+	if (num == 2 || num == 3)
+        return (true);
+    if (num % 2 == 0 || num % 3 == 0)
+        return (false);
+	while (i <= ft_sqrt(num))
+	{
+		if (num % i == 0 || num % (i + 2) == 0)
+			return (false);
+		i += 6;
+	}
+    return (true);
 }
 
 /*int main(void)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 21:07:06 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/20 16:02:49 by kgiannou         ###   ########.fr       */
+/*   Updated: 2025/04/03 18:37:10 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,31 +19,31 @@ int	strcmp_64(char *nptr)
 	int		i;
 
 	i = -1;
-	len_max = ft_strlen(INT64_Max);
-	len_min = ft_strlen(INT64_Min);
+	len_max = ft_strlen(INT64_MAX_ATOI);
+	len_min = ft_strlen(INT64_MIN_ATOI);
 	if ((nptr[0] != '-' && ft_strlen(nptr) > len_max)
 		|| (nptr[0] == '-' && ft_strlen(nptr) > len_min))
-		return (free(nptr), 1);
+		return (1);
 	else if (nptr[0] != '-' && ft_strlen(nptr) == len_max)
 	{
 		while (nptr[++i])
-			if (nptr[i] > INT64_Max[i])
-				return (free(nptr), 1);
+			if (nptr[i] > INT64_MAX_ATOI[i])
+				return (1);
 	}
-	else if (nptr[i++] == '-' && ft_strlen(nptr) == len_min)
+	else if (nptr[++i] == '-' && ft_strlen(nptr) == len_min)
 	{
 		while (nptr[++i])
-			if (nptr[i] > INT64_Min[i])
-				return (free(nptr), 1);
+			if (nptr[i] > INT64_MIN_ATOI[i])
+				return (1);
 	}
-	return (free(nptr), 0);
+	return (0);
 }
 
 void	error_exit(const char *str, int nb)
 {
 	if (nb == 1)
-		ft_fprintf(2, \
-"exit\nminishell: exit: %s: numeric argument required\n", str);
+		ft_fprintf(2,
+			"exit\nminishell: exit: %s: numeric argument required\n", str);
 	else
 		ft_fprintf(2, "minishell: exit: too many arguments\n");
 }

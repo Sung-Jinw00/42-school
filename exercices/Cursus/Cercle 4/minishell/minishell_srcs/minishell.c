@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 18:03:17 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/10 21:20:11 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/03 20:07:32 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	init_env(t_env	**my_env, char **env)
 		{
 			free(tmp->data);
 			shlvl = ft_itoa(ft_atoi(env[i] + 6) + 1);
-			tmp->data = ft_strjoinm("SHLVL=", shlvl, 2);
+			tmp->data = ft_strjoin_n_free("SHLVL=", shlvl, 2);
 			if (!tmp->data || !tmp->data[6])
 				return (ft_list_clear(*my_env), 1);
 		}
@@ -75,7 +75,7 @@ char	*toprint(t_minishell *mini, char *cur_loc)
 {
 	char	*str;
 
-	str = ft_strdup(BOLD MAGENTA);
+	str = ft_strdup(BOLD GREEN);
 	if (mini->user.final)
 		str = ft_strjoin_n_free(str, mini->user.final, 1);
 	str = multi_join_n_free("0", str, cur_loc, "$ ", RESET, NULL);
@@ -101,9 +101,8 @@ int	main(int ac, char **av, char **env)
 			continue ;
 		str = replace_var(mini, str);
 		optimised_line(str, &mini);
-		if (is_redir_or_pipes(mini->pipes_redirs, 0))
+		if (is_symbols(mini->pipes_redirs, 0))
 			free_all(mini, "tabs");
-		mini->p.nb_pipes = pipe_count(mini);
 		if (!mini->tokens || !mini->tokens[0] || mini->tokens[0][0] == 0)
 			continue ;
 		exec_cmd(mini);
