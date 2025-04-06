@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_r3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:33:04 by kgiannou          #+#    #+#             */
-/*   Updated: 2025/04/03 17:34:06 by kgiannou         ###   ########.fr       */
+/*   Updated: 2025/04/06 15:09:33 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	exec_buildin(char **tab, t_minishell *mini, int free)
 	else if (!ft_strcmp(tab[0], "env"))
 		ft_env(mini->env);
 	else if (!ft_strcmp(tab[0], "exit"))
-		ft_exit(mini);
+		ft_exit(tab, mini);
 	if (free)
 		free_dbl_tab(tab);
 }

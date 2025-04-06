@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_tree.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:25:44 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/03 17:13:49 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/06 18:26:23 by kgiannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,11 @@ void	add_right_branch(t_btree **root, char **tokens, char **p_r, int *ptr_i)
 void	build_right_branch(t_btree_params *p, char **tokens, char **p_r,
 	t_btree **tree)
 {
-	t_btree	*right;
 	int		j;
 
 	if (!str_multi_cmp(p_r[p->i], "&&", "||", NULL))
 		p->i++;
 	j = 0;
-	right = NULL;
 	if (!ft_strcmp(p_r[p->i], "("))
 	{
 		j = get_end_parenthesis(p_r, p->i, p->len_tokens);
@@ -71,9 +69,6 @@ void	build_right_branch(t_btree_params *p, char **tokens, char **p_r,
 void	build_tree(t_btree_params p, char **tokens, char **p_r,
 	t_btree **tree)
 {
-	int	j;
-
-	j = 0;
 	p.i = 0;
 	while (p.i < p.len_tokens && tokens[p.i])
 	{
@@ -86,6 +81,8 @@ void	build_tree(t_btree_params p, char **tokens, char **p_r,
 		if (!str_multi_cmp(p_r[p.i], "&&", "||", NULL)
 			|| !get_next_oplog(tokens, p_r, p.i))
 			build_right_branch(&p, tokens, p_r, tree);
+		else
+			p.i++;
 	}
 }
 
@@ -101,14 +98,17 @@ t_btree	*create_tree(t_btree_params p, char **tokens, char **p_r)
 	{
 		if (prior.parenthesis)
 			remove_parenthesis(&tokens, &p_r, p.len_tokens);
-		tree = btree_create_node(ft_splitdup(tokens),
-				ft_splitndup(p_r, p.len_tokens, 0, p.len_tokens), CMD);
+		if (tokens && tokens[0])
+			tree = btree_create_node(ft_splitdup(tokens),
+					ft_splitndup(p_r, p.len_tokens, 0, p.len_tokens), CMD);
 		if (p.to_free)
-			multi_free("2, 2", tokens, p_r, NULL);
+			free_tokens_splits(&tokens, &p_r, p.len_tokens);
 		return (tree);
 	}
 	build_tree(p, tokens, p_r, &tree);
 	if (p.to_free)
-		multi_free("2, 2", tokens, p_r, NULL);
+		free_tokens_splits(&tokens, &p_r, p.len_tokens);
 	return (tree);
 }
+
+//display *(tokens + p.i)@(p.len_tokens - p.i)

@@ -1,22 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   free2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/06 19:15:45 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/06 18:27:44 by kgiannou         ###   ########.fr       */
+/*   Created: 2025/02/14 16:46:16 by locagnio          #+#    #+#             */
+/*   Updated: 2025/04/06 18:18:49 by kgiannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_env(t_env *env)
+void	free_tokens_splits(char ***tokens, char ***p_r, int len_tokens)
 {
-	if (!env)
-		return (ft_fprintf(2, "minishell: env: No such file or directory\n"),
-			(void)0);
-	print_list(env);
-	g_signal = 0;
+	if (*p_r)
+		free_pipes_redirs(*p_r, len_tokens);
+	free_dbl_tab(*tokens);
+	*tokens = NULL;
+	*p_r = NULL;
+}
+
+void	free_splits_array(char ****cmd_s)
+{
+	int	j;
+
+	if (!(*cmd_s) || !(*cmd_s)[0])
+		return ;
+	j = 0;
+	while ((*cmd_s)[j])
+		free_dbl_tab((*cmd_s)[j++]);
+	if ((*cmd_s))
+		free((*cmd_s));
+	(*cmd_s) = NULL;
 }

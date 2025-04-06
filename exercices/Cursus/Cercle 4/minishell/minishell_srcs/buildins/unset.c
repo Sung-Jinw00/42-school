@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:15:45 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/07 21:01:31 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/06 15:46:42 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,11 @@ void	delete_from_env(char *var, t_env **v)
 	while (temp != NULL)
 	{
 		if (ft_strncmp(var, temp->data, ft_strlen(var)) == 0)
+		{
+			if (i == 0 && !temp->next)
+				(free_at(*v, i), *v = NULL);
 			return (free(temp->data), (void)free_at(*v, i));
+		}
 		temp = temp->next;
 		i++;
 	}
@@ -70,6 +74,6 @@ void	unset(char **vars, t_minishell *mini)
 		delete_from_env(vars[i], &(mini->env_export));
 		i++;
 	}
-	mini->cur_loc = replace_by_tilde(mini->env, mini->cur_loc, 1);
+	mini->cur_loc = replace_by_tilde(mini->env_export, mini->cur_loc, 1);
 	g_signal = 0;
 }

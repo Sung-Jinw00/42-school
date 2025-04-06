@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 18:03:17 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/03 20:07:32 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/06 16:38:32 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,19 @@ t_minishell	*init_vals(char **env)
 	mini = ft_calloc(1, sizeof(t_minishell));
 	if (!mini)
 		return (ft_fprintf(2, "Error : fail init struct\n"), exit(1), NULL);
+	if (!env || !ft_strncmp(env[0], "_=", 2))
+	{
+		sig_init();
+		mini->cur_loc = getcwd(NULL, 0);
+		init_user(mini);
+		return (mini);
+	}
 	if (init_env(&(mini->env), env))
 		return (ft_fprintf(2, "Error : fail copying env\n"), exit(1), NULL);
 	mini->env_export = ft_envdup(mini->env);
 	ft_env_sort((&mini->env_export));
 	sig_init();
-	mini->cur_loc = replace_by_tilde(mini->env, mini->cur_loc, 0);
+	mini->cur_loc = replace_by_tilde(mini->env_export, mini->cur_loc, 0);
 	init_user(mini);
 	return (mini);
 }
@@ -101,7 +108,8 @@ int	main(int ac, char **av, char **env)
 			continue ;
 		str = replace_var(mini, str);
 		optimised_line(str, &mini);
-		if (is_symbols(mini->pipes_redirs, 0))
+		if (is_symbols(mini->pipes_redirs, 0)
+			|| syntax_error_redir(mini->tokens, mini->pipes_redirs))
 			free_all(mini, "tabs");
 		if (!mini->tokens || !mini->tokens[0] || mini->tokens[0][0] == 0)
 			continue ;

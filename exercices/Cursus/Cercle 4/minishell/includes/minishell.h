@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 18:55:18 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/03 19:59:11 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/06 20:36:12 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,16 @@ typedef struct s_prior
 	int	parenthesis;
 }	t_prior;
 
+typedef struct s_btree
+{
+	int				type;
+	char			**tokens;
+	char			**pipes_redirs;
+	int				len_arg;
+	struct s_btree	*left;
+	struct s_btree	*right;
+}	t_btree;
+
 typedef struct s_minishell
 {
 	int				fd;
@@ -134,7 +144,7 @@ typedef struct s_minishell
 	t_env			*env;
 	bool			sgl_q;
 	bool			dbl_q;
-	char			**cmd_s;
+	char			***cmd_s;
 	int				*cmd_s_redirs;
 	char			*cur_loc;
 	char			**tokens;
@@ -142,6 +152,8 @@ typedef struct s_minishell
 	t_env			*env_export;
 	char			**pipes_redirs;
 	unsigned int	parenthesis_lvl;
+	t_btree			**p_btree;
+	bool			btree_used;
 }	t_minishell;
 
 typedef struct s_btree_params
@@ -150,15 +162,6 @@ typedef struct s_btree_params
 	int	len_tokens;
 	int	to_free;
 }	t_btree_params;
-
-typedef struct s_btree
-{
-	int				type;
-	char			**tokens;
-	char			**pipes_redirs;
-	struct s_btree	*left;
-	struct s_btree	*right;
-}	t_btree;
 
 void	sig_init(void);
 t_env	*ft_envdup(t_env *src);
@@ -179,7 +182,6 @@ char	*ft_substr_with_quotes(char *line, t_minishell *mini, int len);
 
 //btree
 int		get_type(char *symbol);
-void	free_btree(t_btree *btree);
 int		ast(t_minishell *mini, t_btree *the_tree);
 char	**get_p_r(char **tokens, char **p_r, int j);
 char	*get_and_or(char **tokens, char **p_r, int i);
@@ -194,7 +196,7 @@ void	current_status(char **tokens, char **p_r, t_prior prior);
 void	handle_parenthesis(t_minishell *mini, int start, int end);
 t_btree	*init_tree(t_btree_params p, char **tokens, char **p_r, int *j);
 void	remove_parenthesis(char ***tokens, char ***p_r, int len_tokens);
-int		get_log_op_check_par(char **p_r, int len_tokens, int *j, int incr);
+int		get_log_op_check_par(char **p_r, int len_tokens, int *j, int *incr);
 t_btree	*right_branch_par(t_btree_params p, char **tokens, char **p_r, int j);
 
 //print
@@ -205,10 +207,13 @@ void	print_pipes_redirs(char **split, int nb_words);
 void	ft_print_export(t_env *v, bool sign, bool inside);
 
 //frees
+void	free_btree(t_btree *btree);
 void	ft_list_clear(t_env *begin_list);
+void	free_splits_array(char ****cmd_s);
 void	free_pipes(int **pipes, int nb_pipes);
 void	free_all(t_minishell *mini, char *str);
 void	free_pipes_redirs(char **str, int nb_words);
+void	free_tokens_splits(char ***tokens, char ***p_r, int len_tokens);
 
 //pipes
 char	*get_first_arg(char *av);
@@ -219,11 +224,11 @@ int		pipe_count(t_btree *the_tree);
 char	*find_path(char *cmd, char **env);
 void	read_stdin(int *fd, char *limiter);
 void	create_pipes(t_pipes *pipes_struct);
-void	execute(char **av, char **env, t_minishell *mini);
 char	**get_redir_split(t_minishell *mini, int cur_cmd);
 char	**get_cmd_btree(char **tokens, char **p_r, int *j);
 void	set_symbols(char **tokens, char **p_r, t_prior *prior);
 int		pipex(t_minishell *mini, t_btree *the_tree, char **env);
+void	execute(char ***cmd, int i, char **env, t_minishell *mini);
 void	close_and_redirect_pipes(t_pipes *pipes_struct, int current_pipe);
 void	close_curr_pipe(t_pipes *pipes_struct, int current_pipe, char **cmd_s);
 
@@ -231,11 +236,11 @@ void	close_curr_pipe(t_pipes *pipes_struct, int current_pipe, char **cmd_s);
 void	pwd(void);
 void	echo(char **line);
 void	ft_env(t_env *env);
-void	ft_exit(t_minishell *mini);
 void	exec_cmd(t_minishell *mini);
 void	cd(char **chemin, t_minishell **mini);
 void	unset(char **vars, t_minishell *mini);
 void	export(char **vars, t_minishell *mini);
+void	ft_exit(char **tokens, t_minishell *mini);
 
 //redirs
 int		isredir_str(char *str);
@@ -276,11 +281,15 @@ void	free_line(char **line);
 char	*hostname(void);
 int		ft_charset(int c);
 int		get_sig(int status);
+int		valid_nb(char *str);
 long	len_list(t_env *list);
 char	*host_dup(char *name);
-void	init_v(t_variables v);
+int		will_exit(char **tokens);
+int		strcmp_64_mini(char *nptr);
+int		is_the_cmd_exist(char *cmd);
 void	init_user(t_minishell *mini);
 int		first_letter_valid(char *str);
+int		only_parenthesis(char **split);
 int		ft_strrchr(const char *s, int c);
 char	*return_tab(int tab, int *new_i);
 char	*ft_strsrch(const char *s, char *c);
@@ -289,6 +298,8 @@ void	handle_single(t_variables *v, char *str);
 void	remove_multiple_slashs(char *path, int i);
 void	ft_list_add_back(t_env **lst, t_env *new);
 char	*replace_var(t_minishell *mini, char *str);
+void	twenty_five_lines_bs(int *j, int *i, int *k);
+int		redir_if_needed(char **env, t_minishell *mini);
 void	if_pipes_or_redirs(char *line, int *i, int *count);
 void	ft_substr_mini_2(char *line, t_minishell **mini, int *len);
 

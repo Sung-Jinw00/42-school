@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:25:44 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/03 20:13:06 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/06 20:47:44 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ast(t_minishell *mini, t_btree *the_tree)
 	int	sig;
 
 	sig = 0;
+	if (!the_tree)
+		return (0);
 	if (the_tree->type == CMD)
 		return (pipex(mini, the_tree, splited_env(mini->env)));
 	if (the_tree->type == AND)
@@ -46,7 +48,7 @@ void	exec_cmd(t_minishell *mini)
 
 	set_symbols(mini->tokens, mini->pipes_redirs, &prior);
 	if (is_buildin(mini->tokens[0], 0) && !prior.and && !prior.or
-		&& !prior.pipes)
+		&& !prior.pipes && !isredir(mini))
 	{
 		len_tokens = ft_count_words((const char **)mini->tokens);
 		if (prior.parenthesis)
@@ -57,13 +59,14 @@ void	exec_cmd(t_minishell *mini)
 	{
 		btree = create_tree((t_btree_params){0}, mini->tokens,
 				mini->pipes_redirs);
+		mini->p_btree = &btree;
+		mini->btree_used = true;
 		if (btree)
 			g_signal = ast(mini, btree);
 		free_btree(btree);
 	}
+	mini->btree_used = false;
 	free_all(mini, "tabs");
-	mini->tokens = NULL;
-	mini->pipes_redirs = NULL;
 }
 
 	/* t_prior prior;

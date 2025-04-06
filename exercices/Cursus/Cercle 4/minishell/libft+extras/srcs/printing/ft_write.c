@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_write.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/06 19:15:45 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/06 18:27:44 by kgiannou         ###   ########.fr       */
+/*   Created: 2025/04/06 14:53:35 by locagnio          #+#    #+#             */
+/*   Updated: 2025/04/06 14:56:02 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft_extras.h"
 
-void	ft_env(t_env *env)
+/* because searching for the lenght of the string is annoying.
+*/
+int	ft_write(int fd, char *s)
 {
-	if (!env)
-		return (ft_fprintf(2, "minishell: env: No such file or directory\n"),
-			(void)0);
-	print_list(env);
-	g_signal = 0;
+	return (write(fd, s, ft_strlen(s)));
 }

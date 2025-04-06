@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_free_splits_array.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/06 19:15:45 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/06 18:27:44 by kgiannou         ###   ########.fr       */
+/*   Created: 2025/04/06 16:24:32 by locagnio          #+#    #+#             */
+/*   Updated: 2025/04/06 18:28:50 by kgiannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft_extras.h"
 
-void	ft_env(t_env *env)
+/* free an array of splits and set it to NULL.
+*/
+void	ft_free_splits_array(char ****cmd_s)
 {
-	if (!env)
-		return (ft_fprintf(2, "minishell: env: No such file or directory\n"),
-			(void)0);
-	print_list(env);
-	g_signal = 0;
+	int	j;
+
+	if (!(*cmd_s) || !(*cmd_s)[0])
+		return ;
+	j = 0;
+	while ((*cmd_s)[j])
+		free_dbl_tab((*cmd_s)[j++]);
+	if ((*cmd_s))
+		free((*cmd_s));
+	(*cmd_s) = NULL;
 }

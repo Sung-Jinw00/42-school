@@ -6,7 +6,7 @@
 /*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 19:15:45 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/21 12:18:14 by kgiannou         ###   ########.fr       */
+/*   Updated: 2025/04/06 18:27:12 by kgiannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	change_old_pwd(char *data, t_minishell **mini)
 
 	tmp = (*mini)->env;
 	ft_get_env(&tmp, "OLDPWD=");
+	if (!tmp->data)
+		return ;
 	free(tmp->data);
 	tmp->data = ft_strjoin("OLD", data);
 	tmp = (*mini)->env_export;
@@ -53,7 +55,7 @@ int	new_location(t_minishell **mini)
 	tmp_env = (*mini)->env;
 	ft_get_env(&tmp_env, "PWD=");
 	if (!tmp_env)
-		return (1);
+		return (0);
 	change_old_pwd(tmp_env->data, mini);
 	free(tmp_env->data);
 	tmp_env->data = ft_strjoin_n_free("PWD=", getcwd(NULL, 0), 2);
@@ -73,10 +75,10 @@ void	cd(char **path, t_minishell **mini)
 	t_env		*tmp;
 	char		*str;
 
-	tmp = (*mini)->env;
 	if (path[1] && path[2])
 		return (g_signal = 1, (void)ft_fprintf(2,
 				"minishell: cd: too many arguments\n"));
+	tmp = (*mini)->env_export;
 	str = path[1];
 	if (!path[1])
 	{
@@ -88,7 +90,10 @@ void	cd(char **path, t_minishell **mini)
 	}
 	if (change_dir(str))
 		return ;
-	(*mini)->cur_loc = replace_by_tilde((*mini)->env, (*mini)->cur_loc, 1);
+	if (!path[1])
+		free(str);
+	(*mini)->cur_loc = replace_by_tilde((*mini)->env_export, \
+	(*mini)->cur_loc, 1);
 	if (!(*mini)->cur_loc || new_location(mini))
 		return (free_all(*mini, "all"), exit(1));
 	g_signal = 0;

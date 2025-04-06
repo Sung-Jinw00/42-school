@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 15:31:28 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/03 19:07:25 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/06 15:07:53 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static int	count_tokens(char *line, bool sgl_q, bool dbl_q, int i)
 	return (count++);
 }
 
-//cmd1 || cmd2 || (cmd3)
 static char	*ft_substr2(char *line, t_minishell **mini, int len)
 {
 	char	*str;
@@ -133,7 +132,7 @@ void	optimised_line(char *line, t_minishell **mini)
 	if (!(*mini)->tokens || !(*mini)->pipes_redirs)
 		return (free(line));
 	i = 0;
-	while (line[i] == ' ')
+	while (line && line[i] == ' ')
 		i++;
 	split_line(line + i, mini, 0, (int)ft_strlen(line));
 	free(line);

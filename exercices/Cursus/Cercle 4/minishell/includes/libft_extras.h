@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:00:12 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/03 18:31:45 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/06 16:25:29 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_msjnf
 
 void		free_dbl_tab(char **str);
 void		multi_free(char *to_free, ...);
+void		ft_free_splits_array(char ****cmd_s);
 //																			  //
 /* ************************************************************************** */
 
@@ -124,6 +125,7 @@ char		**ft_splitndup(char **split, int len_split, int start, int end);
 /* ************************************************************************** */
 //																			  //
 
+int			ft_write(int fd, char *s);
 void		print_dlb_tabs(char **tab);
 void		ft_putnbr_fd(int n, int fd);
 void		ft_putstr_fd(char *s, int fd);
