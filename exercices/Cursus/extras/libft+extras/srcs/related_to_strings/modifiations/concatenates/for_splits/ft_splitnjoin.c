@@ -6,13 +6,31 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:26:24 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/13 16:08:23 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:44:58 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* creates a new split by concatenate n tabs of 2 splits
+/**
+ * @brief
+ * Creates a new array of strings by concatenate n strings of 2 array of
+ * strings.
+ * 
+ * @param s1 The first array of strings.
+ * @param n_s1 The number of strings from s1 that will be joined.
+ * @param s2 The second array of strings.
+ * @param n_s2 The number of strings from s2 that will be joined.
+ * 
+ * @note
+ * - Every end of array of strings and the last argument should be NULL to
+ * interrupt the function correctly, otherwise, undefined outcome may
+ * happened.*/
+/**
+ * - The free of s1 and s2 is the responsibility of the user.
+ * 
+ * @return
+ * The new joined array of strings.
 */
 char	**ft_splitnjoin(char const **s1, size_t n1, char const **s2, size_t n2)
 {

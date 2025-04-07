@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:00:12 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/27 20:31:27 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 19:37:55 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,8 @@ char		*get_multi_cmp(const char *s1, ...);
 char		**ft_splitstr(char **split, char *str);
 void		*ft_memchr(const void *s, int c, size_t n);
 char		*get_multi_ncmp(int n, const char *s1, ...);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
+char		*ft_substr(char const *s, unsigned int start, size_t len,
+			bool to_free);
 char		*ft_strnstr(const char *big, const char *little, size_t len);
 /* -------------------------------------------------------------------------- */
 /*                            Return The Difference                           */
@@ -169,7 +170,7 @@ int			ft_count_words(const char **split);
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
 char		**ft_split(char *str, char *charset);
-char		*ft_strtrim(char const *s1, char const *set);
+char		*ft_strtrim(char const *s1, char const *set, bool to_free);
 /* -------------------------------------------------------------------------- */
 /*                              Apply A Function                              */
 /* -------------------------------------------------------------------------- */
@@ -214,7 +215,7 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t dsize);
 
 int			*strchar_to_strint(char *str_char);
 void		*ft_memset(void *s, int c, size_t n);
-char		*ft_remove_from_string(char *str, char *to_delete, int free_str);
+char		*ft_remove_from_string(char *str, char *to_delete, int to_free);
 //																			  //
 /* ************************************************************************** */
 

@@ -6,13 +6,22 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:45 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:53:40 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:55:47 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* apply a function on each character of a string
+/**
+ * @brief
+ * Apply a function on each character of s.
+ * 
+ * @param s the string that will be modified.
+ * @param f the function that will be applied to s, the prototype
+ * is : f(unsigned int, char *).
+ * 
+ * @return
+ * The new s.
 */
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {

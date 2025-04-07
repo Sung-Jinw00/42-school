@@ -6,13 +6,15 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:03 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:52:03 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 19:14:56 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* return true if the argument is printable
+/**
+ * @brief
+ * Return true if the argument is printable.
 */
 int	ft_isprint(int c)
 {

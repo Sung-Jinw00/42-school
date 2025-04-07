@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:23 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:54:48 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:54:28 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,13 @@
 
 /* write n characters of a string into the fd chosen
 */
-void	ft_putnstr_fd(char *s, int fd, int n)
+void	ft_putnstr_fd(int fd, char *s, int n)
 {
-	int	i;
-
-	i = 0;
-	while (s[i] && i < n)
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
+	if (!s)
+		return (0);
+	if (n > ft_strlen(s))
+		n = ft_strlen(s);
+	return ((void)write(fd, s, ft_strlen(n)));
 }
 
 /* int main(void)

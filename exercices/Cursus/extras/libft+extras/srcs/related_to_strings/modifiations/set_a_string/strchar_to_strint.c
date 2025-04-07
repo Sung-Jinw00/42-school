@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strchar_to_strint.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 14:46:21 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/21 12:38:27 by kgiannou         ###   ########.fr       */
+/*   Updated: 2025/04/07 19:34:51 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,18 @@ static bool	correct_format(char *str_char)
 	return (1);
 }
 
-/*	convert a string of char to a string of int.
-
-	- The string must follow the format : "n1, n2, ..., nn".
-	- If the format isn't respected, or if the string is NULL or empty, the
-	function returns NULL
+/**
+ * @brief
+ * Convert an array of characters into an array of int.
+ * 
+ * @note
+ * - The string must follow the format : "n1, n2, ..., nn". */
+/**
+ * - If the format isn't respected, the function returns NULL.
+ * 
+ * @return
+ * Returns the converted array of characters, if the string is NULL or empty,
+ * the function returns NULL. 
 */
 int	*strchar_to_strint(char *str_char)
 {

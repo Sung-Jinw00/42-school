@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:23 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:55:00 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:53:43 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,11 @@
 
 /* write a string until c occurs in the fd chosen
 */
-void	ft_putcstr_fd(char *s, int fd, char c)
+void	ft_putcstr_fd(int fd, char *s, char c)
 {
-	int	i;
-
-	i = 0;
-	while (s[i] && s[i] != c)
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
+	if (!s)
+		return (0);
+	return ((void)write(fd, s, ft_strclen(s, c)));
 }
 
 /* int main(void)

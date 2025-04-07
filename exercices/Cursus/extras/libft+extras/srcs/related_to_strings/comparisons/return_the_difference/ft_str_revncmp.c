@@ -1,44 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   char_multi_cmp.c                                   :+:      :+:    :+:   */
+/*   ft_str_revncmp.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:34:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 18:05:06 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 18:17:03 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* Compares an infinite amout of characters.
-
-	Return 0 if a comparison was successful, else it returns 1, the last argument
-	should be NUL-terminated.
+/**
+ * return the difference of a string by comparing n bytes at the end of the
+ * string
 */
-int	multi_char_cmp(int s1, ...)
+int	ft_str_revncmp(const char *s1, const char *s2, size_t n)
 {
-	int		arg;
-	va_list	args;
+	size_t	len_s1;
+	size_t	len_s2;
 
-	if (!ft_isascii(s1) || !s1)
+	if (!s1 && !s2)
+		return (0);
+	else if (!s1 || !s2)
 		return (1);
-	va_start(args, s1);
-	arg = va_arg(args, int);
-	while (!ft_isascii(arg))
-		arg = va_arg(args, int);
-	while (arg)
+	len_s1 = ft_strlen(s1) - 1;
+	len_s2 = ft_strlen(s2) - 1;
+	while (len_s1 >= 0 && len_s2 >= 0 && len_s1 >= n && len_s2 >= n
+		&& (s1[len_s1] || s2[len_s2]))
 	{
-		if (s1 == arg)
-			return (va_end(args), 0);
-		else
-			arg = va_arg(args, int);
-		while (!ft_isascii(arg))
-			arg = va_arg(args, int);
+		if (s1[len_s1] != s2[len_s2])
+			return ((unsigned char)s1[len_s1] - (unsigned char)s2[len_s2]);
+		len_s1--;
+		len_s2--;
 	}
-	va_end(args);
-	return (1);
+	return (0);
 }
 
 /* #include <stdio.h>

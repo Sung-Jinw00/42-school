@@ -6,13 +6,22 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:55 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:53:01 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 19:47:39 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* erase and copy d_size of src in dst, returns the len of src
+/**
+ * @brief
+ * Erase and copy dsize of src in dst.
+ * 
+ * @param dst the string that will be modified.
+ * @param src the string that will be copied in dst.
+ * @param dsize the number of characters that will be replaced
+ * 
+ * @returns
+ * The len of src.
 */
 size_t	ft_strlcpy(char *dst, const char *src, size_t dsize)
 {

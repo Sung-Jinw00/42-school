@@ -6,13 +6,15 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:49 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:52:21 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 19:15:04 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* return true if the argument is an alphabetic lowercase argument
+/**
+ * @brief
+ * Return true if the argument is an alphabetic lowercase argument.
 */
 int	ft_islowalpha(int c)
 {

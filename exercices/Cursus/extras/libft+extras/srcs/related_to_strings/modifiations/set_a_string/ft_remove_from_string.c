@@ -3,19 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_remove_from_string.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 14:46:21 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/21 12:37:55 by kgiannou         ###   ########.fr       */
+/*   Updated: 2025/04/07 19:41:15 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* remove every characters of to_delete string to str and return the new line,
-	can free str
+/**
+ * @brief
+ * Remove every characters of to_delete string to str and return the new line,
+ * can free str.
+ * 
+ * @param str The string that will be changed.
+ * @param to_delete The string that contains the characters that will be
+ * removed from str.
+ * @param to_free If to_free = true, str will be freed.
+ * 
+ * @return
+ * The new allocated string without the characters of to_delete. If the
+ * function fails or if str is NULL, the function will returns NULL.
 */
-char	*ft_remove_from_string(char *str, char *to_delete, int free_str)
+char	*ft_remove_from_string(char *str, char *to_delete, int to_free)
 {
 	char	**tab;
 	char	*line;
@@ -36,7 +47,8 @@ char	*ft_remove_from_string(char *str, char *to_delete, int free_str)
 		free(line);
 		line = tmp;
 	}
-	if (free_str)
+	free_dbl_tab(tab);
+	if (to_free)
 		free(str);
 	return (line);
 }

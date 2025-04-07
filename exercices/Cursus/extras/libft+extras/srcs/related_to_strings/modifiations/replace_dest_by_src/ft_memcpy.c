@@ -6,13 +6,25 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:21 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:53:11 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 19:50:51 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* copy src into dest on n bytes
+/**
+ * @brief
+ * Copies n bytes from src in dest.
+ * 
+ * @param dest The string that will be replaced by src.
+ * @param src The string that will replace n bytes of src.
+ * @param n The number of bytes srcs will replace.
+ * 
+ * @note
+ * The function may overlaps.
+ * 
+ * @return
+ * The new dest string.
 */
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {

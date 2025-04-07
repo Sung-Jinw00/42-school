@@ -75,10 +75,13 @@ int	print_this_bs(va_list args, t_struct *v)
 }
 
 /**
- * @brief 
- * This function stores the formatted result like the behavior of printf in
- * an already allocated string.
+ * @brief This function stores the formatted result of sprintf like the behavior
+ * of printf in an already allocated string.
+ * 
+ * @param buffer The allocated string.
+ * 
  * @return The number of characters written.
+ * 
  * @note The user is responsible for the potential overflow if the string is
  * too short for the formated result.
  */

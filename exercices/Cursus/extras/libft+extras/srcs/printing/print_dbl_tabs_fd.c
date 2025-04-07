@@ -1,41 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strclen.c                                       :+:      :+:    :+:   */
+/*   print_dbl_tabs_fd.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 13:33:59 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 21:01:26 by locagnio         ###   ########.fr       */
+/*   Created: 2025/02/06 18:51:34 by locagnio          #+#    #+#             */
+/*   Updated: 2025/04/07 17:59:08 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/**
- * @return
- * The len of as string when :*/
-/**
- * - It reaches the first iteration of c.*/
-/**
- * - It reaches the end of the string.
+/* print all the stings of a list of strings in the fd chosen
 */
-size_t	ft_strclen(const char *s, char c)
+void	print_dlb_tabs_fd(int fd, char **tab)
 {
-	size_t	i;
+	int	i;
 
-	i = 0;
-	while (s && s[i] != '\0' && s[i] != c)
-		i++;
-	return (i);
+	if (!tab || !tab[0])
+		return ;
+	i = -1;
+	while (tab[++i])
+		write(fd, tab[i], ft_strlen(tab[i]));
 }
-
-/* #include <stdio.h>
-
-int	main(void)
-{
-	char str[] = "Yeppi";
-
-	printf("%zu\n", ft_strlen(str));
-	return(0);
-} */

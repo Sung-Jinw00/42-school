@@ -6,13 +6,26 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:26:24 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/13 17:28:19 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:42:21 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* creates a new split by concatenate 2 splits
+/**
+ * @brief
+ * Creates a new array of strings by concatenate 2 array of
+ * strings.
+ * 
+ * @param s1 The first array of strings.
+ * @param s2 The second array of strings.
+ * 
+ * @note
+ * Every end of array of strings and the last argument should be NULL to
+ * interrupt the function correctly, otherwise, undefined outcome may happened.
+ * 
+ * @return
+ * The new joined array of strings.
 */
 char	**ft_splitjoin(char const **s1, char const **s2)
 {

@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 16:07:25 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/25 19:20:51 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:40:15 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,24 +63,31 @@ char	**multi_spitjoin_n_free2(t_msjnf v)
 	return (v.new_split);
 }
 
-/* Join an infinite amount of splits and free the wished tabs.
-
-	The last argument should be NULL to interrupt the
-	function correctly, otherwise,
-	undefined outcome may happened.
-
-	If one split is passed in argument, it behaves like strdup(s1).
-	
-	The string "to_free" follows the rules of the function strchar_to_strint :
-	- Each numbers represent the position of
-	each split that should be freed, starting
-	at position zero, if the number exceeds the
-	limits of the numbers of splits, they
-	will be ignored.
-	- The string must follow the format : "n1, n2, ..., nn".
-	- If the format isn't respected, or if the string is NULL or empty, the
-	string will be considered NULL and no split will be freed
-	*/
+/**
+ * @brief
+ * Join an infinite amount of array of strings and free the wished tabs.
+ * 
+ * @param to_free The string "to_free" follows the rules of the function
+ * strchar_to_strint : */
+/**
+ * - Each numbers represent the position of each string that should be freed,
+ * starting at position zero, if the number exceeds the limits of the amount
+ * of strings, they will be ignored. */
+/**
+ * - The string must follow the format : "n1, n2, ..., nn". 
+ * 
+ * @note
+ * - Every end of array of strings and the last argument should be NULL to
+ * interrupt the function correctly, otherwise, undefined outcome may
+ * happened.*/
+/**
+ * - If the format of to_free isn't respected, or if the string is NULL or
+ * empty, the string will be considered NULL and no string will be freed.
+ * 
+ * @returns
+ * The new joined array of strings, or the duplicate of s1 if there's no other
+ * argument.
+*/
 char	**multi_splitjoin_n_free(char *to_free, char **s1, ...)
 {
 	t_msjnf	v;

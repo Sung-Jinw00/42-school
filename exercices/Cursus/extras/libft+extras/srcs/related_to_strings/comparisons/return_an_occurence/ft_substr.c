@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:21 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:54:23 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 19:21:36 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 	If start is greater than the lenght of s or if s doesn't exist, it returns
 	an empty string
 */
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len, bool to_free)
 {
 	int				i;
 	char			*new_str;
@@ -40,6 +40,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	while ((size_t)start < limit && s[start])
 		new_str[i++] = s[start++];
 	new_str[i] = '\0';
+	if (to_free)
+		free(s);
 	return (new_str);
 }
 

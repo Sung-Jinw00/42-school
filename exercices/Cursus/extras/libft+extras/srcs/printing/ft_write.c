@@ -1,41 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strclen.c                                       :+:      :+:    :+:   */
+/*   ft_write.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 13:33:59 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 21:01:26 by locagnio         ###   ########.fr       */
+/*   Created: 2025/04/06 14:53:35 by locagnio          #+#    #+#             */
+/*   Updated: 2025/04/07 17:44:56 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/**
- * @return
- * The len of as string when :*/
-/**
- * - It reaches the first iteration of c.*/
-/**
- * - It reaches the end of the string.
+/* Because searching for the lenght of the string is annoying.
 */
-size_t	ft_strclen(const char *s, char c)
+int	ft_write(int fd, char *s)
 {
-	size_t	i;
-
-	i = 0;
-	while (s && s[i] != '\0' && s[i] != c)
-		i++;
-	return (i);
+	if (!s)
+		return (0);
+	return (write(fd, s, ft_strlen(s)));
 }
-
-/* #include <stdio.h>
-
-int	main(void)
-{
-	char str[] = "Yeppi";
-
-	printf("%zu\n", ft_strlen(str));
-	return(0);
-} */

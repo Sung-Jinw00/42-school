@@ -6,13 +6,26 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:26:24 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:53:17 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:45:20 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* creates a new string by concatenate n characters of 2 strings
+/**
+ * @brief
+ * Creates a new string by concatenate n characters of 2 strings.
+ * 
+ * @param s1 The first sring.
+ * @param n_s1 The number of bytes from s1 that will be joined.
+ * @param s2 The second sring.
+ * @param n_s2 The number of bytes from s2 that will be joined.
+ * 
+ * @return
+ * The new joined string.
+ * 
+ * @note
+ * The free of s1 and s2 is the responsibility of the user.
 */
 char	*ft_strnjoin(char const *s1, size_t n_s1, char const *s2, size_t n_s2)
 {

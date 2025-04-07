@@ -78,7 +78,11 @@ int	print_this_bs(va_list args, t_struct *v)
  * @brief 
  * This function dynamically allocates a buffer and stores the formatted result
  * like the behavior of printf in it.
+ * 
+ * @param buffer A pointer to a string that will be allocated and filled.
+ * 
  * @return The number of characters written.
+ * 
  * @note The user is responsible for freeing the buffer when it is no longer
  * needed.
  */

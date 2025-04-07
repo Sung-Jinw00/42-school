@@ -6,13 +6,22 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:53:08 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 19:50:08 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* copies n bytes from src to dest and avoid overlaps
+/**
+ * @brief
+ * Copies n bytes from src in dest and avoid overlaps.
+ * 
+ * @param dest The string that will be replaced by src.
+ * @param src The string that will replace n bytes of src.
+ * @param n The number of bytes srcs will replace.
+ * 
+ * @return
+ * The new dest string.
 */
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {

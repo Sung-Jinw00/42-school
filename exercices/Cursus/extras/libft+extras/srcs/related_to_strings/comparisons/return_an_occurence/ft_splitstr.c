@@ -6,15 +6,16 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:42 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/25 20:39:17 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 18:24:10 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* search the first iteration of str in split
+/**
+ * Search the first iteration of str in split
 */
-char	**ft_splitstr(char **split, char *str)
+char	**ft_split_strsrch(char **split, char *str)
 {
 	int	i;
 

@@ -6,19 +6,35 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 20:00:24 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:53:33 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:31:52 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* concatenates a fixed string to another fixed string
+/**
+ * @brief
+ * Copy src at the end of dest.
+ * 
+ * @param dest The string that will be modified.
+ * @param src The string that will be added.
+ * 
+ * @return
+ * - If dest is NULL : The function returns NULL. */
+/**
+ * - Else if src is NULL : The function returns dest unchanged.*/
+/**
+ * - Else : The function returns the new dest.
 */
 char	*ft_strcat(char *dest, char *src)
 {
 	int	i;
 	int	j;
 
+	if (!dest)
+		return (NULL);
+	if (!src)
+		return (dest);
 	i = 0;
 	j = 0;
 	while (dest[i] != '\0')

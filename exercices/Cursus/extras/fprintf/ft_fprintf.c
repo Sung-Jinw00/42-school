@@ -75,8 +75,10 @@ int	print_this_bs(va_list args, t_struct v)
 }
 
 /**
- * @brief Behaves like printf, but allows printing to any specified file
- * descriptor.
+ * @brief Behaves like printf, but print in any specified file descriptor.
+ * 
+ * @param fd File descriptor.
+ * 
  * @return The number of characters written.
  */
 int	ft_fprintf(int fd, const char *str, ...)

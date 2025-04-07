@@ -6,15 +6,34 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:50 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:53:23 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:36:18 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* Concatenates 2 strings and guarantee to NUL-terminate the result if dsize
-	is at least greater than the len of dst. Both src and dst must be
-	NUL-terminated. It returns the final len of the concatenated string
+/**
+ * @brief
+ * Copy n bytes of src at the end of dst.
+ * 
+ * @note
+ * - Guarantee to NUL-terminate the result if dsize is at least greater than
+ * the len of dst.*/
+/**
+ * - Both src and dst must be NUL-terminated.*/
+/**
+ * - If dst or src are NULL, the strings won't be modified.
+ * 
+ * 
+ * @param dst The string that will be modified.
+ * @param src The string that will be added.
+ * @param dsize The number of bytes of src that will be copied in dst.
+ * 
+ * @return
+ * - If dsize isn't greater that the len of dst, dst won't be modified, and the
+ * function returns the len of dsize + the len of src.*/
+/**
+ * - Else, the function returns the final len of the concatenated string.
 */
 size_t	ft_strlcat(char *dst, const char *src, size_t dsize)
 {
@@ -27,12 +46,13 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dsize)
 	if (dsize <= len_dest)
 		return (dsize + ft_strlen(src));
 	len_trunc = ft_strlen(dst) + ft_strlen(src);
-	while (src[i] != '\0' && i < dsize - len_dest - 1)
+	while (dst && src && src[i] != '\0' && i < dsize - len_dest - 1)
 	{
 		dst[len_dest + i] = src[i];
 		i++;
 	}
-	dst[len_dest + i] = '\0';
+	if (!dst)
+		dst[len_dest + i] = '\0';
 	return (len_trunc);
 }
 

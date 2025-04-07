@@ -3,20 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   multi_strjoin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 16:07:25 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/21 12:42:36 by kgiannou         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:48:01 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* join an infinite amount of strings,
-the last argument should be NULL to interrupt
-the function correctly, otherwise, undefined outcome may happened.
-
-if the function has only one string, it behave like strdup(s1).
+/**
+ * @brief
+ * Join an infinite amount of strings.
+ * 
+ * @note
+ * - The last argument should be NULL to interrupt the function correctly,
+ * otherwise, undefined outcome may happened. */ 
+/**
+ * - The free of the strings are the responsibility of the user.
+ * 
+ * @returns
+ * The new joined string, or the duplicate of s1 if there's no other argument.
 */
 char	*multi_join(char *s1, ...)
 {

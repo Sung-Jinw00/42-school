@@ -6,13 +6,19 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:35 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:52:54 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 19:43:45 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* set n bytes of s with c
+/**
+ * @brief
+ * Set n bytes of s with c.
+ * 
+ * @param s The argument that will be set.
+ * @param c The character that will set s.
+ * @param n The n bytes of s that will be set.
 */
 void	*ft_memset(void *s, int c, size_t n)
 {

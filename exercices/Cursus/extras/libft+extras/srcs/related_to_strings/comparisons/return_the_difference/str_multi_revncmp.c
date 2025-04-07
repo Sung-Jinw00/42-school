@@ -1,41 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   char_multi_cmp.c                                   :+:      :+:    :+:   */
+/*   str_multi_revncmp.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:34:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 18:05:06 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:56:21 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* Compares an infinite amout of characters.
-
-	Return 0 if a comparison was successful, else it returns 1, the last argument
-	should be NUL-terminated.
+/**
+ * @brief
+ * Compares an infinite amout of n characters of strings at the end of them.
+ * 
+ * - if n < 0, the function will take a lenght for each string in
+ * the following format "s1, s2, n_s2, s3, n_s3,..., sn, n_sn".
+ * - if n == 0, the function will return 1.
+ * - else, n will be applied for every string.
+ * 
+ * The last argument should be NULL,
+ * Otherwise, the function may have an undefined behavior.
+ * 
+ * @returns
+ * Return 0 if a comparison was successful, else it returns 1.
 */
-int	multi_char_cmp(int s1, ...)
+int	str_multi_revncmp(int n, const char *s1, ...)
 {
-	int		arg;
-	va_list	args;
+	const char	*arg;
+	va_list		args;
+	size_t		n_sn;
 
-	if (!ft_isascii(s1) || !s1)
+	if (!n)
 		return (1);
 	va_start(args, s1);
-	arg = va_arg(args, int);
-	while (!ft_isascii(arg))
-		arg = va_arg(args, int);
+	arg = va_arg(args, const char *);
+	if (n < 0)
+		n_sn = va_arg(args, size_t);
 	while (arg)
 	{
-		if (s1 == arg)
+		if (n > 0 && !ft_str_revncmp(s1, arg, n))
+			return (va_end(args), 0);
+		else if (n < 0 && !ft_str_revncmp(s1, arg, n_sn))
 			return (va_end(args), 0);
 		else
-			arg = va_arg(args, int);
-		while (!ft_isascii(arg))
-			arg = va_arg(args, int);
+			arg = va_arg(args, const char *);
+		if (n < 0)
+			n_sn = va_arg(args, size_t);
 	}
 	va_end(args);
 	return (1);

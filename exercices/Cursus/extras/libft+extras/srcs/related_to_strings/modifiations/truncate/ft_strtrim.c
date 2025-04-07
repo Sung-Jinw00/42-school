@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:16 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:52:35 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 19:23:56 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,19 @@ static int	set_cmp(char c, const char *set)
 	return (0);
 }
 
-/* return a new string by removing the characters found in "set" string at start
-	and end	of s1
+/**
+ * @brief
+ * Remove the characters found in "set" at start and end of s1.
+ * 
+ * @param s1 The string that will be trimmed.
+ * @param set The string of characters that will be removed from the extremities
+ * of s1.
+ * @param to_bree If to_free = true, s1 will be freed, else, it won't.
+ * 
+ * @return
+ * The new string trimmed.
 */
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set, bool to_free)
 {
 	int	i;
 	int	j;
@@ -45,7 +54,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	j--;
 	while (set_cmp(s1[j], set) && j > i)
 		j--;
-	return (ft_substr(s1, i, j - i + 1));
+	return (ft_substr(s1, i, j - i + 1, to_free));
 }
 
 /* #include <stdio.h>

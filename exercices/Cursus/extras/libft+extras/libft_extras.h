@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:00:12 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/27 20:31:27 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 18:23:49 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@
 # endif
 # ifndef RESET
 #  define RESET		"\033[0m"   //Réinitialisation
+# endif
+
+# ifndef INT64_MAX_ATOI
+#  define INT64_MAX_ATOI "9223372036854775807"
+# endif
+# ifndef INT64_MIN_ATOI
+#  define INT64_MIN_ATOI "-9223372036854775808"
 # endif
 
 typedef struct s_mjnf
@@ -50,6 +57,13 @@ typedef struct s_msjnf
 	int		tab_len;
 }	t_msjnf;
 
+typedef struct t_str_mlt_revncmp
+{
+	const char	*arg;
+	va_list		args;
+	size_t		n_sn;
+}	t_str_mlt_revncmp;
+
 /* ************************************************************************** */
 /*                                   To Free                                  */
 /* ************************************************************************** */
@@ -57,13 +71,14 @@ typedef struct s_msjnf
 
 void		free_dbl_tab(char **str);
 void		multi_free(char *to_free, ...);
+void		ft_free_splits_array(char ****cmd_s);
 //																			  //
 /* ************************************************************************** */
 
 /* ************************************************************************** */
 /*                                    Maths                                   */
 /* ************************************************************************** */
-//																			  //
+//			
 
 int			ft_sqrt(int nb);
 char		*ft_itoa(int n);
@@ -83,8 +98,8 @@ double		ft_atod(char *nptr);
 float		ft_atof(char *nptr);
 long		ft_atol(char *nptr);
 long long	ft_atold(char *nptr);
+int64_t		ft_atoi64(char *nptr);
 int			ft_atoi(const char *nptr);
-int64_t		ft_atoi64(const char *nptr);
 int			ft_natoi(const char *nptr, int *i);
 int			ft_atoi_base(const char *nptr, char *base);
 char		*ft_convert_base(char *nbr, char *base_from, char *base_to);
@@ -117,13 +132,17 @@ char		**ft_splitndup(char **split, int len_split, int start, int end);
 /* ************************************************************************** */
 //																			  //
 
-void		ft_putnbr_fd(int n, int fd);
-void		ft_putstr_fd(char *s, int fd);
-void		ft_putchar_fd(char c, int fd);
-void		ft_putendl_fd(char *s, int fd);
+int			ft_write(int fd, char *s);
+void		print_dlb_tabs(char **tab);
+void		ft_putnbr_fd(int fd, int n);
+void		ft_putstr_fd(int fd, char *s);
+void		ft_putchar_fd(int fd, char c);
+void		ft_putendl_fd(int fd, char *s);
 void		ft_putnbr_base(int nbr, char *base);
-void		ft_putnstr_fd(char *s, int fd, int n);
-void		ft_putcstr_fd(char *s, int fd, char c);
+void		print_dlb_tabs_fd(int fd, char **tab);
+void		ft_putnstr_fd(int fd, char *s, int n);
+void		ft_putcstr_fd(int fd, char *s, char c);
+void		ft_putnbr_base_fd(int fd, int nbr, char *base);
 //																			  //
 /* ************************************************************************** */
 
@@ -141,21 +160,23 @@ void		ft_putcstr_fd(char *s, int fd, char c);
 char		get_multi_char_cmp(int s1, ...);
 char		*ft_strchr(const char *s, int c);
 char		*get_multi_cmp(const char *s1, ...);
-char		**ft_splitstr(char **split, char *str);
 void		*ft_memchr(const void *s, int c, size_t n);
 char		*get_multi_ncmp(int n, const char *s1, ...);
+char		**ft_split_strsrch(char **split, char *str);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strnstr(const char *big, const char *little, size_t len);
 /* -------------------------------------------------------------------------- */
 /*                            Return The Difference                           */
 /* -------------------------------------------------------------------------- */
 
-int			char_multi_cmp(int s1, ...);
+int			multi_char_cmp(int s1, ...);
 int			str_multi_cmp(const char *s1, ...);
 int			ft_strcmp(const char *s1, const char *s2);
 int			str_multi_ncmp(int n, const char *s1, ...);
+int			str_multi_revncmp(int n, const char *s1, ...);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
+int			ft_str_revncmp(const char *s1, const char *s2, size_t n);
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 /*                                   Lenght                                   */
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
@@ -240,7 +261,7 @@ int			ft_strnchr(const char *s, const char *to_find, int len);
 /*                                 Chain Lists                                */
 /* ************************************************************************** */
 //																			  //
-typedef struct s_list
+/* typedef struct s_list
 {
 	void			*data;
 	struct s_list	*next;
@@ -256,8 +277,8 @@ void		ft_list_sort(t_list **begin_list);
 void		ft_list_reverse(t_list **begin_list);
 void		set_at(t_list *L, void *data, int pos);
 t_list		*add_at(t_list *L, void *data, int pos);
-void		ft_list_add_back(t_list **lst, t_list *new);
 void		ft_list_add_front(t_list **lst, t_list *new);
+void		ft_list_add_back(t_list **lst, t_list *new);
 int			ft_list_find_pos(t_list *begin_list, void *data_ref);
 void		ft_list_remove_if(t_list **begin_list, void *data_ref);
 int			ft_list_find_data(t_list *begin_list, void *data_ref);
@@ -265,13 +286,13 @@ void		ft_list_merge(t_list **begin_list1, t_list *begin_list2);
 void		ft_list_foreach_data(t_list *begin_list, void (*f)(void *));
 void		ft_sorted_list_merge(t_list **begin_list1, t_list *begin_list2);
 void		ft_list_foreach_data_if(t_list *begin_list, void (*f)(void *), \
-void *data_ref);
+void *data_ref); */
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 /*                                  Free List                                 */
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-
+/*
 void		free_list(t_list *L);
-t_list		*free_at(t_list *L, int pos);
+t_list		*free_at(t_list *L, int pos); */
 //																			  //
 /* ************************************************************************** */
 

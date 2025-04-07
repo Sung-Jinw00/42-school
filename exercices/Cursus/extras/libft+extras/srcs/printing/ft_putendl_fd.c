@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:13 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:54:56 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:53:56 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,11 @@
 
 /* write a string in the fd chosen, followed by a newline
 */
-void	ft_putendl_fd(char *s, int fd)
+void	ft_putendl_fd(int fd, char *s)
 {
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
-	write(fd, "\n", 1);
+	if (!s)
+		return (0);
+	return (write(fd, s, ft_strlen(s)), (void)write(fd, "\n", 1));
 }
 
 /* int main(void)

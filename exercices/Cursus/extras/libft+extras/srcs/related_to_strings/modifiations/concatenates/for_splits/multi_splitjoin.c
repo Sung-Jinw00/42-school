@@ -3,20 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   multi_splitjoin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 16:07:25 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/21 12:31:28 by kgiannou         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:38:52 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* join an infinite amount of splits,
-the last argument should be NULL to interrupt
-the function correctly, otherwise, undefined outcome may happened.
-
-if the function has only one split, it behave like splitdup(s1).
+/**
+ * @brief
+ * Join an infinite amount of array of strings.
+ * 
+ * @note
+ * Every end of array of strings and the last argument should be NULL to
+ * interrupt the function correctly, otherwise, undefined outcome may happened.
+ * 
+ * @returns
+ * The new joined array of strings, or the duplicate of s1 if there's no
+ * other argument.
 */
 char	**multi_splitjoin(char **s1, ...)
 {

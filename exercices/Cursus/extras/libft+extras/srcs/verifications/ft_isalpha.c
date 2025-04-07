@@ -6,13 +6,15 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:49 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/13 17:37:37 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 19:15:13 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* return true if the argument is an alphabetic argument
+/**
+ * @brief
+ * Return true if the argument is an alphabetic argument.
 */
 int	ft_isalpha(int c)
 {

@@ -6,13 +6,25 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:05 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:53:37 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:55:06 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* apply a function on a copy of each character of a string
+/**
+ * @brief
+ * Apply a function on each character of a copy of s.
+ * 
+ * @param s the string that will be copied.
+ * @param f the function that will be applied to the copy of s, the prototype
+ * is : f(unsigned int, char).
+ * 
+ * @return
+ * The new modified copy of s.
+ * 
+ * @note
+ * The free of s is the responsibility of the user.
 */
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {

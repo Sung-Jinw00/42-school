@@ -3,19 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_splitjoin_n_free.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:26:24 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/21 12:41:38 by kgiannou         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:49:43 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* join 2 splits and free whatever used split you want to free :
-	- 1 : free s1
-	- 2 : free s2
-	- 12 : free both s1 and s2
+/**
+ * @brief
+ * Creates a new string by concatenate 2 strings and free whatever used array
+ * of strings you want to free.
+ * 
+ * @param s1 The first sring.
+ * @param s2 The second sring.
+ * @param tab_to_free :*/
+/**
+ * - If tab_to_free = 1, s1 will be freed.*/
+/**
+ * - If tab_to_free = 2, s2 will be freed.*/
+/**
+ * - If tab_to_free = 12 (1 and 2), both s1 and s2 will be freed.
+ * 
+ * @return
+ * The new joined array of strings.
 */
 char	**ft_splitjoin_n_free(char **s1, char **s2, int tab_to_free)
 {

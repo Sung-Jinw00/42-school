@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:37 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/22 17:24:35 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:45:48 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,19 @@ char	**write_split(char *str, char **split, char *charset, int i)
 	return (split);
 }
 
-/* split a string into a chain of strings
-depending on the characters of "charset"
+/**
+ * @brief
+ * Split a string into a array of strings
+ * 
+ * @param str the string that will be splited.
+ * @param charset the string that contains the arguments that will be uset as
+ * separators to split str.
+ * 
+ * @return
+ * The new array of strings.
+ * 
+ * @note
+ * The free of s1 and s2 is the responsibility of the user.
 */
 char	**ft_split(char *str, char *charset)
 {

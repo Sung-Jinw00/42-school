@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strintlen.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:59 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/21 12:30:07 by kgiannou         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:59:45 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* returns the len of as string of chars that will be turned in a string of int
+/**
+ * @return
+ * The len of as string of chars that will be turned in a string of int.
 */
 int	ft_strintlen(char *str_char)
 {
