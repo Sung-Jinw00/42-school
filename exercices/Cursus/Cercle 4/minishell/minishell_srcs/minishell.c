@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 18:03:17 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/06 16:38:32 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 17:29:06 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,10 @@ int	main(int ac, char **av, char **env)
 	char		*print;
 	t_minishell	*mini;
 
-	(void)av;
+	print_welcome();
 	str = NULL;
 	mini = init_vals(env);
-	signal(SIGQUIT, SIG_IGN);
+	((void)av, signal(SIGQUIT, SIG_IGN));
 	while (1)
 	{
 		print = toprint(mini, mini->cur_loc);

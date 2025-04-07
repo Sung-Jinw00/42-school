@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:06 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/02 15:57:25 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/06 22:01:55 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	someone_died(t_philo *philo)
 	philo->dead = 1;
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_unlock(philo->rules->death);
 	return (1);
 }
 
@@ -30,7 +31,6 @@ int	check_death(t_philo *philo)
 	now = time_now() - philo->meal;
 	if (now >= philo->rules->t2die)
 	{
-		pthread_mutex_unlock(philo->rules->death);
 		return (someone_died(philo));
 	}
 	pthread_mutex_unlock(philo->rules->death);
