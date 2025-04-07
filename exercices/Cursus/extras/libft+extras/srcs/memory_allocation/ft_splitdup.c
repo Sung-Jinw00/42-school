@@ -3,16 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_splitdup.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:46 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/21 12:40:46 by kgiannou         ###   ########.fr       */
+/*   Updated: 2025/04/08 00:29:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* create a dublicate of a splited string
+/**
+ * @brief
+ * Duplicates an array of strings.
+ * 
+ * @returns
+ * - If split is NULL, the function returns NULL.*/
+/**
+ * - Else, the function will return the duplicate array of strings.
 */
 char	**ft_splitdup(char **split)
 {
@@ -21,8 +28,7 @@ char	**ft_splitdup(char **split)
 
 	if (!split)
 		return (NULL);
-	dup = (char **)malloc(sizeof(char *) * \
-			(ft_count_words((const char **)split) + 1));
+	dup = (char **)malloc(sizeof(char *) * (ft_count_words(split) + 1));
 	if (!dup)
 		return (NULL);
 	i = 0;

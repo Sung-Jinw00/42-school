@@ -3,17 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:07 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:54:34 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 23:54:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* scans n bytes of a string for the first instance of c and return the rest of
-	the string where c was found
+/**
+ * @brief
+ * Scans n bytes of an argument for the first instance of c.
+ *  
+ * @param s The array of strings that will be scanned.
+ * @param c The string to find in split.
+ * @param n The amount of bytes that wiill be checked.
+ * 
+ * @returns
+ * - If c was found in s, it will return the whole section of s from c.*/
+/**
+ * - Else, it will returns NULL.
 */
 void	*ft_memchr(const void *s, int c, size_t n)
 {

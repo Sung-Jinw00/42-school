@@ -3,16 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:46 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:55:15 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 00:30:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* create a dublicate of a string
+/**
+ * @brief
+ * Duplicates a string.
+ * 
+ * @returns
+ * - If src is NULL, the function returns NULL.*/
+/**
+ * - Else, the function will return the duplicate string.
 */
 char	*ft_strdup(const char *src)
 {

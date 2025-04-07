@@ -3,17 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:39 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:55:22 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 00:15:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* memory allocate depending on the size of the type of argument and the amount
-	of arguments, and set it to zero
+/**
+ * @brief
+ * Memory allocates a generic pointer, depending on the size of the type of
+ * argument, and the amount of arguments, and set it to zero.
+ * 
+ * @returns
+ * - If size = 0, or if the allocation is too big, the function returns NULL.*/
+/**
+ * - Else, the function will return the new generic pointer, set to zero.
 */
 void	*ft_calloc(size_t nmemb, size_t size)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strclen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:59 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 21:01:26 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 22:26:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 /**
  * @return
- * The len of as string when :*/
+ * The len of s when :*/
 /**
- * - It reaches the first iteration of c.*/
+ * - It reaches the first iteration of c in s.*/
 /**
- * - It reaches the end of the string.
+ * - It reaches the end of s.
 */
 size_t	ft_strclen(const char *s, char c)
 {

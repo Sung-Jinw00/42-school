@@ -3,26 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   get_multi_ncmp.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:34:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/21 12:28:59 by kgiannou         ###   ########.fr       */
+/*   Updated: 2025/04/07 23:19:14 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* return a string if a comparison of n charaters was successful, else it
-	returns NULL.
-
-	- if n < 0, the function will take a lenght for each string in
-	the following format "s1, s2, n_s2, s3, n_s3,..., sn, n_sn".
-	- else if n = 0, the function will behave like a multicmp.
-	- else, n will be applied for every string.
-
-	the last argument should be NULL, otherwise,
-	the function may have an undefined
-	behavior.
+/**
+ * @brief
+ * Compares an infinite amout of n bytes of strings and return the string if it
+ * was successful.
+ *  
+ * @param n : */
+/**
+ * - If n < 0, the function will take a lenght for each string in
+ * the following format "s1, s2, n_s2, s3, n_s3,..., sn, n_sn".*/
+/**
+ * - Else if n == 0, the function will behave like get_multi_cmp.*/
+/**
+ * - Else if, n will be applied for every string.
+ * 
+ * @note
+ * - The last argument should be NULL, otherwise, the function may have an
+ * undefined behavior.*/
+/**
+ * - If s1 is NULL, the function will return NULL.
+ * 
+ * @returns
+ * Return the string if a comparison was successful, else it returns NULL.
 */
 char	*get_multi_ncmp(int n, const char *s1, ...)
 {

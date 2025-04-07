@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_extras.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:00:12 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 18:23:49 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 00:20:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,6 @@ typedef struct s_msjnf
 	int		tab_increment;
 	int		tab_len;
 }	t_msjnf;
-
-typedef struct t_str_mlt_revncmp
-{
-	const char	*arg;
-	va_list		args;
-	size_t		n_sn;
-}	t_str_mlt_revncmp;
 
 /* ************************************************************************** */
 /*                                   To Free                                  */
@@ -120,9 +113,9 @@ int			ft_toupper(int c);
 void		ft_bzero(void *s, size_t n);
 char		*ft_strdup(const char *src);
 char		**ft_splitdup(char **split);
+void		*ft_realloc(void *ptr, size_t size);
 char		*ft_strndup(const char *src, int n);
 void		*ft_calloc(size_t nmemb, size_t size);
-void		*ft_upgrade_realloc(void *ptr, size_t size);
 char		**ft_splitndup(char **split, int len_split, int start, int end);
 //																			  //
 /* ************************************************************************** */
@@ -157,20 +150,21 @@ void		ft_putnbr_base_fd(int fd, int nbr, char *base);
 /*                             Return An Occurence                            */
 /* -------------------------------------------------------------------------- */
 
-char		get_multi_char_cmp(int s1, ...);
 char		*ft_strchr(const char *s, int c);
 char		*get_multi_cmp(const char *s1, ...);
 void		*ft_memchr(const void *s, int c, size_t n);
 char		*get_multi_ncmp(int n, const char *s1, ...);
 char		**ft_split_strsrch(char **split, char *str);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
+char		*get_multi_revncmp(int n, const char *s1, ...);
 char		*ft_strnstr(const char *big, const char *little, size_t len);
+char		*ft_substr(char const *s, unsigned int start, size_t len,
+			bool to_free);
 /* -------------------------------------------------------------------------- */
 /*                            Return The Difference                           */
 /* -------------------------------------------------------------------------- */
 
-int			multi_char_cmp(int s1, ...);
 int			str_multi_cmp(const char *s1, ...);
+char		multi_charcmp(char c, char *str_char);
 int			ft_strcmp(const char *s1, const char *s2);
 int			str_multi_ncmp(int n, const char *s1, ...);
 int			str_multi_revncmp(int n, const char *s1, ...);
@@ -183,8 +177,8 @@ int			ft_str_revncmp(const char *s1, const char *s2, size_t n);
 
 size_t		ft_strlen(const char *s);
 int			ft_strintlen(char *str_char);
+int			ft_count_words(char **split);
 size_t		ft_strclen(const char *s, char c);
-int			ft_count_words(const char **split);
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 /*                                Modifications                               */
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
@@ -217,10 +211,9 @@ char		*ft_strjoin_n_free(char *s1, char *s2, int tab_to_free);
 /*                                 For Splits                                 */
 /* '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' */
 
-char		**ft_splitjoin(char const **s1, char const **s2);
+char		**ft_splitjoin(char **s1, char **s2);
 char		**multi_splitjoin_n_free(char *to_free, char **s1, ...);
-char		**ft_splitnjoin(char const **s1, size_t n1, char const **s2,
-				size_t n2);
+char		**ft_splitnjoin(char **s1, size_t n1, char **s2, size_t n2);
 char		**ft_splitjoin_n_free(char **s1, char **s2, int tab_to_free);
 /* -------------------------------------------------------------------------- */
 /*                             Replace Dest By Src                            */

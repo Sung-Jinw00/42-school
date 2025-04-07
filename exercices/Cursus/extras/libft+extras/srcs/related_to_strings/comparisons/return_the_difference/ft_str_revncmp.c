@@ -3,18 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_revncmp.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:34:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 18:17:03 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 22:50:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
 /**
- * return the difference of a string by comparing n bytes at the end of the
- * string
+ * @brief
+ * Compares n characters of 2 strings from the end.
+ * 
+ * @param n : */
+/**
+ * - If n <= 0, the function will return 1.*/
+/**
+ * - Else, the function will compare n bytes of both strings from the end.
+ * 
+ * @returns
+ * Return 0 if a comparison was successful, else it returns 1.
 */
 int	ft_str_revncmp(const char *s1, const char *s2, size_t n)
 {
@@ -23,7 +32,7 @@ int	ft_str_revncmp(const char *s1, const char *s2, size_t n)
 
 	if (!s1 && !s2)
 		return (0);
-	else if (!s1 || !s2)
+	else if (!s1 || !s2 || n <= 0)
 		return (1);
 	len_s1 = ft_strlen(s1) - 1;
 	len_s2 = ft_strlen(s2) - 1;

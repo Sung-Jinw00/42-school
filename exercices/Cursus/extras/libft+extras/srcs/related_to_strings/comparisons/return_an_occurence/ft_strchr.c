@@ -3,23 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:42 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:54:30 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 23:43:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* search the first iteration of c in s
+/**
+ * @brief
+ * Search for the first iteration of c in s.
+ *  
+ * @param s The string that will be scanned.
+ * @param c The character to find in s.
+ * 
+ * @returns
+ * - If c was found in s, it will return the whole section of s from c.*/
+/**
+ * - Else, it will returns 0.
 */
 char	*ft_strchr(const char *s, int c)
 {
 	int	i;
 
 	i = 0;
-	while (s[i])
+	while (s && s[i])
 	{
 		if (s[i] == (char)c)
 			return ((char *)(s + i));

@@ -3,16 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:34:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:54:16 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 22:40:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* return the difference of a string
+/**
+ * @brief
+ * Compares every characters of 2 strings.
+ * 
+ * @returns
+ * Return 0 if a comparison was successful, else it returns 1.
 */
 int	ft_strcmp(const char *s1, const char *s2)
 {

@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 16:47:12 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 17:53:33 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 00:02:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* write a char in the fd chosen
+/**
+ * @brief
+ * Print a char in the fd chosen. 
 */
 void	ft_putchar_fd(int fd, char c)
 {

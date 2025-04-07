@@ -3,16 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:34:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:54:13 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 22:50:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* return the difference of a string by comparing n bytes
+/**
+ * @brief
+ * Compares n characters of 2 strings.
+ * 
+ * @param n : */
+/**
+ * - If n <= 0 the function will return 1.*/
+/**
+ * - Else, the function will compare n bytes of both strings.
+ * 
+ * @returns
+ * Return 0 if a comparison was successful, else it returns 1.
 */
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -21,7 +32,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	i = 0;
 	if (!s1 && !s2)
 		return (0);
-	else if (!s1 || !s2)
+	else if (!s1 || !s2 || n <= 0)
 		return (1);
 	while ((s1[i] || s2[i]) && i < n)
 	{

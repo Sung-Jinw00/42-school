@@ -3,19 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   str_multi_cmp.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:34:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/21 12:29:38 by kgiannou         ###   ########.fr       */
+/*   Updated: 2025/04/07 22:36:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* Compares an infinite amout of strings.
-
-	return 0 if a comparison was successful, else it returns 1, the last argument
-	should be NULL.
+/**
+ * @brief
+ * Compares an infinite amout of strings.
+ * 
+ * @note
+ * The last argument should be NULL, otherwise, the function may have an
+ * undefined behavior.
+ * 
+ * @returns
+ * Return 0 if a comparison was successful, else it returns 1.
 */
 int	str_multi_cmp(const char *s1, ...)
 {

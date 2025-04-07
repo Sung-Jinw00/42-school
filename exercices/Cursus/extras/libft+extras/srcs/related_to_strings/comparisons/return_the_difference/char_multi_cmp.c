@@ -3,42 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   char_multi_cmp.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:34:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 18:05:06 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 23:10:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* Compares an infinite amout of characters.
-
-	Return 0 if a comparison was successful, else it returns 1, the last argument
-	should be NUL-terminated.
+/**
+ * @brief
+ * Compares an infinite amout of characters of the restrained ascii table.
+ * 
+ * @param c The character that will be compared with all the others.
+ * @param str_char The string that will contain every char to compare with c.
+ * 
+ * @note
+ * If c is not a character from restained ascii table, or if it's equal to
+ * zero, or if str_char is NULL or empty, the function will return 0.
+ * 
+ * @returns
+ * Return the character if a comparison was successful, else it returns 0.
 */
-int	multi_char_cmp(int s1, ...)
+char	multi_charcmp(char c, char *str_char)
 {
-	int		arg;
-	va_list	args;
+	int	i;
 
-	if (!ft_isascii(s1) || !s1)
-		return (1);
-	va_start(args, s1);
-	arg = va_arg(args, int);
-	while (!ft_isascii(arg))
-		arg = va_arg(args, int);
-	while (arg)
-	{
-		if (s1 == arg)
-			return (va_end(args), 0);
-		else
-			arg = va_arg(args, int);
-		while (!ft_isascii(arg))
-			arg = va_arg(args, int);
-	}
-	va_end(args);
-	return (1);
+	if (!ft_isascii(c) || !c || !str_char || !str_char[0])
+		return (0);
+	i = -1;
+	while (str_char[++i])
+		if (ft_isascii(str_char[i]) && c == str_char[i]);
+			return (c);
+	return (0);
 }
 
 /* #include <stdio.h>

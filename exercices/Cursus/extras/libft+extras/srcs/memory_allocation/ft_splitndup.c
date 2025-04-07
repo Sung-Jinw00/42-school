@@ -3,16 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_splitndup.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:46 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/31 18:24:22 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 00:29:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* create a dublicate of a splited string at start tab up to end tab
+
+/**
+ * @brief
+ * Create a dublicate of an array of strings, at start tab, up to end tab.
+ * 
+ * @param split The array of strings that will be duplicated.
+ * @param len_split The len of the array of strings that will be duplicated. 
+ * @param start The starting string of the duplication.
+ * @param end The end string of the duplication.
+ * 
+ * @returns
+ * - If start >= end, or if split is NULL, the function returns NULL. */
+/**
+ * - Else, the function will return the duplicated array of end - start strings.
 */
 char	**ft_splitndup(char **split, int len_split, int start, int end)
 {

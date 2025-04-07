@@ -3,22 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:46 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:55:13 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 00:31:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* create a dublicate of a string on n characters
+/**
+ * @brief
+ * Duplicates n bytes of a string.
+ * 
+ * @returns
+ * - If src is NULL, the function returns NULL.*/
+/**
+ * - Else, the function will return the duplicate of n bytes of src.
 */
 char	*ft_strndup(const char *src, int n)
 {
 	char	*cpy;
 	int		i;
 
+	if (!src)
+		return (NULL);
 	i = 0;
 	if (n > (int)ft_strlen(src))
 		n = (int)ft_strlen(src);

@@ -3,21 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:11 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:54:18 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 22:50:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* scans n bytes of 2 strings and return the difference of the 2 strings
+/**
+ * @brief
+ * Compares n characters of 2 arguments.
+ * 
+ * @param n : */
+/**
+ * - If n <= 0, the function will return 1.*/
+/**
+ * - Else, the function will compare n bytes of both strings from the end.
+ * 
+ * @returns
+ * Return 0 if a comparison was successful, else it returns 1.
 */
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	size_t	i;
 
+	if (n <= 0)
+		return (1);
 	i = 0;
 	while (i < n)
 	{

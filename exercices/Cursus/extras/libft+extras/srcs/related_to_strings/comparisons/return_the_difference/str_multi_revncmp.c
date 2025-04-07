@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_multi_revncmp.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:34:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 20:56:21 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 22:43:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,20 @@
 
 /**
  * @brief
- * Compares an infinite amout of n characters of strings at the end of them.
+ * Compares an infinite amout of n characters of strings from the end.
  * 
- * - if n < 0, the function will take a lenght for each string in
- * the following format "s1, s2, n_s2, s3, n_s3,..., sn, n_sn".
- * - if n == 0, the function will return 1.
- * - else, n will be applied for every string.
+ * @param n : */
+/**
+ * - If n < 0, the function will take a lenght for each string in
+ * the following format "s1, s2, n_s2, s3, n_s3,..., sn, n_sn".*/
+/**
+ * - Else if n == 0, the function will return 1.*/
+/**
+ * - Else, n will be applied for every string from the end.
  * 
- * The last argument should be NULL,
- * Otherwise, the function may have an undefined behavior.
+ * @note
+ * The last argument should be NULL, otherwise, the function may have an
+ * undefined behavior.
  * 
  * @returns
  * Return 0 if a comparison was successful, else it returns 1.

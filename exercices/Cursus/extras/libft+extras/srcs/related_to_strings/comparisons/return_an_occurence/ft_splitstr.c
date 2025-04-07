@@ -3,27 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   ft_splitstr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:42 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 18:24:10 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 23:51:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
 /**
- * Search the first iteration of str in split
+ * @brief
+ * Search for the first iteration of str in split.
+ *  
+ * @param split The array of strings that will be scanned.
+ * @param str The string to find in split.
+ * 
+ * @returns
+ * - If split is NULL of empty, or if str is NULL, the function will returns
+ * NULL.*/
+/**
+ * - If str was found in split, it will return a memory allocated duplicate of
+ * the whole section of split from str.*/
+/**
+ * - Else, it will returns NULL.
 */
 char	**ft_split_strsrch(char **split, char *str)
 {
 	int	i;
 
+	if (!split || !split[0] || !str)
+		return (NULL);
 	i = 0;
 	while (split[i])
 	{
 		if (!ft_strcmp(split[i], str))
-			return ((char **)(split + i));
+			return (ft_splitdup((char **)(split + i)));
 		i++;
 	}
 	return (NULL);

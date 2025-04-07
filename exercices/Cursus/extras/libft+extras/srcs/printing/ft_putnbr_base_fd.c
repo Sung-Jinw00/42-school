@@ -43,7 +43,9 @@ int	ft_error(char *base)
 	return (1);
 }
 
-/* write an int into the base chosen
+/**
+ * @brief
+ * Print an int into the base chosen, in the fd chosen. 
 */
 void	ft_putnbr_base_fd(int fd, int nbr, char *base)
 {

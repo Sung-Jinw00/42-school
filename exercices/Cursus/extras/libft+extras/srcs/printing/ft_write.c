@@ -3,16 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_write.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 14:53:35 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 17:44:56 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 00:01:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* Because searching for the lenght of the string is annoying.
+/**
+ * @brief
+ * Because searching for the lenght of the string is annoying.
+ * 
+ * @return
+ * The number of bytes wrote.
 */
 int	ft_write(int fd, char *s)
 {

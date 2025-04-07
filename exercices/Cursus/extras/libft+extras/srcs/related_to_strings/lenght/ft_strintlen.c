@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strintlen.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:59 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 20:59:45 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 22:27:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /**
  * @return
- * The len of as string of chars that will be turned in a string of int.
+ * The len of str_char that will be turned in a string of int.
 */
 int	ft_strintlen(char *str_char)
 {

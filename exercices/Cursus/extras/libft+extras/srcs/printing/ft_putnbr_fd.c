@@ -3,16 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:30:58 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 17:54:23 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 00:03:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
 /* write an int into the fd chosen
+*/
+/**
+ * @brief
+ * Print an int into the fd chosen. 
 */
 void	ft_putnbr_fd(int fd, int n)
 {

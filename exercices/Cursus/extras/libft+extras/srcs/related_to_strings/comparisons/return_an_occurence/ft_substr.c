@@ -3,18 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:21 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 19:21:36 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 23:33:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* returns a new string that started at start, and end at len or the end of s.
-	If start is greater than the lenght of s or if s doesn't exist, it returns
-	an empty string
+/**
+ * @brief
+ * Returns a new string that begins at start, and ended at len, or the end of s.
+ *  
+ * @param s The string that will be copied.
+ * @param start The starting point of the new string.
+ * @param len The len the new string.
+ * @param to_free If to_free = true, s will be freed.
+ * 
+ * @returns
+ * - If start is greater than the lenght of s, or if s is NULL or empty, it
+ * will returns an empty string.*/
+/**
+ * - Else, it will returns the new string.
 */
 char	*ft_substr(char const *s, unsigned int start, size_t len, bool to_free)
 {
@@ -22,13 +33,14 @@ char	*ft_substr(char const *s, unsigned int start, size_t len, bool to_free)
 	char			*new_str;
 	unsigned int	limit;
 
-	if (start >= ft_strlen(s) || !s[0])
+	if (start >= ft_strlen(s) || !s || !s[0])
 	{
 		new_str = malloc(1);
 		if (!new_str)
 			return (NULL);
-		new_str[0] = '\0';
-		return (new_str);
+		if (to_free)
+			free(s);
+		return (new_str[0] = '\0', new_str);
 	}
 	limit = start + (unsigned int)len;
 	if (limit > ft_strlen(s))
@@ -39,10 +51,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len, bool to_free)
 	i = 0;
 	while ((size_t)start < limit && s[start])
 		new_str[i++] = s[start++];
-	new_str[i] = '\0';
 	if (to_free)
 		free(s);
-	return (new_str);
+	return (new_str[i] = '\0', new_str);
 }
 
 /* #include <stdio.h>

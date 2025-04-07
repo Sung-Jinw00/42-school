@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_splitjoin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:26:24 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 20:42:21 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 00:20:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
  * @return
  * The new joined array of strings.
 */
-char	**ft_splitjoin(char const **s1, char const **s2)
+char	**ft_splitjoin(char **s1, char **s2)
 {
 	char	**new_split;
 	size_t	len;

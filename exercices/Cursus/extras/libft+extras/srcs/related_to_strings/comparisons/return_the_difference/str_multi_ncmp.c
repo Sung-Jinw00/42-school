@@ -3,27 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   str_multi_ncmp.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kgiannou <kgiannou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:34:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/21 12:29:48 by kgiannou         ###   ########.fr       */
+/*   Updated: 2025/04/07 22:49:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* Compares an infinite amout of n characters of strings.
-
-	return 0 if a comparison was successful, else it returns 1.
-
-	- if n < 0, the function will take a lenght for each string in
-	the following format "s1, s2, n_s2, s3, n_s3,..., sn, n_sn".
-	- else if n = 0, the function will behave like a multicmp.
-	- else, n will be applied for every string.
-
-	the last argument should be NULL,
-	otherwise, the function may have an undefined
-	behavior.
+/**
+ * @brief
+ * Compares an infinite amout of n characters of strings.
+ * 
+ * @param n : */
+/**
+ * - If n < 0, the function will take a lenght for each string in
+ * the following format "s1, s2, n_s2, s3, n_s3,..., sn, n_sn".*/
+/**
+ * - Else if n == 0, the function will behave like str_multi_cmp.*/
+/**
+ * - Else if, n will be applied for every string.
+ * 
+ * @note
+ * The last argument should be NULL, otherwise, the function may have an
+ * undefined behavior.
+ * 
+ * @returns
+ * Return 0 if a comparison was successful, else it returns 1.
 */
 int	str_multi_ncmp(int n, const char *s1, ...)
 {

@@ -3,25 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:34:10 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:54:27 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/07 23:44:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* search for the first iteration of little string into len bytes of big string
-	and returns the rest of big string at the first iteration found. If little
-	is null, the function returns big
+/**
+ * @brief
+ * Search for the first iteration of "little" into len bytes of "big".
+ *  
+ * @param big The string that will be scanned.
+ * @param little The string to find in "big".
+ * @param len The bytes that will be scanned by the function.
+ * 
+ * @returns
+ * - If "little" was found in "big", it will return the whole section of "big"
+ * from "little".*/
+/**
+ * - Else if "little" is NULL or empty, it will returns "big".*/
+/**
+ * - Else , it will returns NULL.
 */
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
 	size_t	i;
 	size_t	j;
 
-	if (!*little)
+	if (!little || !*little || !big)
 		return ((char *)big);
 	i = 0;
 	j = 0;

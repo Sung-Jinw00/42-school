@@ -3,16 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:32 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:55:28 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 00:17:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* set whatever argument to zero
+/**
+ * @brief
+ * Set a generic pointer to zero.
+ * 
+ * @returns
+ * - The a generic pointer, set to zero.
 */
 void	ft_bzero(void *s, size_t n)
 {

@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:13 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 17:53:56 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 00:03:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* write a string in the fd chosen, followed by a newline
+/**
+ * @brief
+ * Print a string in the fd chosen, followed by a newline. 
 */
 void	ft_putendl_fd(int fd, char *s)
 {

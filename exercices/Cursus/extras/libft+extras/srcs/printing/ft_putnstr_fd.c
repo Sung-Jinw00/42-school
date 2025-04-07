@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnstr_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:23 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 17:54:28 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 00:03:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* write n characters of a string into the fd chosen
+/**
+ * @brief
+ * Print n characters of a string into the fd chosen. 
 */
 void	ft_putnstr_fd(int fd, char *s, int n)
 {
