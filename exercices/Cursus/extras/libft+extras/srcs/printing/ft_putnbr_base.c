@@ -14,7 +14,7 @@
 
 static void	error_msg(char *msg)
 {
-	ft_putstr_fd(msg, 2);
+	ft_putstr_fd(2, msg);
 	exit(EXIT_FAILURE);
 }
 

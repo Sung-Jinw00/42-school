@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_convert_base.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:58:28 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:56:06 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 00:53:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	error_msg(char *msg)
 {
-	ft_putstr_fd(msg, 2);
+	ft_putstr_fd(2, msg);
 	exit(EXIT_FAILURE);
 }
 

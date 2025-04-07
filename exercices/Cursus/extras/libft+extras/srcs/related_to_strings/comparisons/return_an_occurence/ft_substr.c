@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:21 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 23:33:53 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/08 00:57:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 /**
  * - Else, it will returns the new string.
 */
-char	*ft_substr(char const *s, unsigned int start, size_t len, bool to_free)
+char	*ft_substr(char *s, unsigned int start, size_t len, bool to_free)
 {
 	int				i;
 	char			*new_str;

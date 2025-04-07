@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:46 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 00:29:40 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/08 00:54:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	**ft_splitdup(char **split)
 	{
 		dup[i] = ft_strdup(split[i]);
 		if (!dup[i])
-			return (free_dbl_tab(dup), NULL);
+			return (free_dbl_tab(&dup), NULL);
 		i++;
 	}
 	dup[i] = NULL;

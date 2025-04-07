@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multi_splitjoin_n_free.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 16:07:25 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 20:40:15 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 01:04:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,18 @@ int	has_to_be_freed(t_msjnf v, int *tab_inc)
 char	**multi_spitjoin_n_free2(t_msjnf v)
 {
 	if (v.tabs_to_free && has_to_be_freed(v, &v.tab_increment))
-		free_dbl_tab(v.arg);
+		free_dbl_tab(&v.arg);
 	if (!v.new_split)
-		return (ft_putstr_fd("fail join\n", 2), NULL);
+		return (ft_putstr_fd(2, "fail join\n"), NULL);
 	v.arg = va_arg(v.args, char **);
 	v.cur_str = 2;
 	while (v.arg)
 	{
 		v.new_split = ft_splitjoin_n_free(v.new_split, v.arg, 1);
 		if (v.tabs_to_free && has_to_be_freed(v, &v.tab_increment))
-			free_dbl_tab(v.arg);
+			free_dbl_tab(&v.arg);
 		if (!v.new_split)
-			return (ft_putstr_fd("fail join and free\n", 2), NULL);
+			return (ft_putstr_fd(2, "fail join and free\n"), NULL);
 		v.arg = va_arg(v.args, char **);
 		v.cur_str++;
 	}
@@ -106,12 +106,12 @@ char	**multi_splitjoin_n_free(char *to_free, char **s1, ...)
 	{
 		v.new_split = ft_splitdup(s1);
 		if (v.tabs_to_free && has_to_be_freed(v, &v.tab_increment))
-			free_dbl_tab(s1);
+			free_dbl_tab(&s1);
 		return (va_end(v.args), free(v.tabs_to_free), v.new_split);
 	}
-	v.new_split = ft_splitjoin((const char **)s1, (const char **)v.arg);
+	v.new_split = ft_splitjoin(s1, v.arg);
 	if (v.tabs_to_free && has_to_be_freed(v, &v.tab_increment))
-		free_dbl_tab(s1);
+		free_dbl_tab(&s1);
 	v.cur_str++;
 	return (multi_spitjoin_n_free2(v));
 }

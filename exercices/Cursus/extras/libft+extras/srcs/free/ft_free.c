@@ -14,19 +14,13 @@
 
 /**
  * @brief
- * Free an array of strings and set it to NULL.
+ * Free a string and set it to NULL.
  * 
- * @param str is an pointer on an array of strings.
+ * @param str is an pointer on an string.
 */
-void	free_dbl_tab(char ***str)
+void	ft_free(char **str)
 {
-	int	j;
-
-	if (!*str || !(*str)[0])
-		return ;
-	j = 0;
-	while ((*str)[j])
-		ft_free(&(*str)[j++]);
 	if (*str)
-		ft_free(*str);
+		free(*str);
+	*str = NULL;
 }

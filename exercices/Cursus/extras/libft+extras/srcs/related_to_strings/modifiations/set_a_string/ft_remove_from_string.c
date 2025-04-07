@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_remove_from_string.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 14:46:21 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 19:41:15 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 01:06:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ char	*ft_remove_from_string(char *str, char *to_delete, int to_free)
 	{
 		tmp = ft_strjoin(line, tab[i++]);
 		if (!tmp)
-			return (free_dbl_tab(tab), free(line), NULL);
+			return (free_dbl_tab(&tab), free(line), NULL);
 		free(line);
 		line = tmp;
 	}
-	free_dbl_tab(tab);
+	free_dbl_tab(&tab);
 	if (to_free)
 		free(str);
 	return (line);

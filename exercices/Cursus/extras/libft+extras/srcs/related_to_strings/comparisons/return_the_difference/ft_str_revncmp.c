@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:34:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 22:50:43 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/08 01:00:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@
 */
 int	ft_str_revncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	len_s1;
-	size_t	len_s2;
+	int	len_s1;
+	int	len_s2;
 
 	if (!s1 && !s2)
 		return (0);
 	else if (!s1 || !s2 || n <= 0)
 		return (1);
-	len_s1 = ft_strlen(s1) - 1;
-	len_s2 = ft_strlen(s2) - 1;
-	while (len_s1 >= 0 && len_s2 >= 0 && len_s1 >= n && len_s2 >= n
+	len_s1 = (int)ft_strlen(s1) - 1;
+	len_s2 = (int)ft_strlen(s2) - 1;
+	while (len_s1 >= 0 && len_s2 >= 0 && len_s1 >= (int)n && len_s2 >= (int)n
 		&& (s1[len_s1] || s2[len_s2]))
 	{
 		if (s1[len_s1] != s2[len_s2])

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:23 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 00:02:32 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/08 00:54:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void	ft_putcstr_fd(int fd, char *s, char c)
 {
 	if (!s)
-		return (0);
+		return ;
 	return ((void)write(fd, s, ft_strclen(s, c)));
 }
 

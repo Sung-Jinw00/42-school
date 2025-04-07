@@ -29,18 +29,26 @@ static bool	correct_format(char *str_char)
 	return (1);
 }
 
-/* free an infinite number of arguments
-
-	- The string "to_free" must follow the format : "n1, n2, ..., nn".
-	- If the format isn't respected, or if the string is NULL or empty, nothing
-	will be free.
-
-	- if the number is 1, it will free a string (*str)
-	- if the number is 2, it will free a board of strings (**str)
-
-	The last argument should be NULL to i
-	nterrupt the function correctly, otherwise,
-	undefined outcome may happened.
+/**
+ * @brief
+ * Free an infinite of number of arguments.
+ * 
+ * @param to_free :*/
+/**
+ * - The string "to_free" must follow the format : "n1, n2, ..., nn".*/
+/**
+ * - If tab_to_free = 1, it will free a string (*str).*/
+/**
+ * - If tab_to_free = 2, it will free an array of strings (**str).*/
+/**
+ * @note
+ * - The last argument should be NULL to interrupt the function correctly,
+ * otherwise, undefined outcome may happened.*/
+/**
+ * - If the format of to_free isn't respected, or if it's NULL or empty,
+ * nothing will be freed.
+ * 
+ * @param str is an pointer on an array of strings.
 */
 void	multi_free(char *to_free, ...)
 {
@@ -58,9 +66,9 @@ void	multi_free(char *to_free, ...)
 	while (ptrn)
 	{
 		if (tabs_to_free && tabs_to_free[i] == 1 && ptrn)
-			free(ptrn);
+			ft_free((char **)&ptrn);
 		if (tabs_to_free && tabs_to_free[i] == 2 && (char **)ptrn)
-			free_dbl_tab((char **)ptrn);
+			free_dbl_tab((char ***)&ptrn);
 		ptrn = va_arg(args, void *);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:34:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 23:10:38 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/08 00:58:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	multi_charcmp(char c, char *str_char)
 		return (0);
 	i = -1;
 	while (str_char[++i])
-		if (ft_isascii(str_char[i]) && c == str_char[i]);
+		if (ft_isascii(str_char[i]) && c == str_char[i])
 			return (c);
 	return (0);
 }

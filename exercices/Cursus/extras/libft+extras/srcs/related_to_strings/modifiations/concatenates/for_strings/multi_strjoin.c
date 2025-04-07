@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multi_strjoin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 16:07:25 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 20:48:01 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 01:08:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * 
  * @note
  * - The last argument should be NULL to interrupt the function correctly,
- * otherwise, undefined outcome may happened. */ 
+ * otherwise, undefined outcome may happened. */
 /**
  * - The free of the strings are the responsibility of the user.
  * 
@@ -39,13 +39,13 @@ char	*multi_join(char *s1, ...)
 		return (va_end(args), ft_strdup(s1));
 	new_string = ft_strjoin(s1, arg);
 	if (!new_string)
-		return (ft_putstr_fd("fail join\n", 2), NULL);
+		return (ft_putstr_fd(2, "fail join\n"), NULL);
 	arg = va_arg(args, char *);
 	while (arg)
 	{
 		new_string = ft_strjoin_n_free(new_string, arg, 1);
 		if (!new_string)
-			return (ft_putstr_fd("fail join and free\n", 2), NULL);
+			return (ft_putstr_fd(2, "fail join and free\n"), NULL);
 		arg = va_arg(args, char *);
 	}
 	va_end(args);

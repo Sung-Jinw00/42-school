@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:00:12 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 00:20:58 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/08 01:06:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ typedef struct s_msjnf
 /* ************************************************************************** */
 //																			  //
 
-void		free_dbl_tab(char **str);
+void		ft_free(char **str);
+void		free_dbl_tab(char ***str);
 void		multi_free(char *to_free, ...);
 void		ft_free_splits_array(char ****cmd_s);
 //																			  //
@@ -133,8 +134,8 @@ void		ft_putchar_fd(int fd, char c);
 void		ft_putendl_fd(int fd, char *s);
 void		ft_putnbr_base(int nbr, char *base);
 void		print_dlb_tabs_fd(int fd, char **tab);
-void		ft_putnstr_fd(int fd, char *s, int n);
 void		ft_putcstr_fd(int fd, char *s, char c);
+void		ft_putnstr_fd(int fd, char *s, size_t n);
 void		ft_putnbr_base_fd(int fd, int nbr, char *base);
 //																			  //
 /* ************************************************************************** */
@@ -157,8 +158,7 @@ char		*get_multi_ncmp(int n, const char *s1, ...);
 char		**ft_split_strsrch(char **split, char *str);
 char		*get_multi_revncmp(int n, const char *s1, ...);
 char		*ft_strnstr(const char *big, const char *little, size_t len);
-char		*ft_substr(char const *s, unsigned int start, size_t len,
-			bool to_free);
+char		*ft_substr(char *s, unsigned int start, size_t len, bool to_free);
 /* -------------------------------------------------------------------------- */
 /*                            Return The Difference                           */
 /* -------------------------------------------------------------------------- */
@@ -184,7 +184,7 @@ size_t		ft_strclen(const char *s, char c);
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
 char		**ft_split(char *str, char *charset);
-char		*ft_strtrim(char const *s1, char const *set);
+char		*ft_strtrim(char const *s1, char const *set, bool to_free);
 /* -------------------------------------------------------------------------- */
 /*                              Apply A Function                              */
 /* -------------------------------------------------------------------------- */

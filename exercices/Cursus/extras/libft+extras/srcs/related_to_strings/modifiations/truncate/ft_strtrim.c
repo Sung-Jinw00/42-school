@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:16 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 19:23:56 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 01:07:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*ft_strtrim(char const *s1, char const *set, bool to_free)
 	j--;
 	while (set_cmp(s1[j], set) && j > i)
 		j--;
-	return (ft_substr(s1, i, j - i + 1, to_free));
+	return (ft_substr((char *)s1, i, j - i + 1, to_free));
 }
 
 /* #include <stdio.h>

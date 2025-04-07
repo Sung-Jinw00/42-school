@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:26:24 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 00:19:54 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/08 01:01:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ char	**ft_splitjoin_n_free(char **s1, char **s2, int tab_to_free)
 		new_split[i++] = ft_strdup(s2[j++]);
 	new_split[i] = NULL;
 	if (tab_to_free == 1)
-		free_dbl_tab(s1);
+		free_dbl_tab(&s1);
 	else if (tab_to_free == 2)
-		free_dbl_tab(s2);
+		free_dbl_tab(&s2);
 	else if (tab_to_free == 12)
-		return (free_dbl_tab(s1), free_dbl_tab(s2), new_split);
+		return (free_dbl_tab(&s1), free_dbl_tab(&s2), new_split);
 	return (new_split);
 }
 

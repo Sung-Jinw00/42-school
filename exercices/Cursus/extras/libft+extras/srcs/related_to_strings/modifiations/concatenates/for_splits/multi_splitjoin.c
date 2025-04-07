@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multi_splitjoin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 16:07:25 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 20:38:52 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 01:02:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ char	**multi_splitjoin(char **s1, ...)
 	arg = va_arg(args, char **);
 	if (!arg)
 		return (va_end(args), ft_splitdup(s1));
-	new_split = ft_splitjoin((const char **)s1, (const char **)arg);
+	new_split = ft_splitjoin(s1, arg);
 	if (!new_split)
-		return (ft_putstr_fd("fail join\n", 2), NULL);
+		return (ft_putstr_fd(2, "fail join\n"), NULL);
 	arg = va_arg(args, char **);
 	while (arg)
 	{
 		new_split = ft_splitjoin_n_free(new_split, arg, 1);
 		if (!new_split)
-			return (ft_putstr_fd("fail join and free\n", 2), NULL);
+			return (ft_putstr_fd(2, "fail join and free\n"), NULL);
 		arg = va_arg(args, char **);
 	}
 	va_end(args);

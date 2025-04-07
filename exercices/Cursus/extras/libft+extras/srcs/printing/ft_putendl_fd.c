@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:13 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 00:03:08 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/08 00:54:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void	ft_putendl_fd(int fd, char *s)
 {
 	if (!s)
-		return (0);
+		return ;
 	return (write(fd, s, ft_strlen(s)), (void)write(fd, "\n", 1));
 }
 

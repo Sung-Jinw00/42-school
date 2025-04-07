@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multi_strjoin_n_free.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 16:07:25 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 20:39:10 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 01:04:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*multi_join_n_free2(t_mjnf v)
 	if (v.tabs_to_free && has_to_be_freed(v, &v.tab_increment))
 		free(v.arg);
 	if (!v.new_string)
-		return (ft_putstr_fd("fail join\n", 2), NULL);
+		return (ft_putstr_fd(2, "fail join\n"), NULL);
 	v.arg = va_arg(v.args, char *);
 	v.cur_str = 2;
 	while (v.arg)
@@ -55,7 +55,7 @@ char	*multi_join_n_free2(t_mjnf v)
 		if (v.tabs_to_free && has_to_be_freed(v, &v.tab_increment))
 			free(v.arg);
 		if (!v.new_string)
-			return (ft_putstr_fd("fail join and free\n", 2), NULL);
+			return (ft_putstr_fd(2, "fail join and free\n"), NULL);
 		v.arg = va_arg(v.args, char *);
 		v.cur_str++;
 	}
