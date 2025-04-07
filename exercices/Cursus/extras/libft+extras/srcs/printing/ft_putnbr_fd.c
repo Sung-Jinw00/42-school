@@ -6,14 +6,12 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:30:58 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 00:03:45 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/08 01:15:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* write an int into the fd chosen
-*/
 /**
  * @brief
  * Print an int into the fd chosen. 

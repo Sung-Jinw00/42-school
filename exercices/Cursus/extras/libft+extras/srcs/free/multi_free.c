@@ -37,9 +37,9 @@ static bool	correct_format(char *str_char)
 /**
  * - The string "to_free" must follow the format : "n1, n2, ..., nn".*/
 /**
- * - If tab_to_free = 1, it will free a string (*str).*/
+ * - If n = 1, it will free a string (*str).*/
 /**
- * - If tab_to_free = 2, it will free an array of strings (**str).*/
+ * - If n = 2, it will free an array of strings (**str).*/
 /**
  * @note
  * - The last argument should be NULL to interrupt the function correctly,

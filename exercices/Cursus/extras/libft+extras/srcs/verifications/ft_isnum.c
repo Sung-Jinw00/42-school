@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isnum.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:52:11 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 19:14:59 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 01:18:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
 /**
- * @brief
- * Return true if the argument is an number.
+ * @return
+ * True if the argument is an number.
 */
 int	ft_isnum(int c)
 {

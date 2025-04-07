@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:46 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 01:09:00 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/08 01:11:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /**
  * @brief
- * Create a dublicate of an array of strings, at start tab, up to end tab.
+ * Create a duplicate of an array of strings, at start tab, up to end tab.
  * 
  * @param split The array of strings that will be duplicated.
  * @param len_split The len of the array of strings that will be duplicated. 

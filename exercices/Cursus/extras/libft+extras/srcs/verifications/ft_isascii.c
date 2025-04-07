@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:53 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 19:15:10 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 01:19:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
 /**
- * @brief
- * Return true if the argument is an restrained ascii argument.
+ * @return
+ * True if the argument is an restrained ascii argument.
 */
 int	ft_isascii(int c)
 {

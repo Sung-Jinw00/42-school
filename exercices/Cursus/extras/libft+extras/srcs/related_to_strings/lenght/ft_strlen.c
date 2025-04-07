@@ -6,18 +6,15 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:59 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 22:28:26 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/08 01:16:59 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
 /**
- * @brief
- * Returns the len of a string.
- * 
  * @return
- * The len of s.
+ * The len len of a string.
 */
 size_t	ft_strlen(const char *s)
 {

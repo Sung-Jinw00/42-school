@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:03 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 19:14:56 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 01:20:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
 /**
- * @brief
- * Return true if the argument is printable.
+ * @return
+ * True if the argument is printable.
 */
 int	ft_isprint(int c)
 {

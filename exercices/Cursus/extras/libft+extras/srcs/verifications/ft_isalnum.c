@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:44 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 19:15:16 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 01:20:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
 /**
- * @brief
- * Return true if the argument is an alphanumeric argument.
+ * @return
+ * True if the argument is an alphanumeric argument.
 */
 int	ft_isalnum(int c)
 {
