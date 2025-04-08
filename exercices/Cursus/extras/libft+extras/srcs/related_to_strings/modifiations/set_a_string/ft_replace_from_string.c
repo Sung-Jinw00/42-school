@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 14:46:21 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 21:22:16 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/09 01:58:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int to_free)
 		}
 		else
 		{
-			tmp = ft_strndup(str + i, ft_str_string_len(str + i, to_search));
+			tmp = ft_strndup(str + i, ft_str_strlen(str + i, to_search));
 			i += ft_strlen(tmp);
 			new_str = ft_strjoin_n_free(new_str, tmp, 12);
 		}

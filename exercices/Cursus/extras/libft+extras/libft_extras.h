@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:00:12 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/09 01:11:32 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/09 01:58:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ size_t			ft_strlen(const char *s);
 int				ft_strintlen(char *str_char);
 int				ft_count_words(char **split);
 size_t			ft_strclen(const char *s, char c);
-size_t			ft_str_string_len(const char *s1, char *s2);
+size_t			ft_str_strlen(const char *s1, char *s2);
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 /*                                Modifications                               */
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */

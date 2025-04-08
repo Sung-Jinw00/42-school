@@ -38,9 +38,5 @@
 
 int	main(void)
 {
-	unsigned int	i;
-
-	ft_ato_universal("-37", &i, "unsigned int");
-	printf("i = %d\n", i);
 	return (0);
 }

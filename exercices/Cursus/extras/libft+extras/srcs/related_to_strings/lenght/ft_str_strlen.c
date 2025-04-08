@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_string_len.c                                :+:      :+:    :+:   */
+/*   ft_str_strlen.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:59 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 18:43:16 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/09 01:58:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 /**
  * - It reaches the end of s1.
 */
-size_t	ft_str_string_len(const char *s1, char *s2)
+size_t	ft_str_strlen(const char *s1, char *s2)
 {
 	size_t	i;
 
