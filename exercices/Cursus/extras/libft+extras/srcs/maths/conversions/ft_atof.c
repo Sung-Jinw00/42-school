@@ -3,40 +3,76 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:56:22 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/09 01:06:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-static float	decimal(char *nptr)
+static int	is_valid_float(double result)
+{
+	double	dup;
+
+	if (result != result)
+		return (ft_write(2, "ft_atof : number is NaN (Not a Number)\n"), 0);
+	else if (result == INFINITY)
+		return (ft_write(2, "ft_atof : number is infinity\n"), 0);
+	else if (result == -INFINITY)
+		return (ft_write(2, "ft_atof : number is -infinity\n"), 0);
+	else if (result > FLT_MAX || result < -FLT_MAX)
+	{
+		ft_write(2, "ft_atof : number is above the limits of a float\n");
+		return (0);
+	}
+	ft_absolu(&result, &dup, "float");
+	if (dup < FLT_TRUE_MIN && result != 0.0)
+	{
+		ft_write(2, "ft_atof : number is subnormal (too small for float)\n");
+		return (0);
+	}
+	return (1);
+}
+
+static int	decimal(double *result, char *nptr)
 {
 	int		i;
 	int		divizor;
-	float	result;
+	double	decimal;
 
 	i = 0;
 	divizor = 10;
-	result = 0;
+	decimal = 0;
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		result = result + (float)(nptr[i] - '0') / divizor;
+		decimal = decimal + (float)(nptr[i] - '0') / divizor;
 		divizor *= 10;
 		i++;
 	}
-	return (result);
+	*result += decimal;
+	if (!is_valid_float(*result))
+		return (1);
+	return (0);
 }
 
-/* turn a decimal number string into an float
+/**
+ * @brief
+ * Transform a number in a string into a float.
+ * 
+ * @returns
+ * - If nptr = NULL, the result exceeds the limits of a float, or results in
+ * infinity, -infinity, or a NaN (Not a NUmber), or if the casual requirements
+ * of atoi aren't respected, the function returns 0.*/
+/**
+ * - Else, it returns the float version of a string of numbers.
 */
 float	ft_atof(char *nptr)
 {
 	int		i;
 	int		sign;
-	float	result;
+	double	result;
 
 	if (!nptr)
 		return (0);
@@ -56,8 +92,8 @@ float	ft_atof(char *nptr)
 		result = result * 10 + nptr[i] - '0';
 		i++;
 	}
-	if (nptr[i] == '.' || nptr[i] == ',')
-		result += decimal(nptr + i + 1);
+	if ((nptr[i] == '.' || nptr[i] == ',') && decimal(&result, nptr + i + 1))
+		return (0);
 	return (result * sign);
 }
 

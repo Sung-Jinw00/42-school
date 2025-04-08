@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 18:51:34 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 23:58:03 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/08 19:21:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ void	print_dlb_tabs(char **tab)
 
 	i = 0;
 	while (tab && tab[i])
-		printf("%s\n", tab[i++]);
+		printf("%s ", tab[i++]);
+	printf("\n");
 }

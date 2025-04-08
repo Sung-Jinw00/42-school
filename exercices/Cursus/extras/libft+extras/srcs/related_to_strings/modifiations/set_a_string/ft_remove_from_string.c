@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 14:46:21 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 01:06:04 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/08 17:33:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 /**
  * @brief
- * Remove every characters of to_delete string to str and return the new line,
- * can free str.
+ * Remove every characters of to_delete string to str and return the new string,
+ * str can be freed.
  * 
  * @param str The string that will be changed.
  * @param to_delete The string that contains the characters that will be

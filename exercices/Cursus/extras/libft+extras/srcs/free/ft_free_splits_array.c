@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 16:24:32 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 00:52:58 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/08 19:38:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void	ft_free_splits_array(char ****cmd_s)
 {
 	int	j;
 
-	if (!(*cmd_s) || !(*cmd_s)[0])
+	if (!cmd_s || !(*cmd_s) || !(*cmd_s)[0])
 		return ;
 	j = 0;
 	while ((*cmd_s)[j])
-		free_dbl_tab(&(*cmd_s)[j++]);
+		free_dbl_tab(&((*cmd_s)[j++]));
 	if ((*cmd_s))
 		free(*cmd_s);
 	*cmd_s = NULL;

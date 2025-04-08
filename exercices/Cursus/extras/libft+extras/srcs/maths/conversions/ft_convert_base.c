@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:58:28 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 00:53:41 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/08 14:58:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	error_msg(char *msg)
 {
 	ft_putstr_fd(2, msg);
-	exit(EXIT_FAILURE);
 }
 
 static int	ft_error(char *base)
@@ -26,19 +25,19 @@ static int	ft_error(char *base)
 	i = 0;
 	j = 1;
 	if ((int)ft_strlen(base) <= 1)
-		error_msg(RED"Error : invalid base\n"RESET);
+		return (error_msg(RED"Error : invalid base\n"RESET), 1);
 	if (base[i] == ' ' || base[i] == '-' || base[i] == '+'
 		|| (base[i] >= 9 && base[i] <= 13))
-		error_msg(RED"Error : white spaces in base\n"RESET);
+		return (error_msg(RED"Error : white spaces in base\n"RESET), 1);
 	while (i <= (int)ft_strlen(base))
 	{
 		while (j <= (int)ft_strlen(base))
 		{
 			if (base[i] == base[j])
-				error_msg(RED"Error : duplicates in base\n"RESET);
+				return (error_msg(RED"Error : duplicates in base\n"RESET), 1);
 			if (base[j] == ' ' || base[j] == '-' || base[j] == '+'
 				|| (base[j] >= 9 && base[j] <= 13))
-				error_msg(RED"Error : white spaces in base\n"RESET);
+				return (error_msg(RED"Error : white spaces in base\n"RESET), 1);
 			j++;
 		}
 		i++;
@@ -47,7 +46,15 @@ static int	ft_error(char *base)
 	return (0);
 }
 
-/* converts a string of numbers on a certain base into another base
+/**
+ * @brief
+ * Transform a string of numbers in a certain base into another string of
+ * numbers in another base.
+ * 
+ * @returns
+ * - If the bases are invalid, it returns NULL.*/
+/**
+ * - Else, it returns the integer version of a string of numbers.
 */
 char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 {

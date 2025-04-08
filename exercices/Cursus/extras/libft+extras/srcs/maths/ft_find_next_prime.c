@@ -3,16 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_find_next_prime.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 10:04:52 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:55:47 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:43:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* return tne prime number above nb if he is not himself a prime number
+/**
+ * @brief
+ * Find the prime number above nb if nb is not a prime number.
+ * 
+ * @returns
+ * - nb if it's a prime number.*/
+/**
+ * - The prime number above nb.
 */
 int	ft_find_next_prime(int nb)
 {

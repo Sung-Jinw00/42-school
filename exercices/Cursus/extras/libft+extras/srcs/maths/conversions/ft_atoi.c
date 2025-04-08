@@ -3,22 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:56:16 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 21:10:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* turn a string into an number
+/**
+ * @brief
+ * Transform a number in a string into an int.
+ * 
+ * @returns
+ * - If nptr = NULL, or if the casual requirements of
+ * atoi aren't respected, the function returns 0.*/
+/**
+ * - Else, it returns the integer version of a string of numbers.
 */
-int	ft_atoi(const char *nptr)
+int	ft_atoi(char *nptr)
 {
-	int	i;
-	int	sign;
-	int	result;
+	int		i;
+	int		sign;
+	long	result;
 
 	i = 0;
 	sign = 1;
@@ -36,6 +44,8 @@ int	ft_atoi(const char *nptr)
 		result = result * 10 + nptr[i] - '0';
 		i++;
 	}
+	if (result < INT_MIN || result > INT_MAX)
+		return (ft_write(2, "ft_atoi : nb out of the limits of an int\n"), 0);
 	return (result * sign);
 }
 

@@ -3,22 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:56:10 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 21:11:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* turn a decimal number string into an long
+/**
+ * @brief
+ * Transform a number in a string into an long int.
+ * 
+ * @returns
+ * - If nptr = NULL, or if the casual requirements of
+ * atoi aren't respected, the function returns 0.*/
+/**
+ * - Else, it returns the long int version of a string of numbers.
 */
 long	ft_atol(char *nptr)
 {
-	int		i;
-	int		sign;
-	long	result;
+	int			i;
+	int			sign;
+	long long	result;
 
 	if (!nptr)
 		return (0);
@@ -38,6 +46,8 @@ long	ft_atol(char *nptr)
 		result = result * 10 + nptr[i] - '0';
 		i++;
 	}
+	if (result > LONG_MIN || result > LONG_MAX)
+		return (ft_write(2, "ft_atol : nb out of the limits of a long\n"), 0);
 	return (result * sign);
 }
 

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:07 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 00:53:50 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/08 17:28:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	error_msg(char *msg)
 {
 	ft_putstr_fd(2, msg);
-	exit(EXIT_FAILURE);
 }
 
 static int	ft_error(char *base)
@@ -26,19 +25,19 @@ static int	ft_error(char *base)
 	i = 0;
 	j = 1;
 	if ((int)ft_strlen(base) <= 1)
-		error_msg(RED"Error : invalid base\n"RESET);
+		return (error_msg(RED"Error : invalid base\n"RESET), 1);
 	if (base[i] == ' ' || base[i] == '-' || base[i] == '+'
 		|| (base[i] >= 9 && base[i] <= 13))
-		error_msg(RED"Error : white spaces in base\n"RESET);
+		return (error_msg(RED"Error : white spaces in base\n"RESET), 1);
 	while (i <= (int)ft_strlen(base))
 	{
 		while (j <= (int)ft_strlen(base))
 		{
 			if (base[i] == base[j])
-				error_msg(RED"Error : duplicates in base\n"RESET);
+				return (error_msg(RED"Error : duplicates in base\n"RESET), 1);
 			if (base[j] == ' ' || base[j] == '-' || base[j] == '+'
 				|| (base[j] >= 9 && base[j] <= 13))
-				error_msg(RED"Error : white spaces in base\n"RESET);
+				return (error_msg(RED"Error : white spaces in base\n"RESET), 1);
 			j++;
 		}
 		i++;
@@ -68,7 +67,14 @@ static int	init_vals(long nb, int *sign, char *base)
 	return (i);
 }
 
-/* turn a number into a string in a certain base
+/**
+ * @brief
+ * Transform an integer into a string in a certain base.
+ * 
+ * @returns
+ * - If the base is invalid, it returns NULL.*/
+/**
+ * - Else, it returns the integer version of a string of numbers.
 */
 char	*ft_itoa_base(int n, char *base)
 {
@@ -77,7 +83,8 @@ char	*ft_itoa_base(int n, char *base)
 	int		i;
 	int		sign;
 
-	ft_error(base);
+	if (ft_error(base))
+		return (NULL);
 	nb = n;
 	sign = 0;
 	i = init_vals(nb, &sign, base);

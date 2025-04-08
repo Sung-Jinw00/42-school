@@ -28,5 +28,6 @@ void	free_dbl_tab(char ***str)
 	while ((*str)[j])
 		ft_free(&(*str)[j++]);
 	if (*str)
-		ft_free(*str);
+		free(*str);
+	*str = NULL;
 }

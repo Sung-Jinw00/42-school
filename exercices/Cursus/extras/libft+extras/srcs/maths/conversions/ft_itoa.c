@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:07 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:55:59 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:50:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,12 @@ static int	init_vals(long nb, int *sign)
 	return (i);
 }
 
-/* turn a number into an string
+/**
+ * @brief
+ * Transform an integer into a number in a string.
+ * 
+ * @returns
+ * - The string version of an int.
 */
 char	*ft_itoa(int n)
 {

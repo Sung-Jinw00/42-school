@@ -3,16 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_recursive_factorial.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 19:05:57 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:55:37 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:39:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* return the factorial of nb
+/**
+ * @brief
+ * Calculates the factorial of a number recursively.
+ * 
+ * @returns
+ * The factorial of a number if nb is positive.*/
+/**
+ * - Else 0.
 */
 int	ft_recursive_factorial(int nb)
 {

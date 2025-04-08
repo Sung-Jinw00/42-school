@@ -3,16 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_recursive_power.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:09:31 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:55:35 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:37:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* return the result of a power of a number
+/**
+ * @brief
+ * Calculates the power of a number recursively.
+ * 
+ * @returns
+ * The power of a number.
 */
 int	ft_recursive_power(int nb, int power)
 {

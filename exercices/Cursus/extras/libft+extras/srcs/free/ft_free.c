@@ -20,7 +20,7 @@
 */
 void	ft_free(char **str)
 {
-	if (*str)
+	if (!str || *str)
 		free(*str);
 	*str = NULL;
 }

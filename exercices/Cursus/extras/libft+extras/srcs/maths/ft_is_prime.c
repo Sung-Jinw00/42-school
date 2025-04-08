@@ -3,16 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_is_prime.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 09:58:38 by locagnio          #+#    #+#             */
-/*   Updated: 2025/03/09 16:55:44 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/08 14:37:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-/* return true if nb is an prime number
+/**
+ * @brief
+ * Tells if a number is a prime number or not.
+ * 
+ * @returns
+ * - 1 if the number is a prime number.*/
+/**
+ * - Else 0.
 */
 int	ft_is_prime(int nb)
 {
