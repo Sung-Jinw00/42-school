@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:58:52 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/02 15:56:59 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/09 21:42:45 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,17 @@ typedef struct s_rules
 	int				max_iter;
 	int				nb_of_meals;
 	int				over;
+	int				dead;
 	long int		start;
-	pthread_mutex_t	*death;
+	pthread_mutex_t	writing;
+	pthread_mutex_t	death;
 	pthread_mutex_t	*fork;
+	pthread_mutex_t	status;
 }	t_rules;
 
 typedef struct s_philo
 {
 	int				id;
-	int				dead;
 	int				iter_num;
 	long int		thread_start;
 	long int		meal;
@@ -69,16 +71,18 @@ typedef struct s_philo
 }	t_philo;
 
 long int	time_now(void);
-void		final_print(int alive);
 int			main(int ac, char **ag);
 int			check_death(t_philo *p);
-int			ft_atoi_philo(const char *str);
 int			ft_usleep(long int time);
 void		*thread_routine(void *job);
 int			philosophers(t_rules *params);
+int			ft_atoi_philo(const char *str);
 int			ft_strcmp_philo(char *s1, char *s2);
+void		*ft_calloc(size_t nmemb, size_t size);
 void		print_routine(t_philo *p, char *action);
 void		end_thread(t_rules *rules, t_philo *philo);
-int			error_msg(char *s, t_rules *rules, t_philo *p, int malloc);
+void		destroy_n_free_mutex(pthread_mutex_t *mutex);
+int			error_msg(char *s, t_rules *rules, t_philo *p);
+void		final_print(int alive, int max_iter, pthread_mutex_t *writing);
 
 #endif

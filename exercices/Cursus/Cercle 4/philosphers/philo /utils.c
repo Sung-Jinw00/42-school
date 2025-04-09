@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/14 20:35:33 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/09 20:41:28 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,18 @@ int	ft_usleep(long int time)
 	return (1);
 }
 
-int	error_msg(char *s, t_rules *rules, t_philo *p, int malloc)
+int	error_msg(char *s, t_rules *rules, t_philo *p)
 {
-	if (malloc)
-	{
-		if (rules->death)
-			free(rules->death);
-		if (rules->fork)
-			free(rules->fork);
-		if (p)
-			free(p);
-	}
+	end_thread(rules, p);
 	return (ft_fprintf(2, "%s", s));
 }
 
 void	print_routine(t_philo *p, char *action)
 {
-	pthread_mutex_lock(p->rules->death);
-	if (p->rules->over)
+	pthread_mutex_lock(&p->rules->writing);
+	if (p->rules->over || p->rules->dead)
 	{
-		pthread_mutex_unlock(p->rules->death);
+		pthread_mutex_unlock(&p->rules->writing);
 		return ;
 	}
 	if (!ft_strcmp_philo(action, FORK))
@@ -67,15 +59,20 @@ void	print_routine(t_philo *p, char *action)
 	else
 		printf(RED "%ld %d %s\n" RESET, time_now() - p->thread_start, p->id + 1,
 			action);
-	pthread_mutex_unlock(p->rules->death);
+	pthread_mutex_unlock(&p->rules->writing);
 }
 
-void	final_print(int alive)
+void	final_print(int alive, int max_iter, pthread_mutex_t *writing)
 {
-	printf("						\n");
+	pthread_mutex_lock(writing);
 	if (alive)
-		printf("       No one died today, noice.\n");
+	{
+		if (max_iter)
+			printf(BOLD GREEN "\n  All philosophers have eaten %d times !\n"
+			RESET, max_iter);
+		printf("\n       No one died today, noice.\n");
+	}
 	else
-		printf("	¯\\_(ツ)_/¯			\n");
-	printf("						\n");
+		printf("\n	¯\\_(ツ)_/¯\n\n");
+	pthread_mutex_unlock(writing);
 }

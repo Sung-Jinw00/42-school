@@ -6,11 +6,30 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:01 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/02 15:01:28 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/09 21:43:09 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*tab;
+	size_t	i;
+
+	i = 0;
+	if (size != 0 && nmemb > (-1 / size))
+		return (NULL);
+	tab = (void *)malloc(nmemb * size);
+	if (!tab)
+		return (NULL);
+	while (i < nmemb * size)
+	{
+		*(char *)(tab + i) = 0;
+		i++;
+	}
+	return (tab);
+}
 
 static int	ft_isnumber(const char *s)
 {
@@ -28,47 +47,36 @@ static int	ft_isnumber(const char *s)
 	return (1);
 }
 
-static int	check_sign(char c)
-{
-	if (c == '-')
-		return (-1);
-	return (1);
-}
-
-static int	check_overflow(int sign)
-{
-	if (sign == 1)
-		return (-1);
-	return (0);
-}
-
 int	ft_atoi_philo(const char *str)
 {
 	int					i;
-	int					sign;
 	unsigned long long	n;
 
 	i = 0;
 	n = 0;
-	if (!ft_isnumber(str))
-		return (-1);
-	sign = 1;
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
 		i++;
+	if (!ft_isnumber(str))
+		return (-1);
 	if (str[i] == '-' || str[i] == '+')
-		sign = check_sign(str[i++]);
-	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if (n >= LONG_MAX)
-		{
-			n = check_overflow(sign);
-			break ;
-		}
-		n = n * 10 + (str[i++] - '0');
+		if (str[i++] == '-')
+			return (0);
 	}
-	if (sign < 0)
+	while (str[i] >= '0' && str[i] <= '9')
+		n = n * 10 + (str[i++] - '0');
+	if (n > INT_MAX)
 		return (0);
-	return (sign * (int)n);
+	return ((int)n);
+}
+
+void	destroy_n_free_mutex(pthread_mutex_t *mutex)
+{
+	if (mutex)
+	{
+		pthread_mutex_destroy(mutex);
+		free(mutex);
+	}
 }
 
 void	end_thread(t_rules *rules, t_philo *philo)
@@ -76,11 +84,17 @@ void	end_thread(t_rules *rules, t_philo *philo)
 	int	i;
 
 	i = -1;
-	while (++i < rules->demography)
-		pthread_join(philo[i].life_tid, (void *)&philo[i]);
-	pthread_mutex_destroy(rules->death);
-	pthread_mutex_destroy(rules->fork);
-	free(rules->death);
-	free(rules->fork);
-	free(philo);
+	if (philo && rules)
+	{
+		while (++i < rules->demography)
+			pthread_join(philo[i].life_tid, (void *)&philo[i]);
+		free(philo);
+	}
+	if (rules)
+	{
+		destroy_n_free_mutex(rules->fork);
+		pthread_mutex_destroy(&rules->death);
+		pthread_mutex_destroy(&rules->status);
+		pthread_mutex_destroy(&rules->writing);
+	}
 }
