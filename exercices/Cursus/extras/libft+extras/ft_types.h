@@ -66,4 +66,20 @@
 #  define TYPE_LONGDOUBLE	"long double"
 # endif
 
+# ifndef FT_DBL_MAX
+#  define FT_DBL_MAX		1.7976931348623157e+308
+# endif
+
+# ifndef FT_DBL_MIN
+#  define FT_DBL_MIN			2.2250738585072014e-308
+# endif
+
+# ifndef FT_FLT_MAX
+#  define FT_FLT_MAX			3.402823466e+38F
+# endif
+
+# ifndef FT_FLT_TRUE_MIN
+#  define FT_FLT_TRUE_MIN	1.401298464324817e-45F
+# endif
+
 #endif

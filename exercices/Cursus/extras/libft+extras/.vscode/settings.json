@@ -6,6 +6,10 @@
 		"type_traits": "c",
 		"stdio.h": "c",
 		"types.h": "c",
-		"compare": "c"
+		"compare": "c",
+		"stdbool.h": "c",
+		"errno.h": "c",
+		"ft_types.h": "c",
+		"float.h": "c"
 	}
 }

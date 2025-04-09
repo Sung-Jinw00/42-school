@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atod.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/09 01:06:40 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/09 15:39:56 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static int	is_valid_double(double result)
 		return (ft_write(2, "ft_atod : number is infinity\n"), 0);
 	else if (result == -INFINITY)
 		return (ft_write(2, "ft_atod : number is -infinity\n"), 0);
-	else if (result > DBL_MAX || result < -DBL_MAX)
+	else if (result > FT_DBL_MAX || result < -FT_DBL_MAX)
 	{
 		ft_write(2, "ft_atod : number is above the limits of a double\n");
 		return (0);
 	}
-	else if (result < DBL_MIN && result > -DBL_MIN)
+	else if (result < FT_DBL_MIN && result > -FT_DBL_MIN)
 	{
 		ft_write(2, "ft_atod : number is below the limits of a double ");
 		ft_write(2, "(subnormal)\n");

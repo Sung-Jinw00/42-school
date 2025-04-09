@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ato_univeral.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 23:45:37 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/09 15:43:25 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /**
  * @brief Transform a number in a string into any type of integers wished.
  * 
+ * @param nptr The string that will be converted.
  * @param value A pointer on the value where the user want to receive the result
  * of the function.
  * @param type :*/

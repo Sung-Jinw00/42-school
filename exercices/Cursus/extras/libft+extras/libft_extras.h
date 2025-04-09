@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_extras.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:00:12 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/09 01:58:58 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/09 15:41:28 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
-# include <float.h>
 # include <math.h>
 # include <stdint.h>
 # include <limits.h>
@@ -24,13 +23,16 @@
 # include <errno.h>
 # include <stdarg.h>
 # include <stdbool.h>
-# include "ft_types.h"
+# include "ft_types.h" 
 
+/* Couleur rouge */
 # ifndef RED
-#  define RED		"\033[31m"   //Couleur rouge
+#  define RED		"\033[31m"
 # endif
+
+/* Réinitialisation */
 # ifndef RESET
-#  define RESET		"\033[0m"   //Réinitialisation
+#  define RESET		"\033[0m"
 # endif
 
 # ifndef INT64_MAX_ATOI
