@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:58:52 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/09 21:42:45 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/10 00:50:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,21 @@ typedef struct s_rules
 	int				max_iter;
 	int				nb_of_meals;
 	int				over;
-	int				dead;
 	long int		start;
-	pthread_mutex_t	writing;
-	pthread_mutex_t	death;
+	pthread_mutex_t	*death;
 	pthread_mutex_t	*fork;
-	pthread_mutex_t	status;
+	pthread_mutex_t	rules;
+	pthread_mutex_t	print;
+	pthread_mutex_t	meal;
+	pthread_mutex_t	iter;
+	pthread_mutex_t	ready_mutex;
+	pthread_t		handle_threads;
 }	t_rules;
 
 typedef struct s_philo
 {
 	int				id;
+	//int				dead;
 	int				iter_num;
 	long int		thread_start;
 	long int		meal;
@@ -78,11 +82,9 @@ void		*thread_routine(void *job);
 int			philosophers(t_rules *params);
 int			ft_atoi_philo(const char *str);
 int			ft_strcmp_philo(char *s1, char *s2);
-void		*ft_calloc(size_t nmemb, size_t size);
 void		print_routine(t_philo *p, char *action);
 void		end_thread(t_rules *rules, t_philo *philo);
-void		destroy_n_free_mutex(pthread_mutex_t *mutex);
-int			error_msg(char *s, t_rules *rules, t_philo *p);
-void		final_print(int alive, int max_iter, pthread_mutex_t *writing);
+void		final_print(t_philo *philo, t_rules *rules);
+int			error_msg(char *s, t_rules *rules, t_philo *p, int malloc);
 
 #endif

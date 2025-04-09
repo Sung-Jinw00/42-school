@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/09 20:41:28 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/10 01:01:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,30 @@ int	ft_usleep(long int time)
 	return (1);
 }
 
-int	error_msg(char *s, t_rules *rules, t_philo *p)
+int	error_msg(char *s, t_rules *rules, t_philo *p, int malloc)
 {
-	end_thread(rules, p);
+	if (malloc)
+	{
+		if (rules->death)
+			free(rules->death);
+		if (rules->fork)
+			free(rules->fork);
+		if (p)
+			free(p);
+	}
 	return (ft_fprintf(2, "%s", s));
 }
 
 void	print_routine(t_philo *p, char *action)
 {
-	pthread_mutex_lock(&p->rules->writing);
-	if (p->rules->over || p->rules->dead)
+	pthread_mutex_lock(&p->rules->rules);
+	if (p->rules->over)
 	{
-		pthread_mutex_unlock(&p->rules->writing);
+		pthread_mutex_unlock(&p->rules->rules);
 		return ;
 	}
+	pthread_mutex_unlock(&p->rules->rules);
+	pthread_mutex_lock(&p->rules->print);
 	if (!ft_strcmp_philo(action, FORK))
 		printf(GREEN "%ld %d %s\n" RESET, time_now() - p->thread_start, p->id
 			+ 1, action);
@@ -59,20 +69,21 @@ void	print_routine(t_philo *p, char *action)
 	else
 		printf(RED "%ld %d %s\n" RESET, time_now() - p->thread_start, p->id + 1,
 			action);
-	pthread_mutex_unlock(&p->rules->writing);
+	pthread_mutex_unlock(&p->rules->print);
 }
 
-void	final_print(int alive, int max_iter, pthread_mutex_t *writing)
+void	final_print(t_philo *philo, t_rules *rules)
 {
-	pthread_mutex_lock(writing);
-	if (alive)
+	pthread_mutex_lock(&philo->rules->iter);
+	if (rules->nb_of_meals && philo[rules->demography
+			- 1].iter_num >= rules->max_iter)
 	{
-		if (max_iter)
-			printf(BOLD GREEN "\n  All philosophers have eaten %d times !\n"
-			RESET, max_iter);
-		printf("\n       No one died today, noice.\n");
+		printf(BOLD GREEN "\n  All philosophers have eaten %d times !\n" RESET,
+			rules->max_iter);
+		printf("       No one died today, noice.\n\n");
+		pthread_mutex_unlock(&philo->rules->iter);
+		return ;
 	}
-	else
-		printf("\n	¯\\_(ツ)_/¯\n\n");
-	pthread_mutex_unlock(writing);
+	printf("\n	¯\\_(ツ)_/¯\n\n");
+	pthread_mutex_unlock(&philo->rules->iter);
 }
