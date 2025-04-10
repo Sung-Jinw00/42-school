@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:01 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/10 00:51:57 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/10 17:00:29 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,47 +28,28 @@ static int	ft_isnumber(const char *s)
 	return (1);
 }
 
-static int	check_sign(char c)
-{
-	if (c == '-')
-		return (-1);
-	return (1);
-}
-
-static int	check_overflow(int sign)
-{
-	if (sign == 1)
-		return (-1);
-	return (0);
-}
-
 int	ft_atoi_philo(const char *str)
 {
 	int					i;
-	int					sign;
 	unsigned long long	n;
 
 	i = 0;
 	n = 0;
-	if (!ft_isnumber(str))
-		return (-1);
-	sign = 1;
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
 		i++;
+	if (!ft_isnumber(str))
+		return (-1);
 	if (str[i] == '-' || str[i] == '+')
-		sign = check_sign(str[i++]);
-	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if (n >= LONG_MAX)
-		{
-			n = check_overflow(sign);
-			break ;
-		}
-		n = n * 10 + (str[i++] - '0');
+		if (str[i++] == '-')
+			return (error_msg("atoi : error : negative value not allowed\n",
+					0, 0), 0);
 	}
-	if (sign < 0)
-		return (0);
-	return (sign * (int)n);
+	while (str[i] >= '0' && str[i] <= '9')
+		n = n * 10 + (str[i++] - '0');
+	if (n > INT_MAX)
+		return (error_msg("atoi : error : number bigger than int\n", 0, 0), 0);
+	return ((int)n);
 }
 
 void	end_thread(t_rules *rules, t_philo *philo)
@@ -76,17 +57,25 @@ void	end_thread(t_rules *rules, t_philo *philo)
 	int	i;
 
 	i = -1;
-	while (++i < rules->demography)
-		pthread_join(philo[i].life_tid, (void *)&philo[i]);
-	pthread_mutex_destroy(rules->death);
-	i = 0;
-	while (i < rules->demography)
+	if (philo && rules)
 	{
-		pthread_mutex_destroy(&philo->rules->fork[i]);
-		i++;
+		while (++i < rules->demography)
+			pthread_join(philo[i].life_tid, (void *)&philo[i]);
+		free(philo);
 	}
-	pthread_mutex_destroy(rules->fork);
-	free(rules->death);
-	free(rules->fork);
-	free(philo);
+	if (rules)
+	{
+		if (rules->fork)
+		{
+			i = -1;
+			while (++i < rules->demography)
+				pthread_mutex_destroy(&rules->fork[i]);
+			free(rules->fork);
+		}
+		pthread_mutex_destroy(&rules->meal);
+		pthread_mutex_destroy(&rules->iter);
+		pthread_mutex_destroy(&rules->rules);
+		pthread_mutex_destroy(&rules->print);
+		pthread_mutex_destroy(&rules->death);
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/10 01:01:04 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/10 16:32:17 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,9 @@ int	ft_usleep(long int time)
 	return (1);
 }
 
-int	error_msg(char *s, t_rules *rules, t_philo *p, int malloc)
+int	error_msg(char *s, t_rules *rules, t_philo *p)
 {
-	if (malloc)
-	{
-		if (rules->death)
-			free(rules->death);
-		if (rules->fork)
-			free(rules->fork);
-		if (p)
-			free(p);
-	}
+	end_thread(rules, p);
 	return (ft_fprintf(2, "%s", s));
 }
 

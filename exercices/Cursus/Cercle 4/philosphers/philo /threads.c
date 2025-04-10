@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:06 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/10 00:29:59 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/10 16:23:59 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,9 @@ int	check_death(t_philo *philo)
 {
 	long int	now;
 
-	// pthread_mutex_lock(&philo->rules->iter);
-	
-	// pthread_mutex_lock(&philo->rules->meal);
-
 	now = time_now() - philo->meal;
-	// pthread_mutex_unlock(&philo->rules->meal);
-	// pthread_mutex_unlock(&philo->rules->iter);
-
 	if (now >= philo->rules->t2die)
-	{
 		return (someone_died(philo));
-	}
-	//pthread_mutex_unlock(&philo->rules->meal);
 	return (0);
 }
 
@@ -50,7 +40,6 @@ void	ft_sleep_and_think(t_philo *philo)
 
 void	ft_eat(t_philo *philo)
 {
-	
 	if (philo->left_fork < philo->right_fork)
 	{
 		pthread_mutex_lock(philo->left_fork);
@@ -63,10 +52,10 @@ void	ft_eat(t_philo *philo)
 	}
 	print_routine(philo, FORK);
 	print_routine(philo, FORK);
+	print_routine(philo, EAT);
 	pthread_mutex_lock(&philo->rules->meal);
 	philo->meal = time_now();
 	pthread_mutex_unlock(&philo->rules->meal);
-	print_routine(philo, EAT);
 	ft_usleep(philo->rules->t2eat);
 	pthread_mutex_lock(&philo->rules->iter);
 	philo->iter_num++;
