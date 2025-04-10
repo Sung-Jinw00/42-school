@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:10 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/10 18:37:10 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/10 20:28:09 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,8 @@ static int	init_philo(t_rules *rules, t_philo *philo)
 	i = -1;
 	while (++i < rules->demography)
 	{
+		philo[i] = (t_philo){0};
 		philo[i].id = i;
-		philo[i].dead = 0;
-		philo[i].iter_num = 0;
-		philo[i].thread_start = 0;
-		philo[i].last_meal = 0;
 		philo[i].rules = rules;
 	}
 	return (0);
