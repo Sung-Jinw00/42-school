@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:52:21 by locavnio          #+#    #+#             */
-/*   Updated: 2025/04/10 20:36:11 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/10 19:31:13 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,12 @@ static int	init_rules(t_rules *rules, char **ag)
 
 int	main(int ac, char **ag)
 {
-	t_rules		rules;
-	t_thread	death_check;
+	t_rules	rules;
 
 	rules = (t_rules){0};
-	death_check = (t_thread){0};
 	if ((ac != 5 && ac != 6) || init_rules(&rules, ag))
 		return (error_msg("Error: invalid arguments\n", &rules));
-	if (philosophers(&rules, &death_check))
+	if (philosophers(&rules))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

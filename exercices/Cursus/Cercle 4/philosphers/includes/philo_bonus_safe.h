@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_bonus.h                                      :+:      :+:    :+:   */
+/*   philo_bonus_safe.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:58:52 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/10 20:37:54 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/10 20:29:54 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_BONUS_H
-# define PHILO_BONUS_H
+#ifndef PHILO_BONUS_SAFE_H
+# define PHILO_BONUS_SAFE_H
 
 # include <stdio.h>
 # include <unistd.h>
@@ -46,17 +46,10 @@
 
 typedef struct s_rules t_rules;
 
-typedef struct s_thread
-{
-	int				max_iter;
-	int				over;
-	long int		last_meal[200];
-}	t_thread;
-
 typedef struct s_philo
 {
 	int				id;
-	t_thread		*dead;
+	int				dead;
 	int				iter_num;
 	long int		thread_start;
 	long int		last_meal;
@@ -87,11 +80,11 @@ int			main(int ac, char **ag);
 int			check_death(t_philo *p);
 void		*sem_routine(void *job);
 void		end_sem(t_rules *rules);
+int			philosophers(t_rules *rules);
 int			ft_atoi_philo(const char *str);
 int			error_msg(char *s, t_rules *rules);
 int			ft_strcmp_philo(char *s1, char *s2);
 void		print_routine(t_philo *p, char *action);
 int			ft_usleep(long int time, t_philo *philo);
-int			philosophers(t_rules *rules, t_thread *death_check);
 
 #endif
