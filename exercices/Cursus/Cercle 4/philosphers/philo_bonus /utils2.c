@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:01 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/10 17:17:52 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/10 19:31:37 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,16 @@ static int	ft_isnumber(const char *s)
 	return (1);
 }
 
+int	ft_strlen(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s && s[i])
+		i++;
+	return (i);
+}
+
 int	ft_atoi_philo(const char *str)
 {
 	int					i;
@@ -43,27 +53,19 @@ int	ft_atoi_philo(const char *str)
 	{
 		if (str[i++] == '-')
 			return (error_msg("atoi : error : negative value not allowed\n",
-					0, 0, 0), 0);
+					0), 0);
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 		n = n * 10 + (str[i++] - '0');
 	if (n > INT_MAX)
-		return (error_msg("atoi : error : number bigger than int\n",
-				0, 0, 0), 0);
+		return (error_msg("atoi : error : number bigger than int\n", 0), 0);
 	return ((int)n);
 }
 
-void	end_sem(t_rules *rules, t_philo *philo)
+void	end_sem(t_rules *rules)
 {
-	int	i;
-
-	i = -1;
-	while (++i < rules->demography)
-		pthread_join(philo[i].life_tid, NULL);
-	i = -1;
 	sem_close(rules->death);
 	sem_unlink("/death");
 	sem_close(rules->fork);
 	sem_unlink("/fork");
-	free(philo);
 }

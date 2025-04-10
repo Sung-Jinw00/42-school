@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:58:52 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/10 17:37:45 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/10 19:30:45 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include <sys/wait.h>
 # include <limits.h>
 # include <signal.h>
-# include "ft_fprintf.h"
 # include <semaphore.h>
 
 # define RESET		"\033[0m"   //Réinitialisation
@@ -75,16 +74,17 @@ typedef struct s_rules
 }	t_rules;
 
 long int	time_now(void);
+int			ft_strlen(char *s);
 void		final_print(int alive);
 int			main(int ac, char **ag);
 int			check_death(t_philo *p);
 void		*sem_routine(void *job);
+void		end_sem(t_rules *rules);
 int			philosophers(t_rules *rules);
 int			ft_atoi_philo(const char *str);
+int			error_msg(char *s, t_rules *rules);
 int			ft_strcmp_philo(char *s1, char *s2);
 void		print_routine(t_philo *p, char *action);
-void		end_sem(t_rules *rules, t_philo *philo);
 int			ft_usleep(long int time, t_philo *philo);
-int			error_msg(char *s, t_rules *rules, t_philo *p, int malloc);
 
 #endif

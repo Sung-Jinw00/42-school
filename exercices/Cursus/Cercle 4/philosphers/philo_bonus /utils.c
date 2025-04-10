@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/08 21:39:22 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/10 19:30:08 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,16 @@ int	ft_usleep(long int time, t_philo *philo)
 	while ((time_now() - start_time) < time)
 	{
 		if (check_death(philo))
-			exit(1);
+			(end_sem(philo->rules), exit(1));
 		usleep(150);
 	}
 	return (1);
 }
 
-int	error_msg(char *s, t_rules *rules, t_philo *philo, int malloc)
+int	error_msg(char *s, t_rules *rules)
 {
-	sem_close(rules->death);
-	sem_unlink("/death");
-	sem_close(rules->fork);
-	sem_unlink("/fork");
-	if (malloc)
-	{
-		if (philo)
-			free(philo);
-	}
-	return (ft_fprintf(2, "%s", s));
+	end_sem(rules);
+	return (write(2, s, ft_strlen(s)));
 }
 
 void	print_routine(t_philo *p, char *action)

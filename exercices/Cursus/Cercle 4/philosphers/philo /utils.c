@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/10 16:32:17 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/10 19:18:58 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_usleep(long int time)
 int	error_msg(char *s, t_rules *rules, t_philo *p)
 {
 	end_thread(rules, p);
-	return (ft_fprintf(2, "%s", s));
+	return (write(2, s, ft_strlen(s)));
 }
 
 void	print_routine(t_philo *p, char *action)

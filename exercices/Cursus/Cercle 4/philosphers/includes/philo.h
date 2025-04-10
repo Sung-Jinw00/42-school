@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:58:52 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/10 17:34:44 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/10 19:20:12 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <limits.h>
-# include "ft_fprintf.h"
 
 # define RESET		"\033[0m"   //Réinitialisation
 # define RED		"\033[31m"   //Couleur rouge
@@ -74,6 +73,7 @@ typedef struct s_philo
 }	t_philo;
 
 long int	time_now(void);
+int			ft_strlen(char *s);
 int			main(int ac, char **ag);
 int			check_death(t_philo *p);
 int			ft_usleep(long int time);

@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:01 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/10 17:00:29 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/10 19:20:16 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ static int	ft_isnumber(const char *s)
 		i++;
 	}
 	return (1);
+}
+
+int	ft_strlen(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s && s[i])
+		i++;
+	return (i);
 }
 
 int	ft_atoi_philo(const char *str)

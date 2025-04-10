@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   threads.c                                          :+:      :+:    :+:   */
+/*   sem.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:06 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/14 20:15:53 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/10 19:45:04 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@ void	ft_eat(t_philo *philo)
 {
 	sem_wait(philo->rules->fork);
 	print_routine(philo, FORK);
+	if (check_death(philo))
+		(end_sem(philo->rules), exit(1));
 	sem_wait(philo->rules->fork);
 	print_routine(philo, FORK);
 	if (check_death(philo))
-		exit(1);
+		(end_sem(philo->rules), exit(1));
 	philo->last_meal = time_now();
 	print_routine(philo, EAT);
 	ft_usleep(philo->rules->t2eat, philo);
@@ -57,7 +59,7 @@ void	ft_eat(t_philo *philo)
 	sem_post(philo->rules->fork);
 	sem_post(philo->rules->fork);
 	if (philo->iter_num == philo->rules->max_iter)
-		exit(0);
+		(end_sem(philo->rules), exit(0));
 }
 
 void	*sem_routine(void *arg)
@@ -66,9 +68,11 @@ void	*sem_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id & 1)
-		ft_usleep(philo->rules->t2eat * 0.9 + 1, philo);
+		ft_usleep(philo->rules->t2eat, philo);
 	while (1)
 	{
+		if (check_death(philo))
+		(end_sem(philo->rules), exit(1));
 		ft_eat(philo);
 		ft_sleep_and_think(philo);
 	}

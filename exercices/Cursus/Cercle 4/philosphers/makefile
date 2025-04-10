@@ -32,7 +32,7 @@ all: $(PHILO_NAME)
 # Création de l'exécutable
 $(PHILO_NAME): $(SRC_O)
 	@echo $(CYAN)"Création de l'exécutable $(PHILO_NAME)..."$(RESET)
-	@$(CC) $(FLAGS) $(SRC_O) -L lib -lfprintf -I $(HDRS) -o $(PHILO_NAME)
+	@$(CC) $(FLAGS) $(SRC_O) -I $(HDRS) -o $(PHILO_NAME)
 	@echo $(GREEN)"Exécutable $(PHILO_NAME) créé !"$(RESET)
 
 # Compilation des fichiers sources en objets
@@ -56,7 +56,7 @@ re: fclean all
 
 bonus: $(B_SRCS_O)
 	@echo $(CYAN)"Création du bonus..."$(RESET)
-	@$(CC) $(FLAGS) $(B_SRCS_O) -L lib -lfprintf -I $(HDRS) -o $(B_PHILO_NAME)
+	@$(CC) $(FLAGS) $(B_SRCS_O) -I $(HDRS) -o $(B_PHILO_NAME)
 	@echo $(GREEN)"Exécutable $(B_PHILO_NAME) créé !"$(RESET)
 
 # Compilation des fichiers sources en objets (version bonus)
