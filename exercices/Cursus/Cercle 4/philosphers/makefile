@@ -5,11 +5,18 @@ CC				= cc
 FLAGS			= -Wall -Wextra -Werror -g
 HDRS			= includes
 
-SRCS			=  philo\ /main.c philo\ /utils.c philo\ /utils2.c philo\ /philo.c\
-				   philo\ /threads.c
+SRCS			=  philo\ /main.c\
+				   philo\ /philo.c\
+				   philo\ /threads.c\
+				   philo\ /utils.c\
+				   philo\ /utils2.c
 SRC_O			= $(SRCS:philo\ /.c=.o)
-B_SRCS			=  philo_bonus\ /main.c philo_bonus\ /utils.c philo_bonus\ /utils2.c\
-				   philo_bonus\ /threads.c philo_bonus\ /philo.c
+
+B_SRCS			=  philo_bonus\ /main.c\
+				   philo_bonus\ /philo.c\
+				   philo_bonus\ /sem.c\
+				   philo_bonus\ /utils.c\
+				   philo_bonus\ /utils2.c
 B_SRCS_O		= $(B_SRCS:philo_bonus\ /.c=.o)
 PHILO_NAME		= philo
 B_PHILO_NAME	= philo_bonus

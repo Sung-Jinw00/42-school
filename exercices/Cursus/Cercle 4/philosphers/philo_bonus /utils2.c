@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:01 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/08 21:04:15 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/10 17:17:52 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,47 +28,29 @@ static int	ft_isnumber(const char *s)
 	return (1);
 }
 
-static int	check_sign(char c)
-{
-	if (c == '-')
-		return (-1);
-	return (1);
-}
-
-static int	check_overflow(int sign)
-{
-	if (sign == 1)
-		return (-1);
-	return (0);
-}
-
 int	ft_atoi_philo(const char *str)
 {
 	int					i;
-	int					sign;
 	unsigned long long	n;
 
 	i = 0;
 	n = 0;
-	if (!ft_isnumber(str))
-		return (-1);
-	sign = 1;
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
 		i++;
+	if (!ft_isnumber(str))
+		return (-1);
 	if (str[i] == '-' || str[i] == '+')
-		sign = check_sign(str[i++]);
-	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if (n >= LONG_MAX)
-		{
-			n = check_overflow(sign);
-			break ;
-		}
-		n = n * 10 + (str[i++] - '0');
+		if (str[i++] == '-')
+			return (error_msg("atoi : error : negative value not allowed\n",
+					0, 0, 0), 0);
 	}
-	if (sign < 0)
-		return (0);
-	return (sign * (int)n);
+	while (str[i] >= '0' && str[i] <= '9')
+		n = n * 10 + (str[i++] - '0');
+	if (n > INT_MAX)
+		return (error_msg("atoi : error : number bigger than int\n",
+				0, 0, 0), 0);
+	return ((int)n);
 }
 
 void	end_sem(t_rules *rules, t_philo *philo)
@@ -78,7 +60,7 @@ void	end_sem(t_rules *rules, t_philo *philo)
 	i = -1;
 	while (++i < rules->demography)
 		pthread_join(philo[i].life_tid, NULL);
-	ft_usleep(2 * rules->demography, philo);
+	i = -1;
 	sem_close(rules->death);
 	sem_unlink("/death");
 	sem_close(rules->fork);

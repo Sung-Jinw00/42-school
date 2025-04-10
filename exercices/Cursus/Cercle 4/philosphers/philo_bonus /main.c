@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 15:52:21 by locavnio          #+#    #+#             */
-/*   Updated: 2025/02/14 19:55:51 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/10 17:05:01 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,17 @@ static int	init_rules(t_rules *rules, char **ag)
 {
 	int	sem;
 
-	sem = -1;
 	rules->demography = ft_atoi(ag[1]);
 	rules->t2die = ft_atoi(ag[2]);
 	rules->t2eat = ft_atoi(ag[3]);
 	rules->t2sleep = ft_atoi(ag[4]);
 	rules->max_iter = -1;
-	rules->nb_of_meals = 0;
-	rules->ready = 0;
 	if (ag[5])
 	{
 		rules->nb_of_meals = 1;
 		rules->max_iter = ft_atoi(ag[5]);
 	}
-	rules->over = 0;
+	sem = -1;
 	if (rules->demography > 0)
 		sem = init_rules_semaphore(rules);
 	return (sem || rules->demography <= 0 || rules->t2die <= 0
@@ -69,7 +66,7 @@ int	main(int ac, char **ag)
 {
 	t_rules	rules;
 
-	memset(&rules, 0, sizeof(rules));
+	rules = (t_rules){0};
 	if ((ac != 5 && ac != 6) || init_rules(&rules, ag))
 		return (error_msg("Error: invalid arguments\n", &rules, 0, 1));
 	if (philosophers(&rules))

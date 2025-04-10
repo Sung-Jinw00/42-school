@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:58:52 by locagnio          #+#    #+#             */
-/*   Updated: 2025/02/08 21:17:28 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/10 17:37:45 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,19 @@
 # define LEFT 0
 # define RIGHT 1
 
+typedef struct s_rules t_rules;
+
+typedef struct s_philo
+{
+	int				id;
+	int				dead;
+	int				iter_num;
+	long int		thread_start;
+	long int		last_meal;
+	pthread_t		life_tid;
+	t_rules			*rules;
+}	t_philo;
+
 typedef struct s_rules
 {
 	int				demography;
@@ -58,31 +71,20 @@ typedef struct s_rules
 	long int		start;
 	sem_t			*death;
 	sem_t			*fork;
-	void			*philo;
+	t_philo			philo[200];
 }	t_rules;
-
-typedef struct s_philo
-{
-	int				id;
-	int				dead;
-	int				iter_num;
-	long int		thread_start;
-	long int		last_meal;
-	pthread_t		life_tid;
-	t_rules			*rules;
-}	t_philo;
 
 long int	time_now(void);
 void		final_print(int alive);
 int			main(int ac, char **ag);
 int			check_death(t_philo *p);
-int			ft_atoi_philo(const char *str);
-int			ft_usleep(long int time, t_philo *philo);
 void		*sem_routine(void *job);
-int			philosophers(t_rules *params);
+int			philosophers(t_rules *rules);
+int			ft_atoi_philo(const char *str);
 int			ft_strcmp_philo(char *s1, char *s2);
 void		print_routine(t_philo *p, char *action);
 void		end_sem(t_rules *rules, t_philo *philo);
+int			ft_usleep(long int time, t_philo *philo);
 int			error_msg(char *s, t_rules *rules, t_philo *p, int malloc);
 
 #endif
