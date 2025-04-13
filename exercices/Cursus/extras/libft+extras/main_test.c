@@ -12,13 +12,18 @@
 
 #include "libft_extras.h"
 
-int	main(int ac, char **av)
+int main(void)
 {
-	if (ac != 2)
-		return (0);
-	char *str = ft_ftoa(ft_atod(av[1]), ft_strrclen(av[1], '.'));
+    char *tab2[] = {"bonjour", "tout", "le", "monde", NULL};
+    char *tab3[] = {"hello", "world", NULL};
+    char **tableau[] = {tab2, tab3, NULL};  // Tableau de tableaux de chaînes
+    char ***ptr = tableau;  // Pointeur vers un tableau de tableaux de chaînes
 
-	if (!ft_strcmp(str, av[1]))
-		return (ft_write(1, "nickel\n"));
-	return (printf("eclate au sol\nresultat : %s\n", str));
+    // Exemple avec un char***
+    printf("Count of words in char ***: %d\n", ft_count_words((void *)ptr));
+
+    // Exemple avec un char**
+    printf("Count of words in char **: %d\n", ft_count_words(tab2));
+
+    return 0;
 }

@@ -6,35 +6,37 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/13 23:36:23 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 00:14:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
 /**
- * @brief Transform any number into a string.
+ * @brief Converts a numeric value into a string representation.
  * 
- * @param value A pointer on the value that will be turned into a string.
- * @param precision For float numbers only, the amount of digits after the
- * coma.*/
+ * @param value     Pointer to the value to be converted.
+ * @param precision Number of digits after the decimal point (used for floats
+ * only).
+ * @param type      Type of the value. Must be one of : */
 /**
- * If precision < 1, no number after the coma will be added,
- * as well as the coma itself. 
- * @param type :*/
+ * 					- "signed"   → for signed integers (int64_t) */
 /**
- * - The function will converts if type equal to "signed", "unsigned"
- * or "float".*/
+ * 					- "unsigned" → for unsigned integers (uint64_t) */
 /**
- * - If the type is wrong, the value will be equal to NULL.
+ * 					- "float"    → for floating-point numbers (long double)
  * 
- * 
- * @returns
- * - If type is NULL or if the type doesn't match, the function will
- * return NULL.*/
+ * @note
+ * - If `type` is NULL or doesn't match one of the supported types, the
+ * function returns NULL. */
 /**
- * - Else, it returns the string of a number.
-*/
+ *- For floating-point types, if `precision < 1`, the decimal point and digits
+ after it are omitted.
+ * 
+ * @return
+ * - A newly allocated string representing the number, or
+ * - NULL if the type is invalid.
+ */
 char	*all_for_one(void *value, int precision, char *type)
 {
 	if (!type)

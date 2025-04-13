@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:00:12 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/13 23:32:22 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 00:38:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int				ft_recursive_factorial(int nb);
 char			*ft_itoa_base(int n, char *base);
 int				ft_recursive_power(int nb, int power);
 void			ft_absolu(void *nb, void *dup, char *type);
+char			*ft_multiply(const char *s1, const char *s2);
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 /*                                 Conversions                                */
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
@@ -177,8 +178,8 @@ int				ft_str_revncmp(const char *s1, const char *s2, int n);
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
 size_t			ft_strlen(const char *s);
+int				ft_count_words(void *arg);
 int				ft_strintlen(char *str_char);
-int				ft_count_words(char **split);
 size_t			ft_strclen(const char *s, char c);
 size_t			ft_strrclen(const char *s, char c);
 size_t			ft_str_strlen(const char *s1, char *s2);

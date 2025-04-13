@@ -66,8 +66,9 @@ static int	calculation(char *result, const char *s1, const char *s2)
 
 /**
  * @brief
- * Multiply 2 numbers in a string format, return the value of the 2 numbers in
- * a string, the values of s1 and s2 can be greater than a long long.
+ * Multiply 2 numbers in a string format, return the multiplication of the 2
+ * numbers in a string, the values of s1 and s2 can be greater than a long
+ * long.
  * 
  * Requirements :*/
 /**
