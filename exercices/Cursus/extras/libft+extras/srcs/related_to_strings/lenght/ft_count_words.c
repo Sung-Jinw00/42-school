@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:59 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/14 00:42:25 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 00:45:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
  * @return
  * The number of strings in an array of strings, doesn't work for strings
  * alone.
+ * 
+ * @note
+ * The array should be NULL terminated.
 */
 int	ft_count_words(void *arg)
 {
