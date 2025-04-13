@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/09 15:40:02 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/13 22:32:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	is_valid_float(double result)
 		return (ft_write(2, "ft_atof : number is infinity\n"), 0);
 	else if (result == -INFINITY)
 		return (ft_write(2, "ft_atof : number is -infinity\n"), 0);
-	else if (result > FT_FLT_MAX || result < -FT_FLT_MAX)
+	else if (result != 0.0 && (result > FT_FLT_MAX || result < -FT_FLT_MAX))
 	{
 		ft_write(2, "ft_atof : number is above the limits of a float\n");
 		return (0);

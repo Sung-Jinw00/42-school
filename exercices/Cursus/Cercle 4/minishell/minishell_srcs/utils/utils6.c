@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils6.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 18:07:16 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/06 16:22:04 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/13 13:29:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	pipe_count(t_btree *the_tree)
 	len_split = ft_count_words((const char **)the_tree->tokens);
 	while (i < len_split)
 	{
-		if (the_tree->pipes_redirs[i]
+		if (the_tree->pipes_redirs && the_tree->pipes_redirs[i]
 			&& !ft_strncmp(the_tree->pipes_redirs[i], "|", 1))
 			count++;
 		i++;

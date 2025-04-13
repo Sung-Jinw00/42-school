@@ -6,7 +6,7 @@
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:58:52 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/10 20:37:54 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/02/08 21:17:28 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/wait.h>
 # include <limits.h>
 # include <signal.h>
+# include "ft_fprintf.h"
 # include <semaphore.h>
 
 # define RESET		"\033[0m"   //Réinitialisation
@@ -44,26 +45,6 @@
 # define LEFT 0
 # define RIGHT 1
 
-typedef struct s_rules t_rules;
-
-typedef struct s_thread
-{
-	int				max_iter;
-	int				over;
-	long int		last_meal[200];
-}	t_thread;
-
-typedef struct s_philo
-{
-	int				id;
-	t_thread		*dead;
-	int				iter_num;
-	long int		thread_start;
-	long int		last_meal;
-	pthread_t		life_tid;
-	t_rules			*rules;
-}	t_philo;
-
 typedef struct s_rules
 {
 	int				demography;
@@ -77,21 +58,31 @@ typedef struct s_rules
 	long int		start;
 	sem_t			*death;
 	sem_t			*fork;
-	t_philo			philo[200];
+	void			*philo;
 }	t_rules;
 
+typedef struct s_philo
+{
+	int				id;
+	int				dead;
+	int				iter_num;
+	long int		thread_start;
+	long int		last_meal;
+	pthread_t		life_tid;
+	t_rules			*rules;
+}	t_philo;
+
 long int	time_now(void);
-int			ft_strlen(char *s);
 void		final_print(int alive);
 int			main(int ac, char **ag);
 int			check_death(t_philo *p);
-void		*sem_routine(void *job);
-void		end_sem(t_rules *rules);
 int			ft_atoi_philo(const char *str);
-int			error_msg(char *s, t_rules *rules);
+int			ft_usleep(long int time, t_philo *philo);
+void		*sem_routine(void *job);
+int			philosophers(t_rules *params);
 int			ft_strcmp_philo(char *s1, char *s2);
 void		print_routine(t_philo *p, char *action);
-int			ft_usleep(long int time, t_philo *philo);
-int			philosophers(t_rules *rules, t_thread *death_check);
+void		end_sem(t_rules *rules, t_philo *philo);
+int			error_msg(char *s, t_rules *rules, t_philo *p, int malloc);
 
 #endif

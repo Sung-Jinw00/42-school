@@ -5,18 +5,11 @@ CC				= cc
 FLAGS			= -Wall -Wextra -Werror -g
 HDRS			= includes
 
-SRCS			=  philo\ /main.c\
-				   philo\ /philo.c\
-				   philo\ /threads.c\
-				   philo\ /utils.c\
-				   philo\ /utils2.c
+SRCS			=  philo\ /main.c philo\ /utils.c philo\ /utils2.c philo\ /philo.c\
+				   philo\ /threads.c
 SRC_O			= $(SRCS:philo\ /.c=.o)
-
-B_SRCS			=  philo_bonus\ /main.c\
-				   philo_bonus\ /philo.c\
-				   philo_bonus\ /sem.c\
-				   philo_bonus\ /utils.c\
-				   philo_bonus\ /utils2.c
+B_SRCS			=  philo_bonus\ /main.c philo_bonus\ /utils.c philo_bonus\ /utils2.c\
+				   philo_bonus\ /threads.c philo_bonus\ /philo.c
 B_SRCS_O		= $(B_SRCS:philo_bonus\ /.c=.o)
 PHILO_NAME		= philo
 B_PHILO_NAME	= philo_bonus
@@ -32,7 +25,7 @@ all: $(PHILO_NAME)
 # Création de l'exécutable
 $(PHILO_NAME): $(SRC_O)
 	@echo $(CYAN)"Création de l'exécutable $(PHILO_NAME)..."$(RESET)
-	@$(CC) $(FLAGS) $(SRC_O) -I $(HDRS) -o $(PHILO_NAME)
+	@$(CC) $(FLAGS) $(SRC_O) -L lib -lfprintf -I $(HDRS) -o $(PHILO_NAME)
 	@echo $(GREEN)"Exécutable $(PHILO_NAME) créé !"$(RESET)
 
 # Compilation des fichiers sources en objets
@@ -56,7 +49,7 @@ re: fclean all
 
 bonus: $(B_SRCS_O)
 	@echo $(CYAN)"Création du bonus..."$(RESET)
-	@$(CC) $(FLAGS) $(B_SRCS_O) -I $(HDRS) -o $(B_PHILO_NAME)
+	@$(CC) $(FLAGS) $(B_SRCS_O) -L lib -lfprintf -I $(HDRS) -o $(B_PHILO_NAME)
 	@echo $(GREEN)"Exécutable $(B_PHILO_NAME) créé !"$(RESET)
 
 # Compilation des fichiers sources en objets (version bonus)

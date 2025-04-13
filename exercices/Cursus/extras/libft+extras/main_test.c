@@ -12,31 +12,13 @@
 
 #include "libft_extras.h"
 
-/* int main(void)
+int	main(int ac, char **av)
 {
-	char ***str = 
+	if (ac != 2)
+		return (0);
+	char *str = ft_ftoa(ft_atod(av[1]), ft_strrclen(av[1], '.'));
 
-	str = ft_calloc(sizeof(char **), 4);
-	str[0] = ft_split("Mythos y LEYENDAS", " ");
-	str[1] = ft_split("You want to see the free", " ");
-	str[2] = ft_split("Yeh, but you dun like", " ");
-	str[3] = NULL;
-
-	for (int i = 0; i < 4; i++)
-	{
-		printf("tab %d = ", i);
-		if (str[i])
-			print_dlb_tabs(str[i]);
-		else if (!str[i])
-			printf("(NULL)\n");
-	}
-	ft_free_splits_array(&str);
-	if (!str)
-		printf("tab = (NULL)\n");
-	return (0);
-} */
-
-int	main(void)
-{
-	return (0);
+	if (!ft_strcmp(str, av[1]))
+		return (ft_write(1, "nickel\n"));
+	return (printf("eclate au sol\nresultat : %s\n", str));
 }

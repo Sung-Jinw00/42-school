@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_extras.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:00:12 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/09 15:41:28 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/13 23:32:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@
 # include <errno.h>
 # include <stdarg.h>
 # include <stdbool.h>
+
 # include "ft_types.h" 
+# include "ft_structs.h"
 
 /* Couleur rouge */
 # ifndef RED
@@ -46,28 +48,6 @@
 #  define UINT64_MAX_ATOI "18446744073709551615"
 # endif
 
-typedef struct s_mjnf
-{
-	char	*arg;
-	va_list	args;
-	char	*new_string;
-	int		*tabs_to_free;
-	int		cur_str;
-	int		tab_increment;
-	int		tab_len;
-}	t_mjnf;
-
-typedef struct s_msjnf
-{
-	char	**arg;
-	va_list	args;
-	char	**new_split;
-	int		*tabs_to_free;
-	int		cur_str;
-	int		tab_increment;
-	int		tab_len;
-}	t_msjnf;
-
 /* ************************************************************************** */
 /*                                   To Free                                  */
 /* ************************************************************************** */
@@ -86,10 +66,11 @@ void			ft_free_splits_array(char ****cmd_s);
 //			
 
 int				ft_sqrt(int nb);
-char			*ft_itoa(int n);
 int				ft_min(int *tab);
 int				ft_max(int *tab);
 int				ft_is_prime(int nb);
+char			*ft_itoa(long long n);
+char			*ft_uitoa(uint64_t n);
 int				ft_find_next_prime(int nb);
 int				ft_recursive_factorial(int nb);
 char			*ft_itoa_base(int n, char *base);
@@ -109,8 +90,11 @@ unsigned long	ft_atoul(char *nptr);
 int64_t			ft_atoi64(char *nptr);
 uint64_t		ft_atoui64(char *nptr);
 int				ft_natoi(const char *nptr, int *i);
+int				ft_nbdigit(long double nb, int base);
+char			*ft_ftoa(long double n, int precision);
 int				ft_atoi_base(const char *nptr, char *base);
-void			ft_ato_universal(char *nptr, void *value, char *type);
+void			one_for_all(char *nptr, void *value, char *type);
+char			*all_for_one(void *value, int precision, char *type);
 char			*ft_convert_base(char *nbr, char *base_from, char *base_to);
 /* -------------------------------------------------------------------------- */
 /*                              Upper/Lowercases                              */
@@ -196,6 +180,7 @@ size_t			ft_strlen(const char *s);
 int				ft_strintlen(char *str_char);
 int				ft_count_words(char **split);
 size_t			ft_strclen(const char *s, char c);
+size_t			ft_strrclen(const char *s, char c);
 size_t			ft_str_strlen(const char *s1, char *s2);
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 /*                                Modifications                               */

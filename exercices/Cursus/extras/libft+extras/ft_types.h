@@ -16,6 +16,11 @@
 // ───────────────────────────────
 //  SIGNED TYPES
 // ───────────────────────────────
+
+# ifndef TYPE_SIGNED
+#  define TYPE_SIGNED		"signed"
+# endif
+
 # ifndef TYPE_INT
 #  define TYPE_INT			"int"
 # endif
@@ -35,6 +40,11 @@
 // ───────────────────────────────
 //  UNSIGNED TYPES
 // ───────────────────────────────
+
+# ifndef TYPE_UNSIGNED
+#  define TYPE_UNSIGNED			"unsigned"
+# endif
+
 # ifndef TYPE_UINT
 #  define TYPE_UINT			"unsigned int"
 # endif
@@ -54,6 +64,7 @@
 // ───────────────────────────────
 //  FOALTING-POINT TYPES
 // ───────────────────────────────
+
 # ifndef TYPE_FLOAT
 #  define TYPE_FLOAT			"float"
 # endif

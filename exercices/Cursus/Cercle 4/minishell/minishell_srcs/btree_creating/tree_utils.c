@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:25:44 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/05 19:31:33 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/13 13:47:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,10 @@ t_btree	*right_branch(char **tokens, char **p_r, int *i)
 {
 	t_btree	*cmd;
 	t_btree	*logical_operator;
-
-	cmd = btree_create_node(get_cmd_btree(tokens, p_r, i),
-			get_p_r(tokens, p_r, *i), CMD);
+	char	**get_cmd;
+	
+	get_cmd = get_cmd_btree(tokens, p_r, i);
+	cmd = btree_create_node(get_cmd, get_p_r(tokens, p_r, *i), CMD);
 	if (!cmd || !cmd->tokens)
 		return (ft_fprintf(2, "minishell : error : no command after logical "),
 			ft_fprintf(2, "operator\n"), NULL);

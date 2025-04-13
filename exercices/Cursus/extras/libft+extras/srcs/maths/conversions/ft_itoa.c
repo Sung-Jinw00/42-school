@@ -6,13 +6,13 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:07 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 14:50:53 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/13 17:37:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-static int	init_vals(long nb, int *sign)
+static int	init_vals(long long nb, int *sign)
 {
 	int	i;
 	int	digits;
@@ -35,18 +35,20 @@ static int	init_vals(long nb, int *sign)
 
 /**
  * @brief
- * Transform an integer into a number in a string.
+ * Transform an signed number into a string.
  * 
  * @returns
- * - The string version of an int.
+ * - The string version of an signed number.
 */
-char	*ft_itoa(int n)
+char	*ft_itoa(long long n)
 {
-	char	*cpy;
-	long	nb;
-	int		i;
-	int		sign;
+	char		*cpy;
+	long long	nb;
+	int			i;
+	int			sign;
 
+	if (n == LLONG_MIN)
+		return (ft_strdup("-9223372036854775808"));
 	nb = n;
 	sign = 0;
 	i = init_vals(nb, &sign);

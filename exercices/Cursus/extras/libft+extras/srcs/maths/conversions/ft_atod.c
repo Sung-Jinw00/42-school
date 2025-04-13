@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atod.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/09 15:39:56 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/13 22:33:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	is_valid_double(double result)
 		ft_write(2, "ft_atod : number is above the limits of a double\n");
 		return (0);
 	}
-	else if (result < FT_DBL_MIN && result > -FT_DBL_MIN)
+	else if (result != 0.0 && result < FT_DBL_MIN && result > -FT_DBL_MIN)
 	{
 		ft_write(2, "ft_atod : number is below the limits of a double ");
 		ft_write(2, "(subnormal)\n");
@@ -45,7 +45,7 @@ static int	decimal(double *result, char *nptr)
 	decimal = 0;
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		decimal = decimal + (float)(nptr[i] - '0') / divizor;
+		decimal = decimal + (double)(nptr[i] - '0') / divizor;
 		divizor *= 10;
 		i++;
 	}
