@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 21:23:30 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:37:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,8 @@ int	ft_atoi_base(const char *nptr, char *base)
 	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
 		i++;
 	if (nptr[i] == '-' || nptr[i] == '+')
-	{
 		if (nptr[i++] == '-')
 			sign = -sign;
-	}
 	while (nptr[i] >= base[0] && nptr[i] <= base[len_base - 1])
 		result = result * len_base + ft_strclen(base, nptr[i++]);
 	if (error_msg(result, sign))

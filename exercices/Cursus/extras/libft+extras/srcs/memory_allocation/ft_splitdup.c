@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:46 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 00:54:20 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:47:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,12 @@ char	**ft_splitdup(char **split)
 	dup = (char **)malloc(sizeof(char *) * (ft_count_words(split) + 1));
 	if (!dup)
 		return (NULL);
-	i = 0;
-	while (split[i])
+	i = -1;
+	while (split[++i])
 	{
 		dup[i] = ft_strdup(split[i]);
 		if (!dup[i])
 			return (free_dbl_tab(&dup), NULL);
-		i++;
 	}
 	dup[i] = NULL;
 	return (dup);

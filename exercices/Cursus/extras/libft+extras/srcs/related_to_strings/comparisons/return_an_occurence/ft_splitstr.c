@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:42 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 23:51:01 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:12:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,10 @@ char	**ft_split_strsrch(char **split, char *str)
 
 	if (!split || !split[0] || !str)
 		return (NULL);
-	i = 0;
-	while (split[i])
-	{
+	i = -1;
+	while (split[++i])
 		if (!ft_strcmp(split[i], str))
 			return (ft_splitdup((char **)(split + i)));
-		i++;
-	}
 	return (NULL);
 }
 

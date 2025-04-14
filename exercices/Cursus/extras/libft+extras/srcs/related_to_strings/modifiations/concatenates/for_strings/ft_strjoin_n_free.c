@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin_n_free.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 16:07:25 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 20:48:58 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/14 02:52:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,14 @@
 */
 char	*ft_strjoin_n_free(char *s1, char *s2, int tab_to_free)
 {
-	char	*new_string;
-	size_t	i;
-	size_t	j;
+	char	*str;
 
-	i = 0;
-	j = 0;
-	new_string = ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, 1);
-	if (!new_string)
-		return (NULL);
-	while (s1 && s1[i] != '\0')
-	{
-		new_string[i] = s1[i];
-		i++;
-	}
-	while (s2 && s2[j] != '\0')
-		new_string[i++] = s2[j++];
-	new_string[i] = '\0';
+	str = ft_strjoin(s1, s2);
 	if (tab_to_free == 1)
-		free(s1);
+		return (free(s1), str);
 	else if (tab_to_free == 2)
-		free(s2);
+		return (free(s2), str);
 	else if (tab_to_free == 12)
-		return (free(s1), free(s2), new_string);
-	return (new_string);
+		return (free(s1), free(s2), str);
+	return (str);
 }

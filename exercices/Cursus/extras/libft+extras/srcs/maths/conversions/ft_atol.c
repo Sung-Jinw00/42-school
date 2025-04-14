@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 21:11:11 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:35:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,10 @@ long	ft_atol(char *nptr)
 	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
 		i++;
 	if (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
+		if (nptr[i++] == '-')
 			sign = -sign;
-		i++;
-	}
 	while (nptr[i] >= '0' && nptr[i] <= '9')
-	{
-		result = result * 10 + nptr[i] - '0';
-		i++;
-	}
+		result = result * 10 + nptr[i++] - '0';
 	if (result > LONG_MIN || result > LONG_MAX)
 		return (ft_write(2, "ft_atol : nb out of the limits of a long\n"), 0);
 	return (result * sign);

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/13 22:32:50 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:37:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,8 @@ static int	decimal(double *result, char *nptr)
 	decimal = 0;
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		decimal = decimal + (float)(nptr[i] - '0') / divizor;
+		decimal = decimal + (float)(nptr[i++] - '0') / divizor;
 		divizor *= 10;
-		i++;
 	}
 	*result += decimal;
 	if (!is_valid_float(*result))
@@ -82,16 +81,10 @@ float	ft_atof(char *nptr)
 	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
 		i++;
 	if (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
+		if (nptr[i++] == '-')
 			sign = -sign;
-		i++;
-	}
 	while (nptr[i] >= '0' && nptr[i] <= '9')
-	{
-		result = result * 10 + nptr[i] - '0';
-		i++;
-	}
+		result = result * 10 + nptr[i++] - '0';
 	if ((nptr[i] == '.' || nptr[i] == ',') && decimal(&result, nptr + i + 1))
 		return (0);
 	return (result * sign);

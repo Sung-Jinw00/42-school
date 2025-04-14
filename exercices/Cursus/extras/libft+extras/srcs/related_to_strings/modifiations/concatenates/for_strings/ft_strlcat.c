@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:50 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 20:36:18 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/14 01:57:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,14 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dsize)
 	unsigned int	len_trunc;
 	unsigned int	len_dest;
 
-	i = 0;
 	len_dest = ft_strlen(dst);
 	if (dsize <= len_dest)
 		return (dsize + ft_strlen(src));
 	len_trunc = ft_strlen(dst) + ft_strlen(src);
-	while (dst && src && src[i] != '\0' && i < dsize - len_dest - 1)
-	{
+	i = -1;
+	while (dst && src && src[++i] != '\0' && i < dsize - len_dest - 1)
 		dst[len_dest + i] = src[i];
-		i++;
-	}
-	if (!dst)
-		dst[len_dest + i] = '\0';
+	dst[len_dest + i] = '\0';
 	return (len_trunc);
 }
 

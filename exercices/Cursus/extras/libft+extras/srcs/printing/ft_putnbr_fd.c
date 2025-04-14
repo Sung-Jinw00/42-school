@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:30:58 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 01:15:25 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:19:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,7 @@
 void	ft_putnbr_fd(int fd, int n)
 {
 	if (n == -2147483648)
-	{
-		write(fd, "-2147483648", 11);
-		return ;
-	}
+		return ((void)ft_write(fd, "-2147483648"));
 	else if (n < 0)
 	{
 		write(fd, "-", 1);

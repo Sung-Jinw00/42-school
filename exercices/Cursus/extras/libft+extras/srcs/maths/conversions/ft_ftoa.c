@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:07 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/13 23:18:07 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:32:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,8 @@ char	*ft_ftoa(long double n, int precision)
 	v.cpy[v.int_part + v.dec_part + 1] = '\0';
 	while (v.dec_part > 0)
 	{
-		v.cpy[v.int_part + v.dec_part] = (v.dec_nb % 10) + '0';
+		v.cpy[v.int_part + v.dec_part--] = (v.dec_nb % 10) + '0';
 		v.dec_nb /= 10;
-		v.dec_part--;
 	}
 	if (precision > 0)
 		v.cpy[v.int_part] = '.';

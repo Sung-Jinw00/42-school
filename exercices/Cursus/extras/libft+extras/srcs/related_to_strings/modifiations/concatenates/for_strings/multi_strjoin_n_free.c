@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 16:07:25 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 01:04:57 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 01:52:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static bool	correct_format(char *str_char)
 	{
 		if (ft_isnum(str_char[i]) || str_char[i] == '-' || str_char[i] == '+')
 			i++;
-		else if (ft_strcmp (str_char + i, ", ") && i != 0)
+		else if (!ft_strncmp(str_char + i, ", ", 2) && i != 0)
 			i += 2;
 		else
 			return (0);
@@ -46,7 +46,7 @@ char	*multi_join_n_free2(t_mjnf v)
 	if (v.tabs_to_free && has_to_be_freed(v, &v.tab_increment))
 		free(v.arg);
 	if (!v.new_string)
-		return (ft_putstr_fd(2, "fail join\n"), NULL);
+		return (ft_write(2, "fail join\n"), NULL);
 	v.arg = va_arg(v.args, char *);
 	v.cur_str = 2;
 	while (v.arg)
@@ -55,7 +55,7 @@ char	*multi_join_n_free2(t_mjnf v)
 		if (v.tabs_to_free && has_to_be_freed(v, &v.tab_increment))
 			free(v.arg);
 		if (!v.new_string)
-			return (ft_putstr_fd(2, "fail join and free\n"), NULL);
+			return (ft_write(2, "fail join and free\n"), NULL);
 		v.arg = va_arg(v.args, char *);
 		v.cur_str++;
 	}

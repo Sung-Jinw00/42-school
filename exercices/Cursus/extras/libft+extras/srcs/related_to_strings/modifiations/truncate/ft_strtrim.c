@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:16 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 01:07:24 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 01:12:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,16 @@ static int	set_cmp(char c, const char *set)
  * @param to_bree If to_free = true, s1 will be freed, else, it won't.
  * 
  * @return
- * The new string trimmed.
+ * - If s1 or set are NULL, the function will return NULL.*/
+/**
+ * - The new string trimmed.
 */
-char	*ft_strtrim(char const *s1, char const *set, bool to_free)
+char	*ft_strtrim(char *s1, char const *set, bool to_free)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	int		k;
+	char	*new_str;
 
 	if (!s1 || !set)
 		return (NULL);
@@ -51,10 +55,16 @@ char	*ft_strtrim(char const *s1, char const *set, bool to_free)
 		i++;
 	if (i == j)
 		return (ft_strdup(""));
-	j--;
-	while (set_cmp(s1[j], set) && j > i)
+	while (set_cmp(s1[j - 1], set) && j - 1 > i)
 		j--;
-	return (ft_substr((char *)s1, i, j - i + 1, to_free));
+	new_str = malloc(sizeof(char) * (j - i + 2));
+	k = 0;
+	while (i <= j && s1[i])
+		new_str[k++] = s1[i++];
+	new_str[k] = 0;
+	if (to_free)
+		free(s1);
+	return (new_str);
 }
 
 /* #include <stdio.h>

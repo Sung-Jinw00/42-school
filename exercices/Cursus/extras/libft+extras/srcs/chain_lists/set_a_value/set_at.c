@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 19:10:05 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 17:25:59 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:39:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void	set_at(t_list *L, void *data, int pos)
 {
 	int	i;
 
-	i = 0;
 	if (!L)
 		return ((void)ft_write(2, "Set_at : Empty list\n"));
 	else if (pos > len_list(L) || pos < 0)
 		return ((void)ft_write(2, "Set_at : Pos is out of the len of L\n"));
+	i = 0;
 	while (i++ < pos)
 		L = L->next;
 	L->data = data;

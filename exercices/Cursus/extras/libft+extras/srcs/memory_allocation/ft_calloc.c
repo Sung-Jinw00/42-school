@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:39 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 00:15:53 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:23:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,14 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	void	*tab;
 	size_t	i;
 
-	i = 0;
 	if (size != 0 && nmemb > (-1 / size))
 		return (NULL);
 	tab = (void *)malloc(nmemb * size);
 	if (!tab)
 		return (NULL);
-	while (i < nmemb * size)
-	{
+	i = -1;
+	while (++i < nmemb * size)
 		*(char *)(tab + i) = 0;
-		i++;
-	}
 	return (tab);
 }
 

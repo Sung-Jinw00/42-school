@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:26:37 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 21:58:50 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:34:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,8 @@ uint64_t	ft_atoui64(char *nptr)
 	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
 		i++;
 	if (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
+		if (nptr[i++] == '-')
 			return (ft_write(2, "ft_atoui64 : nb is negative\n"), 0);
-		i++;
-	}
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 		result = result * 10 + nptr[i++] - '0';
 	return (result);

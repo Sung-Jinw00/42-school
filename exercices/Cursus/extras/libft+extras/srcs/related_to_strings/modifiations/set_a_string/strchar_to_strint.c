@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strchar_to_strint.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 14:46:21 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 19:34:51 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/14 01:47:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static bool	correct_format(char *str_char)
 	{
 		if (ft_isnum(str_char[i]) || str_char[i] == '-' || str_char[i] == '+')
 			i++;
-		else if (ft_strcmp (str_char + i, ", ") && i != 0)
+		else if (ft_strcmp(str_char + i, ", ") && i != 0)
 			i += 2;
 		else
 			return (0);

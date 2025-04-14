@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 18:30:39 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/08 16:12:20 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:40:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ void	ft_list_reverse(t_list **begin_list)
 	copy = ft_listdup(*begin_list);
 	*begin_list = create_cell(get_at(copy, len));
 	cur = *begin_list;
-	while (len > 0)
+	while (len-- > 0)
 	{
-		len--;
 		cur->next = create_cell(get_at(copy, len));
 		cur = cur->next;
 	}

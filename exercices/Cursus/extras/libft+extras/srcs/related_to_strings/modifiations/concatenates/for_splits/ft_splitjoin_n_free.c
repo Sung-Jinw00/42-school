@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:26:24 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 01:01:10 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:53:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,16 @@
 */
 char	**ft_splitjoin_n_free(char **s1, char **s2, int tab_to_free)
 {
-	char	**new_split;
-	size_t	len;
-	size_t	i;
-	size_t	j;
+	char	**split;
 
-	i = -1;
-	j = 0;
-	len = ft_count_words(s1) + ft_count_words(s2) + 1;
-	new_split = malloc(len);
-	if (!new_split)
-		return (NULL);
-	while (s1[++i])
-		new_split[i] = ft_strdup(s1[i]);
-	while (s2[j])
-		new_split[i++] = ft_strdup(s2[j++]);
-	new_split[i] = NULL;
+	split = ft_splitjoin(s1, s2);
 	if (tab_to_free == 1)
-		free_dbl_tab(&s1);
+		return (free_dbl_tab(&s1), split);
 	else if (tab_to_free == 2)
-		free_dbl_tab(&s2);
+		return (free_dbl_tab(&s2), split);
 	else if (tab_to_free == 12)
-		return (free_dbl_tab(&s1), free_dbl_tab(&s2), new_split);
-	return (new_split);
+		return (free_dbl_tab(&s1), free_dbl_tab(&s2), split);
+	return (split);
 }
 
 /* #include <stdio.h>

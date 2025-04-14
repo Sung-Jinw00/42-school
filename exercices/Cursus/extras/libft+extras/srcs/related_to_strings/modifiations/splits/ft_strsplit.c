@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:37 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 18:21:04 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 01:15:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,61 +15,54 @@
 int	ft_cnt_words(char *str, char *sep)
 {
 	size_t	i;
+	size_t	len_sep;
 	int		trigger;
 	int		count;
 
 	trigger = 0;
 	count = 0;
 	i = 0;
+	len_sep = ft_strlen(sep);
 	while (i < ft_strlen(str) && str[i])
 	{
-		if (!ft_strncmp(str + i, sep, ft_strlen(sep)) && trigger == 0)
+		if (!ft_strncmp(str + i, sep, len_sep) && trigger == 0)
 		{
 			trigger = 1;
 			count++;
-			i += ft_strlen(sep) - 1;
+			i += len_sep - 1;
 		}
-		else if (!ft_strncmp(str + i, sep, ft_strlen(sep)) && trigger == 1)
-			i += ft_strlen(sep) - 1;
-		if (ft_strncmp(str + i, sep, ft_strlen(sep)) && trigger == 1)
+		else if (!ft_strncmp(str + i, sep, len_sep) && trigger == 1)
+			i += len_sep - 1;
+		if (ft_strncmp(str + i, sep, len_sep) && trigger == 1)
 			trigger = 0;
 		i++;
 	}
 	return (count);
 }
 
-int	len_word(char *str, char *sep)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && ft_strncmp(str + i, sep, ft_strlen(sep)))
-		i++;
-	return (i);
-}
-
 char	**write_split(char *str, char **split, char *sep, size_t i)
 {
 	int	j;
 	int	len_wrd;
+	int	len_sep;
 
 	j = 0;
 	len_wrd = 0;
-	while (i < ft_strlen(str) && !ft_strncmp(str + i, sep, ft_strlen(sep)))
-		i += ft_strlen(sep);
+	len_sep = ft_strlen(sep);
+	while (i < ft_strlen(str) && !ft_strncmp(str + i, sep, len_sep))
+		i += len_sep;
 	while (i < ft_strlen(str) && str)
 	{
-		len_wrd = len_word(str + i, sep);
-		if (len_wrd != 0 && ft_strncmp(str + i, sep, ft_strlen(sep)))
+		len_wrd = ft_str_strlen(str + i, sep);
+		if (len_wrd != 0 && ft_strncmp(str + i, sep, len_sep))
 		{
 			split[j] = ft_strndup(str + i, len_wrd);
-			if (!split[j])
+			if (!split[j++])
 				return (free_dbl_tab(&split), NULL);
-			j++;
 			i += len_wrd;
 		}
-		else if (!ft_strncmp(str + i, sep, ft_strlen(sep)))
-			i += ft_strlen(sep) - 1;
+		else if (!ft_strncmp(str + i, sep, len_sep))
+			i += len_sep - 1;
 		i++;
 	}
 	split[ft_cnt_words(str, sep)] = NULL;

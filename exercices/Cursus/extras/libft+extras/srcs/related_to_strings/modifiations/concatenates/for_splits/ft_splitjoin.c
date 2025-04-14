@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:26:24 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 00:20:52 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:09:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ char	**ft_splitjoin(char **s1, char **s2)
 	size_t	i;
 	size_t	j;
 
+	if (!s1 && !s2)
+		return (NULL);
+	else if (s1 && !s2)
+		return (ft_splitdup(s1));
+	else if (!s1 && s2)
+		return (ft_splitdup(s2));
 	i = -1;
 	j = 0;
 	len = ft_count_words(s1) + ft_count_words(s2) + 1;

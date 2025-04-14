@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:59 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/09 01:58:40 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 00:47:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,15 @@
 size_t	ft_str_strlen(const char *s1, char *s2)
 {
 	size_t	i;
+	size_t	len_s2;
 
+	if (!s1)
+		return (0);
+	else if (!s2)
+		return (ft_strlen(s1));
 	i = 0;
-	while (s1 && s1[i] && ft_strncmp(s1 + i, s2, ft_strlen(s2)))
+	len_s2 = ft_strlen(s2);
+	while (s1[i] && ft_strncmp(s1 + i, s2, len_s2))
 		i++;
 	return (i);
 }

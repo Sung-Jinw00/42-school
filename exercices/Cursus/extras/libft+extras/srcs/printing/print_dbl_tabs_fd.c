@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 18:51:34 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 00:00:29 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:22:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,9 @@ void	print_dlb_tabs_fd(int fd, char **tab)
 		return ;
 	i = -1;
 	while (tab[++i])
+	{
 		write(fd, tab[i], ft_strlen(tab[i]));
+		write(fd, " ", 1);
+	}
+	write(fd, "\n", 1);
 }

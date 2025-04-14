@@ -21,7 +21,7 @@ static bool	correct_format(char *str_char)
 	{
 		if (ft_isnum(str_char[i]))
 			i++;
-		else if (ft_strcmp (str_char + i, ", ") && i != 0)
+		else if (!ft_strncmp(str_char + i, ", ", 2) && i != 0)
 			i += 2;
 		else
 			return (0);

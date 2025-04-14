@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 19:10:05 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 16:22:47 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:41:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ t_list	*ft_listndup(t_list *src, int n)
 	cpy = NULL;
 	while (tmp && n-- > 0)
 	{
-		cpy = add_at(cpy, tmp->data, i);
-		i++;
+		cpy = add_at(cpy, tmp->data, i++);
 		tmp = tmp->next;
 	}
 	return (cpy);

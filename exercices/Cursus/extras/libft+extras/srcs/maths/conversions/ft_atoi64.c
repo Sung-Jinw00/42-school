@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:26:37 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 21:22:41 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:53:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,12 @@ static int	cmp_64(char *nptr)
 	if ((nptr[0] != '-' && ft_strlen(nptr) > len_max)
 		|| (nptr[0] == '-' && ft_strlen(nptr) > len_min))
 		return (1);
-	else if (nptr[0] != '-' && ft_strlen(nptr) == len_max)
-	{
-		if (ft_strcmp(nptr, INT64_MAX_ATOI) > 0)
-			return (1);
-	}
-	else if (nptr[0] == '-' && ft_strlen(nptr) == len_min)
-	{
-		if (ft_strcmp(nptr, INT64_MIN_ATOI) > 0)
-			return (1);
-	}
+	else if (nptr[0] != '-' && ft_strlen(nptr) == len_max
+		&& ft_strcmp(nptr, INT64_MAX_ATOI) > 0)
+		return (1);
+	else if (nptr[0] == '-' && ft_strlen(nptr) == len_min
+		&& ft_strcmp(nptr, INT64_MIN_ATOI) > 0)
+		return (1);
 	return (0);
 }
 
@@ -68,11 +64,8 @@ int64_t	ft_atoi64(char *nptr)
 	while (nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13))
 		i++;
 	if (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
+		if (nptr[i++] == '-')
 			sign = -sign;
-		i++;
-	}
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 		result = result * 10 + nptr[i++] - '0';
 	return (result * sign);

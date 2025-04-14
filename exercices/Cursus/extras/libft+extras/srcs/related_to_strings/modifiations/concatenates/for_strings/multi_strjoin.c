@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 16:07:25 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 01:08:41 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 01:51:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ char	*multi_join(char *s1, ...)
 		return (va_end(args), ft_strdup(s1));
 	new_string = ft_strjoin(s1, arg);
 	if (!new_string)
-		return (ft_putstr_fd(2, "fail join\n"), NULL);
+		return (ft_write(2, "fail join\n"), NULL);
 	arg = va_arg(args, char *);
 	while (arg)
 	{
 		new_string = ft_strjoin_n_free(new_string, arg, 1);
 		if (!new_string)
-			return (ft_putstr_fd(2, "fail join and free\n"), NULL);
+			return (ft_write(2, "fail join and free\n"), NULL);
 		arg = va_arg(args, char *);
 	}
 	va_end(args);

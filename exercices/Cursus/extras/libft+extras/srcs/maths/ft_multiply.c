@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdlib.h>
-#include <ctype.h>
+#include "libft_extras.h"
 
 static int	verifications(const char *s1, const char *s2)
 {
@@ -27,11 +25,11 @@ static int	verifications(const char *s1, const char *s2)
 		i++;
 	if (s2[j] == '-')
 		j++;
-	len_s1 = strlen(s1);
-	len_s2 = strlen(s2);
+	len_s1 = ft_strlen(s1);
+	len_s2 = ft_strlen(s2);
 	while (s1[i] || s2[j])
-		if ((i < len_s1 && !isdigit(s1[i++]))
-			|| (j < len_s2 && !isdigit(s2[j++])))
+		if ((i < len_s1 && !ft_isnum(s1[i++]))
+			|| (j < len_s2 && !ft_isnum(s2[j++])))
 			return (0);
 	return (1);
 }
@@ -43,11 +41,11 @@ static int	calculation(char *result, const char *s1, const char *s2)
 	int	i_result;
 	int	start_result;
 
-	i_s1 = strlen(s1) - 1;
+	i_s1 = ft_strlen(s1) - 1;
 	start_result = 500;
 	while (i_s1 >= 0 && s1[i_s1] != '-')
 	{
-		i_s2 = strlen(s2) - 1;
+		i_s2 = ft_strlen(s2) - 1;
 		i_result = start_result--;
 		while (i_s2 >= 0 && s2[i_s2] != '-')
 		{
@@ -106,7 +104,7 @@ char	*ft_multiply(const char *s1, const char *s2)
 	while (i_result < 501)
 		result[++start_result] = '0' + result[i_result++];
 	result[++start_result] = 0;
-	return (strdup(result));
+	return (ft_strdup(result));
 }
 
 /* #include <unistd.h>

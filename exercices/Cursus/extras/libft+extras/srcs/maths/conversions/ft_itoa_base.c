@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:07 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 17:28:41 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:32:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,8 @@ char	*ft_itoa_base(int n, char *base)
 	cpy[i--] = '\0';
 	while (i >= sign)
 	{
-		cpy[i] = base[nb % (int)ft_strlen(base)];
+		cpy[i--] = base[nb % (int)ft_strlen(base)];
 		nb /= (int)ft_strlen(base);
-		i--;
 	}
 	return (cpy);
 }

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:21 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 00:57:25 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:15:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,9 @@ char	*ft_substr(char *s, unsigned int start, size_t len, bool to_free)
 
 	if (start >= ft_strlen(s) || !s || !s[0])
 	{
-		new_str = malloc(1);
-		if (!new_str)
-			return (NULL);
 		if (to_free)
 			free(s);
-		return (new_str[0] = '\0', new_str);
+		return (ft_strdup(""));
 	}
 	limit = start + (unsigned int)len;
 	if (limit > ft_strlen(s))
@@ -51,9 +48,10 @@ char	*ft_substr(char *s, unsigned int start, size_t len, bool to_free)
 	i = 0;
 	while ((size_t)start < limit && s[start])
 		new_str[i++] = s[start++];
+	new_str[i] = '\0';
 	if (to_free)
 		free(s);
-	return (new_str[i] = '\0', new_str);
+	return (new_str);
 }
 
 /* #include <stdio.h>

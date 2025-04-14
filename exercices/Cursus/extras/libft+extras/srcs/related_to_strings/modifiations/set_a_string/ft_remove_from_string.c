@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 14:46:21 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 17:33:27 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 01:46:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ char	*ft_remove_from_string(char *str, char *to_delete, int to_free)
 {
 	char	**tab;
 	char	*line;
-	char	*tmp;
 	int		i;
 
 	tab = ft_split(str, to_delete);
@@ -38,14 +37,11 @@ char	*ft_remove_from_string(char *str, char *to_delete, int to_free)
 		return (NULL);
 	i = 0;
 	line = ft_strdup(tab[i++]);
-	tmp = NULL;
 	while (tab[i])
 	{
-		tmp = ft_strjoin(line, tab[i++]);
-		if (!tmp)
-			return (free_dbl_tab(&tab), free(line), NULL);
-		free(line);
-		line = tmp;
+		line = ft_strjoin_n_free(line, tab[i++], 1);
+		if (!line)
+			return (free_dbl_tab(&tab), NULL);
 	}
 	free_dbl_tab(&tab);
 	if (to_free)

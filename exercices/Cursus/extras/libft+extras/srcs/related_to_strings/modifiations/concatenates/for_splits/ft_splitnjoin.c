@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:26:24 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 00:20:25 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:48:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,26 @@
 char	**ft_splitnjoin(char **s1, size_t n1, char **s2, size_t n2)
 {
 	char	**new_split;
-	size_t	len;
 	size_t	i;
 	size_t	j;
 
-	i = -1;
-	j = 0;
-	len = n1 + n2 + 1;
-	new_split = malloc(len);
+	if (!s1 && !s2)
+		return (NULL);
+	else if (s1 && !s2)
+		return (ft_splitndup(s1, ft_count_words(s1), 0, ft_count_words(s1)));
+	else if (!s1 && s2)
+		return (ft_splitndup(s2, ft_count_words(s2), 0, ft_count_words(s2)));
+	if (n1 > (size_t)ft_count_words(s1))
+		n1 = (size_t)ft_count_words(s1);
+	if (n2 > (size_t)ft_count_words(s2))
+		n2 = (size_t)ft_count_words(s2);
+	new_split = malloc(n1 + n2 + 1);
 	if (!new_split)
 		return (NULL);
+	i = -1;
 	while (s1[++i] && i < n1)
 		new_split[i] = ft_strdup(s1[i]);
+	j = 0;
 	while (s2[j] && j < n2)
 		new_split[i++] = ft_strdup(s2[j++]);
 	new_split[i] = NULL;

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:34:14 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 23:36:24 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:13:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,9 @@ char	*ft_strrchr(const char *s, int c)
 	int	len;
 
 	len = (int)ft_strlen(s);
-	while (len >= 0)
-	{
+	while (--len >= 0)
 		if (s[len] == (char)c)
 			return ((char *)s + len);
-		len--;
-	}
 	return (0);
 }
 

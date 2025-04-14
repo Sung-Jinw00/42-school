@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:00:12 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/14 00:38:11 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 01:03:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ size_t			ft_str_strlen(const char *s1, char *s2);
 
 char			**ft_strsplit(char *str, char *sep);
 char			**ft_split(char *str, char *charset);
-char			*ft_strtrim(char const *s1, char const *set, bool to_free);
+char			*ft_strtrim(char *s1, char const *set, bool to_free);
 /* -------------------------------------------------------------------------- */
 /*                              Apply A Function                              */
 /* -------------------------------------------------------------------------- */
