@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:07 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/14 02:30:56 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:58:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,8 @@ char	*ft_uitoa(uint64_t n)
 	cpy[digits--] = '\0';
 	while (digits >= 0)
 	{
-		cpy[digits] = n % 10 + '0';
+		cpy[digits--] = n % 10 + '0';
 		n /= 10;
-		digits--;
 	}
 	return (cpy);
 }

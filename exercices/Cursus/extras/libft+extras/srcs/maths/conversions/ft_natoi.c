@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:23:02 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 17:29:05 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:59:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,11 @@ int	ft_natoi(const char *nptr, int *i)
 	sign = 1;
 	result = 0;
 	while (nptr[*i] == ' ' || (nptr[*i] >= 9 && nptr[*i] <= 13))
-		*i += 1;
+		(*i)++;
 	if (nptr[*i] == '-' || nptr[*i] == '+')
-	{
-		if (nptr[*i] == '-')
+		if (nptr[(*i)++] == '-')
 			sign = -sign;
-		*i += 1;
-	}
 	while (nptr[*i] >= '0' && nptr[*i] <= '9')
-	{
-		result = result * 10 + nptr[*i] - '0';
-		*i += 1;
-	}
+		result = result * 10 + nptr[(*i)++] - '0';
 	return (result * sign);
 }
