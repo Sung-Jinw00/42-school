@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   multi_splitjoin.c                                  :+:      :+:    :+:   */
+/*   multi_arrjoin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -24,29 +24,29 @@
  * The new joined array of strings, or the duplicate of s1 if there's no
  * other argument.
 */
-char	**multi_splitjoin(char **s1, ...)
+char	**multi_arrjoin(char **s1, ...)
 {
 	va_list	args;
 	char	**arg;
-	char	**new_split;
+	char	**new_array;
 
 	if (!s1)
 		return (NULL);
 	va_start(args, s1);
 	arg = va_arg(args, char **);
 	if (!arg)
-		return (va_end(args), ft_splitdup(s1));
-	new_split = ft_splitjoin(s1, arg);
-	if (!new_split)
+		return (va_end(args), ft_arrdup(s1));
+	new_array = ft_arrjoin(s1, arg);
+	if (!new_array)
 		return (ft_putstr_fd(2, "fail join\n"), NULL);
 	arg = va_arg(args, char **);
 	while (arg)
 	{
-		new_split = ft_splitjoin_n_free(new_split, arg, 1);
-		if (!new_split)
+		new_array = ft_arrjoin_n_free(new_array, arg, 1);
+		if (!new_array)
 			return (ft_putstr_fd(2, "fail join and free\n"), NULL);
 		arg = va_arg(args, char **);
 	}
 	va_end(args);
-	return (new_split);
+	return (new_array);
 }

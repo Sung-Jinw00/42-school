@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_splits_array.c                             :+:      :+:    :+:   */
+/*   ft_listadd_back.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/06 16:24:32 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/14 16:36:37 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/04 13:34:31 by locagnio          #+#    #+#             */
+/*   Updated: 2025/04/14 18:36:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,28 @@
 
 /**
  * @brief
- * Free an array of array of strings and set it to NULL.
+ * Add a new cell at the end of a chain list.
  * 
- * @param cmd_s is an pointer on an array of an array of strings.
+ * @note
+ * - If `new` or the pointer on `list` == NULL, the function don't do
+ * anything. */
+/**
+ * - If the list pointed by `list` is NULL, `new` become the first element
+ * of the list.
 */
-void	ft_free_array_of_array(char ****cmd_s)
+void	ft_listadd_back(t_list **list, t_list *new)
 {
-	int	j;
+	t_list	*temp;
 
-	if (!cmd_s || !(*cmd_s) || !(*cmd_s)[0])
+	if (!new || !list)
 		return ;
-	j = 0;
-	while ((*cmd_s)[j])
-		free_array(&((*cmd_s)[j++]));
-	if ((*cmd_s))
-		free(*cmd_s);
-	*cmd_s = NULL;
+	if (!*list)
+	{
+		*list = new;
+		return ;
+	}
+	temp = *list;
+	while (temp->next)
+		temp = temp->next;
+	temp->next = new;
 }

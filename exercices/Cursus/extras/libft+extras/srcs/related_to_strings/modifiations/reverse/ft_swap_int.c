@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/08 18:16:22 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/08 18:16:22 by marvin           ###   ########.fr       */
+/*   Created: 2025/04/14 12:48:39 by marvin            #+#    #+#             */
+/*   Updated: 2025/04/14 12:48:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_extras.h"
 
-int main(void)
+/**
+ * @brief
+ * Swap 2 ints.
+*/
+void	ft_swap_int(int *a, int *b)
 {
-	char *a = "Hello";
-	char *b = NULL;
+	int	c;
 
-	a = ft_strrev(a, 1);
-	ft_swap(&a, &b, sizeof(char *));
-	printf("a = %s, b = %s\n", a, b);
-	free(b);
-	return (0);
+	c = *a;
+	*a = *b;
+	*b = c;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_range.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 12:24:04 by locagnio          #+#    #+#             */
-/*   Updated: 2024/09/16 11:33:52 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/14 15:49:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ void	ft_putnbr(int n)
 } */
 int	*ft_range(int min, int max)
 {
+	int	i;
+	int	len_cpy;
+	int	*cpy;
+
 	i = 0;
 	if (min >= max)
 		return (0);

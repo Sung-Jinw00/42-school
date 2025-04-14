@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 18:51:34 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/14 02:22:34 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 15:08:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * @brief
  * Print all the stings of a list of strings in the fd chosen. 
 */
-void	print_dlb_tabs_fd(int fd, char **tab)
+void	print_array_fd(int fd, char **tab)
 {
 	int	i;
 

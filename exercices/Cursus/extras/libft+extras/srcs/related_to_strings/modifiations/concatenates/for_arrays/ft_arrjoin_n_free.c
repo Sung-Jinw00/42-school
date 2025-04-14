@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_splitjoin.c                                     :+:      :+:    :+:   */
+/*   ft_arrjoin_n_free.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 14:26:24 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/14 02:09:53 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 02:53:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,34 @@
 
 /**
  * @brief
- * Creates a new array of strings by concatenate 2 array of
- * strings.
+ * Creates a new string by concatenate 2 strings and free whatever used array
+ * of strings you want to free.
  * 
- * @param s1 The first array of strings.
- * @param s2 The second array of strings.
- * 
- * @note
- * Every end of array of strings and the last argument should be NULL to
- * interrupt the function correctly, otherwise, undefined outcome may happened.
+ * @param s1 The first sring.
+ * @param s2 The second sring.
+ * @param tab_to_free :*/
+/**
+ * - If tab_to_free = 1, s1 will be freed.*/
+/**
+ * - If tab_to_free = 2, s2 will be freed.*/
+/**
+ * - If tab_to_free = 12 (1 and 2), both s1 and s2 will be freed.
  * 
  * @return
  * The new joined array of strings.
 */
-char	**ft_splitjoin(char **s1, char **s2)
+char	**ft_arrjoin_n_free(char **s1, char **s2, int tab_to_free)
 {
-	char	**new_split;
-	size_t	len;
-	size_t	i;
-	size_t	j;
+	char	**array;
 
-	if (!s1 && !s2)
-		return (NULL);
-	else if (s1 && !s2)
-		return (ft_splitdup(s1));
-	else if (!s1 && s2)
-		return (ft_splitdup(s2));
-	i = -1;
-	j = 0;
-	len = ft_count_words(s1) + ft_count_words(s2) + 1;
-	new_split = malloc(len);
-	if (!new_split)
-		return (NULL);
-	while (s1[++i])
-		new_split[i] = ft_strdup(s1[i]);
-	while (s2[j])
-		new_split[i++] = ft_strdup(s2[j++]);
-	new_split[i] = NULL;
-	return (new_split);
+	array = ft_arrjoin(s1, s2);
+	if (tab_to_free == 1)
+		return (free_array(&s1), array);
+	else if (tab_to_free == 2)
+		return (free_array(&s2), array);
+	else if (tab_to_free == 12)
+		return (free_array(&s1), free_array(&s2), array);
+	return (array);
 }
 
 /* #include <stdio.h>

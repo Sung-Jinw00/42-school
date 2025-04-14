@@ -44,7 +44,7 @@ void	print_list(t_list *L, char *data_type)
 		else if (!ft_strcmp(data_type, "int"))
 			printf("%d\n", *(int *)L->data);
 		if (!ft_strcmp(data_type, "string array"))
-			print_dlb_tabs((char **)L->data);
+			print_array((char **)L->data);
 		L = L->next;
 		i++;
 	}

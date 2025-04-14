@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_isbetween.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 13:32:49 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/14 14:52:02 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/04 13:32:44 by locagnio          #+#    #+#             */
+/*   Updated: 2025/04/14 14:53:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 /**
  * @return
- * True if the argument is an alphabetic argument.
+ * True if nb is between min and max.
 */
-bool	ft_isalpha(int c)
+bool	ft_isbetween(int nb, int min, int max)
 {
-	return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'));
+	return (nb >= min && nb <= max);
 }
 
 /* #include <stdio.h>
 
 int	main(void)
 {
-	printf("%d\n", ft_isalpha(97));
+	printf("%d\n", ft_isalnum(99));
 	return(0);
 } */

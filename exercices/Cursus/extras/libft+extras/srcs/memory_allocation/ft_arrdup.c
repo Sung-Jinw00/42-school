@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_splitdup.c                                      :+:      :+:    :+:   */
+/*   ft_arrdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:46 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/14 02:47:03 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 16:38:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,26 @@
  * Duplicates an array of strings.
  * 
  * @returns
- * - If split is NULL, the function returns NULL.*/
+ * - If `array` is NULL, the function returns NULL.*/
 /**
- * - Else, the function will return the duplicate array of strings.
+ * - Else, the function will return the duplicated array of strings.
 */
-char	**ft_splitdup(char **split)
+char	**ft_arrdup(char **array)
 {
 	char	**dup;
 	int		i;
 
-	if (!split)
+	if (!array)
 		return (NULL);
-	dup = (char **)malloc(sizeof(char *) * (ft_count_words(split) + 1));
+	dup = (char **)malloc(sizeof(char *) * (ft_count_words(array) + 1));
 	if (!dup)
 		return (NULL);
 	i = -1;
-	while (split[++i])
+	while (array[++i])
 	{
-		dup[i] = ft_strdup(split[i]);
+		dup[i] = ft_strdup(array[i]);
 		if (!dup[i])
-			return (free_dbl_tab(&dup), NULL);
+			return (free_array(&dup), NULL);
 	}
 	dup[i] = NULL;
 	return (dup);

@@ -64,9 +64,9 @@ static int	calculation(char *result, const char *s1, const char *s2)
 
 /**
  * @brief
- * Multiply 2 numbers in a string format, return the multiplication of the 2
- * numbers in a string, the values of s1 and s2 can be greater than a long
- * long.
+ * Multiply 2 non-floats numbers in a string format, return the multiplication
+ * of the numbers in a string, the values of s1 and s2 can be greater than a
+ * unsigned long long.
  * 
  * Requirements :*/
 /**
@@ -83,17 +83,21 @@ static int	calculation(char *result, const char *s1, const char *s2)
  * - The multiplication of the 2 numbers in a memory allocated string.
  * 
  * @note
- * The memory released of the string returned by the function is the
- * responsibility of the user.
+ * - The memory released of the string returned by the function is the
+ * responsibility of the user.*/
+/**
+ * - If s1 and s2 contains both a number with at least 250 digits each, then
+ * the function could have undefined behavior.
 */
 char	*ft_multiply(const char *s1, const char *s2)
 {
-	static char	result[501] = {0};
+	char		result[501];
 	int			start_result;
 	int			i_result;
 
 	if (!s1 || !s1[0] || !s2 || !s2[0] || !verifications(s1, s2))
 		return (NULL);
+	ft_bzero(result, 501);
 	i_result = calculation(result, s1, s2) + 1;
 	while (result[i_result - 1] != 0 || result[i_result - 2] != 0
 		|| result[i_result - 3] != 0)

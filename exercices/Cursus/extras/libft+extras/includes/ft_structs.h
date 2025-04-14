@@ -16,6 +16,10 @@
 # include <stdarg.h>
 # include <stdint.h>
 
+// ───────────────────────────────
+//  multi_join_n_free
+// ───────────────────────────────
+
 typedef struct s_mjnf
 {
 	char	*arg;
@@ -27,16 +31,24 @@ typedef struct s_mjnf
 	int		tab_len;
 }	t_mjnf;
 
-typedef struct s_msjnf
+// ───────────────────────────────
+//  multi_arrjoin_n_free
+// ───────────────────────────────
+
+typedef struct s_majnf
 {
 	char	**arg;
 	va_list	args;
-	char	**new_split;
+	char	**new_arr;
 	int		*tabs_to_free;
 	int		cur_str;
 	int		tab_increment;
 	int		tab_len;
-}	t_msjnf;
+}	t_majnf;
+
+// ───────────────────────────────
+//  ft_ftoa
+// ───────────────────────────────
 
 typedef struct s_ftoa
 {

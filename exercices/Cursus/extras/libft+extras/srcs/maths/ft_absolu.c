@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 17:25:29 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/09 01:05:29 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 17:39:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void	nb_cpy(void *nb, void *dup, char *type)
 {
-	if (!ft_strcmp(type, TYPE_INT))
+	if (!ft_strcmp(type, FT_INT))
 		*(int *)dup = -(*(int *)nb);
-	else if (!ft_strcmp(type, TYPE_LONG))
+	else if (!ft_strcmp(type, FT_LONG))
 		*(long *)dup = -(*(long *)nb);
-	else if (!ft_strcmp(type, TYPE_LLONG))
+	else if (!ft_strcmp(type, FT_LLONG))
 		*(long long *)dup = -(*(long long *)nb);
-	else if (!ft_strcmp(type, TYPE_INT64))
+	else if (!ft_strcmp(type, FT_INT64))
 		*(int64_t *)dup = -(*(int64_t *)nb);
-	else if (!ft_strcmp(type, TYPE_DOUBLE))
+	else if (!ft_strcmp(type, FT_DOUBLE))
 		*(double *)dup = -(*(double *)nb);
-	else if (!ft_strcmp(type, TYPE_FLOAT))
+	else if (!ft_strcmp(type, FT_FLOAT))
 		*(float *)dup = -(*(float *)nb);
 	else
 		*(int *)dup = 0;
@@ -51,17 +51,17 @@ void	ft_absolu(void *nb, void *dup, char *type)
 		*(int *)dup = 0;
 		return ;
 	}
-	if (!ft_strcmp(type, TYPE_INT) && *(int *)nb < 0)
+	if (!ft_strcmp(type, FT_INT) && *(int *)nb < 0)
 		*(int *)dup = -(*(int *)nb);
-	else if (!ft_strcmp(type, TYPE_LONG) && *(long *)nb < 0)
+	else if (!ft_strcmp(type, FT_LONG) && *(long *)nb < 0)
 		*(long *)dup = -(*(long *)nb);
-	else if (!ft_strcmp(type, TYPE_LLONG) && *(long long *)nb < 0)
+	else if (!ft_strcmp(type, FT_LLONG) && *(long long *)nb < 0)
 		*(long long *)dup = -(*(long long *)nb);
-	else if (!ft_strcmp(type, TYPE_INT64) && *(int64_t *)nb < 0)
+	else if (!ft_strcmp(type, FT_INT64) && *(int64_t *)nb < 0)
 		*(int64_t *)dup = -(*(int64_t *)nb);
-	else if (!ft_strcmp(type, TYPE_DOUBLE) && *(double *)nb < 0)
+	else if (!ft_strcmp(type, FT_DOUBLE) && *(double *)nb < 0)
 		*(double *)dup = -(*(double *)nb);
-	else if (!ft_strcmp(type, TYPE_FLOAT) && *(float *)nb < 0)
+	else if (!ft_strcmp(type, FT_FLOAT) && *(float *)nb < 0)
 		*(float *)dup = -(*(float *)nb);
 	else
 		nb_cpy(nb, dup, type);

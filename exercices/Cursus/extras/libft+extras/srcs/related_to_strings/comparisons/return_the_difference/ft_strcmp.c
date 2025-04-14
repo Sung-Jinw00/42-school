@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:34:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/14 02:17:36 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 17:53:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
  * Compares every characters of 2 strings.
  * 
  * @returns
- * Return 0 if a comparison was successful, else it returns 1.
+ * Return 0 if a comparison was successful, else it returns the difference of
+ * the 2 different chars.
 */
 int	ft_strcmp(const char *s1, const char *s2)
 {

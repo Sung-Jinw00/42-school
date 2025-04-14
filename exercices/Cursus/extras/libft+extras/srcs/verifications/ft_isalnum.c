@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:44 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 01:20:07 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 14:51:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,9 @@
  * @return
  * True if the argument is an alphanumeric argument.
 */
-int	ft_isalnum(int c)
+bool	ft_isalnum(int c)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0'
-			&& c <= '9'))
-		return (1);
-	return (0);
+	return (ft_isalpha(c) || ft_isnum(c));
 }
 
 /* #include <stdio.h>

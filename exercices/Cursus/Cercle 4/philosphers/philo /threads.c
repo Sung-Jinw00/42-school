@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:06 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/10 16:23:59 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/14 15:57:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_death(t_philo *philo)
 	long int	now;
 
 	now = time_now() - philo->meal;
-	if (now >= philo->rules->t2die)
+	if (now >= (philo->rules->t2die + 8))
 		return (someone_died(philo));
 	return (0);
 }

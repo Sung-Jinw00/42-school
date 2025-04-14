@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   multi_splitjoin_n_free.c                           :+:      :+:    :+:   */
+/*   multi_arrjoin_n_free.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -29,7 +29,7 @@ static bool	correct_format(char *str_char)
 	return (1);
 }
 
-int	has_to_be_freed(t_msjnf v, int *tab_inc)
+int	has_to_be_freed(t_majnf v, int *tab_inc)
 {
 	while (v.tabs_to_free[*tab_inc] < v.cur_str && *tab_inc < v.tab_len - 1)
 		(*tab_inc)++;
@@ -40,27 +40,27 @@ int	has_to_be_freed(t_msjnf v, int *tab_inc)
 	return (0);
 }
 
-char	**multi_spitjoin_n_free2(t_msjnf v)
+char	**multi_arrjoin_n_free2(t_majnf v)
 {
 	if (v.tabs_to_free && has_to_be_freed(v, &v.tab_increment))
-		free_dbl_tab(&v.arg);
-	if (!v.new_split)
+		free_array(&v.arg);
+	if (!v.new_arr)
 		return (ft_putstr_fd(2, "fail join\n"), NULL);
 	v.arg = va_arg(v.args, char **);
 	v.cur_str = 2;
 	while (v.arg)
 	{
-		v.new_split = ft_splitjoin_n_free(v.new_split, v.arg, 1);
+		v.new_arr = ft_arrjoin_n_free(v.new_arr, v.arg, 1);
 		if (v.tabs_to_free && has_to_be_freed(v, &v.tab_increment))
-			free_dbl_tab(&v.arg);
-		if (!v.new_split)
+			free_array(&v.arg);
+		if (!v.new_arr)
 			return (ft_putstr_fd(2, "fail join and free\n"), NULL);
 		v.arg = va_arg(v.args, char **);
 		v.cur_str++;
 	}
 	va_end(v.args);
 	free(v.tabs_to_free);
-	return (v.new_split);
+	return (v.new_arr);
 }
 
 /**
@@ -88,13 +88,13 @@ char	**multi_spitjoin_n_free2(t_msjnf v)
  * The new joined array of strings, or the duplicate of s1 if there's no other
  * argument.
 */
-char	**multi_splitjoin_n_free(char *to_free, char **s1, ...)
+char	**multi_arrjoin_n_free(char *to_free, char **s1, ...)
 {
-	t_msjnf	v;
+	t_majnf	v;
 
 	if (!s1)
 		return (NULL);
-	v = (t_msjnf){0};
+	v = (t_majnf){0};
 	if (to_free && correct_format(to_free))
 	{
 		v.tabs_to_free = strchar_to_strint(to_free);
@@ -104,14 +104,14 @@ char	**multi_splitjoin_n_free(char *to_free, char **s1, ...)
 	v.arg = va_arg(v.args, char **);
 	if (!v.arg)
 	{
-		v.new_split = ft_splitdup(s1);
+		v.new_arr = ft_arrdup(s1);
 		if (v.tabs_to_free && has_to_be_freed(v, &v.tab_increment))
-			free_dbl_tab(&s1);
-		return (va_end(v.args), free(v.tabs_to_free), v.new_split);
+			free_array(&s1);
+		return (va_end(v.args), free(v.tabs_to_free), v.new_arr);
 	}
-	v.new_split = ft_splitjoin(s1, v.arg);
+	v.new_arr = ft_arrjoin(s1, v.arg);
 	if (v.tabs_to_free && has_to_be_freed(v, &v.tab_increment))
-		free_dbl_tab(&s1);
+		free_array(&s1);
 	v.cur_str++;
-	return (multi_spitjoin_n_free2(v));
+	return (multi_arrjoin_n_free2(v));
 }

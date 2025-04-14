@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:49 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 01:20:21 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 14:52:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@
  * @return
  * True if the argument is an alphabetic uppercase argument.
 */
-int	ft_isupalpha(int c)
+bool	ft_isupalpha(int c)
 {
-	if (c >= 'A' && c <= 'Z')
-		return (1);
-	return (0);
+	return (c >= 'A' && c <= 'Z');
 }
 
 /* #include <stdio.h>

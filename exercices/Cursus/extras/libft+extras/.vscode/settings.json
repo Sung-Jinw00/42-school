@@ -10,6 +10,13 @@
 		"stdbool.h": "c",
 		"errno.h": "c",
 		"ft_types.h": "c",
-		"float.h": "c"
+		"float.h": "c",
+		"stdint.h": "c",
+		"ft_printing.h": "c",
+		"ft_related_to_strings.h": "c",
+		"ft_verifications.h": "c",
+		"ft_free.h": "c",
+		"ft_maths.h": "c",
+		"limits.h": "c"
 	}
 }

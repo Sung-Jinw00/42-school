@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   one_for all.c                                      :+:      :+:    :+:   */
+/*   one_for_all.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/13 23:08:30 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 17:39:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,21 @@ void	one_for_all(char *nptr, void *value, char *type)
 {
 	if (!nptr || !type)
 		*(int *)value = 0;
-	else if (!ft_strcmp(type, TYPE_INT))
+	else if (!ft_strcmp(type, FT_INT))
 		*(int *)value = ft_atoi(nptr);
-	else if (!ft_strcmp(type, TYPE_UINT))
+	else if (!ft_strcmp(type, FT_UINT))
 		*(unsigned int *)value = ft_atoui(nptr);
-	else if (!ft_strcmp(type, TYPE_LONG))
+	else if (!ft_strcmp(type, FT_LONG))
 		*(long *)value = ft_atol(nptr);
-	else if (!ft_strcmp(type, TYPE_ULONG))
+	else if (!ft_strcmp(type, FT_ULONG))
 		*(unsigned long *)value = ft_atoul(nptr);
-	else if (!ft_strcmp(type, TYPE_LLONG))
+	else if (!ft_strcmp(type, FT_LLONG))
 		*(int64_t *)value = ft_atoi64(nptr);
-	else if (!ft_strcmp(type, TYPE_ULLONG))
+	else if (!ft_strcmp(type, FT_ULLONG))
 		*(uint64_t *)value = ft_atoui64(nptr);
-	else if (!ft_strcmp(type, TYPE_DOUBLE))
+	else if (!ft_strcmp(type, FT_DOUBLE))
 		*(double *)value = ft_atod(nptr);
-	else if (!ft_strcmp(type, TYPE_FLOAT))
+	else if (!ft_strcmp(type, FT_FLOAT))
 		*(float *)value = ft_atof(nptr);
 	else
 		*(int *)value = 0;

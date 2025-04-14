@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/14 00:14:03 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 17:39:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ char	*all_for_one(void *value, int precision, char *type)
 {
 	if (!type)
 		return (NULL);
-	else if (!ft_strcmp(type, TYPE_SIGNED))
+	else if (!ft_strcmp(type, FT_SIGNED))
 		return (ft_itoa(*(int64_t *)value));
-	else if (!ft_strcmp(type, TYPE_UNSIGNED))
+	else if (!ft_strcmp(type, FT_UNSIGNED))
 		return (ft_uitoa(*(uint64_t *)value));
-	else if (!ft_strcmp(type, TYPE_FLOAT))
+	else if (!ft_strcmp(type, FT_FLOAT))
 		return (ft_ftoa(*(long double *)value, precision));
 	return (NULL);
 }

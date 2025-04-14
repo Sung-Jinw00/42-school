@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:26:37 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/14 02:34:17 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 17:53:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,12 @@ static int	erroru64(char *str)
 static int	cmp_u64(char *nptr)
 {
 	size_t	len_max;
+	size_t	len_nptr;
 
-	len_max = ft_strlen(UINT64_MAX_ATOI);
-	if ((nptr[0] != '-' && ft_strlen(nptr) > len_max)
-		|| (nptr[0] == '-'))
-		return (1);
-	else if (ft_strlen(nptr) == len_max)
-	{
-		if (ft_strcmp(nptr, UINT64_MAX_ATOI) > 0)
-			return (1);
-	}
-	return (0);
+	len_nptr = ft_strlen(nptr);
+	len_max = ft_strlen(FT_UINT64_MAX);
+	return (nptr[0] == '-' || len_nptr > len_max
+		|| (len_nptr == len_max && ft_strcmp(nptr, FT_UINT64_MAX) > 0));
 }
 
 /**

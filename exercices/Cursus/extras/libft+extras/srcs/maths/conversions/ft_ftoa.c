@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:07 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/14 02:32:51 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 15:45:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ char	*ft_ftoa(long double n, int precision)
 	v.nb = n - remv_int_float(n);
 	if (v.nb < 0)
 		v.nb = -v.nb;
-	v.cpy = malloc(sizeof(char) * v.int_part + v.dec_part + 2);
+	v.cpy = malloc(sizeof(char) * (v.int_part + v.dec_part + 2));
 	if (!v.cpy)
 		return (NULL);
 	ft_memset(v.cpy, '0', v.int_part + v.dec_part + 1);

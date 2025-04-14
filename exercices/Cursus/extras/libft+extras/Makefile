@@ -4,10 +4,11 @@ CC = cc
 FLAGS = -Wall -Wextra -Werror -g
 
 SRCS_DIR = srcs/
+INCLUDES = includes/
 
 NAME = libft.a
 
-SRCS = $(shell find $(SRCS_DIR) -type f -name '*.c')
+SRCS = $(shell find srcs -type f -name '*.c')
 
 OBJS = $(SRCS:.c=.o)
 
@@ -26,7 +27,7 @@ $(NAME) : $(OBJS)
 	@echo $(GREEN)"libft crée !"$(RESET)
 
 %.o : %.c
-	$(CC) $(FLAGS) -I ./ -c $< -o $@
+	$(CC) $(FLAGS) -I $(INCLUDES) -c $< -o $@
 
 clean :
 	rm -f $(OBJS) $(OBJS_BONUS)

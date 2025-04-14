@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:46 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 01:11:58 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 15:12:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,25 @@
  * @brief
  * Create a duplicate of an array of strings, at start tab, up to end tab.
  * 
- * @param split The array of strings that will be duplicated.
- * @param len_split The len of the array of strings that will be duplicated. 
+ * @param array The array of strings that will be duplicated.
+ * @param len_array The len of `array` that will be duplicated. 
  * @param start The starting string of the duplication.
  * @param end The end string of the duplication.
  * 
  * @returns
- * - If start >= end, or if split is NULL, the function returns NULL. */
+ * - If start >= end, or if `arr` is NULL, the function returns NULL. */
 /**
  * - Else, the function will return the duplicated array of end - start strings.
 */
-char	**ft_splitndup(char **split, int len_split, int start, int end)
+char	**ft_arrndup(char **array, int len_array, int start, int end)
 {
 	char	**dup;
 	int		i;
 	int		len;
 
-	if (end > len_split)
-		end = len_split;
-	if (start >= end || !split)
+	if (end > len_array)
+		end = len_array;
+	if (start >= end || !array)
 		return (NULL);
 	len = end - start + 1;
 	dup = (char **)malloc(sizeof(char *) * len);
@@ -42,7 +42,7 @@ char	**ft_splitndup(char **split, int len_split, int start, int end)
 		return (NULL);
 	i = 0;
 	while (start < end)
-		dup[i++] = ft_strdup(split[start++]);
+		dup[i++] = ft_strdup(array[start++]);
 	dup[i] = NULL;
 	return (dup);
 }

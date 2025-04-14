@@ -14,67 +14,82 @@
 # define FT_TYPES_H
 
 // ───────────────────────────────
+//  INTEGER LIMITS IN STRING
+// ───────────────────────────────
+
+# ifndef FT_INT64_MAX
+#  define FT_INT64_MAX		"9223372036854775807"
+# endif
+# ifndef FT_INT64_MIN
+#  define FT_INT64_MIN		"-9223372036854775808"
+# endif
+
+# ifndef FT_UINT64_MAX
+#  define FT_UINT64_MAX		"18446744073709551615"
+# endif
+
+// ───────────────────────────────
 //  SIGNED TYPES
 // ───────────────────────────────
 
-# ifndef TYPE_SIGNED
-#  define TYPE_SIGNED		"signed"
+# ifndef FT_SIGNED
+#  define FT_SIGNED			"signed"
 # endif
 
-# ifndef TYPE_INT
-#  define TYPE_INT			"int"
+# ifndef FT_INT
+#  define FT_INT			"int"
 # endif
 
-# ifndef TYPE_LONG
-#  define TYPE_LONG			"long"
+# ifndef FT_LONG
+#  define FT_LONG			"long"
 # endif
 
-# ifndef TYPE_LLONG
-#  define TYPE_LLONG		"long long"
+# ifndef FT_LLONG
+#  define FT_LLONG			"long long"
 # endif
 
-# ifndef TYPE_INT64
-#  define TYPE_INT64		"int64"
+# ifndef FT_INT64
+#  define FT_INT64			"int64"
 # endif
 
 // ───────────────────────────────
 //  UNSIGNED TYPES
 // ───────────────────────────────
 
-# ifndef TYPE_UNSIGNED
-#  define TYPE_UNSIGNED			"unsigned"
+# ifndef FT_UNSIGNED
+#  define FT_UNSIGNED		"unsigned"
 # endif
 
-# ifndef TYPE_UINT
-#  define TYPE_UINT			"unsigned int"
+# ifndef FT_UINT
+#  define FT_UINT			"unsigned int"
 # endif
 
-# ifndef TYPE_ULONG
-#  define TYPE_ULONG		"unsigned long"
+# ifndef FT_ULONG
+#  define FT_ULONG			"unsigned long"
 # endif
 
-# ifndef TYPE_ULLONG
-#  define TYPE_ULLONG		"unsigned long long"
+# ifndef FT_ULLONG
+#  define FT_ULLONG			"unsigned long long"
 # endif
 
-# ifndef TYPE_UINT64
-#  define TYPE_UINT64		"uint64"
+# ifndef FT_UINT64
+#  define FT_UINT64			"uint64"
 # endif
 
 // ───────────────────────────────
 //  FOALTING-POINT TYPES
 // ───────────────────────────────
 
-# ifndef TYPE_FLOAT
-#  define TYPE_FLOAT			"float"
+# ifndef FT_FLOAT
+#  define FT_FLOAT			"float"
 # endif
 
-# ifndef TYPE_DOUBLE
-#  define TYPE_DOUBLE		"double"
+# ifndef FT_DOUBLE
+#  define FT_DOUBLE			"double"
 # endif
 
-# ifndef TYPE_LONGDOUBLE
-#  define TYPE_LONGDOUBLE	"long double"
+# ifndef FT_LONGDOUBLE
+#  define FT_LONGDOUBLE		"long double"
 # endif
 
 # ifndef FT_DBL_MAX
@@ -82,11 +97,11 @@
 # endif
 
 # ifndef FT_DBL_MIN
-#  define FT_DBL_MIN			2.2250738585072014e-308
+#  define FT_DBL_MIN		2.2250738585072014e-308
 # endif
 
 # ifndef FT_FLT_MAX
-#  define FT_FLT_MAX			3.402823466e+38F
+#  define FT_FLT_MAX		3.402823466e+38F
 # endif
 
 # ifndef FT_FLT_TRUE_MIN

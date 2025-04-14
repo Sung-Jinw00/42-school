@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:53 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 01:19:57 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 14:52:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@
  * @return
  * True if the argument is an restrained ascii argument.
 */
-int	ft_isascii(int c)
+bool	ft_isascii(int c)
 {
-	if (c >= 0 && c <= 127)
-		return (1);
-	return (0);
+	return (c >= 0 && c <= 127);
 }
 
 /* #include <stdio.h>

@@ -68,7 +68,7 @@ void	multi_free(char *to_free, ...)
 		if (tabs_to_free && tabs_to_free[i] == 1 && ptrn)
 			ft_free((char **)&ptrn);
 		if (tabs_to_free && tabs_to_free[i] == 2 && (char **)ptrn)
-			free_dbl_tab((char ***)&ptrn);
+			free_array((char ***)&ptrn);
 		ptrn = va_arg(args, void *);
 		i++;
 	}

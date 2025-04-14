@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 18:51:34 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 19:21:18 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 15:08:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * @brief
  * Print all the stings of an array of strings. 
 */
-void	print_dlb_tabs(char **tab)
+void	print_array(char **tab)
 {
 	int	i;
 

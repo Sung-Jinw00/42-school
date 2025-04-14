@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 16:52:11 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 01:18:36 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 14:52:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@
  * @return
  * True if the argument is an number.
 */
-int	ft_isnum(int c)
+bool	ft_isnum(int c)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	return (c >= '0' && c <= '9');
 }
 
 /* #include <stdio.h>

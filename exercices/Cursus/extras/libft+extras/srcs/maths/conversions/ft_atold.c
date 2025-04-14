@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:32:27 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/14 02:53:52 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 17:47:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ static int	cmp_64(char *nptr)
 	size_t	len_max;
 	size_t	len_min;
 
-	len_max = ft_strlen(INT64_MAX_ATOI);
-	len_min = ft_strlen(INT64_MIN_ATOI);
+	len_max = ft_strlen(FT_INT64_MAX);
+	len_min = ft_strlen(FT_INT64_MIN);
 	if ((nptr[0] != '-' && ft_strlen(nptr) > len_max)
 		|| (nptr[0] == '-' && ft_strlen(nptr) > len_min))
 		return (1);
 	else if (nptr[0] != '-' && ft_strlen(nptr) == len_max
-		&& ft_strcmp(nptr, INT64_MAX_ATOI) > 0)
+		&& ft_strcmp(nptr, FT_INT64_MAX) > 0)
 		return (1);
 	else if (nptr[0] == '-' && ft_strlen(nptr) == len_min
-		&& ft_strcmp(nptr, INT64_MIN_ATOI) > 0)
+		&& ft_strcmp(nptr, FT_INT64_MIN) > 0)
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 14:46:21 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/14 01:46:47 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 16:40:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ char	*ft_remove_from_string(char *str, char *to_delete, int to_free)
 	{
 		line = ft_strjoin_n_free(line, tab[i++], 1);
 		if (!line)
-			return (free_dbl_tab(&tab), NULL);
+			return (free_array(&tab), NULL);
 	}
-	free_dbl_tab(&tab);
+	free_array(&tab);
 	if (to_free)
 		free(str);
 	return (line);

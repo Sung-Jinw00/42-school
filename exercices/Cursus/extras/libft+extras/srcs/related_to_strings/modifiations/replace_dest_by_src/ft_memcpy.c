@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:21 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/14 02:52:34 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 14:01:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * Copies n bytes from src in dest.
  * 
  * @param dest The string that will be replaced by src.
- * @param src The string that will replace n bytes of src.
+ * @param src The string that will replace n bytes of dest.
  * @param n The number of bytes srcs will replace.
  * 
  * @note
@@ -34,7 +34,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 		return (0);
 	i = -1;
 	while (++i < n)
-		*(char *)(dest + i) = *(char *)(src + i);
+		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
 	return (dest);
 }
 

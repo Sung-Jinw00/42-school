@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:03 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 01:20:19 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 14:52:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@
  * @return
  * True if the argument is printable.
 */
-int	ft_isprint(int c)
+bool	ft_isprint(int c)
 {
-	if (c >= 32 && c <= 126)
-		return (1);
-	return (0);
+	return (c >= 32 && c <= 126);
 }
 
 /* #include <stdio.h>

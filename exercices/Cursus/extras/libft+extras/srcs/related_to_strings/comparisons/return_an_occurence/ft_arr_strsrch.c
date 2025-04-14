@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_splitstr.c                                      :+:      :+:    :+:   */
+/*   ft_arr_strsrch.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:42 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/14 02:12:36 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 18:35:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,30 @@
 
 /**
  * @brief
- * Search for the first iteration of str in split.
+ * Search for the first iteration of `str` in `array`.
  *  
- * @param split The array of strings that will be scanned.
- * @param str The string to find in split.
+ * @param array The array of strings that will be scanned.
+ * @param str The string to find in `array`.
  * 
  * @returns
- * - If split is NULL of empty, or if str is NULL, the function will returns
+ * - If `array` is NULL of empty, or if `str` is NULL, the function will returns
  * NULL.*/
 /**
- * - If str was found in split, it will return a memory allocated duplicate of
- * the whole section of split from str.*/
+ * - If `str` was found in `array`, it will return a memory allocated duplicate
+ * of the whole section of `array` from `str`.*/
 /**
  * - Else, it will returns NULL.
 */
-char	**ft_split_strsrch(char **split, char *str)
+char	**ft_arr_strsrch(char **array, char *str)
 {
 	int	i;
 
-	if (!split || !split[0] || !str)
+	if (!array || !array[0] || !str)
 		return (NULL);
 	i = -1;
-	while (split[++i])
-		if (!ft_strcmp(split[i], str))
-			return (ft_splitdup((char **)(split + i)));
+	while (array[++i])
+		if (!ft_strcmp(array[i], str))
+			return (ft_arrdup((char **)(array + i)));
 	return (NULL);
 }
 
