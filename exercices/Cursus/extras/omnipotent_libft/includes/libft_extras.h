@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlowcase.c                                    :+:      :+:    :+:   */
+/*   libft_extras.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/06 20:54:29 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/14 18:44:43 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/04 14:00:12 by locagnio          #+#    #+#             */
+/*   Updated: 2025/04/14 19:25:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#ifndef LIBFT_EXTRAS_H
+# define LIBFT_EXTRAS_H
 
-char	*ft_strlowcase(char *str)
-{
-	int	i;
+# include "ft_types.h" 
+# include "ft_colors.h"
 
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] >= 'A' && str[i] <= 'Z')
-			str[i] += 32;
-		i++;
-	}
-	return (str);
-}
+# include "ft_free.h"
+# include "ft_maths.h"
+# include "ft_malloc.h"
+# include "ft_printing.h"
+# include "ft_chain_lists.h"
+# include "ft_verifications.h"
+# include "ft_related_to_strings.h"
+
+#endif

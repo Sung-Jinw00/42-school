@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rush04.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 09:53:23 by locagnio          #+#    #+#             */
-/*   Updated: 2024/09/07 17:06:57 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/14 18:54:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	ft_conditions(int x, int y, int height, int length)
 
 int	rush(int x, int y)
 {
-	int length;
-	int height;
+	int	length;
+	int	height;
 
 	length = 0;
 	height = 0;

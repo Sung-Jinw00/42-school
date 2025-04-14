@@ -5,6 +5,8 @@
 		"*.tcc": "c",
 		"ft_asprintf.h": "c",
 		"ft_sprintf.h": "c",
-		"random": "c"
+		"random": "c",
+		"ft_maths.h": "c",
+		"ft_types.h": "c"
 	}
 }

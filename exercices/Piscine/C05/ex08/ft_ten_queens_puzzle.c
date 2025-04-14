@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 10:15:05 by locagnio          #+#    #+#             */
-/*   Updated: 2024/10/02 17:51:35 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 18:47:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int	check(int *position, int col)
 	n = 1;
 	while (col - n >= 0)
 	{
-		if ((position[col - n] == position[col]) || ((position[col
-					- n] == position[col] + n)) || ((position[col
-					- n] == position[col] - n)))
+		if ((position[col - n] == position[col])
+			|| ((position[col - n] == position[col] + n))
+			|| ((position[col - n] == position[col] - n)))
 			return (0);
 		n++;
 	}

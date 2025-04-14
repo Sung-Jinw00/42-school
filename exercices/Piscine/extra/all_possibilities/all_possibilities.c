@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:39:57 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/18 13:39:57 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 18:58:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,10 @@ int	if_charset(int val, int *charset, int k)
 {
 	int	j;
 
-	j = 0;
-	while (charset[j] && j < k)
-	{
+	j = -1;
+	while (charset[++j] && j < k)
 		if (val == charset[j])
 			return (1);
-		j++;
-	}
 	return (0);
 }
 
@@ -41,16 +38,13 @@ int	*ft_strdup(int *src, int size)
 	int	len_src;
 	int	i;
 
-	i = 0;
 	len_src = size + 1;
 	cpy = (int *)malloc(sizeof(int) * len_src);
 	if (!cpy)
 		return (NULL);
-	while (i < len_src)
-	{
+	i = -1;
+	while (++i < len_src)
 		cpy[i] = src[i];
-		i++;
-	}
 	return (cpy);
 }
 
@@ -76,36 +70,27 @@ int	**all_possibilities(int min, int max)
 	min = save_min;
 	while (++i < combinaisons)
 	{
-		k = max - min; // je pars de la fin du tableau
+		k = max - min;
 		solution = malloc(sizeof(int) * k);
 		solution = ft_strdup(possibilities[i - 1], k);
-			// je pars de mon tableau d'avant
-		solution[k]++;                                 // j'augmente de 1
+		solution[k]++;
 		while (if_charset(solution[k], solution, k))  
-			// et je continu d'augmenter tant que ma valeur est egale a une valeur d'avant
 			solution[k]++;
 		while (solution[k] > max)
-			// tant que ma valeur depasse 4 je remet ma valeur a 1 et j'ajoute
-			+ 1 a la valeur d'avant
 		{
 			solution[k--] = min;
 			solution[k]++;
 			while (if_charset(solution[k], solution, k))
-				// et je continu d'augmenter tant que ma valeur est egale a une valeur d'avant
 				solution[k]++;
 		}
 		k++;
-		while (k - 1 < max - min) // tant que je suis pas revenu a la fin
+		while (k - 1 < max - min)
 		{
 			while (if_charset(solution[k], solution, k))
-				// tant que ma valeur correspond a une valeur precedente
-				solution[k]++;                           // j'augmente
+				solution[k]++;
 			k++;                                        
-				// puis je passe a la suivante
 		}
 		possibilities[i] = ft_strdup(solution, k + 1);
-			// j'ai trouve une solution,
-			je la sauvegarde et je passe a la suivante
 		free(solution);
 	}
 	return (possibilities);

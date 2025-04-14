@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_show_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 15:01:50 by locagnio          #+#    #+#             */
-/*   Updated: 2024/09/18 15:40:31 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/14 18:50:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ struct s_stock_str	*ft_strs_to_tab(int ac, char **av)
 //////////////////////exercice//////////////////////////
 #include "ft_stock_str.h"
 #include <unistd.h>
+
 void	ft_putnbr(int n)
 {
 	if (n == -2147483648)
