@@ -5,12 +5,12 @@ CC				= cc
 FLAGS			= -Wall -Wextra -Werror -g
 HDRS			= includes
 
-SRCS			=  philo\ /main.c philo\ /utils.c philo\ /utils2.c philo\ /philo.c\
-				   philo\ /threads.c
-SRC_O			= $(SRCS:philo\ /.c=.o)
-B_SRCS			=  philo_bonus\ /main.c philo_bonus\ /utils.c philo_bonus\ /utils2.c\
-				   philo_bonus\ /threads.c philo_bonus\ /philo.c
-B_SRCS_O		= $(B_SRCS:philo_bonus\ /.c=.o)
+SRCS			=  philo_/main.c philo_/utils.c philo_/utils2.c philo_/philo.c\
+				   philo_/threads.c
+SRC_O			= $(SRCS:philo_/.c=.o)
+B_SRCS			=  philo_bonus_/main.c philo_bonus_/utils.c philo_bonus_/utils2.c\
+				   philo_bonus_/sem.c philo_bonus_/philo.c
+B_SRCS_O		= $(B_SRCS:philo_bonus_/.c=.o)
 PHILO_NAME		= philo
 B_PHILO_NAME	= philo_bonus
 RM				= rm -f
@@ -30,7 +30,7 @@ $(PHILO_NAME): $(SRC_O)
 
 # Compilation des fichiers sources en objets
 # On compiles les fichiers .c dans srcs/ en .o dans le répertoire racine
-%.o: philo\ /%.c $(HDRS)/*.h
+%.o: philo_/%.c $(HDRS)/*.h
 	@echo $(CYAN)"Compilation de $<..."$(RESET)
 	@$(CC) $(FLAGS) -I $(HDRS) -c $< -o $@
 
@@ -49,12 +49,12 @@ re: fclean all
 
 bonus: $(B_SRCS_O)
 	@echo $(CYAN)"Création du bonus..."$(RESET)
-	@$(CC) $(FLAGS) $(B_SRCS_O) -L lib -lfprintf -I $(HDRS) -o $(B_PHILO_NAME)
+	@$(CC) $(FLAGS) $(B_SRCS_O) -I $(HDRS) -o $(B_PHILO_NAME)
 	@echo $(GREEN)"Exécutable $(B_PHILO_NAME) créé !"$(RESET)
 
 # Compilation des fichiers sources en objets (version bonus)
 # On compile les fichiers .c dans philo_bonus/ en .o dans le répertoire racine
-%.o: philo_bonus\ /%.c $(HDRS)/*.h
+%.o: philo_bonus_/%.c $(HDRS)/*.h
 	@echo $(CYAN)"Compilation de $<..."$(RESET)
 	@$(CC) $(FLAGS) -I $(HDRS) -c $< -o $@
 

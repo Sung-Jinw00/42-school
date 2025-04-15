@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:10 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/15 13:45:34 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/15 15:46:16 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,7 @@ static int	init_thread(t_rules *rules, t_philo *philo)
 {
 	int	i;
 
-	i = -1;
 	rules->start = time_now();
-	/* while (++i < rules->demography)
-	{
-		philo[i].thread_start = rules->start;
-		philo[i].meal = rules->start;
-	} */
 	i = -1;
 	while (++i < rules->demography)
 	{
