@@ -101,8 +101,8 @@ char	*ft_multiply(const char *s1, const char *s2)
 	if (!s1 || !s1[0] || !s2 || !s2[0] || !verifications(s1, s2))
 		return (NULL);
 	ft_bzero(result, 501);
-	offset_s1 = ft_offset(s1, '0');
-	offset_s2 = ft_offset(s2, '0');
+	offset_s1 = ft_offset(s1, "-0");
+	offset_s2 = ft_offset(s2, "-0");
 	i_result = calculation(result, s1 + offset_s1, s2 + offset_s2) + 1;
 	while (i_result && (result[i_result - 1] != 0 || result[i_result - 2] != 0
 			|| result[i_result - 3] != 0))

@@ -12,11 +12,11 @@
 
 #include "ultimate_libft.h"
 
-int main(void)
+int	main(void)
 {
-	char *answer;
+	char	*answer;
 
-	answer = ft_multiply("-0", "3");
+	answer = ft_multiply("-1", "3");
 	printf("answer = %s\n", answer);
 	free(answer);
 	return (0);
