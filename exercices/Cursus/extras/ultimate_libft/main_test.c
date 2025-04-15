@@ -12,14 +12,12 @@
 
 #include "ultimate_libft.h"
 
-/* int main(void)
+int main(void)
 {
-	char *a = "Hello";
-	char *b = NULL;
+	char *answer;
 
-	a = ft_strrev(a, 1);
-	ft_swap(&a, &b, sizeof(char *));
-	printf("a = %s, b = %s\n", a, b);
-	free(b);
+	answer = ft_multiply("-0", "3");
+	printf("answer = %s\n", answer);
+	free(answer);
 	return (0);
-} */
+}

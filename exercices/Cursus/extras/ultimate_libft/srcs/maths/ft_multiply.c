@@ -43,6 +43,7 @@ static int	calculation(char *result, const char *s1, const char *s2)
 
 	i_s1 = ft_strlen(s1) - 1;
 	start_result = 500;
+	i_result = 499;
 	while (i_s1 >= 0 && s1[i_s1] != '-')
 	{
 		i_s2 = ft_strlen(s2) - 1;
@@ -94,16 +95,21 @@ char	*ft_multiply(const char *s1, const char *s2)
 	char		result[501];
 	int			start_result;
 	int			i_result;
+	int			offset_s1;
+	int			offset_s2;
 
 	if (!s1 || !s1[0] || !s2 || !s2[0] || !verifications(s1, s2))
 		return (NULL);
 	ft_bzero(result, 501);
-	i_result = calculation(result, s1, s2) + 1;
-	while (result[i_result - 1] != 0 || result[i_result - 2] != 0
-		|| result[i_result - 3] != 0)
+	offset_s1 = ft_offset(s1, '0');
+	offset_s2 = ft_offset(s2, '0');
+	i_result = calculation(result, s1 + offset_s1, s2 + offset_s2) + 1;
+	while (i_result && (result[i_result - 1] != 0 || result[i_result - 2] != 0
+			|| result[i_result - 3] != 0))
 		i_result--;
 	start_result = -1;
-	if ((s1[0] == '-' && s2[0] != '-') || (s1[0] != '-' && s2[0] == '-'))
+	if (result[500] && ((s1[0] == '-' && s2[0] != '-')
+			|| (s1[0] != '-' && s2[0] == '-')))
 		result[++start_result] = '-';
 	while (i_result < 501)
 		result[++start_result] = '0' + result[i_result++];

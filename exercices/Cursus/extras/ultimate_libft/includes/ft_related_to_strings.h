@@ -55,6 +55,7 @@ size_t	ft_strlen(const char *s);
 int		ft_count_words(void *arg);
 int		ft_strintlen(char *str_char);
 size_t	ft_strclen(const char *s, char c);
+int		ft_offset(const char *str, char c);
 size_t	ft_strrclen(const char *s, char c);
 size_t	ft_str_strlen(const char *s1, char *s2);
 

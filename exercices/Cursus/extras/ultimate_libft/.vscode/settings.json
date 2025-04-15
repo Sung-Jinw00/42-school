@@ -17,6 +17,7 @@
 		"ft_verifications.h": "c",
 		"ft_free.h": "c",
 		"ft_maths.h": "c",
-		"limits.h": "c"
+		"limits.h": "c",
+		"ft_malloc.h": "c"
 	}
 }
