@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 16:32:10 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/10 16:32:55 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/15 13:45:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static void	check_thread(t_rules *rules, t_philo *philo)
 				rules->over = 1;
 				pthread_mutex_unlock(&philo->rules->rules);
 			}
-			pthread_mutex_unlock(&philo->rules->iter);
 			pthread_mutex_unlock(&philo->rules->meal);
+			pthread_mutex_unlock(&philo->rules->iter);
 		}
 		pthread_mutex_lock(&philo->rules->rules);
 		if (rules->over)
@@ -55,14 +55,16 @@ static int	init_thread(t_rules *rules, t_philo *philo)
 
 	i = -1;
 	rules->start = time_now();
+	/* while (++i < rules->demography)
+	{
+		philo[i].thread_start = rules->start;
+		philo[i].meal = rules->start;
+	} */
+	i = -1;
 	while (++i < rules->demography)
 	{
 		philo[i].thread_start = rules->start;
 		philo[i].meal = rules->start;
-	}
-	i = -1;
-	while (++i < rules->demography)
-	{
 		philo[i].right_fork = philo[(i + 1) % rules->demography].left_fork;
 		if (pthread_create(&philo[i].life_tid, NULL, &thread_routine,
 				&philo[i]) == -1)

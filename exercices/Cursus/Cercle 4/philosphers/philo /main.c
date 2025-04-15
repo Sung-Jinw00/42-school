@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:22:05 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/10 16:52:59 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:44:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ static int	init_params_mutex(t_rules *rules)
 	int	i;
 
 	i = -1;
-	if (pthread_mutex_init(&rules->death, NULL) != 0)
-		return (error_msg("Error : Death is a concept\n", rules, 0));
 	if (pthread_mutex_init(&rules->rules, NULL) != 0)
 		return (error_msg("Error : Death is a concept\n", rules, 0));
 	if (pthread_mutex_init(&rules->print, NULL) != 0)

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:58:52 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/10 00:50:48 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/15 12:46:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <limits.h>
-# include "ft_fprintf.h"
 
 # define RESET		"\033[0m"   //Réinitialisation
 # define RED		"\033[31m"   //Couleur rouge
@@ -51,7 +50,7 @@ typedef struct s_rules
 	int				nb_of_meals;
 	int				over;
 	long int		start;
-	pthread_mutex_t	*death;
+	pthread_mutex_t	death;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	rules;
 	pthread_mutex_t	print;
@@ -75,6 +74,7 @@ typedef struct s_philo
 }	t_philo;
 
 long int	time_now(void);
+int			ft_strlen(char *s);
 int			main(int ac, char **ag);
 int			check_death(t_philo *p);
 int			ft_usleep(long int time);
@@ -85,6 +85,6 @@ int			ft_strcmp_philo(char *s1, char *s2);
 void		print_routine(t_philo *p, char *action);
 void		end_thread(t_rules *rules, t_philo *philo);
 void		final_print(t_philo *philo, t_rules *rules);
-int			error_msg(char *s, t_rules *rules, t_philo *p, int malloc);
+int			error_msg(char *s, t_rules *rules, t_philo *p);
 
 #endif
