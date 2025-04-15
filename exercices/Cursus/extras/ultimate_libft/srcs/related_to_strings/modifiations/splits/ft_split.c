@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:31:37 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/14 16:40:49 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/15 19:04:46 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_extras.h"
+#include "ultimate_libft.h"
 
 int	skip_charset(char i, char *charset)
 {

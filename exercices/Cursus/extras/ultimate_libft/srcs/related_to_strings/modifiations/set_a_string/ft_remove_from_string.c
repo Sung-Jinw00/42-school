@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_remove_from_string.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 14:46:21 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/14 16:40:44 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/15 19:04:46 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_extras.h"
+#include "ultimate_libft.h"
 
 /**
  * @brief

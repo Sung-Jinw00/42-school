@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_splits_array.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 16:24:32 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/14 16:36:37 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/15 19:04:46 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_extras.h"
+#include "ultimate_libft.h"
 
 /**
  * @brief

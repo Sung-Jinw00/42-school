@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_is_prime.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 09:58:38 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/08 14:37:45 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/15 19:04:46 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_extras.h"
+#include "ultimate_libft.h"
 
 /**
  * @brief

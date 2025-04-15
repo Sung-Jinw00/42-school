@@ -1,7 +1,7 @@
 {
 	"files.associations": {
 		"ratio": "c",
-		"libft_extras.h": "c",
+		"ultimate_libft.h": "c",
 		"stdlib.h": "c",
 		"type_traits": "c",
 		"stdio.h": "c",

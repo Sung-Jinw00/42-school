@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_multi_cmp.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:34:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/07 23:14:48 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/15 19:04:46 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_extras.h"
+#include "ultimate_libft.h"
 
 /**
  * @brief

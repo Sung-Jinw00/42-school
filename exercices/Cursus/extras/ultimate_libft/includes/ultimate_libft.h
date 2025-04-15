@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft_extras.h                                     :+:      :+:    :+:   */
+/*   ultimate_libft.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:00:12 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/14 19:25:01 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/15 19:03:59 by locagnio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_EXTRAS_H
-# define LIBFT_EXTRAS_H
+#ifndef ULTIMATE_LIBFT_H
+# define ULTIMATE_LIBFT_H
 
 # include "ft_types.h" 
 # include "ft_colors.h"
