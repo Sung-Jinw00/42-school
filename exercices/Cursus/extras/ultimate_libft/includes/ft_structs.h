@@ -60,4 +60,17 @@ typedef struct s_ftoa
 	int			sign;
 }	t_ftoa;
 
+// ───────────────────────────────
+//  ft_sscanf
+// ───────────────────────────────
+
+typedef struct s_sscanf
+{
+	char		src[50000];
+	int			len_src;
+	int			i;
+	char		end_arg;
+	int			output;
+}	t_sscanf;
+
 #endif

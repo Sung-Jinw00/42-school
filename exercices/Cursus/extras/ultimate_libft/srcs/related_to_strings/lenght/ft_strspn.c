@@ -1,31 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ultimate_libft.h                                   :+:      :+:    :+:   */
+/*   ft_strspn.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 14:00:12 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/19 03:05:33 by marvin           ###   ########.fr       */
+/*   Created: 2025/04/15 20:13:33 by locagnio          #+#    #+#             */
+/*   Updated: 2025/04/16 12:10:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ULTIMATE_LIBFT_H
-# define ULTIMATE_LIBFT_H
+#include "ultimate_libft.h"
 
-//defines
-# include "ft_types.h" 
-# include "ft_colors.h"
-# include "ft_police.h"
+/**
+ * @return
+ * Return the span of characters of `charset` at start of `str`.
+*/
+int	ft_strspn(const char *str, char *charset)
+{
+	int	i;
+	int	j;
 
-//functions
-# include "ft_free.h"
-# include "ft_maths.h"
-# include "ft_malloc.h"
-# include "ft_sscanf.h"
-# include "ft_printing.h"
-# include "ft_chain_lists.h"
-# include "ft_verifications.h"
-# include "ft_related_to_strings.h"
-
-#endif
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i])
+	{
+		j = -1;
+		while (charset[++j])
+		{
+			if (str[i] == charset[j])
+			{
+				i++;
+				break ;
+			}
+		}
+		if (!charset[j])
+			break ;
+	}
+	return (i);
+}

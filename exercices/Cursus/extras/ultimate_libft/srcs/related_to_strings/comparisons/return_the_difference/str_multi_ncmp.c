@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_multi_ncmp.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:34:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/15 19:04:46 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/18 10:54:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@
  * 
  * @note
  * The last argument should be NULL, otherwise, the function may have an
- * undefined behavior.
+ * undefined behavior.*/
+/**
+ * - If one of your strings is NULL, the function will stop at this string,
+ * be careful.
  * 
  * @returns
  * Return 0 if a comparison was successful, else it returns 1.

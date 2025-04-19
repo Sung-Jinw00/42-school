@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:33:55 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/19 03:24:02 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/19 03:19:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,16 @@
  * @returns
  * The len of src.
 */
-size_t	ft_strlcpy(char *dst, const char *src, size_t dsize)
-{
-	int		i;
-	size_t	len;
 
-	len = ft_strlen(src);
-	if (dsize == 0)
-		return (len);
+char	*ft_strcpy(char *dst, const char *src)
+{
+	int	i;
+
 	i = -1;
-	while (++i < (int)dsize - 1 && src[i] != '\0')
+	while (src[++i])
 		dst[i] = src[i];
 	dst[i] = '\0';
-	return (len);
+	return (dst);
 }
 
 /* #include <stdio.h>

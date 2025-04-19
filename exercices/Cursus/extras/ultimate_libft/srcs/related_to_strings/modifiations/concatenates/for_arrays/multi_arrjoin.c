@@ -18,7 +18,11 @@
  * 
  * @note
  * Every end of array of strings and the last argument should be NULL to
- * interrupt the function correctly, otherwise, undefined outcome may happened.
+ * interrupt the function correctly, otherwise, undefined outcome may
+ * happened.*/
+/**
+ * - If one of your strings is NULL, the function will stop at this string,
+ * be careful.
  * 
  * @returns
  * The new joined array of strings, or the duplicate of s1 if there's no

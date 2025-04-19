@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multi_strjoin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 16:07:25 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/15 19:04:46 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/18 10:48:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
  * @note
  * - The last argument should be NULL to interrupt the function correctly,
  * otherwise, undefined outcome may happened. */
+/**
+ * - If one of your strings is NULL, the function will stop at this string,
+ * be careful.*/
 /**
  * - The free of the strings are the responsibility of the user.
  * 

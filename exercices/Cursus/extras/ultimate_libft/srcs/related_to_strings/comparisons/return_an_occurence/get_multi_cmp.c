@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_multi_cmp.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:34:04 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/15 19:04:46 by locagnio         ###   ########.fr       */
+/*   Updated: 2025/04/18 10:53:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@
  * - The last argument should be NULL, otherwise, the function may have an
  * undefined behavior.*/
 /**
- * - If s1 is NULL, the function will return NULL.
+ * - If s1 is NULL, the function will return NULL.*/
+/**
+ * - If one of your strings is NULL, the function will stop at this string,
+ * be careful.
  * 
  * @returns
  * Return the string if a comparison was successful, else it returns NULL.

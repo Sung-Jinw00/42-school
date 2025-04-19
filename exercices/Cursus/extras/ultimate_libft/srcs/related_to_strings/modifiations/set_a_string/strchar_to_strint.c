@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strchar_to_strint.c                                :+:      :+:    :+:   */
+/*   str_to_arrint.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: locagnio <locagnio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,50 +12,36 @@
 
 #include "ultimate_libft.h"
 
-static bool	correct_format(char *str_char)
-{
-	int	i;
-
-	i = 0;
-	while (str_char[i])
-	{
-		if (ft_isnum(str_char[i]) || str_char[i] == '-' || str_char[i] == '+')
-			i++;
-		else if (ft_strcmp(str_char + i, ", ") && i != 0)
-			i += 2;
-		else
-			return (0);
-	}
-	return (1);
-}
-
 /**
  * @brief
  * Convert an array of characters into an array of int.
  * 
- * @note
- * - The string must follow the format : "n1, n2, ..., nn". */
-/**
- * - If the format isn't respected, the function returns NULL.
+ * @param str_char The sting that will be converted in an array of ints.
+ * @param len_arrint The pointer on an int that will receive the len of the
+ * array.
  * 
  * @return
  * Returns the converted array of characters, if the string is NULL or empty,
  * the function returns NULL. 
+ * 
+ * @note The numbers should be separated by at least one non-numeric character.
 */
-int	*strchar_to_strint(char *str_char)
+int	*str_to_arrint(char *str_char, int *len_arrint)
 {
 	int	i;
 	int	j;
 	int	*str_int;
 
-	if (!str_char || !str_char[0] || !correct_format(str_char))
+	if (len_arrint)
+		*len_arrint = ft_arrintlen(str_char);
+	if (!str_char || !str_char[0])
 		return (NULL);
-	str_int = malloc(sizeof(int) * ft_strintlen(str_char));
+	str_int = malloc(sizeof(int) * ft_arrintlen(str_char));
 	i = 0;
 	j = 0;
 	while (str_char[i])
 	{
-		if (str_char[i] != ',')
+		if (ft_isnum(str_char[i]))
 			str_int[j++] = ft_natoi(str_char, &i);
 		else
 			i++;

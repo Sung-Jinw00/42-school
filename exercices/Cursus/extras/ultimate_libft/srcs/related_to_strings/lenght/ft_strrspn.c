@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_offset.c                                        :+:      :+:    :+:   */
+/*   ft_strrspn.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 20:13:33 by locagnio          #+#    #+#             */
-/*   Updated: 2025/04/18 10:59:45 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/16 12:16:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,31 @@
 
 /**
  * @return
- * Return the span of `c` at start of `str`.
+ * Return the span of characters of `charset` at the end of `str`.
 */
-int	ft_offset(const char *str, char *charset)
+int	ft_strrspn(const char *str, char *charset)
 {
 	int	i;
+	int	j;
+	int	count;
 
-	i = 0;
 	if (!str)
 		return (0);
-	while (multi_charcmp(str[i], charset))
-		i++;
-	return (i);
+	count = 0;
+	i = ft_strlen(str);
+	while (str[--i])
+	{
+		j = -1;
+		while (charset[++j])
+		{
+			if (str[i] == charset[j])
+			{
+				count++;
+				break ;
+			}
+		}
+		if (!charset[j])
+			break ;
+	}
+	return (count);
 }
